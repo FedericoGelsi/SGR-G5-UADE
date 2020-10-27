@@ -79,13 +79,16 @@ Una vez que la documentación está completa y el postulante es aceptado, la emp
 
 Cuando una empresa se convierte en socio partícipe se le asigna una línea de crédito por un monto a determinar. Las líneas de crédito tienen fecha de vigencia por lo que un socio con una línea vencida no puede operar.
 Cuando una línea es aprobada se la vincula con qué tipo de operaciones puede operar la empresa. Los tipos de operaciones son:
+
 **Tipo 1:**
 * Cheques propios
 * Cheques de terceros
 * Pagaré Bursatil
+
 **Tipo 2:**
 * Cuentas corrientes Comerciales
 * Tarjetas de crédito
+
 **Tipo 3:**
 * Préstamos
 
