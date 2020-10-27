@@ -1,7 +1,7 @@
 # Trabajo Práctico - Introducción a la Orientación a Objetos
 *UADE* - _2° Cuatrimestre 2020_
 
-![alt-text][[logo]
+![alt-text][logo]
 
 [logo]: https://www.uade.edu.ar/media/kh1hx5wh/logo_mesa-de-trabajo-1-copia.png "UADE Logo"
 ### Grupo 5
@@ -79,14 +79,14 @@ Una vez que la documentación está completa y el postulante es aceptado, la emp
 
 Cuando una empresa se convierte en socio partícipe se le asigna una línea de crédito por un monto a determinar. Las líneas de crédito tienen fecha de vigencia por lo que un socio con una línea vencida no puede operar.
 Cuando una línea es aprobada se la vincula con qué tipo de operaciones puede operar la empresa. Los tipos de operaciones son:
-*Tipo 1:*
+**Tipo 1:**
 * Cheques propios
 * Cheques de terceros
 * Pagaré Bursatil
-*Tipo 2:*
+**Tipo 2:**
 * Cuentas corrientes Comerciales
 * Tarjetas de crédito
-*Tipo 3:*
+**Tipo 3:**
 * Préstamos
 
 Para operar por el total de la línea asignada la empresa debe presentar contragarantías para poder operar.
@@ -100,16 +100,16 @@ Una empresa que quiera realizar una operación sólo podrá hacerlo por el total
 ### Solicitud de Garantías
 
 Cuando un socio solicita realizar una operación debe presentar cierta información según el tipo: 
-* *Cheques:*
+* **Cheques:**
   - Banco del cheque 
   - Número de cheque 
   - Fecha de vencimiento
   - CUIT del Firmante 
-* *Cuentas corrientes Comerciales*
+* **Cuentas corrientes Comerciales**
   - Empresa con la que tendrá cuenta corriente
   - Importe total
   - Fecha de vencimiento 
-* *Préstamos*
+* **Préstamos**
   - Banco donde se solicita el préstamo
   - Importe Total
   - Tasa
@@ -129,9 +129,9 @@ Las comisiones se calculan según la siguiente tabla:
 
 | Tipo de operación | Comisión |
 | :---------------: | :------: |
-| *1* | 3% |
-| *2* | 3% |
-| *3* | 4% |
+| **1** | 3% |
+| **2** | 3% |
+| **3** | 4% |
 
 Cada comisión se crea con un estado inicial de “calculada” que sólo cambia a “facturada” al momento de emitir una factura a nombre del socio lo cual suele ocurrir el primer día hábil de la semana. 
  
@@ -140,9 +140,9 @@ Cada cambio de estado en socios, documentación, operaciones, etc debe ser ident
 ### Riesgo vivo de un socio vs utilizado de línea
 
 El riesgo vivo de un socio son todas las operaciones monetizadas aún no vencidas. El riesgo vivo se compone por: 
-* *Operaciones tipo 1:* Importe total de la operación.
-* *Operaciones tipo 2:* Importe utilizado.
-* *Operaciones tipo 3:* Cuotas impagas
+* **Operaciones tipo 1:** Importe total de la operación.
+* **Operaciones tipo 2:** Importe utilizado.
+* **Operaciones tipo 3:** Cuotas impagas
 
 El utilizado de la línea se compone por todas las operaciones con certificado emitido más el riesgo vivo del socio.
 
@@ -202,9 +202,9 @@ La no entrega de un módulo exime, también, la entrega la parte del modelo y di
 ## Documentación y fases de entrega
 
 Se pide documentar el diseño del sistema e implementar en base a las siguientes fases:
-* *Primera Fase:* Diagrama de clases.
-* *Segunda Fase:* Diagrama de secuencias de todas las reglas de negocios y consultas generales
-* *Tercera Fase:* Sistema funcionando
+* **Primera Fase:** Diagrama de clases.
+* **Segunda Fase:** Diagrama de secuencias de todas las reglas de negocios y consultas generales
+* **Tercera Fase:** Sistema funcionando
 
 ## Pautas para la aprobación de las entregas
 
@@ -212,7 +212,7 @@ Se pide documentar el diseño del sistema e implementar en base a las siguientes
 2.	Las entregas deben subirse al grupo creado en la plataforma webcampus.
 3.	Incorporar entregas anteriores con correcciones si corresponde
 4.	Respetar la fecha de entrega indicada por la cátedra.
-5.	*Se considera desaprobada la entrega que no cumple alguna de las consignas anteriores*
+5.	**Se considera desaprobada la entrega que no cumple alguna de las consignas anteriores**
 
 ## Pautas para la Aprobación del Trabajo Práctico Cuatrimestral
 
@@ -222,9 +222,9 @@ Se pide documentar el diseño del sistema e implementar en base a las siguientes
 
 ## Cronograma de entregas y entregables
 
-* Primera entrega: *15-16/SEP/2020*
+* Primera entrega: **15-16/SEP/2020**
   - Primera fase completa
-* Segunda entrega: *27-28/OCT/2020*
+* Segunda entrega: **27-28/OCT/2020**
   - Segunda fase completa
-* Entrega Final: *17-18/NOV/2020*
+* Entrega Final: **17-18/NOV/2020**
 
