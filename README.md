@@ -1,9 +1,8 @@
 # Trabajo Práctico - Introducción a la Orientación a Objetos
 *UADE* - _2° Cuatrimestre 2020_
 
-![alt-text][logo]
+<img src=url(https://www.uade.edu.ar/media/kh1hx5wh/logo_mesa-de-trabajo-1-copia.png) alt="UADE-Logo" width="200"/>
 
-[logo]: https://www.uade.edu.ar/media/kh1hx5wh/logo_mesa-de-trabajo-1-copia.png "UADE Logo"
 ### Grupo 5
 
 ### Autores
