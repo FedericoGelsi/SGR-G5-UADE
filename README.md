@@ -12,7 +12,7 @@
 * Gelsi Federico
 * Lafranconi Juan Cruz
 * Laporte Gabriel
-* Toreta Franco
+* Toretta Franco
 
 ***
 
