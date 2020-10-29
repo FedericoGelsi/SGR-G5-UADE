@@ -348,7 +348,7 @@
 											"font": "Arial;13;1",
 											"left": 473,
 											"top": 1175,
-											"width": 465.64501953125,
+											"width": 517.6640625,
 											"height": 13,
 											"text": "Socio Protector"
 										},
@@ -386,7 +386,7 @@
 									"font": "Arial;13;0",
 									"left": 468,
 									"top": 1168,
-									"width": 475.64501953125,
+									"width": 527.6640625,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF0Wo0a90GUQF4="
@@ -425,7 +425,7 @@
 											"showShadow": false,
 											"left": 473,
 											"top": 1198,
-											"width": 465.64501953125,
+											"width": 517.6640625,
 											"height": 13,
 											"text": "-Aportes: List<Aporte>",
 											"horizontalAlignment": 0
@@ -435,7 +435,7 @@
 									"font": "Arial;13;0",
 									"left": 468,
 									"top": 1193,
-									"width": 475.64501953125,
+									"width": 527.6640625,
 									"height": 23
 								},
 								{
@@ -461,9 +461,9 @@
 											"font": "Arial;13;0",
 											"left": 473,
 											"top": 1221,
-											"width": 465.64501953125,
+											"width": 517.6640625,
 											"height": 13,
-											"text": "+SocioProtector(CUIT, RazonSocial, FinicAct, tipo, actPrincipal, direccion, Email)",
+											"text": "+SocioProtector(CUIT, RazonSocial, FinicAct, tipoEmpresa, actPrincipal, direccion, Email)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -479,7 +479,7 @@
 											"font": "Arial;13;0",
 											"left": 473,
 											"top": 1236,
-											"width": 465.64501953125,
+											"width": 517.6640625,
 											"height": 13,
 											"text": "+agregarAporte(float cantidad, file documento)",
 											"horizontalAlignment": 0
@@ -497,7 +497,7 @@
 											"font": "Arial;13;0",
 											"left": 473,
 											"top": 1251,
-											"width": 465.64501953125,
+											"width": 517.6640625,
 											"height": 13,
 											"text": "+retirarAporte(float cantidad)",
 											"horizontalAlignment": 0
@@ -554,7 +554,7 @@
 											"showShadow": false,
 											"left": 473,
 											"top": 1266,
-											"width": 465.64501953125,
+											"width": 517.6640625,
 											"height": 13,
 											"text": "+getTotalAporte()",
 											"horizontalAlignment": 0
@@ -564,7 +564,7 @@
 									"font": "Arial;13;0",
 									"left": 468,
 									"top": 1216,
-									"width": 475.64501953125,
+									"width": 527.6640625,
 									"height": 68
 								},
 								{
@@ -607,7 +607,7 @@
 							"containerChangeable": true,
 							"left": 468,
 							"top": 1168,
-							"width": 475.64501953125,
+							"width": 527.6640625,
 							"height": 176,
 							"nameCompartment": {
 								"$ref": "AAAAAAF0Wo0a90GTEvE="
@@ -6252,7 +6252,7 @@
 											"top": 692,
 											"width": 289.4150390625,
 											"height": 13,
-											"text": "-CUITSocio: int",
+											"text": "-CUITSocio: String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -21213,8 +21213,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF1XRVnONoID24="
 									},
-									"name": "CUIT",
-									"type": ""
+									"name": "CUIT"
 								},
 								{
 									"_type": "UMLParameter",
@@ -21222,8 +21221,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF1XRVnONoID24="
 									},
-									"name": "RazonSocial",
-									"type": ""
+									"name": "RazonSocial"
 								},
 								{
 									"_type": "UMLParameter",
@@ -21231,8 +21229,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF1XRVnONoID24="
 									},
-									"name": "FinicAct",
-									"type": ""
+									"name": "FinicAct"
 								},
 								{
 									"_type": "UMLParameter",
@@ -21240,8 +21237,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF1XRVnONoID24="
 									},
-									"name": "tipo",
-									"type": ""
+									"name": "tipoEmpresa"
 								},
 								{
 									"_type": "UMLParameter",
@@ -21249,8 +21245,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF1XRVnONoID24="
 									},
-									"name": "actPrincipal",
-									"type": ""
+									"name": "actPrincipal"
 								},
 								{
 									"_type": "UMLParameter",
@@ -21258,8 +21253,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF1XRVnONoID24="
 									},
-									"name": "direccion",
-									"type": ""
+									"name": "direccion"
 								},
 								{
 									"_type": "UMLParameter",
@@ -21267,8 +21261,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF1XRVnONoID24="
 									},
-									"name": "Email",
-									"type": ""
+									"name": "Email"
 								}
 							]
 						},
@@ -26736,7 +26729,7 @@
 							},
 							"name": "CUITSocio",
 							"visibility": "private",
-							"type": "int"
+							"type": "String"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -27269,9 +27262,9 @@
 														"$ref": "AAAAAAF1aCHFC1Pcul0="
 													},
 													"font": "Arial;13;0",
-													"left": 619.578125,
+													"left": 618.11181640625,
 													"top": 93,
-													"width": 144.8125,
+													"width": 129.49560546875,
 													"height": 13,
 													"text": "Por cada linea de credito"
 												},
@@ -27284,7 +27277,7 @@
 													"font": "Arial;13;1",
 													"left": 589,
 													"top": 93,
-													"width": 25.578125,
+													"width": 24.11181640625,
 													"height": 13,
 													"text": "loop"
 												},
@@ -27370,9 +27363,9 @@
 														"$ref": "AAAAAAF1aCK3NVQiWEo="
 													},
 													"font": "Arial;13;0",
-													"left": 605.07177734375,
+													"left": 603.61181640625,
 													"top": 189,
-													"width": 190.28076171875,
+													"width": 177.54736328125,
 													"height": 13,
 													"text": "Si CUITParticipe es igual a CUIT"
 												},
@@ -27385,7 +27378,7 @@
 													"font": "Arial;13;1",
 													"left": 581,
 													"top": 189,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -27471,9 +27464,9 @@
 														"$ref": "AAAAAAF1BZh9SUK0+lk="
 													},
 													"font": "Arial;13;0",
-													"left": 70.97900390625,
+													"left": 66.58642578125,
 													"top": 5,
-													"width": 347.11865234375,
+													"width": 315.46923828125,
 													"height": 13,
 													"text": "RN01 - Ningun socio puede operar por mas del 5% del FDR"
 												},
@@ -27486,7 +27479,7 @@
 													"font": "Arial;13;1",
 													"left": 5,
 													"top": 5,
-													"width": 60.97900390625,
+													"width": 56.58642578125,
 													"height": 13,
 													"text": "interaction"
 												}
@@ -29435,9 +29428,9 @@
 														"$ref": "AAAAAAF1Z+vyY2NWxac="
 													},
 													"font": "Arial;13;0",
-													"left": 613.07177734375,
+													"left": 611.61181640625,
 													"top": 365,
-													"width": 258.7529296875,
+													"width": 230.505859375,
 													"height": 13,
 													"text": "Si FechaVigencia es menor que fecha actual"
 												},
@@ -29450,7 +29443,7 @@
 													"font": "Arial;13;1",
 													"left": 589,
 													"top": 365,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -29564,9 +29557,9 @@
 														"$ref": "AAAAAAF1Z/WwCWQOioE="
 													},
 													"font": "Arial;13;0",
-													"left": 621.07177734375,
+													"left": 619.61181640625,
 													"top": 453,
-													"width": 266.18603515625,
+													"width": 242.2109375,
 													"height": 13,
 													"text": "Si monto es menor o igual que 5% montoFDR"
 												},
@@ -29579,7 +29572,7 @@
 													"font": "Arial;13;1",
 													"left": 597,
 													"top": 453,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -29781,9 +29774,9 @@
 														"$ref": "AAAAAAF1Z/dP1mSeWpY="
 													},
 													"font": "Arial;13;0",
-													"left": 629.07177734375,
+													"left": 627.61181640625,
 													"top": 549,
-													"width": 346.439453125,
+													"width": 313.08251953125,
 													"height": 13,
 													"text": "Si monto es menor o igual que el Tope de la linea de credito"
 												},
@@ -29796,7 +29789,7 @@
 													"font": "Arial;13;1",
 													"left": 605,
 													"top": 549,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -30114,9 +30107,9 @@
 														"$ref": "AAAAAAF1Z/zg18MOEmQ="
 													},
 													"font": "Arial;13;0",
-													"left": 1387.578125,
+													"left": 1386.11181640625,
 													"top": 629,
-													"width": 139.75341796875,
+													"width": 123.712890625,
 													"height": 13,
 													"text": "Por cada contragarantia"
 												},
@@ -30129,7 +30122,7 @@
 													"font": "Arial;13;1",
 													"left": 1357,
 													"top": 629,
-													"width": 25.578125,
+													"width": 24.11181640625,
 													"height": 13,
 													"text": "loop"
 												},
@@ -30215,9 +30208,9 @@
 														"$ref": "AAAAAAF1Z/3LscNGfio="
 													},
 													"font": "Arial;13;0",
-													"left": 1397.07177734375,
+													"left": 1395.61181640625,
 													"top": 717,
-													"width": 202.56982421875,
+													"width": 189.1064453125,
 													"height": 13,
 													"text": "Si CUITPropietario es igual a CUIT"
 												},
@@ -30230,7 +30223,7 @@
 													"font": "Arial;13;1",
 													"left": 1373,
 													"top": 717,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -30330,9 +30323,9 @@
 														"$ref": "AAAAAAF1aAIsEcRDhQM="
 													},
 													"font": "Arial;13;0",
-													"left": 621.07177734375,
+													"left": 619.61181640625,
 													"top": 861,
-													"width": 303.06591796875,
+													"width": 275.03466796875,
 													"height": 13,
 													"text": "Si monto es menor o igual que MontoContragarantia"
 												},
@@ -30345,7 +30338,7 @@
 													"font": "Arial;13;1",
 													"left": 597,
 													"top": 861,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -30431,9 +30424,9 @@
 														"$ref": "AAAAAAF1aALuhsRk8ek="
 													},
 													"font": "Arial;13;0",
-													"left": 632.72998046875,
+													"left": 631.99365234375,
 													"top": 893,
-													"width": 61.93115234375,
+													"width": 56.5166015625,
 													"height": 13,
 													"text": "Si Tipo es "
 												},
@@ -30446,7 +30439,7 @@
 													"font": "Arial;13;1",
 													"left": 613,
 													"top": 893,
-													"width": 14.72998046875,
+													"width": 13.99365234375,
 													"height": 13,
 													"text": "alt"
 												},
@@ -33529,9 +33522,9 @@
 														"$ref": "AAAAAAF1Hu+ew2bO7Ow="
 													},
 													"font": "Arial;13;0",
-													"left": 70.97900390625,
+													"left": 66.58642578125,
 													"top": 5,
-													"width": 567.57275390625,
+													"width": 509.2822265625,
 													"height": 13,
 													"text": "RN03 - Ningún socio puede operar si debe facturas por más del 10% del total de la línea asignada"
 												},
@@ -33544,7 +33537,7 @@
 													"font": "Arial;13;1",
 													"left": 5,
 													"top": 5,
-													"width": 60.97900390625,
+													"width": 56.58642578125,
 													"height": 13,
 													"text": "interaction"
 												}
@@ -34263,9 +34256,9 @@
 														"$ref": "AAAAAAF1HwjAqOgsVt8="
 													},
 													"font": "Arial;13;0",
-													"left": 635.578125,
+													"left": 634.11181640625,
 													"top": 141,
-													"width": 130.35888671875,
+													"width": 117.95556640625,
 													"height": 13,
 													"text": "Por cada LineaCredito"
 												},
@@ -34278,7 +34271,7 @@
 													"font": "Arial;13;1",
 													"left": 605,
 													"top": 141,
-													"width": 25.578125,
+													"width": 24.11181640625,
 													"height": 13,
 													"text": "loop"
 												},
@@ -34475,9 +34468,9 @@
 														"$ref": "AAAAAAF1HwoA9+iNgH4="
 													},
 													"font": "Arial;13;0",
-													"left": 645.07177734375,
+													"left": 643.61181640625,
 													"top": 237,
-													"width": 162.09716796875,
+													"width": 154.4482421875,
 													"height": 13,
 													"text": "Si CUITParticipe igual CUIT"
 												},
@@ -34490,7 +34483,7 @@
 													"font": "Arial;13;1",
 													"left": 621,
 													"top": 237,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -35022,9 +35015,9 @@
 														"$ref": "AAAAAAF1Hwv9hOkfvgk="
 													},
 													"font": "Arial;13;0",
-													"left": 635.578125,
+													"left": 634.11181640625,
 													"top": 357,
-													"width": 100.71533203125,
+													"width": 88.35009765625,
 													"height": 13,
 													"text": "Por cada Factura"
 												},
@@ -35037,7 +35030,7 @@
 													"font": "Arial;13;1",
 													"left": 605,
 													"top": 357,
-													"width": 25.578125,
+													"width": 24.11181640625,
 													"height": 13,
 													"text": "loop"
 												},
@@ -35123,9 +35116,9 @@
 														"$ref": "AAAAAAF1Hwxumuk7ca4="
 													},
 													"font": "Arial;13;0",
-													"left": 637.07177734375,
+													"left": 635.61181640625,
 													"top": 437,
-													"width": 178.72802734375,
+													"width": 168.88916015625,
 													"height": 13,
 													"text": "Si CUITdestinatario igual CUIT"
 												},
@@ -35138,7 +35131,7 @@
 													"font": "Arial;13;1",
 													"left": 613,
 													"top": 437,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -35447,9 +35440,9 @@
 														"$ref": "AAAAAAF1Hw+xJyHtejk="
 													},
 													"font": "Arial;13;0",
-													"left": 645.07177734375,
+													"left": 643.61181640625,
 													"top": 533,
-													"width": 120.234375,
+													"width": 106.79638671875,
 													"height": 13,
 													"text": "Si Estado es impago"
 												},
@@ -35462,7 +35455,7 @@
 													"font": "Arial;13;1",
 													"left": 621,
 													"top": 533,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -35771,9 +35764,9 @@
 														"$ref": "AAAAAAF1HxIwQyJEGeA="
 													},
 													"font": "Arial;13;0",
-													"left": 621.07177734375,
+													"left": 619.61181640625,
 													"top": 677,
-													"width": 412.9248046875,
+													"width": 372.845703125,
 													"height": 13,
 													"text": "Si monto total impago es menor que 10% del tope de la linea de credito"
 												},
@@ -35786,7 +35779,7 @@
 													"font": "Arial;13;1",
 													"left": 597,
 													"top": 677,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -36002,9 +35995,9 @@
 														"$ref": "AAAAAAF1aCrLeLO3pLU="
 													},
 													"font": "Arial;13;0",
-													"left": 632.72998046875,
+													"left": 631.99365234375,
 													"top": 717,
-													"width": 54.47265625,
+													"width": 49.39453125,
 													"height": 13,
 													"text": "Si tipo es"
 												},
@@ -36017,7 +36010,7 @@
 													"font": "Arial;13;1",
 													"left": 613,
 													"top": 717,
-													"width": 14.72998046875,
+													"width": 13.99365234375,
 													"height": 13,
 													"text": "alt"
 												},
@@ -38340,9 +38333,9 @@
 														"$ref": "AAAAAAF1aDZjm+S9vQM="
 													},
 													"font": "Arial;13;0",
-													"left": 355.578125,
+													"left": 354.11181640625,
 													"top": 93,
-													"width": 141.9052734375,
+													"width": 126.98193359375,
 													"height": 13,
 													"text": "Por cada socio protector"
 												},
@@ -38355,7 +38348,7 @@
 													"font": "Arial;13;1",
 													"left": 325,
 													"top": 93,
-													"width": 25.578125,
+													"width": 24.11181640625,
 													"height": 13,
 													"text": "loop"
 												},
@@ -38441,9 +38434,9 @@
 														"$ref": "AAAAAAF1aDbBjeT5/SU="
 													},
 													"font": "Arial;13;0",
-													"left": 357.07177734375,
+													"left": 355.61181640625,
 													"top": 189,
-													"width": 204.74072265625,
+													"width": 190.56640625,
 													"height": 13,
 													"text": "Si CUITSocio es igual a CUITSocio"
 												},
@@ -38456,7 +38449,7 @@
 													"font": "Arial;13;1",
 													"left": 333,
 													"top": 189,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -38542,9 +38535,9 @@
 														"$ref": "AAAAAAF1aDgxeuWOHhA="
 													},
 													"font": "Arial;13;0",
-													"left": 365.07177734375,
+													"left": 363.61181640625,
 													"top": 285,
-													"width": 139.75341796875,
+													"width": 122.6845703125,
 													"height": 13,
 													"text": "SI Estado es Postulante"
 												},
@@ -38557,7 +38550,7 @@
 													"font": "Arial;13;1",
 													"left": 341,
 													"top": 285,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -38643,9 +38636,9 @@
 														"$ref": "AAAAAAF1OUEj2hRLBBg="
 													},
 													"font": "Arial;13;0",
-													"left": 70.97900390625,
+													"left": 66.58642578125,
 													"top": 5,
-													"width": 664.35546875,
+													"width": 593.03955078125,
 													"height": 13,
 													"text": "RN05 - Un socio no puede ser aprobado como protector si es accionista de una empresa socia participe de la SGR"
 												},
@@ -38658,7 +38651,7 @@
 													"font": "Arial;13;1",
 													"left": 5,
 													"top": 5,
-													"width": 60.97900390625,
+													"width": 56.58642578125,
 													"height": 13,
 													"text": "interaction"
 												}
@@ -39039,9 +39032,9 @@
 														"$ref": "AAAAAAF1OVDlwVnCm1s="
 													},
 													"font": "Arial;13;0",
-													"left": 379.578125,
+													"left": 378.11181640625,
 													"top": 317,
-													"width": 94.2216796875,
+													"width": 83.291015625,
 													"height": 13,
 													"text": "Por cada accion"
 												},
@@ -39054,7 +39047,7 @@
 													"font": "Arial;13;1",
 													"left": 349,
 													"top": 317,
-													"width": 25.578125,
+													"width": 24.11181640625,
 													"height": 13,
 													"text": "loop"
 												},
@@ -40167,9 +40160,9 @@
 														"$ref": "AAAAAAF1aDuHo+X0cRM="
 													},
 													"font": "Arial;13;0",
-													"left": 365.07177734375,
+													"left": 363.61181640625,
 													"top": 405,
-													"width": 235.0888671875,
+													"width": 218.71826171875,
 													"height": 13,
 													"text": "Si CUITPropietario es igual a CUITSocio"
 												},
@@ -40182,7 +40175,7 @@
 													"font": "Arial;13;1",
 													"left": 341,
 													"top": 405,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -40491,9 +40484,9 @@
 														"$ref": "AAAAAAF1aDyCEuY7B8c="
 													},
 													"font": "Arial;13;0",
-													"left": 371.578125,
+													"left": 370.11181640625,
 													"top": 493,
-													"width": 139.74072265625,
+													"width": 125.53466796875,
 													"height": 13,
 													"text": "Por cada socio participe"
 												},
@@ -40506,7 +40499,7 @@
 													"font": "Arial;13;1",
 													"left": 341,
 													"top": 493,
-													"width": 25.578125,
+													"width": 24.11181640625,
 													"height": 13,
 													"text": "loop"
 												},
@@ -40829,9 +40822,9 @@
 														"$ref": "AAAAAAF1aEO0reatyd0="
 													},
 													"font": "Arial;13;0",
-													"left": 365.07177734375,
+													"left": 363.61181640625,
 													"top": 581,
-													"width": 267.58251953125,
+													"width": 249.0537109375,
 													"height": 13,
 													"text": "Si CUITEmisor no existe en la lista CUITSocio"
 												},
@@ -40844,7 +40837,7 @@
 													"font": "Arial;13;1",
 													"left": 341,
 													"top": 581,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -41932,9 +41925,9 @@
 														"$ref": "AAAAAAF1OV6kbq3F8qs="
 													},
 													"font": "Arial;13;0",
-													"left": 70.97900390625,
+													"left": 66.58642578125,
 													"top": 5,
-													"width": 899.14892578125,
+													"width": 799.1923828125,
 													"height": 13,
 													"text": "RN06 - Si una empresa comparte accionistas con otra empresa el total computado para el 5% del FDR es la suma de los riesgos vivos de ambas empresas"
 												},
@@ -41947,7 +41940,7 @@
 													"font": "Arial;13;1",
 													"left": 5,
 													"top": 5,
-													"width": 60.97900390625,
+													"width": 56.58642578125,
 													"height": 13,
 													"text": "interaction"
 												}
@@ -42557,9 +42550,9 @@
 														"$ref": "AAAAAAF1XeSwb2GdC4M="
 													},
 													"font": "Arial;13;0",
-													"left": 787.578125,
+													"left": 786.11181640625,
 													"top": 133,
-													"width": 114.45166015625,
+													"width": 101.34375,
 													"height": 13,
 													"text": "Por cada accionista"
 												},
@@ -42572,7 +42565,7 @@
 													"font": "Arial;13;1",
 													"left": 757,
 													"top": 133,
-													"width": 25.578125,
+													"width": 24.11181640625,
 													"height": 13,
 													"text": "loop"
 												},
@@ -43327,9 +43320,9 @@
 														"$ref": "AAAAAAF1Xe2NjKZkDQU="
 													},
 													"font": "Arial;13;0",
-													"left": 563.578125,
+													"left": 562.11181640625,
 													"top": 341,
-													"width": 98.55078125,
+													"width": 89.81005859375,
 													"height": 13,
 													"text": "Por Cada Accion"
 												},
@@ -43342,7 +43335,7 @@
 													"font": "Arial;13;1",
 													"left": 533,
 													"top": 341,
-													"width": 25.578125,
+													"width": 24.11181640625,
 													"height": 13,
 													"text": "loop"
 												},
@@ -43428,9 +43421,9 @@
 														"$ref": "AAAAAAF1Xe8jQ6aViJI="
 													},
 													"font": "Arial;13;0",
-													"left": 573.07177734375,
+													"left": 571.61181640625,
 													"top": 429,
-													"width": 260.85400390625,
+													"width": 243.658203125,
 													"height": 13,
 													"text": "Si CUITAccionista es igual a CUITPropietario"
 												},
@@ -43443,7 +43436,7 @@
 													"font": "Arial;13;1",
 													"left": 549,
 													"top": 429,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -43641,9 +43634,9 @@
 														"$ref": "AAAAAAF1XfuM4LFbIcY="
 													},
 													"font": "Arial;13;0",
-													"left": 339.578125,
+													"left": 338.11181640625,
 													"top": 637,
-													"width": 195.33984375,
+													"width": 179.70556640625,
 													"height": 13,
 													"text": "Por cada CUITEmisor compartido"
 												},
@@ -43656,7 +43649,7 @@
 													"font": "Arial;13;1",
 													"left": 309,
 													"top": 637,
-													"width": 25.578125,
+													"width": 24.11181640625,
 													"height": 13,
 													"text": "loop"
 												},
@@ -44090,9 +44083,9 @@
 														"$ref": "AAAAAAF1Xg3ZwLoaTYk="
 													},
 													"font": "Arial;13;0",
-													"left": 72.72998046875,
+													"left": 71.99365234375,
 													"top": 597,
-													"width": 277.681640625,
+													"width": 258.07373046875,
 													"height": 13,
 													"text": "Si ListaCUITEmisor tiene mas de 1 CUITEmisor"
 												},
@@ -44105,7 +44098,7 @@
 													"font": "Arial;13;1",
 													"left": 53,
 													"top": 597,
-													"width": 14.72998046875,
+													"width": 13.99365234375,
 													"height": 13,
 													"text": "alt"
 												},
@@ -46200,9 +46193,9 @@
 														"$ref": "AAAAAAF1YbiXDbsspxM="
 													},
 													"font": "Arial;13;0",
-													"left": 70.97900390625,
+													"left": 66.58642578125,
 													"top": 5,
-													"width": 736.43310546875,
+													"width": 656.484375,
 													"height": 13,
 													"text": "CG01 - Total de comisiones calculadas en un día por operaciones de cheques presentadas en el Mercado Argentino de Valores"
 												},
@@ -46215,7 +46208,7 @@
 													"font": "Arial;13;1",
 													"left": 5,
 													"top": 5,
-													"width": 60.97900390625,
+													"width": 56.58642578125,
 													"height": 13,
 													"text": "interaction"
 												}
@@ -46588,9 +46581,9 @@
 														"$ref": "AAAAAAF1YdPZw+eh+7A="
 													},
 													"font": "Arial;13;0",
-													"left": 387.578125,
+													"left": 386.11181640625,
 													"top": 93,
-													"width": 113.74072265625,
+													"width": 100.6201171875,
 													"height": 13,
 													"text": "Por cada operacion"
 												},
@@ -46603,7 +46596,7 @@
 													"font": "Arial;13;1",
 													"left": 357,
 													"top": 93,
-													"width": 25.578125,
+													"width": 24.11181640625,
 													"height": 13,
 													"text": "loop"
 												},
@@ -46916,9 +46909,9 @@
 														"$ref": "AAAAAAF1YdW8l+g/XQQ="
 													},
 													"font": "Arial;13;0",
-													"left": 389.07177734375,
+													"left": 387.61181640625,
 													"top": 189,
-													"width": 213.6845703125,
+													"width": 194.07666015625,
 													"height": 13,
 													"text": "Si Tipo es distinto de Pagare Bursatil"
 												},
@@ -46931,7 +46924,7 @@
 													"font": "Arial;13;1",
 													"left": 365,
 													"top": 189,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -47240,9 +47233,9 @@
 														"$ref": "AAAAAAF1Ydblx+iJ9sA="
 													},
 													"font": "Arial;13;0",
-													"left": 397.07177734375,
+													"left": 395.61181640625,
 													"top": 277,
-													"width": 204.78515625,
+													"width": 184.03466796875,
 													"height": 13,
 													"text": "Si EstadoOperacion es Monetizado"
 												},
@@ -47255,7 +47248,7 @@
 													"font": "Arial;13;1",
 													"left": 373,
 													"top": 277,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -47564,9 +47557,9 @@
 														"$ref": "AAAAAAF1Ydf/r+jQl4w="
 													},
 													"font": "Arial;13;0",
-													"left": 405.07177734375,
+													"left": 403.61181640625,
 													"top": 381,
-													"width": 205.51513671875,
+													"width": 185.45654296875,
 													"height": 13,
 													"text": "Si Date es igual a fechaMonetizado"
 												},
@@ -47579,7 +47572,7 @@
 													"font": "Arial;13;1",
 													"left": 381,
 													"top": 381,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -48339,9 +48332,9 @@
 														"$ref": "AAAAAAF1YeLY8RPH00w="
 													},
 													"font": "Arial;13;0",
-													"left": 731.578125,
+													"left": 730.11181640625,
 													"top": 557,
-													"width": 107.93896484375,
+													"width": 97.03369140625,
 													"height": 13,
 													"text": "Por cada comision"
 												},
@@ -48354,7 +48347,7 @@
 													"font": "Arial;13;1",
 													"left": 701,
 													"top": 557,
-													"width": 25.578125,
+													"width": 24.11181640625,
 													"height": 13,
 													"text": "loop"
 												},
@@ -48551,9 +48544,9 @@
 														"$ref": "AAAAAAF1YeUKvRQKddc="
 													},
 													"font": "Arial;13;0",
-													"left": 733.07177734375,
+													"left": 731.61181640625,
 													"top": 637,
-													"width": 256.08056640625,
+													"width": 232.39111328125,
 													"height": 13,
 													"text": "Si IDOperacion es igual a numeroOperacion"
 												},
@@ -48566,7 +48559,7 @@
 													"font": "Arial;13;1",
 													"left": 709,
 													"top": 637,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -50196,9 +50189,9 @@
 														"$ref": "AAAAAAF1Ye+JxBTVsSo="
 													},
 													"font": "Arial;13;0",
-													"left": 70.97900390625,
+													"left": 66.58642578125,
 													"top": 5,
-													"width": 612.3935546875,
+													"width": 542.4931640625,
 													"height": 13,
 													"text": "CG02 - Las operaciones avaladas a nombre de un socio, en estado monetizadas en un período de tiempo"
 												},
@@ -50211,7 +50204,7 @@
 													"font": "Arial;13;1",
 													"left": 5,
 													"top": 5,
-													"width": 60.97900390625,
+													"width": 56.58642578125,
 													"height": 13,
 													"text": "interaction"
 												}
@@ -50703,9 +50696,9 @@
 														"$ref": "AAAAAAF1Yge9w0AnDtE="
 													},
 													"font": "Arial;13;0",
-													"left": 507.578125,
+													"left": 506.11181640625,
 													"top": 141,
-													"width": 119.5107421875,
+													"width": 106.4091796875,
 													"height": 13,
 													"text": "Por Cada Operacion"
 												},
@@ -50718,7 +50711,7 @@
 													"font": "Arial;13;1",
 													"left": 477,
 													"top": 141,
-													"width": 25.578125,
+													"width": 24.11181640625,
 													"height": 13,
 													"text": "loop"
 												},
@@ -51027,9 +51020,9 @@
 														"$ref": "AAAAAAF1YgifQEBxReU="
 													},
 													"font": "Arial;13;0",
-													"left": 509.07177734375,
+													"left": 507.61181640625,
 													"top": 229,
-													"width": 232.20068359375,
+													"width": 216.5537109375,
 													"height": 13,
 													"text": "Si CUITSocio es igual a CUITSolicitante"
 												},
@@ -51042,7 +51035,7 @@
 													"font": "Arial;13;1",
 													"left": 485,
 													"top": 229,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -51351,9 +51344,9 @@
 														"$ref": "AAAAAAF1Ygt41kDGHZ0="
 													},
 													"font": "Arial;13;0",
-													"left": 517.07177734375,
+													"left": 515.61181640625,
 													"top": 317,
-													"width": 452.6357421875,
+													"width": 412.5439453125,
 													"height": 13,
 													"text": "Si fechaCreacion mayor o igual que FechaInicio y Menor o igual que FechaFin"
 												},
@@ -51366,7 +51359,7 @@
 													"font": "Arial;13;1",
 													"left": 493,
 													"top": 317,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -51787,9 +51780,9 @@
 														"$ref": "AAAAAAF1Yg2BVUEaRQM="
 													},
 													"font": "Arial;13;0",
-													"left": 525.07177734375,
+													"left": 523.61181640625,
 													"top": 421,
-													"width": 204.78515625,
+													"width": 184.03466796875,
 													"height": 13,
 													"text": "Si EstadoOperacion es Monetizado"
 												},
@@ -51802,7 +51795,7 @@
 													"font": "Arial;13;1",
 													"left": 501,
 													"top": 421,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -52213,9 +52206,9 @@
 														"$ref": "AAAAAAF1YhLgGkGP29I="
 													},
 													"font": "Arial;13;0",
-													"left": 70.97900390625,
+													"left": 66.58642578125,
 													"top": 5,
-													"width": 956.88720703125,
+													"width": 848.9453125,
 													"height": 13,
 													"text": "CG03 - Valor promedio de la tasa de descuento y total operado de cheques y pagarés para un tipo de empresa (pequeña, mediana, grande), en un período de tiempo"
 												},
@@ -52228,7 +52221,7 @@
 													"font": "Arial;13;1",
 													"left": 5,
 													"top": 5,
-													"width": 60.97900390625,
+													"width": 56.58642578125,
 													"height": 13,
 													"text": "interaction"
 												}
@@ -52945,9 +52938,9 @@
 														"$ref": "AAAAAAF1Yh87gbQD8uU="
 													},
 													"font": "Arial;13;0",
-													"left": 915.578125,
+													"left": 914.11181640625,
 													"top": 117,
-													"width": 89.16259765625,
+													"width": 78.98095703125,
 													"height": 13,
 													"text": "Por cada Socio"
 												},
@@ -52960,7 +52953,7 @@
 													"font": "Arial;13;1",
 													"left": 885,
 													"top": 117,
-													"width": 25.578125,
+													"width": 24.11181640625,
 													"height": 13,
 													"text": "loop"
 												},
@@ -53046,9 +53039,9 @@
 														"$ref": "AAAAAAF1YiBDCrRMj0I="
 													},
 													"font": "Arial;13;0",
-													"left": 917.07177734375,
+													"left": 915.61181640625,
 													"top": 213,
-													"width": 232.69580078125,
+													"width": 209.837890625,
 													"height": 13,
 													"text": "Si TipoEmpresa es igual a TipoEmpresa"
 												},
@@ -53061,7 +53054,7 @@
 													"font": "Arial;13;1",
 													"left": 893,
 													"top": 213,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -53709,9 +53702,9 @@
 														"$ref": "AAAAAAF1YiOUDbj92Tg="
 													},
 													"font": "Arial;13;0",
-													"left": 595.578125,
+													"left": 594.11181640625,
 													"top": 341,
-													"width": 155.8828125,
+													"width": 140.60400390625,
 													"height": 13,
 													"text": "Por cada Operacion Tipo 1"
 												},
@@ -53724,7 +53717,7 @@
 													"font": "Arial;13;1",
 													"left": 565,
 													"top": 341,
-													"width": 25.578125,
+													"width": 24.11181640625,
 													"height": 13,
 													"text": "loop"
 												},
@@ -54256,9 +54249,9 @@
 														"$ref": "AAAAAAF1Yiica7mRnCk="
 													},
 													"font": "Arial;13;0",
-													"left": 597.07177734375,
+													"left": 595.61181640625,
 													"top": 437,
-													"width": 245.92431640625,
+													"width": 228.1064453125,
 													"height": 13,
 													"text": "Si CUITSolicitante esta en lista CUITSocio"
 												},
@@ -54271,7 +54264,7 @@
 													"font": "Arial;13;1",
 													"left": 573,
 													"top": 437,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -54357,9 +54350,9 @@
 														"$ref": "AAAAAAF1YilkxbmwjW0="
 													},
 													"font": "Arial;13;0",
-													"left": 605.07177734375,
+													"left": 603.61181640625,
 													"top": 533,
-													"width": 475.76025390625,
+													"width": 435.6748046875,
 													"height": 13,
 													"text": "Si FechaVencimiento Mayor o igual que FechaInicio y Menor o igual que FechaFin"
 												},
@@ -54372,7 +54365,7 @@
 													"font": "Arial;13;1",
 													"left": 581,
 													"top": 533,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -55672,9 +55665,9 @@
 														"$ref": "AAAAAAF1Yk1ZnfvnZt4="
 													},
 													"font": "Arial;13;0",
-													"left": 70.97900390625,
+													"left": 66.58642578125,
 													"top": 5,
-													"width": 669.42724609375,
+													"width": 609.1689453125,
 													"height": 13,
 													"text": "CG06 - Consulta consolidada de un socio. Consultas riesgo vivo y total de utilizado. Total y detalle. Contragarantias."
 												},
@@ -55687,7 +55680,7 @@
 													"font": "Arial;13;1",
 													"left": 5,
 													"top": 5,
-													"width": 60.97900390625,
+													"width": 56.58642578125,
 													"height": 13,
 													"text": "interaction"
 												}
@@ -56063,9 +56056,9 @@
 														"$ref": "AAAAAAF1Ylrm8WO9fDY="
 													},
 													"font": "Arial;13;0",
-													"left": 331.578125,
+													"left": 330.11181640625,
 													"top": 93,
-													"width": 149.154296875,
+													"width": 133.84375,
 													"height": 13,
 													"text": "Por cada operacion tipo 1"
 												},
@@ -56078,7 +56071,7 @@
 													"font": "Arial;13;1",
 													"left": 301,
 													"top": 93,
-													"width": 25.578125,
+													"width": 24.11181640625,
 													"height": 13,
 													"text": "loop"
 												},
@@ -56164,9 +56157,9 @@
 														"$ref": "AAAAAAF1YltHVmQC810="
 													},
 													"font": "Arial;13;0",
-													"left": 349.07177734375,
+													"left": 347.61181640625,
 													"top": 181,
-													"width": 232.20068359375,
+													"width": 216.5537109375,
 													"height": 13,
 													"text": "Si CUITSocio es igual a CUITSolicitante"
 												},
@@ -56179,7 +56172,7 @@
 													"font": "Arial;13;1",
 													"left": 325,
 													"top": 181,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -56828,9 +56821,9 @@
 														"$ref": "AAAAAAF1Yl7OE4hD2yk="
 													},
 													"font": "Arial;13;0",
-													"left": 331.578125,
+													"left": 330.11181640625,
 													"top": 317,
-													"width": 149.154296875,
+													"width": 133.84375,
 													"height": 13,
 													"text": "Por cada operacion tipo 2"
 												},
@@ -56843,7 +56836,7 @@
 													"font": "Arial;13;1",
 													"left": 301,
 													"top": 317,
-													"width": 25.578125,
+													"width": 24.11181640625,
 													"height": 13,
 													"text": "loop"
 												},
@@ -57152,9 +57145,9 @@
 														"$ref": "AAAAAAF1Yl9e2IiOgls="
 													},
 													"font": "Arial;13;0",
-													"left": 333.07177734375,
+													"left": 331.61181640625,
 													"top": 397,
-													"width": 232.20068359375,
+													"width": 216.5537109375,
 													"height": 13,
 													"text": "Si CUITSocio es igual a CUITSolicitante"
 												},
@@ -57167,7 +57160,7 @@
 													"font": "Arial;13;1",
 													"left": 309,
 													"top": 397,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -57589,9 +57582,9 @@
 														"$ref": "AAAAAAF1YmDuToj54Go="
 													},
 													"font": "Arial;13;0",
-													"left": 331.578125,
+													"left": 330.11181640625,
 													"top": 493,
-													"width": 149.154296875,
+													"width": 133.84375,
 													"height": 13,
 													"text": "Por cada operacion tipo 3"
 												},
@@ -57604,7 +57597,7 @@
 													"font": "Arial;13;1",
 													"left": 301,
 													"top": 493,
-													"width": 25.578125,
+													"width": 24.11181640625,
 													"height": 13,
 													"text": "loop"
 												},
@@ -57913,9 +57906,9 @@
 														"$ref": "AAAAAAF1YmFfp4lAqlk="
 													},
 													"font": "Arial;13;0",
-													"left": 349.07177734375,
+													"left": 347.61181640625,
 													"top": 597,
-													"width": 232.20068359375,
+													"width": 216.5537109375,
 													"height": 13,
 													"text": "Si CUITSocio es igual a CUITSolicitante"
 												},
@@ -57928,7 +57921,7 @@
 													"font": "Arial;13;1",
 													"left": 325,
 													"top": 597,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -58127,9 +58120,9 @@
 														"$ref": "AAAAAAF1Ymb5cCktBQc="
 													},
 													"font": "Arial;13;0",
-													"left": 1067.578125,
+													"left": 1066.11181640625,
 													"top": 629,
-													"width": 88.4453125,
+													"width": 77.52099609375,
 													"height": 13,
 													"text": "Por cada cuota"
 												},
@@ -58142,7 +58135,7 @@
 													"font": "Arial;13;1",
 													"left": 1037,
 													"top": 629,
-													"width": 25.578125,
+													"width": 24.11181640625,
 													"height": 13,
 													"text": "loop"
 												},
@@ -58451,9 +58444,9 @@
 														"$ref": "AAAAAAF1YmjOtT8IAcc="
 													},
 													"font": "Arial;13;0",
-													"left": 1077.07177734375,
+													"left": 1075.61181640625,
 													"top": 733,
-													"width": 120.9580078125,
+													"width": 107.513671875,
 													"height": 13,
 													"text": "Si Estado es Impago"
 												},
@@ -58466,7 +58459,7 @@
 													"font": "Arial;13;1",
 													"left": 1053,
 													"top": 733,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -59351,9 +59344,9 @@
 														"$ref": "AAAAAAF1YnH745kEQn4="
 													},
 													"font": "Arial;13;0",
-													"left": 339.578125,
+													"left": 338.11181640625,
 													"top": 949,
-													"width": 113.74072265625,
+													"width": 100.6201171875,
 													"height": 13,
 													"text": "Por cada operacion"
 												},
@@ -59366,7 +59359,7 @@
 													"font": "Arial;13;1",
 													"left": 309,
 													"top": 949,
-													"width": 25.578125,
+													"width": 24.11181640625,
 													"height": 13,
 													"text": "loop"
 												},
@@ -59452,9 +59445,9 @@
 														"$ref": "AAAAAAF1YnJYcpkh3yo="
 													},
 													"font": "Arial;13;0",
-													"left": 349.07177734375,
+													"left": 347.61181640625,
 													"top": 1029,
-													"width": 274.13330078125,
+													"width": 250.4755859375,
 													"height": 13,
 													"text": "Si EstadoOperacion es Con Certificado Emitido"
 												},
@@ -59467,7 +59460,7 @@
 													"font": "Arial;13;1",
 													"left": 325,
 													"top": 1029,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -60157,9 +60150,9 @@
 														"$ref": "AAAAAAF1YnhE86xCMk4="
 													},
 													"font": "Arial;13;0",
-													"left": 347.578125,
+													"left": 346.11181640625,
 													"top": 1213,
-													"width": 139.75341796875,
+													"width": 123.712890625,
 													"height": 13,
 													"text": "Por cada contragarantia"
 												},
@@ -60172,7 +60165,7 @@
 													"font": "Arial;13;1",
 													"left": 317,
 													"top": 1213,
-													"width": 25.578125,
+													"width": 24.11181640625,
 													"height": 13,
 													"text": "loop"
 												},
@@ -60258,9 +60251,9 @@
 														"$ref": "AAAAAAF1Ynh0VKxcBp4="
 													},
 													"font": "Arial;13;0",
-													"left": 357.07177734375,
+													"left": 355.61181640625,
 													"top": 1293,
-													"width": 235.0888671875,
+													"width": 218.71826171875,
 													"height": 13,
 													"text": "Si CUITPropietario es igual a CUITSocio"
 												},
@@ -60273,7 +60266,7 @@
 													"font": "Arial;13;1",
 													"left": 333,
 													"top": 1293,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -61914,9 +61907,9 @@
 													},
 													"font": "Arial;13;0",
 													"showShadow": false,
-													"left": 383.578125,
+													"left": 382.11181640625,
 													"top": 145,
-													"width": 86.99169921875,
+													"width": 76.81005859375,
 													"height": 13,
 													"text": "Por cada socio"
 												},
@@ -61930,7 +61923,7 @@
 													"showShadow": false,
 													"left": 353,
 													"top": 145,
-													"width": 25.578125,
+													"width": 24.11181640625,
 													"height": 13,
 													"text": "loop"
 												},
@@ -62021,9 +62014,9 @@
 													},
 													"font": "Arial;13;0",
 													"showShadow": false,
-													"left": 385.07177734375,
+													"left": 383.61181640625,
 													"top": 217,
-													"width": 172.2216796875,
+													"width": 160.95458984375,
 													"height": 13,
 													"text": "Si CUITSocio es igual a CUIT"
 												},
@@ -62037,7 +62030,7 @@
 													"showShadow": false,
 													"left": 361,
 													"top": 217,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -62128,9 +62121,9 @@
 													},
 													"font": "Arial;13;0",
 													"showShadow": false,
-													"left": 399.578125,
+													"left": 398.11181640625,
 													"top": 257,
-													"width": 110.8271484375,
+													"width": 99.9345703125,
 													"height": 13,
 													"text": "Por cada Comisión"
 												},
@@ -62144,7 +62137,7 @@
 													"showShadow": false,
 													"left": 369,
 													"top": 257,
-													"width": 25.578125,
+													"width": 24.11181640625,
 													"height": 13,
 													"text": "loop"
 												},
@@ -62235,9 +62228,9 @@
 													},
 													"font": "Arial;13;0",
 													"showShadow": false,
-													"left": 74.97900390625,
+													"left": 70.58642578125,
 													"top": 10,
-													"width": 514.79833984375,
+													"width": 465.24853515625,
 													"height": 13,
 													"text": "CG04 - Consulta porcentaje de comisión a calcularle a un socio por un tipo de operación "
 												},
@@ -62251,7 +62244,7 @@
 													"showShadow": false,
 													"left": 9,
 													"top": 10,
-													"width": 60.97900390625,
+													"width": 56.58642578125,
 													"height": 13,
 													"text": "interaction"
 												}
@@ -63475,9 +63468,9 @@
 													},
 													"font": "Arial;13;0",
 													"showShadow": false,
-													"left": 401.07177734375,
+													"left": 399.61181640625,
 													"top": 349,
-													"width": 166.22314453125,
+													"width": 152.1123046875,
 													"height": 13,
 													"text": "Si TipoOP es igual a TipoOP"
 												},
@@ -63491,7 +63484,7 @@
 													"showShadow": false,
 													"left": 377,
 													"top": 349,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -64182,9 +64175,9 @@
 														"$ref": "AAAAAAF1a43Xx27QUQo="
 													},
 													"font": "Arial;13;0",
-													"left": 86.97900390625,
+													"left": 82.58642578125,
 													"top": 5,
-													"width": 511.12939453125,
+													"width": 462.76025390625,
 													"height": 13,
 													"text": "RN02 - La SGR no puede recibir mas del 5% del FDR en cheques de un mismo firmante"
 												},
@@ -64197,7 +64190,7 @@
 													"font": "Arial;13;1",
 													"left": 21,
 													"top": 5,
-													"width": 60.97900390625,
+													"width": 56.58642578125,
 													"height": 13,
 													"text": "interaction"
 												}
@@ -64598,9 +64591,9 @@
 													},
 													"font": "Arial;13;0",
 													"showShadow": false,
-													"left": 475.578125,
+													"left": 474.11181640625,
 													"top": 177,
-													"width": 89.16259765625,
+													"width": 78.98095703125,
 													"height": 13,
 													"text": "Por cada Socio"
 												},
@@ -64614,7 +64607,7 @@
 													"showShadow": false,
 													"left": 445,
 													"top": 177,
-													"width": 25.578125,
+													"width": 24.11181640625,
 													"height": 13,
 													"text": "loop"
 												},
@@ -64705,9 +64698,9 @@
 													},
 													"font": "Arial;13;0",
 													"showShadow": false,
-													"left": 485.07177734375,
+													"left": 483.61181640625,
 													"top": 273,
-													"width": 172.2216796875,
+													"width": 160.95458984375,
 													"height": 13,
 													"text": "Si CUIT es igual a CUITSocio"
 												},
@@ -64721,7 +64714,7 @@
 													"showShadow": false,
 													"left": 461,
 													"top": 273,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -65167,9 +65160,9 @@
 													},
 													"font": "Arial;13;0",
 													"showShadow": false,
-													"left": 1223.578125,
+													"left": 1222.11181640625,
 													"top": 369,
-													"width": 94.9453125,
+													"width": 85.46826171875,
 													"height": 13,
 													"text": "Por cada Aporte"
 												},
@@ -65183,7 +65176,7 @@
 													"showShadow": false,
 													"left": 1193,
 													"top": 369,
-													"width": 25.578125,
+													"width": 24.11181640625,
 													"height": 13,
 													"text": "loop"
 												},
@@ -65863,9 +65856,9 @@
 													},
 													"font": "Arial;13;0",
 													"showShadow": false,
-													"left": 493.07177734375,
+													"left": 491.61181640625,
 													"top": 513,
-													"width": 266.18603515625,
+													"width": 244.7119140625,
 													"height": 13,
 													"text": "Si totalAporte es menor o igual al 5% del FDR"
 												},
@@ -65879,7 +65872,7 @@
 													"showShadow": false,
 													"left": 469,
 													"top": 513,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -68287,9 +68280,9 @@
 														"$ref": "AAAAAAF1a48w43VNmk4="
 													},
 													"font": "Arial;13;0",
-													"left": 70.97900390625,
+													"left": 66.58642578125,
 													"top": 5,
-													"width": 381.1103515625,
+													"width": 342.18017578125,
 													"height": 13,
 													"text": "RN04 - Ningún socio puede operar con desembolsos no cubiertos"
 												},
@@ -68302,7 +68295,7 @@
 													"font": "Arial;13;1",
 													"left": 5,
 													"top": 5,
-													"width": 60.97900390625,
+													"width": 56.58642578125,
 													"height": 13,
 													"text": "interaction"
 												}
@@ -68934,9 +68927,9 @@
 													},
 													"font": "Arial;13;0",
 													"showShadow": false,
-													"left": 439.578125,
+													"left": 438.11181640625,
 													"top": 173,
-													"width": 94.95166015625,
+													"width": 83.29736328125,
 													"height": 13,
 													"text": "Por cada Deuda"
 												},
@@ -68950,7 +68943,7 @@
 													"showShadow": false,
 													"left": 409,
 													"top": 173,
-													"width": 25.578125,
+													"width": 24.11181640625,
 													"height": 13,
 													"text": "loop"
 												},
@@ -69158,9 +69151,9 @@
 													},
 													"font": "Arial;13;0",
 													"showShadow": false,
-													"left": 437.07177734375,
+													"left": 435.61181640625,
 													"top": 277,
-													"width": 182.33984375,
+													"width": 170.330078125,
 													"height": 13,
 													"text": "Si CUITDeudor es igual a CUIT"
 												},
@@ -69174,7 +69167,7 @@
 													"showShadow": false,
 													"left": 413,
 													"top": 277,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -69498,9 +69491,9 @@
 													},
 													"font": "Arial;13;0",
 													"showShadow": false,
-													"left": 433.07177734375,
+													"left": 431.61181640625,
 													"top": 409,
-													"width": 122.4052734375,
+													"width": 110.408203125,
 													"height": 13,
 													"text": "Si monto es igual a 0"
 												},
@@ -69514,7 +69507,7 @@
 													"showShadow": false,
 													"left": 409,
 													"top": 409,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -69605,9 +69598,9 @@
 													},
 													"font": "Arial;13;0",
 													"showShadow": false,
-													"left": 445.07177734375,
+													"left": 443.61181640625,
 													"top": 501,
-													"width": 108.90380859375,
+													"width": 99.8583984375,
 													"height": 13,
 													"text": "Si tipo es OPTipo1"
 												},
@@ -69621,7 +69614,7 @@
 													"showShadow": false,
 													"left": 421,
 													"top": 501,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -69712,9 +69705,9 @@
 													},
 													"font": "Arial;13;0",
 													"showShadow": false,
-													"left": 445.07177734375,
+													"left": 443.61181640625,
 													"top": 645,
-													"width": 108.90380859375,
+													"width": 99.8583984375,
 													"height": 13,
 													"text": "Si tipo es OPTipo2"
 												},
@@ -69728,7 +69721,7 @@
 													"showShadow": false,
 													"left": 421,
 													"top": 645,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -69819,9 +69812,9 @@
 													},
 													"font": "Arial;13;0",
 													"showShadow": false,
-													"left": 445.07177734375,
+													"left": 443.61181640625,
 													"top": 805,
-													"width": 108.90380859375,
+													"width": 99.8583984375,
 													"height": 13,
 													"text": "Si tipo es OPTipo3"
 												},
@@ -69835,7 +69828,7 @@
 													"showShadow": false,
 													"left": 421,
 													"top": 805,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -71675,9 +71668,9 @@
 														"$ref": "AAAAAAF1a5QXH3upMlI="
 													},
 													"font": "Arial;13;0",
-													"left": 78.97900390625,
+													"left": 74.58642578125,
 													"top": 5,
-													"width": 338.4541015625,
+													"width": 305.36376953125,
 													"height": 13,
 													"text": "CG05 - Consulta de saldo mora. Mora de un socio por día."
 												},
@@ -71690,7 +71683,7 @@
 													"font": "Arial;13;1",
 													"left": 13,
 													"top": 5,
-													"width": 60.97900390625,
+													"width": 56.58642578125,
 													"height": 13,
 													"text": "interaction"
 												}
@@ -71956,9 +71949,9 @@
 														"$ref": "AAAAAAF1a5QXIHu6Xys="
 													},
 													"font": "Arial;13;0",
-													"left": 307.578125,
+													"left": 306.11181640625,
 													"top": 101,
-													"width": 92.79345703125,
+													"width": 80.4091796875,
 													"height": 13,
 													"text": "Por cada deuda"
 												},
@@ -71971,7 +71964,7 @@
 													"font": "Arial;13;1",
 													"left": 277,
 													"top": 101,
-													"width": 25.578125,
+													"width": 24.11181640625,
 													"height": 13,
 													"text": "loop"
 												},
@@ -72057,9 +72050,9 @@
 														"$ref": "AAAAAAF1a5QXIHvAz1o="
 													},
 													"font": "Arial;13;0",
-													"left": 309.07177734375,
+													"left": 307.61181640625,
 													"top": 181,
-													"width": 212.70068359375,
+													"width": 197.0537109375,
 													"height": 13,
 													"text": "Si CUITSocio es igual a CUITdeudor"
 												},
@@ -72072,7 +72065,7 @@
 													"font": "Arial;13;1",
 													"left": 285,
 													"top": 181,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
@@ -72845,9 +72838,9 @@
 														"$ref": "AAAAAAF1a5QXIXvnSFc="
 													},
 													"font": "Arial;13;0",
-													"left": 309.07177734375,
+													"left": 307.61181640625,
 													"top": 277,
-													"width": 160.70068359375,
+													"width": 145.0283203125,
 													"height": 13,
 													"text": "Si aplicaMora es Verdadero"
 												},
@@ -72860,7 +72853,7 @@
 													"font": "Arial;13;1",
 													"left": 285,
 													"top": 277,
-													"width": 19.07177734375,
+													"width": 17.61181640625,
 													"height": 13,
 													"text": "opt"
 												},
