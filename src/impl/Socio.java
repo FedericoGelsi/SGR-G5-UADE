@@ -1,5 +1,8 @@
 package impl;
 
+import api.DocumentacionEmpresa;
+
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Socio implements api.Socio {
@@ -13,9 +16,8 @@ public class Socio implements api.Socio {
     private String estado;
     private Date FechaPleno;
 
-    // REVISAR
-    //private ArrayList<Accionista> accionistas;
-    //private Map<DocumentacionEmpresa> documentacion;
+    private ArrayList<Accionista> accionistas;
+    private ArrayList<DocumentacionEmpresa> documentacion;
 
     /*======CONSTRUCTOR=======*/
 
