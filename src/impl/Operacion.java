@@ -2,7 +2,7 @@ package impl;
 
 import java.util.Date;
 
-public class Operacion implements api.Operacion {
+public abstract class Operacion implements api.Operacion {
     private int idOperacion;
     private String estadoOperacion;
     private Date fechaCreacion;

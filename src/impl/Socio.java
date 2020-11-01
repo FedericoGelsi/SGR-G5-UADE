@@ -5,7 +5,7 @@ import api.DocumentacionEmpresa;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Socio implements api.Socio {
+public abstract class Socio implements api.Socio {
     private String CUITSocio;
     private String RazonSocial;
     private Date FinicAct;
