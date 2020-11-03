@@ -11,7 +11,7 @@
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints border-constraint="North"/>
         <properties>
-          <background color="-13151547"/>
+          <background color="-12296838"/>
           <focusable value="false"/>
           <foreground color="-16743559"/>
           <minimumSize width="664" height="60"/>
@@ -25,7 +25,7 @@
             </constraints>
             <properties>
               <background color="-986896"/>
-              <font name="Montserrat SemiBold" size="22"/>
+              <font name="Montserrat SemiBold" size="18"/>
               <foreground color="-1"/>
               <horizontalAlignment value="0"/>
               <horizontalTextPosition value="0"/>

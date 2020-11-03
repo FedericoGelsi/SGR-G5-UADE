@@ -8,7 +8,7 @@ public class FrmSocios extends JDialog{
     private JPanel pnlPrincipal;
     private JPanel pnlTitulo;
     private JTabbedPane pnlTabPanel;
-    private JPanel pnlDocmentacion;
+    private JPanel pnlDocumentacion;
     private JPanel pnlAccionistas;
     private JTextField ingreseElCUITConTextField;
 
@@ -29,12 +29,14 @@ public class FrmSocios extends JDialog{
         // Define el canvas según swing.
         this.setContentPane(this.pnlPrincipal);
         // Tamaño de la pantalla
-        this.setSize(800,600);
+        this.setSize(1000,600);
         // No permite volver a la pantalla anterior hasta cerrar esta
         this.setModal(true);
         // Establezco el comportamiento al cerrar la pantalla
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         // Inicia la pantalla centrada
         this.setLocationRelativeTo(null);
+        this.pnlTabPanel.setBackgroundAt(0,Color.red);
+        this.pnlTabPanel.setBackgroundAt(1,Color.blue);
     }
 }

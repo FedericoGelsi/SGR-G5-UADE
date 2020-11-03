@@ -24,7 +24,7 @@ public class FrmLytiposOP extends JDialog{
         // Define el canvas según swing.
         this.setContentPane(this.pnlPrincipal);
         // Tamaño de la pantalla
-        this.setSize(800, 600);
+        this.setSize(1000, 600);
         // No permite volver a la pantalla anterior hasta cerrar esta
         this.setModal(true);
         // Establezco el comportamiento al cerrar la pantalla
