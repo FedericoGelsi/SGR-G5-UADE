@@ -1,6 +1,8 @@
 package vista;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class FrmPrincipal extends JFrame {
     private JPanel pnlPrincipal;
@@ -10,6 +12,7 @@ public class FrmPrincipal extends JFrame {
     private JButton operacionesButton;
     private JButton desembolsosYRecuperosButton;
     private JButton consultasGeneralesButton;
+    private JPanel pnlTitulo;
 
     private FrmPrincipal self;
 
@@ -36,22 +39,48 @@ public class FrmPrincipal extends JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         // Inicia la pantalla centrada
         this.setLocationRelativeTo(null);
-        //this.asociarEventos();
+        this.asociarEventos();
 
         this.self = this;
-    }
 
-    /*
+    }
     private void asociarEventos(){
-        tabsButton.addActionListener(new ActionListener() {
+        sociosButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                FrmTabsDemo frame = new FrmTabsDemo(self, "TABS menu");
+            public void actionPerformed(ActionEvent e) {
+                FrmSocios frame = new FrmSocios(self, "SGR - Socios");
+                frame.setVisible(true);
+            }
+        });
+        líneasYTiposDeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FrmLytiposOP frame = new FrmLytiposOP(self, "SGR - Líneas y tipos de Operaciones asociadas");
+                frame.setVisible(true);
+            }
+        });
+        operacionesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FrmOperaciones frame = new FrmOperaciones(self, "SGR - Operaciones");
+                frame.setVisible(true);
+            }
+        });
+        desembolsosYRecuperosButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FrmDyR frame = new FrmDyR(self, "SGR - Desembolsos y Recuperos");
+                frame.setVisible(true);
+            }
+        });
+        consultasGeneralesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FrmConsultasGenerales frame = new FrmConsultasGenerales(self, "SGR - Consultas Generales");
                 frame.setVisible(true);
             }
         });
     }
-    */
     public static void main(String[] args) {
         FrmPrincipal frame = new FrmPrincipal("Sistema de Gestión de Sociedades de Garantías Recíprocas");
         //  Mostrar el panel

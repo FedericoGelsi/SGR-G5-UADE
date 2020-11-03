@@ -12,7 +12,7 @@
     </properties>
     <border type="none"/>
     <children>
-      <grid id="2a184" layout-manager="GridLayoutManager" row-count="1" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="2a184" binding="pnlTitulo" layout-manager="GridLayoutManager" row-count="1" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints border-constraint="North"/>
         <properties>
@@ -43,7 +43,9 @@
           </component>
           <component id="c497a" class="javax.swing.JLabel">
             <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="16" height="64"/>
+              </grid>
             </constraints>
             <properties>
               <icon value="resources/SGR-logo-64px.png"/>
@@ -63,31 +65,16 @@
         </children>
       </grid>
       <grid id="f1c22" binding="pnlMenu" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-        <margin top="0" left="0" bottom="0" right="0"/>
+        <margin top="10" left="10" bottom="10" right="10"/>
         <constraints border-constraint="Center"/>
         <properties>
           <autoscrolls value="false"/>
-          <background color="-13217941"/>
+          <background color="-15854278"/>
           <focusCycleRoot value="false"/>
           <foreground color="-15854278"/>
         </properties>
         <border type="none"/>
         <children>
-          <component id="1723" class="javax.swing.JButton" binding="líneasYTiposDeButton" default-binding="true">
-            <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <background color="-986896"/>
-              <borderPainted value="true"/>
-              <contentAreaFilled value="false"/>
-              <focusPainted value="false"/>
-              <focusable value="false"/>
-              <font name="Roboto" size="16"/>
-              <foreground color="-986896"/>
-              <text value="Líneas y tipos de operaciones asociadas"/>
-            </properties>
-          </component>
           <component id="97df4" class="javax.swing.JButton" binding="desembolsosYRecuperosButton" default-binding="true">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -150,8 +137,32 @@
               <text value="Socios"/>
             </properties>
           </component>
+          <component id="1723" class="javax.swing.JButton" binding="líneasYTiposDeButton" default-binding="true">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-986896"/>
+              <borderPainted value="true"/>
+              <contentAreaFilled value="false"/>
+              <focusPainted value="false"/>
+              <focusable value="false"/>
+              <font name="Roboto" size="16"/>
+              <foreground color="-986896"/>
+              <text value="Líneas y tipos de operaciones asociadas"/>
+            </properties>
+          </component>
         </children>
       </grid>
+      <hspacer id="65e20">
+        <constraints border-constraint="West"/>
+      </hspacer>
+      <hspacer id="81aab">
+        <constraints border-constraint="East"/>
+      </hspacer>
+      <vspacer id="4b48c">
+        <constraints border-constraint="South"/>
+      </vspacer>
     </children>
   </grid>
 </form>
