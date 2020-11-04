@@ -1,10 +1,13 @@
 package vista;
 
+import api.Aporte;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.ImageObserver;
 import java.awt.image.ImageProducer;
+import java.text.ParseException;
 
 public class FrmPrincipal extends JFrame {
     private JPanel pnlPrincipal;
@@ -166,10 +169,16 @@ public class FrmPrincipal extends JFrame {
         };
         sociosButton.addMouseListener(listener4);
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         FrmPrincipal frame = new FrmPrincipal("Sistema de Gestión de Sociedades de Garantías Recíprocas");
         //  Mostrar el panel
         frame.setVisible(true);
+
+        Aporte aporte1 = new impl.Aporte(1500,null, 21313);
+
+        boolean pepe;
+        pepe = aporte1.calcularVigencia();
+        System.out.println(pepe);
     }
 
 }
