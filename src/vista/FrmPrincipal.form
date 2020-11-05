@@ -190,9 +190,10 @@
           </component>
         </children>
       </grid>
-      <grid id="190f3" layout-manager="BorderLayout" hgap="0" vgap="0">
+      <grid id="190f3" binding="pnlPane" layout-manager="BorderLayout" hgap="0" vgap="0">
         <constraints border-constraint="Center"/>
         <properties>
+          <autoscrolls value="false"/>
           <background color="-11700571"/>
         </properties>
         <border type="none"/>
@@ -229,20 +230,40 @@
               </component>
             </children>
           </grid>
-          <component id="aeb10" class="javax.swing.JButton" binding="button1" default-binding="true">
+          <grid id="9ec3b" binding="pnlLogin" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
             <constraints border-constraint="Center"/>
             <properties>
-              <borderPainted value="false"/>
-              <contentAreaFilled value="false"/>
-              <defaultCapable value="false"/>
-              <enabled value="true"/>
-              <focusPainted value="false"/>
-              <focusable value="false"/>
-              <icon value="resources/Consulting.png"/>
-              <inheritsPopupMenu value="true"/>
-              <text value=""/>
+              <opaque value="false"/>
+              <visible value="true"/>
             </properties>
-          </component>
+            <border type="none"/>
+            <children>
+              <component id="aeb10" class="javax.swing.JButton" binding="button1" default-binding="true">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="0" height="0"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <background color="-11700571"/>
+                  <borderPainted value="false"/>
+                  <contentAreaFilled value="false"/>
+                  <defaultCapable value="false"/>
+                  <enabled value="true"/>
+                  <focusPainted value="false"/>
+                  <focusable value="false"/>
+                  <icon value="resources/Consulting.png"/>
+                  <inheritsPopupMenu value="true"/>
+                  <requestFocusEnabled value="true"/>
+                  <rolloverEnabled value="true"/>
+                  <text value=""/>
+                  <verticalAlignment value="1"/>
+                  <visible value="true"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
         </children>
       </grid>
     </children>

@@ -17,6 +17,8 @@ public class FrmPrincipal extends JFrame {
     private JPanel pnlTitulo;
     private JLabel iconLbl;
     private JButton button1;
+    private JPanel pnlPane;
+    private JPanel pnlLogin;
 
     private FrmPrincipal self;
 
@@ -166,9 +168,17 @@ public class FrmPrincipal extends JFrame {
         };
         sociosButton.addMouseListener(listener4);
     }
+
     public static void main(String[] args) {
         FrmPrincipal frame = new FrmPrincipal("Sistema de Gestión de Sociedades de Garantías Recíprocas");
         //  Mostrar el panel
+        JInternalFrame internalFrame = new JInternalFrame("Internal Frame", true, true, true, true);
+        internalFrame.setBounds(50, 50, 200, 100);
+        JDesktopPane login = new JDesktopPane();
+        login.add(internalFrame, new Integer(1));
+        internalFrame.setVisible(true);
+
+        FrmPrincipal.getContentPane().add(login);
         frame.setVisible(true);
     }
 

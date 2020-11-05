@@ -2,6 +2,8 @@ package vista;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 public class FrmSocios extends JDialog{
@@ -11,6 +13,8 @@ public class FrmSocios extends JDialog{
     private JPanel pnlDocumentacion;
     private JPanel pnlAccionistas;
     private JTextField ingreseElCUITConTextField;
+    private JPanel pnluntitled;
+    private JButton cambiarColorButton;
 
     public FrmSocios(Window owner, String Title){
         super(owner, Title);
@@ -38,5 +42,17 @@ public class FrmSocios extends JDialog{
         this.setLocationRelativeTo(null);
         this.pnlTabPanel.setBackgroundAt(0,Color.red);
         this.pnlTabPanel.setBackgroundAt(1,Color.blue);
+
+        this.events();
     }
+
+    private void events(){
+        cambiarColorButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pnluntitled.setBackground(Color.BLACK);
+            }
+        });
+    }
+
 }
