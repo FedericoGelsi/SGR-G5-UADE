@@ -4,7 +4,9 @@
     <constraints>
       <xy x="20" y="20" width="664" height="400"/>
     </constraints>
-    <properties/>
+    <properties>
+      <background color="-11700571"/>
+    </properties>
     <border type="none"/>
     <children>
       <grid id="ac832" binding="pnlTitulo" layout-manager="GridLayoutManager" row-count="1" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">

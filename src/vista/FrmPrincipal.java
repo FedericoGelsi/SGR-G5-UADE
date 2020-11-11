@@ -3,8 +3,6 @@ package vista;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
 
 public class FrmPrincipal extends JFrame {
     private JPanel pnlPrincipal;
@@ -16,13 +14,14 @@ public class FrmPrincipal extends JFrame {
     private JButton consultasGeneralesButton;
     private JPanel pnlTitulo;
     private JLabel iconLbl;
-    private JButton button1;
     private JPanel pnlPane;
     private JPanel pnlLogin;
+    private JLabel bgImg;
+    private JLabel loggedAs;
 
     private FrmPrincipal self;
 
-    public FrmPrincipal(String Title){
+    public FrmPrincipal(String Title, String CUIT){
         super(Title);
 
         try {
@@ -47,6 +46,7 @@ public class FrmPrincipal extends JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         // Inicia la pantalla centrada
         this.setLocationRelativeTo(null);
+        this.loggedAs.setText(CUIT);
 
         this.asociarEventos();
         this.self = this;
@@ -167,19 +167,6 @@ public class FrmPrincipal extends JFrame {
             }
         };
         sociosButton.addMouseListener(listener4);
-    }
-
-    public static void main(String[] args) {
-        FrmPrincipal frame = new FrmPrincipal("Sistema de Gestión de Sociedades de Garantías Recíprocas");
-        //  Mostrar el panel
-        JInternalFrame internalFrame = new JInternalFrame("Internal Frame", true, true, true, true);
-        internalFrame.setBounds(50, 50, 200, 100);
-        JDesktopPane login = new JDesktopPane();
-        login.add(internalFrame, new Integer(1));
-        internalFrame.setVisible(true);
-
-        FrmPrincipal.getContentPane().add(login);
-        frame.setVisible(true);
     }
 
 }

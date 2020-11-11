@@ -47,12 +47,7 @@ public class FrmSocios extends JDialog{
     }
 
     private void events(){
-        cambiarColorButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                pnluntitled.setBackground(Color.BLACK);
-            }
-        });
+
     }
 
 }
