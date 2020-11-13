@@ -3,6 +3,22 @@ package vista;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
+
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Iterator;
+
+
+import api.API_SHA256;
+import impl.SHA256;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class FrmLogin extends JFrame{
     private JPanel pnlPrincipal;
@@ -13,9 +29,9 @@ public class FrmLogin extends JFrame{
     private JPanel pnlLogin;
     private JTextField userField;
     private JLabel errorMsg;
+    private JButton RegisBtn;
+    private JLabel RegisLbl;
 
-    private String user = "admin";
-    private String password = "admin";
 
     private FrmLogin self;
 
@@ -45,23 +61,48 @@ public class FrmLogin extends JFrame{
         // Inicia la pantalla centrada
         this.setLocationRelativeTo(null);
 
+
         this.asociarEventos();
         this.self = this;
 
+
     }
 
-    private boolean auth(){
-        String pass = "";
-        pass = pass.valueOf(this.passwordField1.getPassword());
+    private boolean auth() throws NoSuchAlgorithmException {
+        JSONParser parser = new JSONParser();
 
-        System.out.println("User: " + this.userField.getText());
-        System.out.println("Pass: " + pass);
-        if (!this.user.equals(this.userField.getText()) || !this.password.equals(pass)){
-            this.errorMsg.setVisible(true);
+        try{
+            JSONArray usersList = new JSONArray();
+            JSONObject jsonObject = (JSONObject) readJson("./src/resources/usuarios.json");
+            usersList = (JSONArray) jsonObject.get("users");
+            API_SHA256 hash = new SHA256();
+            String pass = new String(this.passwordField1.getPassword());
 
-        }else if(this.user.equals(this.userField.getText()) && this.password.equals(pass) ){
-            this.errorMsg.setVisible(false);
-            return true;
+            Iterator<JSONObject> iterator = usersList.iterator();
+            while (iterator.hasNext()) {
+                JSONObject user_data = iterator.next();
+                if(user_data.get("username").equals(hash.getSHA_Str(this.userField.getText())) && user_data.get("password").equals(hash.getSHA_Str(pass)) ){
+                    this.errorMsg.setVisible(false);
+                    return true;
+                }else if (user_data.get("password").equals(hash.getSHA_Str(pass)) && !user_data.get("username").equals(hash.getSHA_Str(this.userField.getText()))){
+                    this.errorMsg.setText("Usuario incorrecto");
+                    this.errorMsg.setVisible(true);
+                }else if (user_data.get("username").equals(hash.getSHA_Str(this.userField.getText())) && !user_data.get("password").equals(hash.getSHA_Str(pass))){
+                    this.errorMsg.setText("Contraseña incorrecto");
+                    this.errorMsg.setVisible(true);
+                }else{
+                    this.errorMsg.setText("El usuario es inexistente");
+                    this.errorMsg.setVisible(true);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return false;
     }
@@ -70,13 +111,83 @@ public class FrmLogin extends JFrame{
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (auth() == true) {
-                    FrmPrincipal frame = new FrmPrincipal("Sistema de Gestión de Sociedades de Garantías Recíprocas", self.userField.getText());
-                    frame.setVisible(true);
-                    self.dispose();
+                try {
+                    if (auth() == true) {
+                        FrmPrincipal frame = new FrmPrincipal("Sistema de Gestión de Sociedades de Garantías Recíprocas", self.userField.getText());
+                        frame.setVisible(true);
+                        self.dispose();
+                    }
+                } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
+                    noSuchAlgorithmException.printStackTrace();
                 }
             }
         });
+        RegisBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if (self.RegisBtn.getText().equals("Registrarse")) {
+                    self.loginButton.setVisible(false);
+                    self.errorMsg.setVisible(false);
+                    self.RegisBtn.setText("Confirmar");
+                    self.RegisLbl.setVisible(true);
+                }else{
+                    self.loginButton.setVisible(true);
+                    self.RegisBtn.setText("Registrarse");
+                    self.RegisLbl.setVisible(false);
+                    //Write JSON file
+
+                    JSONParser parser = new JSONParser();
+                    JSONArray usersList = new JSONArray();
+
+                    try {
+                        JSONObject jsonObject = (JSONObject) readJson("./src/resources/usuarios.json");
+                        usersList = (JSONArray) jsonObject.get("users");
+                    } catch (FileNotFoundException err){
+                        System.out.println("El archivo no existe, creando uno nuevo...");
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                    try {
+                        writeJson("./src/resources/usuarios.json", usersList);
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+
+
+                }
+            }
+        });
+    }
+
+    private Object readJson(String filename) throws Exception{
+        FileReader reader = new FileReader(filename);
+        JSONParser jsonParser = new JSONParser();
+        return jsonParser.parse(reader);
+    }
+
+    private void writeJson(String filename, JSONArray usersList) throws Exception{
+        API_SHA256 hash = new SHA256();
+        JSONObject user_data = new JSONObject();
+        JSONObject users = new JSONObject();
+
+        try {
+            user_data.put("username", hash.getSHA_Str(self.userField.getText()));
+            user_data.put("password", hash.getSHA_Str(new String(self.passwordField1.getPassword())));
+            user_data.put("createdat", LocalDateTime.now().toString());
+        } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
+            noSuchAlgorithmException.printStackTrace();
+        }
+        try {
+            FileWriter file = new FileWriter(filename);
+            usersList.add(user_data);
+            users.put("lastmodified", LocalDateTime.now().toString());
+            users.put("users", usersList);
+            file.write(users.toJSONString());
+            file.flush();
+        } catch (IOException err) {
+            err.printStackTrace();
+        }
     }
     public static void main(String[] args) {
         FrmLogin login = new FrmLogin("Sistema de Gestión de Sociedades de Garantías Recíprocas");

@@ -205,7 +205,7 @@
             <properties>
               <font name="Roboto" size="12" style="0"/>
               <foreground color="-1"/>
-              <text value="Logueado como"/>
+              <text value="Logueado como:"/>
             </properties>
           </component>
           <hspacer id="34ff1">
@@ -282,10 +282,7 @@
             <children>
               <component id="f697c" class="javax.swing.JLabel" binding="bgImg">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
-                    <preferred-size width="600" height="540"/>
-                    <maximum-size width="651" height="540"/>
-                  </grid>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <enabled value="true"/>
