@@ -2,7 +2,7 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="vista.FrmOperaciones">
   <grid id="27dc6" binding="pnlPrincipal" layout-manager="BorderLayout" hgap="0" vgap="0">
     <constraints>
-      <xy x="20" y="20" width="664" height="400"/>
+      <xy x="20" y="20" width="683" height="400"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -19,7 +19,7 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="2b853" class="javax.swing.JLabel">
+          <component id="2b853" class="javax.swing.JLabel" binding="JLTitulo">
             <constraints>
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -36,7 +36,7 @@
               <verticalAlignment value="0"/>
             </properties>
           </component>
-          <component id="7f51b" class="javax.swing.JLabel">
+          <component id="7f51b" class="javax.swing.JLabel" binding="JLLogo">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -57,6 +57,1168 @@
           </hspacer>
         </children>
       </grid>
+      <tabbedpane id="c5fff" binding="pnlTabPanelOps">
+        <constraints border-constraint="Center"/>
+        <properties>
+          <background color="-13217941"/>
+          <focusable value="false"/>
+          <font name="Montserrat" size="14"/>
+          <foreground color="-16777216"/>
+          <minimumSize width="683" height="101"/>
+          <opaque value="true"/>
+          <preferredSize width="683" height="101"/>
+          <requestFocusEnabled value="false"/>
+          <tabPlacement value="2"/>
+        </properties>
+        <border type="none">
+          <font/>
+          <title-color color="-4505822"/>
+        </border>
+        <children>
+          <grid id="bced2" binding="pnlCHP" layout-manager="GridLayoutManager" row-count="7" column-count="11" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="10" left="10" bottom="10" right="10"/>
+            <constraints>
+              <tabbedpane title="Cheque Propio"/>
+            </constraints>
+            <properties>
+              <background color="-11700571"/>
+              <doubleBuffered value="false"/>
+              <enabled value="false"/>
+              <focusable value="false"/>
+              <font name="Montserrat" size="14"/>
+              <foreground color="-1"/>
+              <minimumSize width="560" height="101"/>
+              <preferredSize width="560" height="101"/>
+              <requestFocusEnabled value="false"/>
+              <verifyInputWhenFocusTarget value="false"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <hspacer id="1e7e0">
+                <constraints>
+                  <grid row="0" column="10" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="a5902" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="9" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Montserrat SemiBold" size="14"/>
+                  <foreground color="-1"/>
+                  <text value="Para operar con cheques propios ingrese los siguientes datos:"/>
+                </properties>
+              </component>
+              <hspacer id="18c8">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="17ec6" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Roboto" size="12"/>
+                  <foreground color="-1"/>
+                  <text value="Banco Emisor:"/>
+                </properties>
+              </component>
+              <component id="7b6f5" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Roboto" size="12"/>
+                  <foreground color="-1"/>
+                  <text value="Numero de Cheque:"/>
+                </properties>
+              </component>
+              <component id="4a742" class="javax.swing.JTextField" binding="TFTDDCHP">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="26754" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Roboto" size="12"/>
+                  <foreground color="-1"/>
+                  <text value="Fecha de Vencimiento:"/>
+                </properties>
+              </component>
+              <component id="9687e" class="javax.swing.JTextField" binding="TFFDVCHP">
+                <constraints>
+                  <grid row="3" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <text value="DD/MM/AAAA"/>
+                </properties>
+              </component>
+              <component id="d4b50" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Roboto" size="12"/>
+                  <foreground color="-1"/>
+                  <text value="CUIT del Firmante:"/>
+                </properties>
+              </component>
+              <component id="882d1" class="javax.swing.JTextField" binding="TFCDFCHP">
+                <constraints>
+                  <grid row="4" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <text value="##-########-#"/>
+                </properties>
+              </component>
+              <hspacer id="21d15">
+                <constraints>
+                  <grid row="6" column="0" row-span="1" col-span="2" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="696ce">
+                <constraints>
+                  <grid row="6" column="7" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="807c6">
+                <constraints>
+                  <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="8d78e">
+                <constraints>
+                  <grid row="6" column="6" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="14427" class="javax.swing.JButton" binding="JBCHP">
+                <constraints>
+                  <grid row="6" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Confirmar"/>
+                </properties>
+              </component>
+              <hspacer id="d5e7f">
+                <constraints>
+                  <grid row="6" column="5" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="ab364">
+                <constraints>
+                  <grid row="6" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="c131f" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Roboto" size="12"/>
+                  <foreground color="-1"/>
+                  <text value="Tasa de Descuento:"/>
+                </properties>
+              </component>
+              <component id="dd1b8" class="javax.swing.JComboBox" binding="comboBECHP">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-1"/>
+                  <foreground color="-16777216"/>
+                  <inheritsPopupMenu value="false"/>
+                  <model>
+                    <item value="BANCO DE GALICIA Y BUENOS AIRES S.A.U."/>
+                    <item value="BANCO DE LA NACION ARGENTINA"/>
+                    <item value="BANCO DE LA PROVINCIA DE BUENOS AIRES"/>
+                    <item value="INDUSTRIAL AND COMMERCIAL BANK OF CHINA"/>
+                    <item value="CITIBANK N.A."/>
+                    <item value="BANCO BBVA ARGENTINA S.A."/>
+                    <item value="BANCO DE LA PROVINCIA DE CORDOBA S.A."/>
+                    <item value="BANCO SUPERVIELLE S.A."/>
+                    <item value="BANCO DE LA CIUDAD DE BUENOS AIRES"/>
+                    <item value="BANCO PATAGONIA S.A."/>
+                    <item value="BANCO HIPOTECARIO S.A."/>
+                    <item value="BANCO DE SAN JUAN S.A."/>
+                    <item value="BANCO MUNICIPAL DE ROSARIO"/>
+                    <item value="BANCO SANTANDER RIO S.A."/>
+                    <item value="BANCO DEL CHUBUT S.A."/>
+                    <item value="BANCO DE SANTA CRUZ S.A."/>
+                    <item value="BANCO DE LA PAMPA SOCIEDAD DE ECONOMÍA M"/>
+                    <item value="BANCO DE CORRIENTES S.A."/>
+                    <item value="BANCO PROVINCIA DEL NEUQUÉN SOCIEDAD ANÓ"/>
+                    <item value="BRUBANK S.A.U."/>
+                    <item value="BANCO INTERFINANZAS S.A."/>
+                    <item value="HSBC BANK ARGENTINA S.A."/>
+                    <item value="JPMORGAN CHASE BANK, NATIONAL ASSOCIATIO"/>
+                    <item value="BANCO CREDICOOP COOPERATIVO LIMITADO"/>
+                    <item value="BANCO DE VALORES S.A."/>
+                    <item value="BANCO ROELA S.A."/>
+                    <item value="BANCO MARIVA S.A."/>
+                    <item value="BANCO ITAU ARGENTINA S.A."/>
+                    <item value="BANK OF AMERICA, NATIONAL ASSOCIATION"/>
+                    <item value="BNP PARIBAS"/>
+                    <item value="BANCO PROVINCIA DE TIERRA DEL FUEGO"/>
+                    <item value="BANCO DE LA REPUBLICA ORIENTAL DEL URUGU"/>
+                    <item value="BANCO SAENZ S.A."/>
+                    <item value="BANCO MERIDIAN S.A."/>
+                    <item value="BANCO MACRO S.A."/>
+                    <item value="BANCO COMAFI SOCIEDAD ANONIMA"/>
+                  </model>
+                </properties>
+              </component>
+              <component id="6a0b2" class="javax.swing.JSpinner" binding="spinnerTDDCHP">
+                <constraints>
+                  <grid row="5" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-1"/>
+                  <foreground color="-16777216"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="8b5cc" binding="pnlCHT" layout-manager="GridLayoutManager" row-count="6" column-count="11" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="10" left="10" bottom="10" right="10"/>
+            <constraints>
+              <tabbedpane title="Cheque Terceros"/>
+            </constraints>
+            <properties>
+              <background color="-11700571"/>
+              <doubleBuffered value="false"/>
+              <enabled value="false"/>
+              <focusable value="false"/>
+              <font name="Montserrat" size="14"/>
+              <foreground color="-1"/>
+              <minimumSize width="560" height="101"/>
+              <preferredSize width="560" height="101"/>
+              <requestFocusEnabled value="false"/>
+              <verifyInputWhenFocusTarget value="false"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <hspacer id="61a15">
+                <constraints>
+                  <grid row="0" column="10" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="c9248" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="9" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Montserrat SemiBold" size="14"/>
+                  <foreground color="-1"/>
+                  <text value="Para operar con cheques de terceros ingrese los siguientes datos:"/>
+                </properties>
+              </component>
+              <hspacer id="5b4e3">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="51b52" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Roboto" size="12"/>
+                  <foreground color="-1"/>
+                  <text value="Banco Emisor:"/>
+                </properties>
+              </component>
+              <component id="c46b8" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Roboto" size="12"/>
+                  <foreground color="-1"/>
+                  <text value="Numero de Cheque:"/>
+                </properties>
+              </component>
+              <component id="c9962" class="javax.swing.JTextField" binding="TFBECHT">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="17f92" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Roboto" size="12"/>
+                  <foreground color="-1"/>
+                  <text value="Fecha de Vencimiento:"/>
+                </properties>
+              </component>
+              <component id="ea36e" class="javax.swing.JTextField" binding="TFFDVCHT">
+                <constraints>
+                  <grid row="3" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <text value="DD/MM/AAAA"/>
+                </properties>
+              </component>
+              <component id="ec6a1" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Roboto" size="12"/>
+                  <foreground color="-1"/>
+                  <text value="CUIT del Firmante:"/>
+                </properties>
+              </component>
+              <component id="20ded" class="javax.swing.JTextField" binding="TFCDFCHT">
+                <constraints>
+                  <grid row="4" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <text value="##-########-#"/>
+                </properties>
+              </component>
+              <hspacer id="e6065">
+                <constraints>
+                  <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="30f84">
+                <constraints>
+                  <grid row="5" column="7" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="85ec0">
+                <constraints>
+                  <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="335bd">
+                <constraints>
+                  <grid row="5" column="6" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="6e619" class="javax.swing.JButton" binding="JBCHT">
+                <constraints>
+                  <grid row="5" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Confirmar"/>
+                </properties>
+              </component>
+              <hspacer id="71c07">
+                <constraints>
+                  <grid row="5" column="5" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="3c20">
+                <constraints>
+                  <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="eaa69" class="javax.swing.JComboBox" binding="comboCHT">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-1"/>
+                  <foreground color="-16777216"/>
+                  <inheritsPopupMenu value="false"/>
+                  <model>
+                    <item value="BANCO DE GALICIA Y BUENOS AIRES S.A.U."/>
+                    <item value="BANCO DE LA NACION ARGENTINA"/>
+                    <item value="BANCO DE LA PROVINCIA DE BUENOS AIRES"/>
+                    <item value="INDUSTRIAL AND COMMERCIAL BANK OF CHINA"/>
+                    <item value="CITIBANK N.A."/>
+                    <item value="BANCO BBVA ARGENTINA S.A."/>
+                    <item value="BANCO DE LA PROVINCIA DE CORDOBA S.A."/>
+                    <item value="BANCO SUPERVIELLE S.A."/>
+                    <item value="BANCO DE LA CIUDAD DE BUENOS AIRES"/>
+                    <item value="BANCO PATAGONIA S.A."/>
+                    <item value="BANCO HIPOTECARIO S.A."/>
+                    <item value="BANCO DE SAN JUAN S.A."/>
+                    <item value="BANCO MUNICIPAL DE ROSARIO"/>
+                    <item value="BANCO SANTANDER RIO S.A."/>
+                    <item value="BANCO DEL CHUBUT S.A."/>
+                    <item value="BANCO DE SANTA CRUZ S.A."/>
+                    <item value="BANCO DE LA PAMPA SOCIEDAD DE ECONOMÍA M"/>
+                    <item value="BANCO DE CORRIENTES S.A."/>
+                    <item value="BANCO PROVINCIA DEL NEUQUÉN SOCIEDAD ANÓ"/>
+                    <item value="BRUBANK S.A.U."/>
+                    <item value="BANCO INTERFINANZAS S.A."/>
+                    <item value="HSBC BANK ARGENTINA S.A."/>
+                    <item value="JPMORGAN CHASE BANK, NATIONAL ASSOCIATIO"/>
+                    <item value="BANCO CREDICOOP COOPERATIVO LIMITADO"/>
+                    <item value="BANCO DE VALORES S.A."/>
+                    <item value="BANCO ROELA S.A."/>
+                    <item value="BANCO MARIVA S.A."/>
+                    <item value="BANCO ITAU ARGENTINA S.A."/>
+                    <item value="BANK OF AMERICA, NATIONAL ASSOCIATION"/>
+                    <item value="BNP PARIBAS"/>
+                    <item value="BANCO PROVINCIA DE TIERRA DEL FUEGO"/>
+                    <item value="BANCO DE LA REPUBLICA ORIENTAL DEL URUGU"/>
+                    <item value="BANCO SAENZ S.A."/>
+                    <item value="BANCO MERIDIAN S.A."/>
+                    <item value="BANCO MACRO S.A."/>
+                    <item value="BANCO COMAFI SOCIEDAD ANONIMA"/>
+                  </model>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="becf6" binding="pnlPB" layout-manager="GridLayoutManager" row-count="6" column-count="11" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="10" left="10" bottom="10" right="10"/>
+            <constraints>
+              <tabbedpane title="Pagare Bursatil"/>
+            </constraints>
+            <properties>
+              <background color="-11700571"/>
+              <doubleBuffered value="false"/>
+              <enabled value="false"/>
+              <focusable value="false"/>
+              <font name="Montserrat" size="14"/>
+              <foreground color="-1"/>
+              <minimumSize width="560" height="101"/>
+              <preferredSize width="560" height="101"/>
+              <requestFocusEnabled value="false"/>
+              <verifyInputWhenFocusTarget value="false"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <hspacer id="115e5">
+                <constraints>
+                  <grid row="0" column="10" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="a5825" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="9" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Montserrat SemiBold" size="14"/>
+                  <foreground color="-1"/>
+                  <text value="Para operar con pagare bursatil ingrese los siguientes datos:"/>
+                </properties>
+              </component>
+              <hspacer id="96230">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="fe8e" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Roboto" size="12"/>
+                  <foreground color="-1"/>
+                  <text value="Banco Emisor:"/>
+                </properties>
+              </component>
+              <component id="af747" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Roboto" size="12"/>
+                  <foreground color="-1"/>
+                  <text value="Numero de Pagare:"/>
+                </properties>
+              </component>
+              <component id="2a5d3" class="javax.swing.JTextField" binding="TFNDPPB">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="58e34" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Roboto" size="12"/>
+                  <foreground color="-1"/>
+                  <text value="Fecha de Vencimiento:"/>
+                </properties>
+              </component>
+              <component id="db719" class="javax.swing.JTextField" binding="TFFDVPB">
+                <constraints>
+                  <grid row="3" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <text value="DD/MM/AAAA"/>
+                </properties>
+              </component>
+              <component id="d09fb" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Roboto" size="12"/>
+                  <foreground color="-1"/>
+                  <text value="CUIT del Firmante:"/>
+                </properties>
+              </component>
+              <component id="9a8c8" class="javax.swing.JTextField" binding="TFCDFPB">
+                <constraints>
+                  <grid row="4" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <text value="##-########-#"/>
+                </properties>
+              </component>
+              <hspacer id="84e83">
+                <constraints>
+                  <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="3da77">
+                <constraints>
+                  <grid row="5" column="7" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="482e8">
+                <constraints>
+                  <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="1f735">
+                <constraints>
+                  <grid row="5" column="6" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="278ac" class="javax.swing.JButton" binding="JBPB">
+                <constraints>
+                  <grid row="5" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Confirmar"/>
+                </properties>
+              </component>
+              <hspacer id="f7a1a">
+                <constraints>
+                  <grid row="5" column="5" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="450c1">
+                <constraints>
+                  <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="5e5e5" class="javax.swing.JComboBox" binding="comboBEPB">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-1"/>
+                  <foreground color="-16777216"/>
+                  <inheritsPopupMenu value="false"/>
+                  <model>
+                    <item value="BANCO DE GALICIA Y BUENOS AIRES S.A.U."/>
+                    <item value="BANCO DE LA NACION ARGENTINA"/>
+                    <item value="BANCO DE LA PROVINCIA DE BUENOS AIRES"/>
+                    <item value="INDUSTRIAL AND COMMERCIAL BANK OF CHINA"/>
+                    <item value="CITIBANK N.A."/>
+                    <item value="BANCO BBVA ARGENTINA S.A."/>
+                    <item value="BANCO DE LA PROVINCIA DE CORDOBA S.A."/>
+                    <item value="BANCO SUPERVIELLE S.A."/>
+                    <item value="BANCO DE LA CIUDAD DE BUENOS AIRES"/>
+                    <item value="BANCO PATAGONIA S.A."/>
+                    <item value="BANCO HIPOTECARIO S.A."/>
+                    <item value="BANCO DE SAN JUAN S.A."/>
+                    <item value="BANCO MUNICIPAL DE ROSARIO"/>
+                    <item value="BANCO SANTANDER RIO S.A."/>
+                    <item value="BANCO DEL CHUBUT S.A."/>
+                    <item value="BANCO DE SANTA CRUZ S.A."/>
+                    <item value="BANCO DE LA PAMPA SOCIEDAD DE ECONOMÍA M"/>
+                    <item value="BANCO DE CORRIENTES S.A."/>
+                    <item value="BANCO PROVINCIA DEL NEUQUÉN SOCIEDAD ANÓ"/>
+                    <item value="BRUBANK S.A.U."/>
+                    <item value="BANCO INTERFINANZAS S.A."/>
+                    <item value="HSBC BANK ARGENTINA S.A."/>
+                    <item value="JPMORGAN CHASE BANK, NATIONAL ASSOCIATIO"/>
+                    <item value="BANCO CREDICOOP COOPERATIVO LIMITADO"/>
+                    <item value="BANCO DE VALORES S.A."/>
+                    <item value="BANCO ROELA S.A."/>
+                    <item value="BANCO MARIVA S.A."/>
+                    <item value="BANCO ITAU ARGENTINA S.A."/>
+                    <item value="BANK OF AMERICA, NATIONAL ASSOCIATION"/>
+                    <item value="BNP PARIBAS"/>
+                    <item value="BANCO PROVINCIA DE TIERRA DEL FUEGO"/>
+                    <item value="BANCO DE LA REPUBLICA ORIENTAL DEL URUGU"/>
+                    <item value="BANCO SAENZ S.A."/>
+                    <item value="BANCO MERIDIAN S.A."/>
+                    <item value="BANCO MACRO S.A."/>
+                    <item value="BANCO COMAFI SOCIEDAD ANONIMA"/>
+                  </model>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="de0ff" binding="pnlCCC" layout-manager="GridLayoutManager" row-count="5" column-count="11" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="10" left="10" bottom="10" right="10"/>
+            <constraints>
+              <tabbedpane title="Cuenta Corriente"/>
+            </constraints>
+            <properties>
+              <background color="-11700571"/>
+              <doubleBuffered value="false"/>
+              <enabled value="false"/>
+              <focusable value="false"/>
+              <font name="Montserrat" size="14"/>
+              <foreground color="-1"/>
+              <minimumSize width="560" height="101"/>
+              <preferredSize width="560" height="101"/>
+              <requestFocusEnabled value="false"/>
+              <verifyInputWhenFocusTarget value="false"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <hspacer id="3fcf2">
+                <constraints>
+                  <grid row="0" column="10" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="440c3" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="9" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Montserrat SemiBold" size="14"/>
+                  <foreground color="-1"/>
+                  <text value="Para operar con cuentas corrientes ingrese los siguientes datos:"/>
+                </properties>
+              </component>
+              <hspacer id="f0600">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="bb580" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Roboto" size="12"/>
+                  <foreground color="-1"/>
+                  <text value="Empresa:"/>
+                </properties>
+              </component>
+              <component id="9c142" class="javax.swing.JTextField" binding="TFITCCC">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="73c11" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Roboto" size="12"/>
+                  <foreground color="-1"/>
+                  <text value="Importe Total:"/>
+                </properties>
+              </component>
+              <component id="d3d60" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Roboto" size="12"/>
+                  <foreground color="-1"/>
+                  <text value="Fecha de Vencimiento:"/>
+                </properties>
+              </component>
+              <component id="69f2d" class="javax.swing.JTextField" binding="TFFDVCCC">
+                <constraints>
+                  <grid row="3" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <text value="DD/MM/AAAA"/>
+                </properties>
+              </component>
+              <hspacer id="e33f5">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="a8b3c">
+                <constraints>
+                  <grid row="4" column="7" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="8b578">
+                <constraints>
+                  <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="e46f5">
+                <constraints>
+                  <grid row="4" column="6" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="34ced" class="javax.swing.JButton" binding="JBCCC">
+                <constraints>
+                  <grid row="4" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Confirmar"/>
+                </properties>
+              </component>
+              <hspacer id="83ce5">
+                <constraints>
+                  <grid row="4" column="5" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="b1984">
+                <constraints>
+                  <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="638d6" class="javax.swing.JSpinner" binding="spinnerITCCC">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-1"/>
+                  <foreground color="-16777216"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="12738" binding="pnlTC" layout-manager="GridLayoutManager" row-count="6" column-count="11" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="10" left="10" bottom="10" right="10"/>
+            <constraints>
+              <tabbedpane title="Tarjeta de Credito"/>
+            </constraints>
+            <properties>
+              <background color="-11700571"/>
+              <doubleBuffered value="false"/>
+              <enabled value="false"/>
+              <focusable value="false"/>
+              <font name="Montserrat" size="14"/>
+              <foreground color="-1"/>
+              <minimumSize width="560" height="101"/>
+              <preferredSize width="560" height="101"/>
+              <requestFocusEnabled value="false"/>
+              <verifyInputWhenFocusTarget value="false"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <hspacer id="50683">
+                <constraints>
+                  <grid row="0" column="10" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="c39c8" class="javax.swing.JLabel" binding="JLEncabezadoTC">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="9" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Montserrat SemiBold" size="14"/>
+                  <foreground color="-1"/>
+                  <text value="Para operar con tarjetas de credito ingrese los siguientes datos:"/>
+                </properties>
+              </component>
+              <hspacer id="fa413">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="979bb" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Roboto" size="12"/>
+                  <foreground color="-1"/>
+                  <text value="Numero de Tarjeta:"/>
+                </properties>
+              </component>
+              <component id="fb354" class="javax.swing.JTextField" binding="TFNDTTC">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
+              <component id="a4a34" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Roboto" size="12"/>
+                  <foreground color="-1"/>
+                  <text value="Nombre:"/>
+                </properties>
+              </component>
+              <component id="f06e6" class="javax.swing.JTextField" binding="TFNombreTC">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="7b3f7" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Roboto" size="12"/>
+                  <foreground color="-1"/>
+                  <text value="Fecha de Vencimiento:"/>
+                </properties>
+              </component>
+              <component id="17a91" class="javax.swing.JTextField" binding="TFFVTC">
+                <constraints>
+                  <grid row="3" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <text value="MM/AA"/>
+                </properties>
+              </component>
+              <component id="56ed" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Roboto" size="12"/>
+                  <foreground color="-1"/>
+                  <text value="Codigo de Seguridad:"/>
+                </properties>
+              </component>
+              <component id="94f49" class="javax.swing.JTextField" binding="TFCDSTC">
+                <constraints>
+                  <grid row="4" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties/>
+              </component>
+              <hspacer id="32fd4">
+                <constraints>
+                  <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="60f8a">
+                <constraints>
+                  <grid row="5" column="7" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="99fb5">
+                <constraints>
+                  <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="c79f3">
+                <constraints>
+                  <grid row="5" column="6" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="4c547" class="javax.swing.JButton" binding="JBTC">
+                <constraints>
+                  <grid row="5" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Confirmar"/>
+                </properties>
+              </component>
+              <hspacer id="c0d3c">
+                <constraints>
+                  <grid row="5" column="5" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="8e163">
+                <constraints>
+                  <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+            </children>
+          </grid>
+          <grid id="afe13" binding="pnlPST" layout-manager="GridLayoutManager" row-count="8" column-count="11" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="10" left="10" bottom="10" right="10"/>
+            <constraints>
+              <tabbedpane title="Prestamo"/>
+            </constraints>
+            <properties>
+              <background color="-11700571"/>
+              <doubleBuffered value="false"/>
+              <enabled value="false"/>
+              <focusable value="false"/>
+              <font name="Montserrat" size="14"/>
+              <foreground color="-1"/>
+              <minimumSize width="560" height="101"/>
+              <preferredSize width="560" height="101"/>
+              <requestFocusEnabled value="false"/>
+              <verifyInputWhenFocusTarget value="false"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <hspacer id="f52bc">
+                <constraints>
+                  <grid row="0" column="10" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="c616a" class="javax.swing.JLabel" binding="JLEncabezadoPST">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="9" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Montserrat SemiBold" size="14"/>
+                  <foreground color="-1"/>
+                  <text value="Para operar con prestamos ingrese los siguientes datos:"/>
+                </properties>
+              </component>
+              <hspacer id="d166f">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="72f72" class="javax.swing.JLabel" binding="JLBEPST">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Roboto" size="12"/>
+                  <foreground color="-1"/>
+                  <text value="Banco Emisor:"/>
+                </properties>
+              </component>
+              <component id="cba14" class="javax.swing.JLabel" binding="JLITPST">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Roboto" size="12"/>
+                  <foreground color="-1"/>
+                  <text value="Importe Total"/>
+                </properties>
+              </component>
+              <component id="7c806" class="javax.swing.JLabel" binding="JLTasaPST">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Roboto" size="12"/>
+                  <foreground color="-1"/>
+                  <text value="Tasa:"/>
+                </properties>
+              </component>
+              <component id="c806c" class="javax.swing.JLabel" binding="JLTDAPST">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Roboto" size="12"/>
+                  <foreground color="-1"/>
+                  <text value="Fecha de Acreditacion:"/>
+                </properties>
+              </component>
+              <component id="ba67a" class="javax.swing.JTextField" binding="TFFDAPST">
+                <constraints>
+                  <grid row="4" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <text value="DD/MM/AAAA"/>
+                </properties>
+              </component>
+              <hspacer id="eb614">
+                <constraints>
+                  <grid row="7" column="0" row-span="1" col-span="2" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="c254c">
+                <constraints>
+                  <grid row="7" column="7" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="6306d">
+                <constraints>
+                  <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="a6923">
+                <constraints>
+                  <grid row="7" column="6" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="5d00a" class="javax.swing.JButton" binding="JBPST">
+                <constraints>
+                  <grid row="7" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Confirmar"/>
+                </properties>
+              </component>
+              <hspacer id="19c4e">
+                <constraints>
+                  <grid row="7" column="5" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="da038">
+                <constraints>
+                  <grid row="7" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="b32ed" class="javax.swing.JLabel" binding="comboCDCPST">
+                <constraints>
+                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Roboto" size="12"/>
+                  <foreground color="-1"/>
+                  <text value="Cantidad de Cuotas:"/>
+                </properties>
+              </component>
+              <component id="9047c" class="javax.swing.JLabel" binding="JLSistemaPST">
+                <constraints>
+                  <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Roboto" size="12"/>
+                  <foreground color="-1"/>
+                  <text value="Sistema:"/>
+                </properties>
+              </component>
+              <component id="5f52b" class="javax.swing.JComboBox" binding="comboBoxCDCPST">
+                <constraints>
+                  <grid row="5" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-1"/>
+                  <foreground color="-16777216"/>
+                  <inheritsPopupMenu value="false"/>
+                  <model>
+                    <item value="3"/>
+                    <item value="6"/>
+                    <item value="12"/>
+                    <item value="24"/>
+                    <item value="36"/>
+                  </model>
+                </properties>
+              </component>
+              <component id="cbc19" class="javax.swing.JComboBox" binding="comboBEPST">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-1"/>
+                  <foreground color="-16777216"/>
+                  <inheritsPopupMenu value="false"/>
+                  <model>
+                    <item value="BANCO DE GALICIA Y BUENOS AIRES S.A.U."/>
+                    <item value="BANCO DE LA NACION ARGENTINA"/>
+                    <item value="BANCO DE LA PROVINCIA DE BUENOS AIRES"/>
+                    <item value="INDUSTRIAL AND COMMERCIAL BANK OF CHINA"/>
+                    <item value="CITIBANK N.A."/>
+                    <item value="BANCO BBVA ARGENTINA S.A."/>
+                    <item value="BANCO DE LA PROVINCIA DE CORDOBA S.A."/>
+                    <item value="BANCO SUPERVIELLE S.A."/>
+                    <item value="BANCO DE LA CIUDAD DE BUENOS AIRES"/>
+                    <item value="BANCO PATAGONIA S.A."/>
+                    <item value="BANCO HIPOTECARIO S.A."/>
+                    <item value="BANCO DE SAN JUAN S.A."/>
+                    <item value="BANCO MUNICIPAL DE ROSARIO"/>
+                    <item value="BANCO SANTANDER RIO S.A."/>
+                    <item value="BANCO DEL CHUBUT S.A."/>
+                    <item value="BANCO DE SANTA CRUZ S.A."/>
+                    <item value="BANCO DE LA PAMPA SOCIEDAD DE ECONOMÍA M"/>
+                    <item value="BANCO DE CORRIENTES S.A."/>
+                    <item value="BANCO PROVINCIA DEL NEUQUÉN SOCIEDAD ANÓ"/>
+                    <item value="BRUBANK S.A.U."/>
+                    <item value="BANCO INTERFINANZAS S.A."/>
+                    <item value="HSBC BANK ARGENTINA S.A."/>
+                    <item value="JPMORGAN CHASE BANK, NATIONAL ASSOCIATIO"/>
+                    <item value="BANCO CREDICOOP COOPERATIVO LIMITADO"/>
+                    <item value="BANCO DE VALORES S.A."/>
+                    <item value="BANCO ROELA S.A."/>
+                    <item value="BANCO MARIVA S.A."/>
+                    <item value="BANCO ITAU ARGENTINA S.A."/>
+                    <item value="BANK OF AMERICA, NATIONAL ASSOCIATION"/>
+                    <item value="BNP PARIBAS"/>
+                    <item value="BANCO PROVINCIA DE TIERRA DEL FUEGO"/>
+                    <item value="BANCO DE LA REPUBLICA ORIENTAL DEL URUGU"/>
+                    <item value="BANCO SAENZ S.A."/>
+                    <item value="BANCO MERIDIAN S.A."/>
+                    <item value="BANCO MACRO S.A."/>
+                    <item value="BANCO COMAFI SOCIEDAD ANONIMA"/>
+                  </model>
+                </properties>
+              </component>
+              <component id="e7ca4" class="javax.swing.JComboBox" binding="comboSistemaPST">
+                <constraints>
+                  <grid row="6" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-1"/>
+                  <foreground color="-16777216"/>
+                  <inheritsPopupMenu value="false"/>
+                  <model>
+                    <item value="Frances"/>
+                    <item value="Aleman"/>
+                    <item value="Americano"/>
+                  </model>
+                </properties>
+              </component>
+              <component id="10c93" class="javax.swing.JSpinner" binding="spinnerITPST">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-1"/>
+                  <foreground color="-16777216"/>
+                </properties>
+              </component>
+              <component id="db80" class="javax.swing.JSpinner">
+                <constraints>
+                  <grid row="3" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-1"/>
+                  <foreground color="-16777216"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+        </children>
+      </tabbedpane>
     </children>
   </grid>
 </form>
