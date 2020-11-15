@@ -77,7 +77,7 @@ public class FrmOperaciones extends JDialog{
 
 
 
-    public FrmOperaciones(Window owner, String Title) {
+    public FrmOperaciones(Window owner, String Title) throws Exception {
         super(owner, Title);
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -176,7 +176,9 @@ public class FrmOperaciones extends JDialog{
                     DatosCorrectosFlagCHP = false;
                 }
                 if (DatosCorrectosFlagCHP==true){
-
+                    if(verif.lineacreditovigente(CDFCHP)==false){
+                        showMessageDialog(null,"La linea de credito se encuentra vencida");
+                    }
                 }
             }
         });

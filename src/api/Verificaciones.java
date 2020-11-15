@@ -15,4 +15,7 @@ public interface Verificaciones {
 
     //Chequea el formato de fecha en el String recibido y que los datos ingresados sean numericos
     boolean fechavalida(String fechacheck);
+
+    //Chequea la vigencia de una linea de credito
+    boolean lineacreditovigente(String CUITSocio);
 }
