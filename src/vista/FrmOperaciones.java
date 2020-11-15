@@ -1,5 +1,7 @@
 package vista;
 
+import api.Verificaciones;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -68,57 +70,12 @@ public class FrmOperaciones extends JDialog{
     private JButton JBPST;
     private JLabel JLCSPST;
     private JTextField TFCSPST;
+    private JComboBox comboBECHT;
+    private JTextField TFNDCCHT;
+    private JTextField TFNDCCHP;
+    private Verificaciones verif = new impl.Verificaciones();
 
-    //Compara una fecha entregada por parametro contra la fecha actual y devuelve Menor si la fecha ingresada es en el
-    // pasado, Mayor si la fecha ingresada es en el futuro o Hoy si la fecha ingresada es la actual.
-    public String fechavshoy(LocalDate fecha) {
-        LocalDate hoy = LocalDate.now();
-        int comparacion = fecha.compareTo(hoy);
-        if (comparacion < 0) {
-            return "Menor";
-        }
-        if (comparacion > 0) {
-            return "Mayor";
-        } else {
-            return "Hoy";
-        }
-    }
-    //Chequea que el formato de CUIT ingresado sea valido y que los datos ingresads sean numericos
-    public boolean CUITValido(String CUIT) {
-        String[] cuitseparado = CUIT.split("-");
-        boolean CUITValidoflag = true;
-        if (cuitseparado[0].length() != 2 || esnumerico(cuitseparado[0])!=true) {
-            CUITValidoflag = false;
-        }
-        if (cuitseparado[1].length() != 8 || esnumerico(cuitseparado[1])!=true ){
-            CUITValidoflag = false;
-        }
-        if (cuitseparado[2].length() != 1 || esnumerico(cuitseparado[2])!=true){
-            CUITValidoflag = false;
-        }
-        return CUITValidoflag;
-    }
-    //Chequea que un String este compuesto unicamente por numeros
-    public boolean esnumerico(String datos){
-        String regex = "[0-9]+";
-        boolean numerico = datos.matches(regex);
-        return numerico;
-    }
-    //Chequea el formato de fecha en el String recibido y que los datos ingresados sean numericos
-    public boolean fechavalida(String fechacheck){
-        String[] fechaseparada = fechacheck.split("/");
-        boolean fechavalidaFlag = true;
-        if (fechaseparada[0].length() != 2 || esnumerico(fechaseparada[0])!=true) {
-            fechavalidaFlag = false;
-        }
-        if (fechaseparada[1].length() != 2 || esnumerico(fechaseparada[1])!=true) {
-            fechavalidaFlag = false;
-        }
-        if (fechaseparada[2].length() != 4 || esnumerico(fechaseparada[2])!=true) {
-            fechavalidaFlag = false;
-        }
-        return fechavalidaFlag;
-    }
+
 
     public FrmOperaciones(Window owner, String Title) {
         super(owner, Title);
@@ -145,10 +102,12 @@ public class FrmOperaciones extends JDialog{
         // Inicia la pantalla centrada
         this.setLocationRelativeTo(null);
 
+
         //Action Listener de JButton Cheques Personales
         JBCHP.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                boolean DatosCorrectosFlagCHP = true;
                 //Toma el objeto Banco Emisor desde el Combo Box comboBECHP
                 Object BECHP = new Object();
                 BECHP = comboBECHP.getSelectedItem();
@@ -156,45 +115,51 @@ public class FrmOperaciones extends JDialog{
                 //Toma el String Numero de Cheque desde el JText Field TFNCCHP y lo transforma en un entero
                 String NCCHP;
                 int NCCHPint;
-                NCCHP = TFTDDCHP.getText();
+                NCCHP = TFNDCCHP.getText();
                 if (NCCHP.isEmpty()) {
                     showMessageDialog(null, "El campo Numero de Cheque es mandatorio, por favor ingrese el dato solicitado");
+                    DatosCorrectosFlagCHP = false;
                 }
                 else {
-                    if (esnumerico(NCCHP)) {
+                    if (verif.esnumerico(NCCHP)) {
                         NCCHPint = Integer.parseInt(NCCHP);
                     } else {
                         showMessageDialog(null, "El campo Numero de Cheque solo admite numeros, no se admiten otros caracteres");
+                        DatosCorrectosFlagCHP = false;
                     }
                 }
 
                 //Toma el String Fecha de Vencimiento desde el JText Field FDVCHP y lo transforma en un date
                 String FDVCHP = "";
                 FDVCHP = TFFDVCHP.getText();
-                if (fechavalida(FDVCHP)==true) {
+                if (verif.fechavalida(FDVCHP)==true) {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                     LocalDate localDate = LocalDate.parse(FDVCHP, formatter);
                     //Compara la fecha ingresada con la fecha actual ya que no tendria sentido vender un cheque el dia de su
                     // canje o vender un cheque ya vencido.
-                    String comparacionfecha = fechavshoy(localDate);
+                    String comparacionfecha = verif.fechavshoy(localDate);
                     if (comparacionfecha == "Menor") {
                         showMessageDialog(null, "El cheque se encuentra vencido");
+                        DatosCorrectosFlagCHP = false;
                     }
                     if (comparacionfecha == "Hoy") {
                         showMessageDialog(null, "La fecha de vencimiento del cheque es hoy");
+                        DatosCorrectosFlagCHP = false;
                     }
                 }
                 else{
                     showMessageDialog(null,"La fecha ingresada no cumple con el formato solicitado");
-                    }
+                    DatosCorrectosFlagCHP = false;
+                }
 
-                //Toma el String CUIT firmante desde el JText Field TFCDF
+                //Toma el String CUIT firmante desde el JText Field TFCDFCHT
                 String CDFCHP = "";
                 CDFCHP = TFCDFCHP.getText();
-                if (CUITValido(CDFCHP)){
+                if (verif.CUITValido(CDFCHP)){
                 }
                 else {
                     showMessageDialog(null, "El CUIT ingresado es invalido");
+                    DatosCorrectosFlagCHP = false;
                 }
 
                 //Toma el Entero Tasa desde el JSpinner spinnerTDDCHP
@@ -204,12 +169,135 @@ public class FrmOperaciones extends JDialog{
                 TDDCHPint= (Integer) TDDCHP;
                 if(TDDCHPint <= 0){
                     showMessageDialog(null, "El cheque no puede ser vendido con una tasa de descuento menor o igual a 0");
+                    DatosCorrectosFlagCHP = false;
                 }
                 if(TDDCHPint >=100){
                     showMessageDialog(null,"El cheque no puede ser vendido con una tasa de descuento superior al 99%");
+                    DatosCorrectosFlagCHP = false;
+                }
+                if (DatosCorrectosFlagCHP==true){
+
                 }
             }
         });
+        JBCHT.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean DatosCorrectosFlagCHT = true;
+                //Toma el objeto Banco Emisor desde el Combo Box comboBECHT
+                Object BECHT = new Object();
+                BECHT = comboBECHT.getSelectedItem();
+
+                //Toma el String Numero de Cheque desde el JText Field TFNCCHT y lo transforma en un entero
+                String NCCHT;
+                int NCCHTint;
+                NCCHT = TFNDCCHT.getText();
+                if (NCCHT.isEmpty()) {
+                    showMessageDialog(null, "El campo Numero de Cheque es mandatorio, por favor ingrese el dato solicitado");
+                    DatosCorrectosFlagCHT = false;
+                } else {
+                    if (verif.esnumerico(NCCHT)) {
+                        NCCHTint = Integer.parseInt(NCCHT);
+                    } else {
+                        showMessageDialog(null, "El campo Numero de Cheque solo admite numeros, no se admiten otros caracteres");
+                        DatosCorrectosFlagCHT = false;
+                    }
+                }
+                //Toma el String Fecha de Vencimiento desde el JText Field FDVCHT y lo transforma en un date
+                String FDVCHT = "";
+                FDVCHT = TFFDVCHT.getText();
+                if (verif.fechavalida(FDVCHT) == true) {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    LocalDate localDate = LocalDate.parse(FDVCHT, formatter);
+                    //Compara la fecha ingresada con la fecha actual ya que no tendria sentido vender un cheque el dia de su
+                    // canje o vender un cheque ya vencido.
+                    String comparacionfecha = verif.fechavshoy(localDate);
+                    if (comparacionfecha == "Menor") {
+                        showMessageDialog(null, "El cheque se encuentra vencido");
+                        DatosCorrectosFlagCHT = false;
+                    }
+                    if (comparacionfecha == "Hoy") {
+                        showMessageDialog(null, "La fecha de vencimiento del cheque es hoy");
+                        DatosCorrectosFlagCHT = false;
+                    }
+                } else {
+                    showMessageDialog(null, "La fecha ingresada no cumple con el formato solicitado");
+                    DatosCorrectosFlagCHT = false;
+                }
+                //Toma el String CUIT firmante desde el JText Field TFCDFCHT
+                String CDFCHT = "";
+                CDFCHT = TFCDFCHT.getText();
+                if (verif.CUITValido(CDFCHT)) {
+                } else {
+                    showMessageDialog(null, "El CUIT ingresado es invalido");
+                    DatosCorrectosFlagCHT = false;
+                }
+                if (DatosCorrectosFlagCHT==true){
+
+                }
+            }
+        });
+        JBPB.addActionListener(new ActionListener() {
+                                   @Override
+                                   public void actionPerformed(ActionEvent e) {
+                                       boolean DatosCorrectosFlagPB = true;
+                                       //Toma el objeto Banco Emisor desde el Combo Box comboBEPB
+                                       Object BEPB = new Object();
+                                       BEPB = comboBEPB.getSelectedItem();
+
+                                       //Toma el String Numero de Cheque desde el JText Field TFNDPPB y lo transforma en un entero
+                                       String NDPPB;
+                                       int NDPPBint;
+                                       NDPPB = TFNDPPB.getText();
+                                       if (NDPPB.isEmpty()) {
+                                           showMessageDialog(null, "El campo Numero de Cheque es mandatorio, por favor ingrese el dato solicitado");
+                                           DatosCorrectosFlagPB = false;
+                                       } else {
+                                           if (verif.esnumerico(NDPPB)) {
+                                               NDPPBint = Integer.parseInt(NDPPB);
+                                           } else {
+                                               showMessageDialog(null, "El campo Numero de Cheque solo admite numeros, no se admiten otros caracteres");
+                                               DatosCorrectosFlagPB = false;
+                                           }
+                                       }
+                                       //Toma el String Fecha de Vencimiento desde el JText Field FDVPB y lo transforma en un date
+                                       String FDVPB = "";
+                                       FDVPB = TFFDVPB.getText();
+                                       if (verif.fechavalida(FDVPB) == true) {
+                                           DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                                           LocalDate localDate = LocalDate.parse(FDVPB, formatter);
+                                           //Compara la fecha ingresada con la fecha actual ya que no tendria sentido vender un cheque el dia de su
+                                           // canje o vender un cheque ya vencido.
+                                           String comparacionfecha = verif.fechavshoy(localDate);
+                                           if (comparacionfecha == "Menor") {
+                                               showMessageDialog(null, "El cheque se encuentra vencido");
+                                               DatosCorrectosFlagPB = false;
+                                           }
+                                           if (comparacionfecha == "Hoy") {
+                                               showMessageDialog(null, "La fecha de vencimiento del cheque es hoy");
+                                               DatosCorrectosFlagPB = false;
+                                           }
+                                       } else {
+                                           showMessageDialog(null, "La fecha ingresada no cumple con el formato solicitado");
+                                           DatosCorrectosFlagPB = false;
+                                       }
+                                       //Toma el String CUIT firmante desde el JText Field TFCDFPB
+                                       String CDFPB = "";
+                                       CDFPB = TFCDFPB.getText();
+                                       if (verif.CUITValido(CDFPB)) {
+                                       } else {
+                                           showMessageDialog(null, "El CUIT ingresado es invalido");
+                                           DatosCorrectosFlagPB = false;
+                                       }
+                                       if (DatosCorrectosFlagPB == true) {
+
+                                       }
+                                   }
+                               });
+
+
+
+
 
         // El actionListener de Prestamos
         JBPST.addActionListener(new ActionListener() {
@@ -247,12 +335,12 @@ public class FrmOperaciones extends JDialog{
                 //Toma el String Fecha de Acreeditación desde el JText Field FDFAPST y lo transforma en un date
                 String FDAPST = "";
                 FDAPST = TFFDAPST.getText();
-                if (fechavalida(FDAPST) == true) {
+                if (verif.fechavalida(FDAPST) == true) {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                     LocalDate localDate = LocalDate.parse(FDAPST, formatter);
                     //Compara la fecha ingresada con la fecha actual ya que no tendria sentido vender un cheque el dia de su
                     // canje o vender un cheque ya vencido.
-                    String comparacionfecha = fechavshoy(localDate);
+                    String comparacionfecha = verif.fechavshoy(localDate);
                     if (comparacionfecha == "Menor") {
                         showMessageDialog(null, "La fecha de acreditación no es valida");
                         DatosCorrectosFlagPST = false;
@@ -265,7 +353,7 @@ public class FrmOperaciones extends JDialog{
                 //Toma el String CUIT Socio desde el JText Field TFCSPST
                 String CSPST = "";
                 CSPST = TFCSPST.getText();
-                if (CUITValido(CSPST)) {
+                if (verif.CUITValido(CSPST)) {
                 } else {
                     showMessageDialog(null, "El CUIT ingresado es invalido");
                     DatosCorrectosFlagPST = false;

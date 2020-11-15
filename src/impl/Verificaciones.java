@@ -58,5 +58,6 @@ public class Verificaciones implements api.Verificaciones {
         return fechavalidaFlag;
     }
     public boolean lineacreditovigente(String CUIT){
+        return true;
     }
 }
