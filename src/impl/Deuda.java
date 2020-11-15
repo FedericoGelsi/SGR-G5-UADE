@@ -20,6 +20,7 @@ public class Deuda implements api.Deuda {
         this.CUITDeudor = CUITDeudor;
         this.idDeuda = idDeuda;
         this.montoMora = montoMora;
+        this.fechaDeuda = LocalDate.now();
     }
 
     public Deuda(JSONObject jsonDeuda){

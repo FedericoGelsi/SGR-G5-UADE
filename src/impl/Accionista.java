@@ -8,6 +8,7 @@ public class Accionista implements api.Accionista {
     private String razonsocial;
     private float porcParticipacion;
 
+
     /*======GETTERS=======*/
     @Override
     public String getCUITAccionista() {

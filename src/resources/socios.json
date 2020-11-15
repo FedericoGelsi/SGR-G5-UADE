@@ -160,5 +160,77 @@
     ],
     "author":            "admin",
     "created-at":        "2020-11-13",
-    "modified-by":       "admin"
+    "modified-by":       "admin",
+    "desembolsos": [
+        {
+            "id": 1,
+            "cuit-socio": "20-12345678-2",
+            "razon-social": "Los Pollos Hermanos S.A.",
+            "monto": 123.45,
+            "fecha-op": "2020-10-15"
+        },
+        {
+            "id": 1,
+            "cuit-socio": "20-12345678-2",
+            "razon-social": "Los Pollos Hermanos S.A.",
+            "monto": 123.45,
+            "fecha-op": "2020-10-15"
+        },
+        {
+            "id": 1,
+            "cuit-socio": "20-12345678-2",
+            "razon-social": "Los Pollos Hermanos S.A.",
+            "monto": 123.45,
+            "fecha-op": "2020-10-15"
+        },
+        {
+            "id": 1,
+            "cuit-socio": "20-12345678-2",
+            "razon-social": "Los Pollos Hermanos S.A.",
+            "monto": 123.45,
+            "fecha-op": "2020-10-15"
+        },
+        {
+            "id": 1,
+            "cuit-socio": "20-12345678-2",
+            "razon-social": "Los Pollos Hermanos S.A.",
+            "monto": 123.45,
+            "fecha-op": "2020-10-15"
+        },
+        {
+            "id": 1,
+            "cuit-socio": "20-12345678-2",
+            "razon-social": "Los Pollos Hermanos S.A.",
+            "monto": 123.45,
+            "fecha-op": "2020-10-15"
+        },
+        {
+            "id": 1,
+            "cuit-socio": "20-12345678-2",
+            "razon-social": "Los Pollos Hermanos S.A.",
+            "monto": 123.45,
+            "fecha-op": "2020-10-15"
+        },
+        {
+            "id": 1,
+            "cuit-socio": "20-12345678-2",
+            "razon-social": "Los Pollos Hermanos S.A.",
+            "monto": 123.45,
+            "fecha-op": "2020-10-15"
+        },
+        {
+            "id": 1,
+            "cuit-socio": "20-12345678-2",
+            "razon-social": "Los Pollos Hermanos S.A.",
+            "monto": 123.45,
+            "fecha-op": "2020-10-15"
+        },
+        {
+            "id": 1,
+            "cuit-socio": "20-12345678-2",
+            "razon-social": "Los Pollos Hermanos S.A.",
+            "monto": 123.45,
+            "fecha-op": "2020-10-15"
+        }
+    ]
 }

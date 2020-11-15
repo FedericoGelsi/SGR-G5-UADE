@@ -1,21 +1,15 @@
 package vista;
 
-import api.API_JSONHandler;
-import api.Deuda;
-import api.Recupero;
+import api.*;
 import impl.JSONHandler;
-import netscape.javascript.JSObject;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.print.PrinterException;
-import java.security.cert.CRLReason;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -39,10 +33,15 @@ public class FrmDyR extends JDialog {
     private JButton confirmBtn;
     private JTextField MontoTxField;
     private JTextField CUITTxField;
-    private JTable HistorialRTable;
     private JScrollPane pnlSTable;
+    private JScrollPane pnlSHTable;
+    private JScrollPane pnlSDesembolsosTable;
+    private JButton LDButton;
     private JTable deudasTable;
+    private JTable recuperosTable;
+    private JTable desembolsosTable;
 
+    private Verificaciones verificar = new impl.Verificaciones();
     private FrmDyR self;
 
     private String filename = "./src/resources/socios.json";
@@ -109,9 +108,18 @@ public class FrmDyR extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 if (TipocomboBox.getSelectedItem().toString().equals("Parcial")){
                     MontoTxField.setEditable(true);
+                    MontoTxField.setText("0.0");
                 }else{
                     MontoTxField.setEditable(false);
+                    MontoTxField.setText(TotalDeudaTxField.getText());
                 }
+            }
+        });
+
+        LDButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buscarDesembolsos();
             }
         });
     }
@@ -124,22 +132,32 @@ public class FrmDyR extends JDialog {
             String cuit = socio.get("cuit").toString();
             String estado = socio.get("estado").toString();
             if (TipoBusqueda.getSelectedItem().toString().equals("CUIT")){
-                if (cuit.equals(textFieldSocio.getText()) && estado.equals("Pleno")){
-                    CUITTxField.setText(cuit);
-                    RSTextField.setText(rs);
-                    crearTabla((JSONArray) socio.get("deudas"));
+                if (verificar.CUITValido(textFieldSocio.getText())) {
+                    if (cuit.equals(textFieldSocio.getText()) && estado.equals("Pleno")) {
+                        CUITTxField.setText(cuit);
+                        RSTextField.setText(rs);
+                        if (pnlHR.isShowing()) {
+                            crearTablaHistorialRecuperos((JSONArray) socio.get("recuperos"));
+                        } else {
+                            crearTablaDeudas((JSONArray) socio.get("deudas"));
+                        }
+                    }
                 }
             }else if (TipoBusqueda.getSelectedItem().toString().equals("Razon Social")){
                 if (rs.equals(textFieldSocio.getText()) && estado.equals("Pleno")){
                     CUITTxField.setText(cuit);
                     RSTextField.setText(rs);
-                    crearTabla((JSONArray) socio.get("deudas"));
+                    if ( pnlHR.isShowing()){
+                        crearTablaHistorialRecuperos((JSONArray) socio.get("recuperos"));
+                    }else {
+                        crearTablaDeudas((JSONArray) socio.get("deudas"));
+                    }
                 }
             }
         }
     }
 
-    private void crearTabla(JSONArray deudas){
+    private void crearTablaDeudas(JSONArray deudas){
         String [] nombresColumnas = {"ID","Monto","Fecha Ven","Mora","Monto Mora","Subtotal"};
         DefaultTableModel modelo = new DefaultTableModel();
         for ( String column : nombresColumnas) {
@@ -224,6 +242,28 @@ public class FrmDyR extends JDialog {
         file.writeJson(filename, jsonObject);
     }
 
+    private void crearTablaHistorialRecuperos(JSONArray recuperos){
+        String [] nombresColumnas = {"CUIT","Tipo", "Monto", "Deudas"};
+        DefaultTableModel modelo = new DefaultTableModel();
+        for ( String column : nombresColumnas) {
+            modelo.addColumn(column);
+        }
+        for ( Object recupero: recuperos){
+            ArrayList data = new ArrayList<>();
+            Recupero recu = new impl.Recupero((JSONObject) recupero);
+            data.add(recu.getIdSocioPleno());
+            data.add(recu.getTipo());
+            data.add(recu.getMonto());
+            data.add(recu.getIdDeuda());
+            modelo.addRow(data.toArray());
+        }
+
+        recuperosTable = new JTable(modelo);
+
+        pnlSHTable.setViewportView(recuperosTable);
+
+    }
+
     private void guardarDatos(JSONObject recupero) throws Exception {
         String filename = "./src/resources/socios.json";
         API_JSONHandler file = new JSONHandler();
@@ -240,6 +280,32 @@ public class FrmDyR extends JDialog {
         }
         jsonObject.put("socios-participes", socioList);
         file.writeJson(filename, jsonObject);
+
+    }
+
+    private void buscarDesembolsos(){
+        JSONArray desembolsos = (JSONArray) jsonObject.get("desembolsos");
+        crearTablaDesembolsos(desembolsos);
+    }
+
+    private void crearTablaDesembolsos(JSONArray desembolsos){
+        String [] nombresColumnas = {"id", "CUIT", "Razón social", "Monto", "Fecha Operado"};
+        DefaultTableModel modelo = new DefaultTableModel();
+        for ( String column : nombresColumnas) {
+            modelo.addColumn(column);
+        }
+        for (Object des: desembolsos) {
+            ArrayList data = new ArrayList<>();
+            Desembolso desembolso = new impl.Desembolso((JSONObject) des);
+            data.add(desembolso.getId());
+            data.add(desembolso.getCuit());
+            data.add(desembolso.getRazonSocial());
+            data.add(desembolso.getMonto());
+            data.add(desembolso.getFechaOp().toString());
+            modelo.addRow(data.toArray());
+        }
+        desembolsosTable = new JTable(modelo);
+        pnlSDesembolsosTable.setViewportView(desembolsosTable);
 
     }
 }
