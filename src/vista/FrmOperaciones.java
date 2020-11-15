@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -29,7 +30,7 @@ public class FrmOperaciones extends JDialog{
     private JLabel JLITPST;
     private JLabel JLTasaPST;
     private JLabel JLTDAPST;
-    private JLabel comboCDCPST;
+    private JLabel JLCDCPST;
     private JSpinner spinnerITPST;
     private JLabel JLTitulo;
     private JLabel JLLogo;
@@ -37,7 +38,6 @@ public class FrmOperaciones extends JDialog{
     private JLabel JLEncabezadoTC;
     private JLabel JLBEPST;
     private JTextField TFFDAPST;
-    private JButton JBPST;
     private JLabel JLSistemaPST;
     private JComboBox comboSistemaPST;
     private JTextField TFNDTTC;
@@ -64,6 +64,10 @@ public class FrmOperaciones extends JDialog{
     private JTextField TFCDFCHP;
     private JComboBox comboBECHP;
     private JSpinner spinnerTDDCHP;
+    private JSpinner spinnerTDDPST;
+    private JButton JBPST;
+    private JLabel JLCSPST;
+    private JTextField TFCSPST;
 
     //Compara una fecha entregada por parametro contra la fecha actual y devuelve Menor si la fecha ingresada es en el
     // pasado, Mayor si la fecha ingresada es en el futuro o Hoy si la fecha ingresada es la actual.
@@ -204,6 +208,76 @@ public class FrmOperaciones extends JDialog{
                 if(TDDCHPint >=100){
                     showMessageDialog(null,"El cheque no puede ser vendido con una tasa de descuento superior al 99%");
                 }
+            }
+        });
+
+        // El actionListener de Prestamos
+        JBPST.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean DatosCorrectosFlagPST = true;
+                //Toma el objeto Banco Emisor desde el Combo Box comboBECHP
+                Object BEPST = new Object();
+                BEPST = comboBEPST.getSelectedItem();
+
+                //Toma el Entero Tasa desde el JSpinner spinnerTDDCHP
+                Object TDDPST;
+                TDDPST = spinnerTDDPST.getValue();
+                int TDDPSTint;
+                TDDPSTint = (Integer) TDDPST;
+                if (TDDPSTint <= 0) {
+                    showMessageDialog(null, "El cheque no puede ser vendido con una tasa de descuento menor o igual a 0");
+                    DatosCorrectosFlagPST = false;
+                }
+                if (TDDPSTint >= 100) {
+                    showMessageDialog(null, "El cheque no puede ser vendido con una tasa de descuento superior al 99%");
+                    DatosCorrectosFlagPST = false;
+                }
+
+                //Toma el importe total
+                Object ITPST;
+                ITPST = spinnerITPST.getValue();
+                int ITFloatPST;
+                ITFloatPST = (Integer) ITPST;
+                if (ITFloatPST <= 0) {
+                    showMessageDialog(null, "El importe total del prestamo no puede ser igual o menor que 0");
+                    DatosCorrectosFlagPST = false;
+                }
+
+                //Toma el String Fecha de Acreeditación desde el JText Field FDFAPST y lo transforma en un date
+                String FDAPST = "";
+                FDAPST = TFFDAPST.getText();
+                if (fechavalida(FDAPST) == true) {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    LocalDate localDate = LocalDate.parse(FDAPST, formatter);
+                    //Compara la fecha ingresada con la fecha actual ya que no tendria sentido vender un cheque el dia de su
+                    // canje o vender un cheque ya vencido.
+                    String comparacionfecha = fechavshoy(localDate);
+                    if (comparacionfecha == "Menor") {
+                        showMessageDialog(null, "La fecha de acreditación no es valida");
+                        DatosCorrectosFlagPST = false;
+                    }
+                } else {
+                    showMessageDialog(null, "La fecha ingresada no cumple con el formato solicitado");
+                    DatosCorrectosFlagPST = false;
+                }
+
+                //Toma el String CUIT Socio desde el JText Field TFCSPST
+                String CSPST = "";
+                CSPST = TFCSPST.getText();
+                if (CUITValido(CSPST)) {
+                } else {
+                    showMessageDialog(null, "El CUIT ingresado es invalido");
+                    DatosCorrectosFlagPST = false;
+                }
+
+                //Toma el objeto Sistema desde el Combo Box comboSistemaPST
+                Object Sistema_PST = new Object();
+                Sistema_PST = comboSistemaPST.getSelectedItem();
+
+                //Toma el objeto Cantidad de cuotas desde el Combo Box comboSistemaPST
+                Object cantidadCuotas = new Object();
+                cantidadCuotas = comboBoxCDCPST.getSelectedItem();
             }
         });
     }
