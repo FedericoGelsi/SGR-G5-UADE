@@ -79,20 +79,17 @@ public class FrmOperaciones extends JDialog{
             return "Hoy";
         }
     }
-
+    //Chequea que el formato de CUIT ingresado sea valido y que los datos ingresads sean numericos
     public boolean CUITValido(String CUIT) {
         String[] cuitseparado = CUIT.split("-");
         boolean CUITValidoflag = true;
-        boolean allLetters0 = cuitseparado[0].chars().anyMatch(Character::isLetter);
-        if (cuitseparado[0].length() != 2 || allLetters0==true) {
+        if (cuitseparado[0].length() != 2 || esnumerico(cuitseparado[0])!=true) {
             CUITValidoflag = false;
         }
-        boolean allLetters1 = cuitseparado[1].chars().anyMatch(Character::isLetter);
-        if (cuitseparado[1].length() != 8 || allLetters1==true ){
+        if (cuitseparado[1].length() != 8 || esnumerico(cuitseparado[1])!=true ){
             CUITValidoflag = false;
         }
-        boolean allLetters2 = cuitseparado[2].chars().anyMatch(Character::isLetter);
-        if (cuitseparado[2].length() != 1 || allLetters2==true){
+        if (cuitseparado[2].length() != 1 || esnumerico(cuitseparado[2])!=true){
             CUITValidoflag = false;
         }
         return CUITValidoflag;
@@ -103,7 +100,7 @@ public class FrmOperaciones extends JDialog{
         boolean numerico = datos.matches(regex);
         return numerico;
     }
-
+    //Chequea el formato de fecha en el String recibido y que los datos ingresados sean numericos
     public boolean fechavalida(String fechacheck){
         String[] fechaseparada = fechacheck.split("/");
         boolean fechavalidaFlag = true;
