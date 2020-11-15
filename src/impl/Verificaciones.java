@@ -1,6 +1,7 @@
 package impl;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 
 public class Verificaciones implements api.Verificaciones {
     //Compara una fecha entregada por parametro contra la fecha actual y devuelve Menor si la fecha ingresada es en el
@@ -23,13 +24,17 @@ public class Verificaciones implements api.Verificaciones {
     public boolean CUITValido(String CUIT) {
         String[] cuitseparado = CUIT.split("-");
         boolean CUITValidoflag = true;
-        if (cuitseparado[0].length() != 2 || esnumerico(cuitseparado[0])!=true) {
-            CUITValidoflag = false;
-        }
-        if (cuitseparado[1].length() != 8 || esnumerico(cuitseparado[1])!=true ){
-            CUITValidoflag = false;
-        }
-        if (cuitseparado[2].length() != 1 || esnumerico(cuitseparado[2])!=true){
+        if ( Arrays.stream(cuitseparado).count() == 3) {
+            if (cuitseparado[0].length() != 2 ||  esnumerico(cuitseparado[0]) != true) {
+                CUITValidoflag = false;
+            }
+            if (cuitseparado[1].length() != 8 ||  esnumerico(cuitseparado[1]) != true) {
+                CUITValidoflag = false;
+            }
+            if (cuitseparado[2].length() != 1 || esnumerico(cuitseparado[2]) != true) {
+                CUITValidoflag = false;
+            }
+        }else {
             CUITValidoflag = false;
         }
         return CUITValidoflag;
