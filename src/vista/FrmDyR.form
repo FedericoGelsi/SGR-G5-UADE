@@ -2,7 +2,7 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="vista.FrmDyR">
   <grid id="27dc6" binding="pnlPrincipal" layout-manager="BorderLayout" hgap="0" vgap="0">
     <constraints>
-      <xy x="20" y="20" width="664" height="400"/>
+      <xy x="20" y="20" width="676" height="400"/>
     </constraints>
     <properties>
       <background color="-11700571"/>
@@ -57,6 +57,348 @@
               <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
           </hspacer>
+        </children>
+      </grid>
+      <grid id="df8e9" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="Center"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="995ca" binding="pnlSearch" layout-manager="GridLayoutManager" row-count="1" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="10" left="130" bottom="10" right="0"/>
+            <constraints border-constraint="North"/>
+            <properties>
+              <background color="-12296838"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="59264" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Roboto" size="14"/>
+                  <foreground color="-1"/>
+                  <text value="Buscar Socio:"/>
+                </properties>
+              </component>
+              <component id="be8db" class="javax.swing.JComboBox" binding="TipoBusqueda">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Roboto" size="12"/>
+                  <foreground color="-16777216"/>
+                  <inheritsPopupMenu value="false"/>
+                  <model>
+                    <item value="Razon Social"/>
+                    <item value="CUIT"/>
+                  </model>
+                  <opaque value="true"/>
+                </properties>
+              </component>
+              <component id="a467e" class="javax.swing.JTextField" binding="textFieldSocio">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <background color="-12296838"/>
+                  <caretColor color="-1"/>
+                  <disabledTextColor color="-4013374"/>
+                  <dragEnabled value="false"/>
+                  <font name="Roboto" size="12"/>
+                  <foreground color="-1"/>
+                  <opaque value="false"/>
+                </properties>
+              </component>
+              <hspacer id="3a404">
+                <constraints>
+                  <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="c2d06" class="javax.swing.JButton" binding="buscarButton" default-binding="true">
+                <constraints>
+                  <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-12296838"/>
+                  <borderPainted value="true"/>
+                  <enabled value="true"/>
+                  <focusPainted value="false"/>
+                  <focusable value="false"/>
+                  <font name="Roboto" size="14"/>
+                  <foreground color="-16777216"/>
+                  <text value="Buscar"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="2e7ab" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints border-constraint="Center"/>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <tabbedpane id="255e0" binding="tabbedPaneDyR">
+                <constraints border-constraint="Center"/>
+                <properties>
+                  <background color="-12296838"/>
+                  <enabled value="true"/>
+                  <font name="Montserrat" size="14" style="0"/>
+                  <opaque value="true"/>
+                  <requestFocusEnabled value="false"/>
+                  <tabPlacement value="2"/>
+                  <verifyInputWhenFocusTarget value="false"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <grid id="c52f2" binding="tabRecuperos" layout-manager="BorderLayout" hgap="0" vgap="0">
+                    <constraints>
+                      <tabbedpane title="Recuperos"/>
+                    </constraints>
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <tabbedpane id="7cdaf" binding="tabbedPaneR">
+                        <constraints border-constraint="Center"/>
+                        <properties>
+                          <background color="-12296838"/>
+                          <font name="Roboto" size="12"/>
+                          <opaque value="true"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <grid id="cfee9" binding="pnlNR" layout-manager="GridLayoutManager" row-count="6" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                            <margin top="10" left="10" bottom="10" right="10"/>
+                            <constraints>
+                              <tabbedpane title="Nuevo Recupero"/>
+                            </constraints>
+                            <properties>
+                              <background color="-11700571"/>
+                            </properties>
+                            <border type="none"/>
+                            <children>
+                              <component id="473d3" class="javax.swing.JLabel">
+                                <constraints>
+                                  <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="1" use-parent-layout="false"/>
+                                </constraints>
+                                <properties>
+                                  <font name="Montserrat" size="14" style="0"/>
+                                  <foreground color="-1"/>
+                                  <text value="Total:"/>
+                                </properties>
+                              </component>
+                              <component id="c24ab" class="javax.swing.JTextField" binding="TotalDeudaTxField">
+                                <constraints>
+                                  <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                                    <preferred-size width="150" height="-1"/>
+                                  </grid>
+                                </constraints>
+                                <properties>
+                                  <background color="-12296838"/>
+                                  <disabledTextColor color="-4013374"/>
+                                  <editable value="false"/>
+                                  <focusable value="true"/>
+                                  <font name="Roboto" size="12" style="0"/>
+                                  <foreground color="-1"/>
+                                </properties>
+                              </component>
+                              <component id="dae98" class="javax.swing.JLabel">
+                                <constraints>
+                                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                </constraints>
+                                <properties>
+                                  <background color="-1"/>
+                                  <font name="Montserrat" size="14" style="1"/>
+                                  <foreground color="-1"/>
+                                  <text value="Deudas:"/>
+                                </properties>
+                              </component>
+                              <component id="20fec" class="javax.swing.JButton" binding="confirmBtn">
+                                <constraints>
+                                  <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                                </constraints>
+                                <properties>
+                                  <background color="-12296838"/>
+                                  <borderPainted value="true"/>
+                                  <enabled value="true"/>
+                                  <focusPainted value="false"/>
+                                  <focusable value="false"/>
+                                  <font name="Roboto" size="14"/>
+                                  <foreground color="-16777216"/>
+                                  <text value="Confirmar operación"/>
+                                </properties>
+                              </component>
+                              <component id="4612f" class="javax.swing.JLabel">
+                                <constraints>
+                                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="1" use-parent-layout="false"/>
+                                </constraints>
+                                <properties>
+                                  <font name="Montserrat" size="14" style="0"/>
+                                  <foreground color="-1"/>
+                                  <text value="Monto:"/>
+                                </properties>
+                              </component>
+                              <component id="245da" class="javax.swing.JTextField" binding="MontoTxField">
+                                <constraints>
+                                  <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                                    <preferred-size width="150" height="-1"/>
+                                  </grid>
+                                </constraints>
+                                <properties>
+                                  <background color="-12296838"/>
+                                  <disabledTextColor color="-4013374"/>
+                                  <editable value="false"/>
+                                  <font name="Roboto" size="12" style="0"/>
+                                  <foreground color="-1"/>
+                                </properties>
+                              </component>
+                              <component id="b05e3" class="javax.swing.JComboBox" binding="TipocomboBox">
+                                <constraints>
+                                  <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                                </constraints>
+                                <properties>
+                                  <model>
+                                    <item value="Total"/>
+                                    <item value="Parcial"/>
+                                  </model>
+                                </properties>
+                              </component>
+                              <component id="dca2" class="javax.swing.JLabel">
+                                <constraints>
+                                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                </constraints>
+                                <properties>
+                                  <font name="Montserrat" size="14" style="0"/>
+                                  <foreground color="-1"/>
+                                  <text value="Tipo:"/>
+                                </properties>
+                              </component>
+                              <component id="fac57" class="javax.swing.JLabel">
+                                <constraints>
+                                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                </constraints>
+                                <properties>
+                                  <font name="Montserrat" size="14" style="0"/>
+                                  <foreground color="-1"/>
+                                  <text value="CUIT: "/>
+                                </properties>
+                              </component>
+                              <component id="81213" class="javax.swing.JTextField" binding="CUITTxField">
+                                <constraints>
+                                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                                    <preferred-size width="150" height="-1"/>
+                                  </grid>
+                                </constraints>
+                                <properties>
+                                  <background color="-12296838"/>
+                                  <disabledTextColor color="-4013374"/>
+                                  <editable value="false"/>
+                                  <enabled value="true"/>
+                                  <font name="Roboto" size="12" style="0"/>
+                                  <foreground color="-1"/>
+                                </properties>
+                              </component>
+                              <component id="8a6b" class="javax.swing.JTextField" binding="RSTextField">
+                                <constraints>
+                                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                                    <preferred-size width="150" height="-1"/>
+                                  </grid>
+                                </constraints>
+                                <properties>
+                                  <background color="-12296838"/>
+                                  <disabledTextColor color="-4013374"/>
+                                  <editable value="false"/>
+                                  <font name="Roboto" size="12" style="0"/>
+                                  <foreground color="-1"/>
+                                </properties>
+                              </component>
+                              <component id="66f7c" class="javax.swing.JLabel">
+                                <constraints>
+                                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                </constraints>
+                                <properties>
+                                  <font name="Montserrat" size="14" style="0"/>
+                                  <foreground color="-1"/>
+                                  <text value="Razón Social: "/>
+                                </properties>
+                              </component>
+                              <component id="d0fc0" class="javax.swing.JLabel">
+                                <constraints>
+                                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                </constraints>
+                                <properties>
+                                  <background color="-1"/>
+                                  <font name="Montserrat" size="14" style="1"/>
+                                  <foreground color="-1"/>
+                                  <text value="Socio:"/>
+                                </properties>
+                              </component>
+                              <scrollpane id="b417e" binding="pnlSTable">
+                                <constraints>
+                                  <grid row="1" column="2" row-span="3" col-span="2" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                                </constraints>
+                                <properties/>
+                                <border type="none"/>
+                                <children/>
+                              </scrollpane>
+                            </children>
+                          </grid>
+                          <grid id="9e92b" binding="pnlHR" layout-manager="BorderLayout" hgap="0" vgap="0">
+                            <constraints>
+                              <tabbedpane title="Historial"/>
+                            </constraints>
+                            <properties>
+                              <background color="-11700571"/>
+                            </properties>
+                            <border type="none"/>
+                            <children>
+                              <component id="99ab6" class="javax.swing.JLabel">
+                                <constraints border-constraint="North"/>
+                                <properties>
+                                  <focusCycleRoot value="false"/>
+                                  <font name="Montserrat" size="14" style="1"/>
+                                  <text value="Historial de Recuperos:"/>
+                                </properties>
+                              </component>
+                              <component id="ba6d0" class="javax.swing.JTable" binding="HistorialRTable">
+                                <constraints border-constraint="Center"/>
+                                <properties>
+                                  <autoCreateRowSorter value="true"/>
+                                  <rowHeight value="15"/>
+                                  <rowMargin value="1"/>
+                                </properties>
+                              </component>
+                              <hspacer id="78ea7">
+                                <constraints border-constraint="West"/>
+                              </hspacer>
+                              <hspacer id="d0a7b">
+                                <constraints border-constraint="East"/>
+                              </hspacer>
+                              <vspacer id="b26de">
+                                <constraints border-constraint="South"/>
+                              </vspacer>
+                            </children>
+                          </grid>
+                        </children>
+                      </tabbedpane>
+                    </children>
+                  </grid>
+                  <grid id="6a3f2" binding="tabDesembolsos" layout-manager="BorderLayout" hgap="0" vgap="0">
+                    <constraints>
+                      <tabbedpane title="Desembolsos"/>
+                    </constraints>
+                    <properties>
+                      <background color="-11700571"/>
+                    </properties>
+                    <border type="none"/>
+                    <children/>
+                  </grid>
+                </children>
+              </tabbedpane>
+            </children>
+          </grid>
         </children>
       </grid>
     </children>

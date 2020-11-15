@@ -4,16 +4,20 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 
 
+import api.API_JSONHandler;
 import api.API_SHA256;
+import impl.JSONHandler;
 import impl.SHA256;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -70,10 +74,10 @@ public class FrmLogin extends JFrame{
 
     private boolean auth() throws NoSuchAlgorithmException {
         JSONParser parser = new JSONParser();
-
+        API_JSONHandler file = new JSONHandler();
         try{
             JSONArray usersList = new JSONArray();
-            JSONObject jsonObject = (JSONObject) readJson("./src/resources/usuarios.json");
+            JSONObject jsonObject = (JSONObject) file.readJson("./src/resources/usuarios.json");
             usersList = (JSONArray) jsonObject.get("users");
             API_SHA256 hash = new SHA256();
             String pass = new String(this.passwordField1.getPassword());
@@ -135,21 +139,37 @@ public class FrmLogin extends JFrame{
                     self.loginButton.setVisible(true);
                     self.RegisBtn.setText("Registrarse");
                     self.RegisLbl.setVisible(false);
+
+                    API_JSONHandler file = new JSONHandler();
                     //Write JSON file
 
-                    JSONParser parser = new JSONParser();
                     JSONArray usersList = new JSONArray();
 
                     try {
-                        JSONObject jsonObject = (JSONObject) readJson("./src/resources/usuarios.json");
+                        JSONObject jsonObject = (JSONObject) file.readJson("./src/resources/usuarios.json");
                         usersList = (JSONArray) jsonObject.get("users");
                     } catch (FileNotFoundException err){
                         System.out.println("El archivo no existe, creando uno nuevo...");
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-dd");
                     try {
-                        writeJson("./src/resources/usuarios.json", usersList);
+                        API_SHA256 hash = new SHA256();
+                        JSONObject user_data = new JSONObject();
+                        JSONObject users = new JSONObject();
+                        try {
+                            user_data.put("username", hash.getSHA_Str(self.userField.getText()));
+                            user_data.put("password", hash.getSHA_Str(new String(self.passwordField1.getPassword())));
+
+                            user_data.put("create-dat", LocalDate.now().format(formatter));
+                        } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
+                            noSuchAlgorithmException.printStackTrace();
+                        }
+                        usersList.add(user_data);
+                        users.put("last-modified", LocalDate.now().format(formatter));
+                        users.put("users", usersList);
+                        file.writeJson("./src/resources/usuarios.json", users);
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }
@@ -160,35 +180,7 @@ public class FrmLogin extends JFrame{
         });
     }
 
-    private Object readJson(String filename) throws Exception{
-        FileReader reader = new FileReader(filename);
-        JSONParser jsonParser = new JSONParser();
-        return jsonParser.parse(reader);
-    }
 
-    private void writeJson(String filename, JSONArray usersList) throws Exception{
-        API_SHA256 hash = new SHA256();
-        JSONObject user_data = new JSONObject();
-        JSONObject users = new JSONObject();
-
-        try {
-            user_data.put("username", hash.getSHA_Str(self.userField.getText()));
-            user_data.put("password", hash.getSHA_Str(new String(self.passwordField1.getPassword())));
-            user_data.put("createdat", LocalDateTime.now().toString());
-        } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
-            noSuchAlgorithmException.printStackTrace();
-        }
-        try {
-            FileWriter file = new FileWriter(filename);
-            usersList.add(user_data);
-            users.put("lastmodified", LocalDateTime.now().toString());
-            users.put("users", usersList);
-            file.write(users.toJSONString());
-            file.flush();
-        } catch (IOException err) {
-            err.printStackTrace();
-        }
-    }
     public static void main(String[] args) {
         FrmLogin login = new FrmLogin("Sistema de Gestión de Sociedades de Garantías Recíprocas");
         login.setVisible(true);

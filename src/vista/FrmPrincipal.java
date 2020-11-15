@@ -79,8 +79,15 @@ public class FrmPrincipal extends JFrame {
         desembolsosYRecuperosButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FrmDyR frame = new FrmDyR(self, "SGR - Desembolsos y Recuperos");
+                FrmDyR frame = null;
+                try {
+                    frame = new FrmDyR(self, "SGR - Desembolsos y Recuperos");
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+                self.setVisible(false);
                 frame.setVisible(true);
+                self.setVisible(true);
             }
         });
         consultasGeneralesButton.addActionListener(new ActionListener() {

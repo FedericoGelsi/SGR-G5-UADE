@@ -1,5 +1,7 @@
 package impl;
 
+import org.json.simple.JSONObject;
+
 import java.io.File;
 import java.util.Date;
 
@@ -14,7 +16,7 @@ public class Aporte implements api.Aporte {
     public Aporte(float montoAporte, File documento, int socioAportante) {
         this.montoAporte = montoAporte;
         this.documento = documento;
-        SocioAportante = socioAportante;
+        this.SocioAportante = socioAportante;
     }
 
     /*======GETTERS=======*/
@@ -49,4 +51,11 @@ public class Aporte implements api.Aporte {
         return true;
     }
 
+    public JSONObject toJSON(){
+        JSONObject aporte = new JSONObject();
+        aporte.put("monto", this.montoAporte);
+        aporte.put("doc-path", this.documento.getAbsolutePath());
+        aporte.put("socio-aportante", this.SocioAportante);
+        return aporte;
+    }
 }
