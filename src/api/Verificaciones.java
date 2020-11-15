@@ -18,4 +18,17 @@ public interface Verificaciones {
 
     //Chequea la vigencia de una linea de credito
     boolean lineacreditovigente(String CUITSocio);
+
+    //Chequea que el monto disponible de una linea de credito sea suficiente
+    boolean lineasuficiente(String CUITSocio, float montooperacion);
+
+    //Chequea que el monto total de contragarantias presentadas sea suficiente para operar
+    boolean contragarantiassuficientes(String CUITSocio,float montooperacion);
+
+    //Chequea que un socio sea participe
+    boolean essocioparticipe(String CUITSocio);
+
+    //Chequea que un socio no deba facturas por mas del 10% del tope de la linea de credito
+    boolean debefacturas(String CUITSocio);
 }
+

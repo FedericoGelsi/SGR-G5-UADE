@@ -169,17 +169,17 @@
             "contragarantias":    [
                 {
                     "tipo":          "Fianza Personal",
-                    "monto":         20.0,
+                    "monto":         200.0,
                     "fecha-vigencia":"2020-11-15"
                 },
                 {
                     "tipo":          "Hipoteca",
-                    "monto":         20.0,
+                    "monto":         200.0,
                     "fecha-vigencia":"2020-11-15"
                 }
             ],
             "lineas-de-credito":  {
-                "tope":           20.0,
+                "tope":           200.0,
                 "id":             2,
                 "fecha-vigencia": "2020-12-13",
                 "monto-utilizado":0.0,

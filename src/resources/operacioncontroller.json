@@ -1,0 +1,32 @@
+{
+    "facturas":   [
+        {
+            "idfactura":       1,
+            "montofactura":    10.0,
+            "CUITemisor":      "20-11111111-2",
+            "CUITDestinatario":"20-12345678-2",
+            "estado":          "impago"
+        },
+        {
+            "idfactura":       2,
+            "montofactura":    1000.0,
+            "CUITemisor":      "20-11111111-2",
+            "CUITDestinatario":"20-12345678-2",
+            "estado":          "impago"
+        },
+        {
+            "idfactura":       3,
+            "montofactura":    20.0,
+            "CUITemisor":      "20-11111111-2",
+            "CUITDestinatario":"20-87654321-2",
+            "estado":          "pago"
+        }
+    ],
+
+    "operaciones":[
+    ],
+
+    "author":     "admin",
+    "created-at": "2020-11-13",
+    "modified-by":"admin"
+}
