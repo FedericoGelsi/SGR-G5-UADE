@@ -2,18 +2,18 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="vista.FrmPrincipal">
   <grid id="27dc6" binding="pnlPrincipal" layout-manager="BorderLayout" hgap="0" vgap="0">
     <constraints>
-      <xy x="20" y="20" width="800" height="561"/>
+      <xy x="20" y="20" width="1000" height="600"/>
     </constraints>
     <properties>
       <background color="-15854278"/>
-      <minimumSize width="800" height="400"/>
-      <preferredSize width="800" height="600"/>
+      <minimumSize width="1000" height="600"/>
+      <preferredSize width="1000" height="600"/>
       <requestFocusEnabled value="true"/>
     </properties>
     <border type="none"/>
     <children>
-      <grid id="f1c22" binding="pnlMenu" layout-manager="GridLayoutManager" row-count="8" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="0" vgap="0">
-        <margin top="0" left="0" bottom="0" right="0"/>
+      <grid id="f1c22" binding="pnlMenu" layout-manager="GridLayoutManager" row-count="10" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="0" vgap="0">
+        <margin top="0" left="0" bottom="30" right="0"/>
         <constraints border-constraint="West"/>
         <properties>
           <autoscrolls value="true"/>
@@ -26,20 +26,9 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="c497a" class="javax.swing.JLabel" binding="iconLbl">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
-                <preferred-size width="16" height="64"/>
-              </grid>
-            </constraints>
-            <properties>
-              <icon value="resources/SGR-logo-64px.png"/>
-              <text value=""/>
-            </properties>
-          </component>
           <vspacer id="5ce51">
             <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="1" anchor="1" fill="0" indent="0" use-parent-layout="false">
+              <grid row="1" column="0" row-span="1" col-span="3" vsize-policy="3" hsize-policy="5" anchor="1" fill="0" indent="0" use-parent-layout="false">
                 <minimum-size width="-1" height="80"/>
                 <preferred-size width="-1" height="80"/>
                 <maximum-size width="-1" height="80"/>
@@ -48,12 +37,12 @@
           </vspacer>
           <vspacer id="d20d4">
             <constraints>
-              <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+              <grid row="7" column="0" row-span="1" col-span="3" vsize-policy="7" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
             </constraints>
           </vspacer>
           <component id="e04ba" class="javax.swing.JButton" binding="consultasGeneralesButton" default-binding="true">
             <constraints>
-              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false">
+              <grid row="6" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false">
                 <minimum-size width="185" height="20"/>
                 <preferred-size width="185" height="45"/>
                 <maximum-size width="185" height="-1"/>
@@ -80,7 +69,7 @@
           </component>
           <component id="97df4" class="javax.swing.JButton" binding="desembolsosYRecuperosButton" default-binding="true">
             <constraints>
-              <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false">
+              <grid row="5" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false">
                 <minimum-size width="185" height="20"/>
                 <preferred-size width="185" height="45"/>
                 <maximum-size width="185" height="-1"/>
@@ -108,7 +97,7 @@
           </component>
           <component id="30132" class="javax.swing.JButton" binding="operacionesButton" default-binding="true">
             <constraints>
-              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="0" fill="3" indent="0" use-parent-layout="false">
+              <grid row="4" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="1" anchor="0" fill="3" indent="0" use-parent-layout="false">
                 <minimum-size width="185" height="20"/>
                 <preferred-size width="185" height="45"/>
                 <maximum-size width="185" height="-1"/>
@@ -135,7 +124,7 @@
           </component>
           <component id="1723" class="javax.swing.JButton" binding="líneasYTiposDeButton" default-binding="true">
             <constraints>
-              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="0" fill="3" indent="0" use-parent-layout="false">
+              <grid row="3" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="1" anchor="0" fill="3" indent="0" use-parent-layout="false">
                 <minimum-size width="185" height="20"/>
                 <preferred-size width="185" height="45"/>
                 <maximum-size width="185" height="-1"/>
@@ -162,7 +151,7 @@
           </component>
           <component id="ef5f9" class="javax.swing.JButton" binding="sociosButton" default-binding="true">
             <constraints>
-              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="0" fill="3" indent="0" use-parent-layout="false">
+              <grid row="2" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="1" anchor="0" fill="3" indent="0" use-parent-layout="false">
                 <minimum-size width="185" height="20"/>
                 <preferred-size width="185" height="45"/>
                 <maximum-size width="185" height="-1"/>
@@ -188,11 +177,63 @@
               <text value="Socios"/>
             </properties>
           </component>
+          <component id="80b2e" class="javax.swing.JLabel" binding="loggedAs">
+            <constraints>
+              <grid row="9" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Roboto" size="12" style="0"/>
+              <foreground color="-1"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="c497a" class="javax.swing.JLabel" binding="iconLbl">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="16" height="64"/>
+              </grid>
+            </constraints>
+            <properties>
+              <icon value="resources/SGR-logo-64px.png"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="cf3c3" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Roboto" size="12" style="0"/>
+              <foreground color="-1"/>
+              <text value="Logueado como:"/>
+            </properties>
+          </component>
+          <hspacer id="34ff1">
+            <constraints>
+              <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </hspacer>
+          <hspacer id="55304">
+            <constraints>
+              <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="2" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </hspacer>
+          <hspacer id="c1b71">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </hspacer>
+          <hspacer id="e52ce">
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </hspacer>
         </children>
       </grid>
-      <grid id="190f3" layout-manager="BorderLayout" hgap="0" vgap="0">
+      <grid id="190f3" binding="pnlPane" layout-manager="BorderLayout" hgap="0" vgap="0">
         <constraints border-constraint="Center"/>
         <properties>
+          <autoscrolls value="false"/>
           <background color="-11700571"/>
         </properties>
         <border type="none"/>
@@ -229,20 +270,33 @@
               </component>
             </children>
           </grid>
-          <component id="aeb10" class="javax.swing.JButton" binding="button1" default-binding="true">
+          <grid id="9ec3b" binding="pnlLogin" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
             <constraints border-constraint="Center"/>
             <properties>
-              <borderPainted value="false"/>
-              <contentAreaFilled value="false"/>
-              <defaultCapable value="false"/>
-              <enabled value="true"/>
-              <focusPainted value="false"/>
-              <focusable value="false"/>
-              <icon value="resources/Consulting.png"/>
-              <inheritsPopupMenu value="true"/>
-              <text value=""/>
+              <maximumSize width="651" height="540"/>
+              <opaque value="false"/>
+              <visible value="true"/>
             </properties>
-          </component>
+            <border type="none"/>
+            <children>
+              <component id="f697c" class="javax.swing.JLabel" binding="bgImg">
+                <constraints>
+                  <grid row="0" column="0" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <enabled value="true"/>
+                  <focusable value="false"/>
+                  <icon value="resources/Consulting.png"/>
+                  <inheritsPopupMenu value="false"/>
+                  <requestFocusEnabled value="false"/>
+                  <text value=""/>
+                  <verifyInputWhenFocusTarget value="false"/>
+                  <visible value="true"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
         </children>
       </grid>
     </children>

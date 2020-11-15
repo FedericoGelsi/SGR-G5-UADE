@@ -1,5 +1,7 @@
 package api;
 
+import org.json.simple.JSONObject;
+
 public interface Accion {
     /*======GETTERS=======*/
     char getTipo();
@@ -7,4 +9,6 @@ public interface Accion {
     String getCUITPropietario();
 
     String getCUITEmisor();
+
+    JSONObject toJSON();
 }

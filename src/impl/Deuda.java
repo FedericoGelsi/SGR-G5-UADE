@@ -1,13 +1,16 @@
 package impl;
 
-import java.util.Date;
+import org.json.simple.JSONObject;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Deuda implements api.Deuda {
-    private float monto;
+    private double monto;
     private String CUITDeudor;
     private String idDeuda;
-    private float montoMora;
-    private Date fechaDeuda;
+    private double montoMora;
+    private LocalDate fechaDeuda;
     private boolean aplicaMora;
 
     /*======CONSTRUCTOR=======*/
@@ -19,6 +22,16 @@ public class Deuda implements api.Deuda {
         this.montoMora = montoMora;
     }
 
+    public Deuda(JSONObject jsonDeuda){
+        this.monto = (double) jsonDeuda.get("monto");
+        this.CUITDeudor = (String) jsonDeuda.get("cuit-deudor");
+        this.idDeuda = (String) jsonDeuda.get("id-deuda");
+        this.montoMora = (double) jsonDeuda.get("monto-mora");
+        this.aplicaMora = (boolean) jsonDeuda.get("aplica-mora");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MMM-dd");
+        this.fechaDeuda = LocalDate.parse(jsonDeuda.get("fecha-deuda").toString());
+    }
+
     /*======GETTERS=======*/
 
     @Override
@@ -27,7 +40,7 @@ public class Deuda implements api.Deuda {
     }
 
     @Override
-    public float getMonto() {
+    public double getMonto() {
         return monto;
     }
 
@@ -42,12 +55,12 @@ public class Deuda implements api.Deuda {
     }
 
     @Override
-    public float getMontoMora() {
+    public double getMontoMora() {
         return montoMora;
     }
 
     @Override
-    public Date getFechaDeuda() {
+    public LocalDate getFechaDeuda() {
         return fechaDeuda;
     }
 
@@ -56,6 +69,17 @@ public class Deuda implements api.Deuda {
     @Override
     public void retirarAporte(){
 
+    }
+
+    public JSONObject toJSON(){
+        JSONObject deuda = new JSONObject();
+        deuda.put("monto", this.monto);
+        deuda.put("cuit-deudor", this.CUITDeudor);
+        deuda.put("fecha-deuda", this.fechaDeuda.toString());
+        deuda.put("id-deuda", this.idDeuda);
+        deuda.put("aplica-mora", this.aplicaMora);
+        deuda.put("monto-mora", this.montoMora);
+        return deuda;
     }
 
 }

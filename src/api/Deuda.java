@@ -1,19 +1,23 @@
 package api;
 
-import java.util.Date;
+import org.json.simple.JSONObject;
+
+import java.time.LocalDate;
 
 public interface Deuda {
     boolean isAplicaMora();
 
-    float getMonto();
+    double getMonto();
 
     String getCUITDeudor();
 
     String getIdDeuda();
 
-    float getMontoMora();
+    double getMontoMora();
 
-    Date getFechaDeuda();
+    LocalDate getFechaDeuda();
 
     void retirarAporte();
+
+    JSONObject toJSON();
 }

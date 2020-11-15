@@ -1,11 +1,17 @@
 package api;
 
+import org.json.simple.JSONObject;
+
+import java.util.ArrayList;
+
 public interface Recupero {
     String getTipo();
 
-    int getMonto();
+    double getMonto();
 
     String getIdSocioPleno();
 
-    String getIdDeuda();
+    ArrayList<String> getIdDeuda();
+
+    JSONObject toJSON();
 }

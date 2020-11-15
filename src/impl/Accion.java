@@ -1,5 +1,7 @@
 package impl;
 
+import org.json.simple.JSONObject;
+
 public class Accion implements api.Accion {
 
     private char tipo;
@@ -22,4 +24,11 @@ public class Accion implements api.Accion {
         return CUITEmisor;
     }
 
+    public JSONObject toJSON(){
+        JSONObject accion = new JSONObject();
+        accion.put("tipo", this.tipo);
+        accion.put("cuit-emisor", this.CUITEmisor);
+        accion.put("cuit-propietario", this.CUITPropietario);
+        return accion;
+    }
 }

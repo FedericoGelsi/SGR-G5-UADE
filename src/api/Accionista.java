@@ -1,5 +1,7 @@
 package api;
 
+import org.json.simple.JSONObject;
+
 public interface Accionista {
     /*======GETTERS=======*/
     String getCUITAccionista();
@@ -7,4 +9,6 @@ public interface Accionista {
     String getRazonsocial();
 
     float getPorcParticipacion();
+
+    JSONObject toJSON();
 }
