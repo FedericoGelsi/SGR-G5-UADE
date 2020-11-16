@@ -159,7 +159,7 @@
                 <children>
                   <grid id="64f5f" layout-manager="BorderLayout" hgap="0" vgap="0">
                     <constraints>
-                      <tabbedpane title="Ver Accionista"/>
+                      <tabbedpane title="Ver Accionistas"/>
                     </constraints>
                     <properties/>
                     <border type="none"/>
@@ -200,22 +200,6 @@
                               <text value="Razon Social"/>
                             </properties>
                           </component>
-                          <component id="d2b8c" class="javax.swing.JButton" binding="crearAccionistaButton" default-binding="true">
-                            <constraints>
-                              <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                            </constraints>
-                            <properties>
-                              <text value="Crear Accionista"/>
-                            </properties>
-                          </component>
-                          <component id="b15f1" class="javax.swing.JButton" binding="buscarAccionistaButton" default-binding="true">
-                            <constraints>
-                              <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                            </constraints>
-                            <properties>
-                              <text value="Buscar Accionista"/>
-                            </properties>
-                          </component>
                           <component id="297e1" class="javax.swing.JButton" binding="eliminarAccionistaButton" default-binding="true">
                             <constraints>
                               <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -250,18 +234,26 @@
                             <border type="none"/>
                             <children/>
                           </scrollpane>
+                          <component id="b15f1" class="javax.swing.JButton" binding="buscarAccionistaButton" default-binding="true">
+                            <constraints>
+                              <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <text value="Buscar Accionista"/>
+                            </properties>
+                          </component>
                         </children>
                       </grid>
                     </children>
                   </grid>
                   <grid id="f181d" layout-manager="BorderLayout" hgap="0" vgap="0">
                     <constraints>
-                      <tabbedpane title="Untitled"/>
+                      <tabbedpane title="Agregar Accionista"/>
                     </constraints>
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <grid id="b1f0b" layout-manager="GridLayoutManager" row-count="4" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                      <grid id="b1f0b" layout-manager="GridLayoutManager" row-count="6" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                         <margin top="10" left="10" bottom="10" right="10"/>
                         <constraints border-constraint="Center"/>
                         <properties>
@@ -274,22 +266,22 @@
                         <children>
                           <component id="eba6e" class="javax.swing.JLabel">
                             <constraints>
-                              <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                              <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                             </constraints>
                             <properties>
                               <font size="18"/>
                               <foreground color="-1"/>
-                              <text value="Cuit"/>
+                              <text value="Cuit Empresa"/>
                             </properties>
                           </component>
                           <vspacer id="99db4">
                             <constraints>
-                              <grid row="2" column="0" row-span="2" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                              <grid row="4" column="0" row-span="2" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
                             </constraints>
                           </vspacer>
                           <component id="71963" class="javax.swing.JLabel">
                             <constraints>
-                              <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                              <grid row="2" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                             </constraints>
                             <properties>
                               <font size="18"/>
@@ -297,31 +289,67 @@
                               <text value="Razon Social"/>
                             </properties>
                           </component>
-                          <component id="8788" class="javax.swing.JButton" default-binding="true">
+                          <component id="8788" class="javax.swing.JButton" binding="crearAccionistaButton">
                             <constraints>
-                              <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                             </constraints>
                             <properties>
                               <text value="Crear Accionista"/>
                             </properties>
                           </component>
-                          <component id="77e4c" class="javax.swing.JTextField">
+                          <component id="77e4c" class="javax.swing.JTextField" binding="textFieldCuitEmpresa">
                             <constraints>
-                              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                                <preferred-size width="150" height="-1"/>
+                              </grid>
+                            </constraints>
+                            <properties>
+                              <text value=""/>
+                            </properties>
+                          </component>
+                          <component id="7dda7" class="javax.swing.JTextField" binding="textFieldRazonS">
+                            <constraints>
+                              <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                                <preferred-size width="150" height="-1"/>
+                              </grid>
+                            </constraints>
+                            <properties>
+                              <editable value="true"/>
+                            </properties>
+                          </component>
+                          <component id="17724" class="javax.swing.JLabel">
+                            <constraints>
+                              <grid row="1" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <font size="18"/>
+                              <foreground color="-1"/>
+                              <text value="Cuit Accionista"/>
+                            </properties>
+                          </component>
+                          <component id="91214" class="javax.swing.JTextField" binding="textFieldCuitAccion">
+                            <constraints>
+                              <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                                 <preferred-size width="150" height="-1"/>
                               </grid>
                             </constraints>
                             <properties/>
                           </component>
-                          <component id="7dda7" class="javax.swing.JTextField">
+                          <component id="cac0e" class="javax.swing.JLabel">
                             <constraints>
-                              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                                <preferred-size width="150" height="-1"/>
-                              </grid>
+                              <grid row="3" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                             </constraints>
                             <properties>
-                              <editable value="false"/>
+                              <font size="12"/>
+                              <foreground color="-1"/>
+                              <text value="Porcentaje de Participacion"/>
                             </properties>
+                          </component>
+                          <component id="64958" class="javax.swing.JSpinner" binding="spinnerParticipacion">
+                            <constraints>
+                              <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties/>
                           </component>
                         </children>
                       </grid>

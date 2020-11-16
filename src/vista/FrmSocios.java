@@ -33,8 +33,11 @@ public class FrmSocios extends JDialog{
     private JTextField textFieldRazon;
     private JScrollPane PnlsAccionistas;
     private JPanel pnlAccionistas;
-    private JButton crearAccionistaButton;
+    private JTextField textFieldCuitAccion;
     private JSpinner spinnerParticipacion;
+    private JTextField textFieldCuitEmpresa;
+    private JTextField textFieldRazonS;
+    private JButton crearAccionistaButton;
     private JPanel pnluntitled;
     private JButton cambiarColorButton;
     private JTable accionistasTabla;
@@ -119,47 +122,7 @@ public class FrmSocios extends JDialog{
                 crearTabla(accionistas);
             }
         });
-        /*crearAccionistaButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                boolean datosCorrectosFlag = true;
 
-                //Toma Razon Social y checkea si esta vacio
-                String textRazon="";
-                textRazon= textFieldRazon.getText();
-                if (textRazon.isEmpty()){
-                    showMessageDialog(null, "El campo Razon Social es mandatorio, por favor ingrese el dato solicitado");
-                    datosCorrectosFlag = false;
-                }
-
-                //Checkea el CUIT
-                String textCuit="";
-                textCuit=textFieldCuit.getText();
-                if (verif.CUITValido(textCuit)){
-                }
-                else {
-                    showMessageDialog(null, "El CUIT ingresado es invalido");
-                    datosCorrectosFlag = false;
-                }
-
-                //Toma el Porcentaje de Participacion desde el Spinner
-                Object participacion;
-                participacion = spinnerParticipacion.getValue();
-                int partint;
-                partint= (Integer) participacion;
-                if(partint <= 0){
-                    showMessageDialog(null, "El porcentaje de Participacion debe ser menor o igual a 0");
-                    datosCorrectosFlag = false;
-                }
-                if(partint >=100){
-                    showMessageDialog(null,"El porcentaje de Participacion debe ser superior al 99%");
-                    datosCorrectosFlag = false;
-                }
-                if (datosCorrectosFlag==true){
-
-                }
-            }
-        });*/
         eliminarAccionistaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -211,6 +174,56 @@ public class FrmSocios extends JDialog{
                     buscarAccionista();
                 } catch (Exception exception) {
                     exception.printStackTrace();
+                }
+            }
+        });
+        crearAccionistaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean datosCorrectosFlag = true;
+
+                //Toma Razon Social y checkea si esta vacio
+                String textRazon;
+                textRazon= textFieldRazonS.getText();
+                if (textRazon.isEmpty()){
+                    showMessageDialog(null, "El campo Razon Social es mandatorio, por favor ingrese el dato solicitado");
+                    datosCorrectosFlag = false;
+                }
+
+                //Checkea el CUIT
+                String textCuitEmp;
+                textCuitEmp=textFieldCuitEmpresa.getText();
+                if (verif.CUITValido(textCuitEmp)){
+                }
+                else {
+                    showMessageDialog(null, "El CUIT ingresado es invalido");
+                    datosCorrectosFlag = false;
+                }
+                //Checkea el CUIT
+                String textCuitac;
+                textCuitac=textFieldCuitAccion.getText();
+                if (verif.CUITValido(textCuitac)){
+                }
+                else {
+                    showMessageDialog(null, "El CUIT ingresado es invalido");
+                    datosCorrectosFlag = false;
+                }
+
+                //Toma el Porcentaje de Participacion desde el Spinner
+                Object participacion;
+                participacion = spinnerParticipacion.getValue();
+                int partint;
+                partint= (Integer) participacion;
+                if(partint <= 0){
+                    showMessageDialog(null, "El porcentaje de Participacion debe ser menor o igual a 0");
+                    datosCorrectosFlag = false;
+                }
+                if(partint >=100){
+                    showMessageDialog(null,"El porcentaje de Participacion debe ser superior al 99%");
+                    datosCorrectosFlag = false;
+                }
+                if (datosCorrectosFlag==true){
+
                 }
             }
         });
