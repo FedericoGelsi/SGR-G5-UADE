@@ -1,7 +1,10 @@
 package impl;
 
 import api.DocumentacionEmpresa;
+import org.json.simple.JSONObject;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -29,6 +32,17 @@ public abstract class Socio implements api.Socio {
         this.actPrincipal = actPrincipal;
         this.direccion = direccion;
         this.email = email;
+    }
+
+    public Socio(JSONObject jsonSocio){
+
+        this.CUITSocio = (String) jsonSocio.get("cuit");
+        this.RazonSocial = (String) jsonSocio.get("razon-social");
+        this.FinicAct = (Date) (jsonSocio.get("finic-act"));
+        this.tipoEmpresa = (String) jsonSocio.get("tipo-empresa");
+        this.actPrincipal = (String) jsonSocio.get("actividad-principal");
+        this.direccion = (String) jsonSocio.get("direccion");
+        this.email = (String) jsonSocio.get("email");
     }
 
     /*======GETTERS=======*/
@@ -113,5 +127,17 @@ public abstract class Socio implements api.Socio {
     @Override
     public void getCUITAccionistas(){
         // DEFINIR PARÁMETROS DE ENTRADA
+    }
+
+    public JSONObject toJSON(){
+        JSONObject socio = new JSONObject();
+        socio.put("cuit", this.CUITSocio);
+        socio.put("razon-social", this.RazonSocial);
+        socio.put("finic-act", this.FinicAct);
+        socio.put("tipo-empresa", this.tipoEmpresa);
+        socio.put("actividad-principal", this.actPrincipal);
+        socio.put("monto-mora", this.direccion);
+        socio.put("email", this.email);
+        return socio;
     }
 }
