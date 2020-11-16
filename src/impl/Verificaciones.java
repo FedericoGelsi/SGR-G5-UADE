@@ -19,6 +19,9 @@ public class Verificaciones implements api.Verificaciones {
     private String filenamefact = "./src/resources/operacioncontroller.json";
     private JSONObject jsonObjectOPC = (JSONObject) file.readJson(filenamefact);
 
+    private String filenamefdr = "./src/resources/FondodeRiesgo.json";
+    private JSONObject jsonObjectfdr = (JSONObject) file.readJson(filenamefdr);
+
     public Verificaciones() throws Exception {
     }
 
@@ -191,5 +194,34 @@ public class Verificaciones implements api.Verificaciones {
         }
         return debefacturasflag;
     }
+    public boolean operacionvsfdr(double montototal){
+        double montofdr = 0;
+        boolean operacionmenorfdr =true;
+        JSONArray aporteslist = (JSONArray) jsonObjectfdr.get("aportes");
+        for (Object ap : aporteslist) {
+            JSONObject aporte = (JSONObject) ap;
+            montofdr = montofdr + (double) aporte.get("montoaporte");
+        }
+        if (montototal>(montofdr*0.05)) {
+            operacionmenorfdr=false;
+        }
+        return operacionmenorfdr;
+    }
+    public void crearOT1(LocalDate FDV,String Banco, int NDC, String CUITF, float TDD, String CUITS) throws Exception {
+        api.OPTipo1 nuevaOT1 = new impl.OPTipo1(FDV, Banco, NDC, CUITF, TDD, CUITS);
+
+        JSONObject operacion1 = nuevaOT1.toJSON();
+        guardarDatos(operacion1);
+    }
+    public void guardarDatos(JSONObject objeto) throws Exception {
+        String filename = "./src/resources/operacioncontroller.json";
+        API_JSONHandler file = new JSONHandler();
+        JSONObject jsonObject = (JSONObject) file.readJson(filename);
+        JSONArray operacionesList = (JSONArray) jsonObject.get("operaciones");
+        operacionesList.add(objeto);
+        jsonObject.put("operaciones", operacionesList);
+        file.writeJson(filename, jsonObject);
+    }
 }
+
 

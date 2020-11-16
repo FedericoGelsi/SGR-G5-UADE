@@ -1,9 +1,12 @@
 package api;
 
+import org.json.simple.JSONObject;
+
+import java.time.LocalDate;
 import java.util.Date;
 
 public interface OPTipo1 extends Operacion {
-    Date getFechaVencimiento();
+    LocalDate getFechaVencimiento();
 
     String getBanco();
 
@@ -14,4 +17,6 @@ public interface OPTipo1 extends Operacion {
     String getTipo();
 
     float getTasaDeDescuento();
+
+    JSONObject toJSON();
 }

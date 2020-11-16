@@ -1,0 +1,31 @@
+{
+    "IDFDR":        1,
+    "fechacreacion":"01/10/2020",
+    "montoFDR":     260.0,
+    "aportes":      [
+        {
+            "IDaporte":           1,
+            "fechacreacionaporte":"02/10/2020",
+            "montoaporte":        100.0,
+            "documento":          null,
+            "socioaportante":     "20-87654322-2"
+        },
+        {
+            "IDaporte":           2,
+            "fechacreacionaporte":"03/10/2020",
+            "montoaporte":        150.0,
+            "documento":          null,
+            "socioaportante":     "20-87654322-2"
+        },
+        {
+            "IDaporte":           3,
+            "fechacreacionaporte":"04/10/2020",
+            "montoaporte":        10.0,
+            "documento":          null,
+            "socioaportante":     "20-12345677-2"
+        }
+    ],
+    "author":       "admin",
+    "created-at":   "2020-11-13",
+    "modified-by":  "admin"
+}

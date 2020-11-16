@@ -1,5 +1,7 @@
 package api;
 
+import org.json.simple.JSONObject;
+
 import java.time.LocalDate;
 
 public interface Verificaciones {
@@ -30,5 +32,14 @@ public interface Verificaciones {
 
     //Chequea que un socio no deba facturas por mas del 10% del tope de la linea de credito
     boolean debefacturas(String CUITSocio);
+
+    //Chequea que el monto ingresado por parametro sea menor que el 5% del FDR
+    boolean operacionvsfdr(double montototal);
+
+    //Crea una operacion
+    public void crearOT1(LocalDate FDV,String Banco, int NDC, String CUITF, float TDD, String CUITS) throws Exception;
+
+    //Guarda los datos en .json
+    void guardarDatos(JSONObject objeto) throws Exception;
 }
 

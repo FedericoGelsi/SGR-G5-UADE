@@ -1,5 +1,8 @@
 package api;
 
+import org.json.simple.JSONObject;
+
+import java.time.LocalDate;
 import java.util.Date;
 
 public interface OPTipo3 extends Operacion {
@@ -11,9 +14,11 @@ public interface OPTipo3 extends Operacion {
 
     float getTasa();
 
-    Date getFechaAcreditacion();
+    LocalDate getFechaAcreditacion();
 
     String getSistema();
 
     int getCuotasImpagas();
+
+    JSONObject toJSON();
 }

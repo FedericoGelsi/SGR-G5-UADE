@@ -1,5 +1,8 @@
 package api;
 
+import org.json.simple.JSONObject;
+
+import java.time.LocalDate;
 import java.util.Date;
 
 public interface OPTipo2 extends Operacion {
@@ -7,7 +10,9 @@ public interface OPTipo2 extends Operacion {
 
     float getImporteTotal();
 
-    Date getFechaVencimiento();
+    LocalDate getFechaVencimiento();
 
     String getTipo();
+
+    JSONObject toJSON();
 }

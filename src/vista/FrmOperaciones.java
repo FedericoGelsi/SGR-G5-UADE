@@ -1,6 +1,8 @@
 package vista;
 
 import api.API_JSONHandler;
+import api.OPTipo1;
+import api.Recupero;
 import api.Verificaciones;
 import impl.JSONHandler;
 import org.json.simple.JSONObject;
@@ -15,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -90,6 +93,7 @@ public class FrmOperaciones extends JDialog{
     private String filenamefact = "./src/resources/operacioncontroller.json";
     private JSONObject jsonObjectOPC = (JSONObject) file.readJson(filenamefact);
 
+
     public FrmOperaciones(Window owner, String Title) throws Exception {
         super(owner, Title);
         try {
@@ -127,13 +131,12 @@ public class FrmOperaciones extends JDialog{
 
                 //Toma el String Numero de Cheque desde el JText Field TFNCCHP y lo transforma en un entero
                 String NCCHP;
-                int NCCHPint;
+                int NCCHPint = 0;
                 NCCHP = TFNDCCHP.getText();
                 if (NCCHP.isEmpty()) {
                     showMessageDialog(null, "El campo Numero de Cheque es mandatorio, por favor ingrese el dato solicitado");
                     DatosCorrectosFlagCHP = false;
-                }
-                else {
+                } else {
                     if (verif.esnumerico(NCCHP)) {
                         NCCHPint = Integer.parseInt(NCCHP);
                     } else {
@@ -145,12 +148,15 @@ public class FrmOperaciones extends JDialog{
                 //Toma el String Fecha de Vencimiento desde el JText Field FDVCHP y lo transforma en un date
                 String FDVCHP = "";
                 FDVCHP = TFFDVCHP.getText();
-                if (verif.fechavalida(FDVCHP)==true) {
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                    LocalDate localDate = LocalDate.parse(FDVCHP, formatter);
+                String FDVCHPaux= "20/04/1989";
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate FDVCHPdateaux = LocalDate.parse(FDVCHPaux, formatter);
+                if (verif.fechavalida(FDVCHP) == true) {
+                    LocalDate FDVCHPdate = LocalDate.parse(FDVCHP, formatter);
+                    FDVCHPdateaux = FDVCHPdate;
                     //Compara la fecha ingresada con la fecha actual ya que no tendria sentido vender un cheque el dia de su
                     // canje o vender un cheque ya vencido.
-                    String comparacionfecha = verif.fechavshoy(localDate);
+                    String comparacionfecha = verif.fechavshoy(FDVCHPdate);
                     if (comparacionfecha == "Menor") {
                         showMessageDialog(null, "El cheque se encuentra vencido");
                         DatosCorrectosFlagCHP = false;
@@ -159,18 +165,16 @@ public class FrmOperaciones extends JDialog{
                         showMessageDialog(null, "La fecha de vencimiento del cheque es hoy");
                         DatosCorrectosFlagCHP = false;
                     }
-                }
-                else{
-                    showMessageDialog(null,"La fecha ingresada no cumple con el formato solicitado");
+                } else {
+                    showMessageDialog(null, "La fecha ingresada no cumple con el formato solicitado");
                     DatosCorrectosFlagCHP = false;
                 }
 
                 //Toma el String CUIT firmante desde el JText Field TFCDFCHT
                 String CDFCHP = "";
                 CDFCHP = TFCDFCHP.getText();
-                if (verif.CUITValido(CDFCHP)){
-                }
-                else {
+                if (verif.CUITValido(CDFCHP)) {
+                } else {
                     showMessageDialog(null, "El CUIT ingresado es invalido");
                     DatosCorrectosFlagCHP = false;
                 }
@@ -179,13 +183,13 @@ public class FrmOperaciones extends JDialog{
                 Object TDDCHP;
                 TDDCHP = spinnerTDDCHP.getValue();
                 int TDDCHPint;
-                TDDCHPint= (Integer) TDDCHP;
-                if(TDDCHPint <= 0){
+                TDDCHPint = (Integer) TDDCHP;
+                if (TDDCHPint <= 0) {
                     showMessageDialog(null, "El cheque no puede ser vendido con una tasa de descuento menor o igual a 0");
                     DatosCorrectosFlagCHP = false;
                 }
-                if(TDDCHPint >=100){
-                    showMessageDialog(null,"El cheque no puede ser vendido con una tasa de descuento superior al 99%");
+                if (TDDCHPint >= 100) {
+                    showMessageDialog(null, "El cheque no puede ser vendido con una tasa de descuento superior al 99%");
                     DatosCorrectosFlagCHP = false;
                 }
 
@@ -193,18 +197,28 @@ public class FrmOperaciones extends JDialog{
                 Object ITCHP;
                 ITCHP = spinnerITCHP.getValue();
                 int ITCHPint;
-                ITCHPint= (Integer) ITCHP;
-                if(ITCHPint <= 0){
+                ITCHPint = (Integer) ITCHP;
+                if (ITCHPint <= 0) {
                     showMessageDialog(null, "El cheque no puede tener un valor menor o igual a 0");
                     DatosCorrectosFlagCHP = false;
                 }
 
-                if (DatosCorrectosFlagCHP==true){
-                    if(verif.lineacreditovigente(CDFCHP)==false){
-                        showMessageDialog(null,"La linea de credito se encuentra vencida");
+                if (DatosCorrectosFlagCHP == true) {
+                    boolean checks = true;
+                    if (verif.lineacreditovigente(CDFCHP) == false) {
+                        showMessageDialog(null, "La linea de credito se encuentra vencida");
+                        checks = false;
                     }
-                    if(verif.debefacturas(CDFCHP) == true){
-                        showMessageDialog(null,"La operacion solicitada no puede ser cursada ya que se adeudan facturas");
+                    if (verif.debefacturas(CDFCHP) == true) {
+                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que se adeudan facturas");
+                        checks = false;
+                    }
+                    if (checks == true) {
+                        try {
+                            verif.crearOT1(FDVCHPdateaux,BECHP.toString(),NCCHPint,CDFCHP,TDDCHPint,CDFCHP);
+                        } catch (Exception exception) {
+                            exception.printStackTrace();
+                        }
                     }
                 }
             }
@@ -296,6 +310,9 @@ public class FrmOperaciones extends JDialog{
                     if (verif.debefacturas(CSCHT) == true) {
                         showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que se adeudan facturas");
                     }
+                    if (verif.operacionvsfdr(ITCHTint)==false){
+                        showMessageDialog(null,"La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
+                    }
                 }
             }
         });
@@ -380,9 +397,12 @@ public class FrmOperaciones extends JDialog{
                                            }
                                            if (verif.lineasuficiente(CDFPB, ITPBint) == false) {
                                                showMessageDialog(null, "La linea de credito no tiene disponibilidad para realizar esta operacion");
-                                               if (verif.debefacturas(CSPB) == true) {
+                                           }
+                                           if (verif.debefacturas(CSPB) == true) {
                                                    showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que se adeudan facturas");
-                                               }
+                                           }
+                                           if (verif.operacionvsfdr(ITPBint)==false) {
+                                               showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
                                            }
                                        }
                                    }

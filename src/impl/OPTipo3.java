@@ -1,5 +1,8 @@
 package impl;
 
+import org.json.simple.JSONObject;
+
+import java.time.LocalDate;
 import java.util.Date;
 
 public class OPTipo3 extends Operacion implements api.OPTipo3 {
@@ -7,7 +10,7 @@ public class OPTipo3 extends Operacion implements api.OPTipo3 {
     private String banco;
     private float importeTotal;
     private float tasa;
-    private Date fechaAcreditacion;
+    private LocalDate fechaAcreditacion;
     private String sistema;
 
     /*======CONSTRUCTOR=======*/
@@ -21,6 +24,14 @@ public class OPTipo3 extends Operacion implements api.OPTipo3 {
         this.sistema = sistema;
     }
 
+    public OPTipo3(JSONObject jsonOPT3) {
+        super(jsonOPT3);
+        this.cantCuotas = Integer.parseInt(jsonOPT3.get("cantcuotas").toString());
+        this.banco = (String) jsonOPT3.get("banco");
+        this.importeTotal = Integer.parseInt(jsonOPT3.get("importetotal").toString());
+        this.tasa = (float) jsonOPT3.get("tasa");
+        this.sistema = (String) jsonOPT3.get("sistema");
+    }
     /*======GETTERS=======*/
 
     @Override
@@ -44,7 +55,7 @@ public class OPTipo3 extends Operacion implements api.OPTipo3 {
     }
 
     @Override
-    public Date getFechaAcreditacion() {
+    public LocalDate getFechaAcreditacion() {
         return fechaAcreditacion;
     }
 
@@ -58,5 +69,19 @@ public class OPTipo3 extends Operacion implements api.OPTipo3 {
     @Override
     public int getCuotasImpagas(){
         return 0;
+    }
+
+    @Override
+    public void setFechaMonetizado(LocalDate fechaMonetizado) {
+
+    }
+    public JSONObject toJSON(){
+        JSONObject OP3 = new JSONObject();
+        OP3.put("cantcuotas", this.cantCuotas);
+        OP3.put("banco", this.banco);
+        OP3.put("importetotal", this.importeTotal);
+        OP3.put("tasa", this.tasa);
+        OP3.put("sistema", this.sistema);
+        return OP3;
     }
 }

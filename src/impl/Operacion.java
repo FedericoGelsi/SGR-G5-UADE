@@ -1,18 +1,29 @@
 package impl;
 
+import org.json.simple.JSONObject;
+
+import java.time.LocalDate;
 import java.util.Date;
 
 public abstract class Operacion implements api.Operacion {
     private int idOperacion;
     private String estadoOperacion;
-    private Date fechaCreacion;
-    private Date fechaMonetizado;
+    private LocalDate fechaCreacion;
+    private LocalDate fechaMonetizado;
     private String CUITSolicitante;
 
     /*======CONSTRUCTOR=======*/
 
     public Operacion(String CUITSolicitante) {
         this.CUITSolicitante = CUITSolicitante;
+    }
+
+    public Operacion(JSONObject jsonOperacion) {
+        this.CUITSolicitante = (String) jsonOperacion.get("CUITsolicitante");
+        this.idOperacion = Integer.parseInt(jsonOperacion.get("IDoperacion").toString());
+        this.estadoOperacion = (String) jsonOperacion.get("estadooperacion");
+        this.fechaCreacion = (LocalDate) jsonOperacion.get("fechacreacionop");
+        this.fechaMonetizado = (LocalDate) jsonOperacion.get("fechamonetizado");
     }
 
     /*======GETTERS=======*/
@@ -27,12 +38,12 @@ public abstract class Operacion implements api.Operacion {
     }
 
     @Override
-    public Date getFechaCreacion() {
+    public LocalDate getFechaCreacion() {
         return fechaCreacion;
     }
 
     @Override
-    public Date getFechaMonetizado() {
+    public LocalDate getFechaMonetizado() {
         return fechaMonetizado;
     }
 
@@ -49,7 +60,7 @@ public abstract class Operacion implements api.Operacion {
     }
 
     @Override
-    public void setFechaMonetizado(Date fechaMonetizado) {
+    public void setFechaMonetizado(LocalDate fechaMonetizado) {
         this.fechaMonetizado = fechaMonetizado;
     }
 
@@ -59,5 +70,13 @@ public abstract class Operacion implements api.Operacion {
     public float getPorcentajeComisionAsociada(int IdOperacion){
 
         return 0;
+    }
+    public JSONObject toJSON(){
+        JSONObject Operacion = new JSONObject();
+        Operacion.put("CUITsolicitante", this.CUITSolicitante);
+        Operacion.put("estadooperacion", this.estadoOperacion);
+        Operacion.put("fechacreacionop", this.fechaCreacion);
+        Operacion.put("fechamonetizado", this.fechaMonetizado);
+        return Operacion;
     }
 }
