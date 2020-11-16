@@ -1,6 +1,10 @@
 package impl;
 
 import java.time.LocalDate;
+import java.time.Month;
+import java.time.Year;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 
 public class Verificaciones implements api.Verificaciones {
     //Compara una fecha entregada por parametro contra la fecha actual y devuelve Menor si la fecha ingresada es en el
@@ -18,6 +22,28 @@ public class Verificaciones implements api.Verificaciones {
             return "Hoy";
         }
     }
+
+    public String fechavshoytarjeta(YearMonth fecha) {
+        LocalDate hoy = LocalDate.now(); //2020-09-13 --> 09/2
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yy");
+        //LocalDate localDate = LocalDate.parse(hoy, formatter);
+        Month MesHoy = hoy.getMonth();
+        int AñoHoy = hoy.getYear();
+
+        Month Mes = fecha.getMonth();
+        int Año = fecha.getYear();
+
+        if (Año < AñoHoy) {
+            return "Menor";
+        }
+        if (Año == AñoHoy && Mes.compareTo(MesHoy) < 0){
+            return "Menor";
+        }
+        else{
+            return "Mayor";
+        }
+    }
+
     //Chequea que el formato de CUIT ingresado sea valido y que los datos ingresads sean numericos
     @Override
     public boolean CUITValido(String CUIT) {
@@ -57,7 +83,23 @@ public class Verificaciones implements api.Verificaciones {
         }
         return fechavalidaFlag;
     }
+
+    public boolean fechavalidatarjeta(String fechacheck){
+        String[] fechaseparada = fechacheck.split("/");
+        boolean fechavalidaFlag = true;
+        if (fechaseparada[0].length() != 2 || esnumerico(fechaseparada[0])!=true) {
+            fechavalidaFlag = false;
+        }
+        if (fechaseparada[1].length() != 4 || esnumerico(fechaseparada[1])!=true) {
+            fechavalidaFlag = false;
+        }
+        return fechavalidaFlag;
+    }
+
     public boolean lineacreditovigente(String CUIT){
         return true;
     }
+
+
 }
+

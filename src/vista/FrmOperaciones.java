@@ -11,6 +11,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
@@ -73,6 +74,8 @@ public class FrmOperaciones extends JDialog{
     private JComboBox comboBECHT;
     private JTextField TFNDCCHT;
     private JTextField TFNDCCHP;
+    private JTextField TFCUIT;
+    private JTextField TFCUIT2;
     private Verificaciones verif = new impl.Verificaciones();
 
 
@@ -368,5 +371,111 @@ public class FrmOperaciones extends JDialog{
                 cantidadCuotas = comboBoxCDCPST.getSelectedItem();
             }
         });
-    }
+        JBCCC.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean DatosCorrectosFlagCCC = true;
+                String FDVCCC = "";
+                FDVCCC = TFFDVCCC.getText();
+                if (verif.fechavalida(FDVCCC) == true) {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    LocalDate localDate = LocalDate.parse(FDVCCC, formatter);
+                    //Compara la fecha ingresada con la fecha actual ya que no tendria sentido vender un cheque el dia de su
+                    // canje o vender un cheque ya vencido.
+                    String comparacionfecha = verif.fechavshoy(localDate);
+                    if (comparacionfecha == "Menor") {
+                        showMessageDialog(null, "La fecha de acreditación no es valida");
+                        DatosCorrectosFlagCCC = false;
+                    }
+                } else {
+                    showMessageDialog(null, "La fecha ingresada no cumple con el formato solicitado");
+                    DatosCorrectosFlagCCC = false;
+                }
+                //Toma el String CUIT firmante desde el JText Field TFCDFCHT
+                String CUIT = "";
+                CUIT = TFCUIT.getText();
+                if (verif.CUITValido(CUIT)){
+                }
+                else {
+                    showMessageDialog(null, "El CUIT ingresado es invalido");
+                    DatosCorrectosFlagCCC = false;
+                }
+                //Toma el String Numero de Cheque desde el JText Field TFNCCHP y lo transforma en un entero
+                String ITCCC;
+                int ITCCCint;
+                ITCCC = TFITCCC.getText();
+                if (ITCCC.isEmpty()) {
+                    showMessageDialog(null, "El campo Empresa es mandatorio, por favor ingrese el dato solicitado");
+                    DatosCorrectosFlagCCC = false;
+                }
+                Object SITCCC;
+                SITCCC = spinnerITCCC.getValue();
+                int SITCCCint;
+                SITCCCint= (Integer) SITCCC;
+                if(SITCCCint <= 0){
+                    showMessageDialog(null, "El importe total debe ser mayor que 0");
+                    DatosCorrectosFlagCCC = false;
+                }
+
+
+
+
+            }
+        });
+        JBTC.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean DatosCorrectosFlagTC = true;
+                String NombreTC;
+                int NombreTCint;
+                NombreTC = TFNombreTC.getText();
+                if (NombreTC.isEmpty()) {
+                    showMessageDialog(null, "Debe ingresar el nombre completo tal como figura en la tarjeta");
+                    DatosCorrectosFlagTC = false;
+                }
+                String FVTC = "";
+                FVTC = TFFVTC.getText();
+                if(verif.fechavalidatarjeta(FVTC) == true) {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yyyy");
+                    YearMonth yearMonth = YearMonth.parse(FVTC, formatter);
+                    String comparacionfecha = verif.fechavshoytarjeta(yearMonth);
+                    if (comparacionfecha == "Menor") {
+                        showMessageDialog(null, "La tarjeta se encuentra vencida");
+                        DatosCorrectosFlagTC = false;
+                    }
+
+            }
+                else {
+                    showMessageDialog(null, "La fecha de vencimiento ingresada no cumple con el formato solicitado");
+                    DatosCorrectosFlagTC = false;}
+
+                String CDSTC;
+                int CDSTCint;
+                CDSTC = TFCDSTC.getText();
+                if (CDSTC.isEmpty()){
+                    showMessageDialog(null, "El código no puede quedar vacío");
+                    DatosCorrectosFlagTC = false;
+                }
+
+                if (verif.esnumerico(CDSTC)){
+                    if (CDSTC.length() != 3){
+                        showMessageDialog(null, "El código debe ser de 3 números");
+                    }
+                }
+                if(!verif.esnumerico(CDSTC) && !CDSTC.isEmpty()){
+                    showMessageDialog(null,"El código debe ser numérico");
+                    DatosCorrectosFlagTC = false;
+                }
+                String CUIT2 = "";
+                CUIT2 = TFCUIT2.getText();
+                if (verif.CUITValido(CUIT2)){
+                }
+                else {
+                    showMessageDialog(null, "El CUIT ingresado es invalido");
+                    DatosCorrectosFlagTC = false;
+                }
+                TFNDTTC
+            }
+    });
+}
 }

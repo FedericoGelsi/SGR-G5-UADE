@@ -1,6 +1,7 @@
 package api;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 
 public interface Verificaciones {
     //Compara una fecha entregada por parametro contra la fecha actual y devuelve Menor si la fecha ingresada es en el
@@ -15,4 +16,8 @@ public interface Verificaciones {
 
     //Chequea el formato de fecha en el String recibido y que los datos ingresados sean numericos
     boolean fechavalida(String fechacheck);
+
+    String fechavshoytarjeta(YearMonth fecha);
+
+    boolean fechavalidatarjeta(String fvtc);
 }
