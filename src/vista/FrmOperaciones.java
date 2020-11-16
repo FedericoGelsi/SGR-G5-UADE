@@ -215,6 +215,11 @@ public class FrmOperaciones extends JDialog {
                         showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que se adeudan facturas");
                         checks = false;
                     }
+                    if(verif.check_deuda(CDFCHP)==true){
+                        showMessageDialog(null,"No puede operar porque el socio tiene deudas");
+                        checks = false;
+                    }
+
                     if (checks == true) {
                         totalmenostasa=(float)ITCHPint-((float) ITCHPint *((float) TDDCHPint/100));
                         try {
@@ -325,6 +330,10 @@ public class FrmOperaciones extends JDialog {
                         showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
                         checks = false;
                     }
+                    if(verif.check_deuda(CSCHT)==true){
+                        showMessageDialog(null,"No puede operar porque el socio tiene deudas");
+                        checks = false;
+                    }
                     if (checks == true) {
                         try {
                             verif.crearOT1(FDVCHTdateaux, BECHT.toString(), NCCHTint, CDFCHT, 0, CSCHT, "Cheque de terceros", ITCHTint, "Ingresado");
@@ -431,6 +440,10 @@ public class FrmOperaciones extends JDialog {
                         showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
                         checks = false;
                     }
+                    if(verif.check_deuda(CSPB)==true){
+                        showMessageDialog(null,"No puede operar porque el socio tiene deudas");
+                        checks = false;
+                    }
                     if (checks == true) {
                         try {
                             verif.crearOT1(FDVPBdateaux, BEPB.toString(), NDPPBint, CDFPB, 0, CSPB, "Pagare Bursatil", ITPBint, "Ingresado");
@@ -531,6 +544,10 @@ public class FrmOperaciones extends JDialog {
                     }
                     if (verif.operacionvsfdr(ITFloatPST) == false) {
                         showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
+                        checks = false;
+                    }
+                    if(verif.check_deuda(CSPST)==true){
+                        showMessageDialog(null,"No puede operar porque el socio tiene deudas");
                         checks = false;
                     }
                     if (checks == true) {

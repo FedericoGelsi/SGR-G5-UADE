@@ -31,6 +31,76 @@
             "Numero-Operacion":   1,
             "Tipo-Operacion":     "Pagare",
             "Estado":             "Pago"
+        },
+        {
+            "Porcentaje-Comision":3.0,
+            "IDComision":         0,
+            "Numero-Operacion":   1,
+            "Tipo-Operacion":     "Pagare",
+            "Estado":             "Pago"
+        },
+        {
+            "Porcentaje-Comision":3.0,
+            "IDComision":         0,
+            "Numero-Operacion":   1,
+            "Tipo-Operacion":     "Pagare",
+            "Estado":             "Pago"
+        },
+        {
+            "Porcentaje-Comision":3.0,
+            "IDComision":         0,
+            "Numero-Operacion":   1,
+            "Tipo-Operacion":     "Pagare",
+            "Estado":             "Pago"
+        },
+        {
+            "Porcentaje-Comision":3.0,
+            "IDComision":         0,
+            "Numero-Operacion":   1,
+            "Tipo-Operacion":     "Pagare",
+            "Estado":             "Pago"
+        },
+        {
+            "Porcentaje-Comision":3.0,
+            "IDComision":         0,
+            "Numero-Operacion":   1,
+            "Tipo-Operacion":     "Pagare",
+            "Estado":             "Pago"
+        },
+        {
+            "Porcentaje-Comision":3.0,
+            "IDComision":         0,
+            "Numero-Operacion":   1,
+            "Tipo-Operacion":     "Pagare",
+            "Estado":             "Pago"
+        },
+        {
+            "Porcentaje-Comision":3.0,
+            "IDComision":         0,
+            "Numero-Operacion":   1,
+            "Tipo-Operacion":     "Pagare",
+            "Estado":             "Pago"
+        },
+        {
+            "Porcentaje-Comision":3.0,
+            "IDComision":         0,
+            "Numero-Operacion":   1,
+            "Tipo-Operacion":     "Pagare",
+            "Estado":             "Pago"
+        },
+        {
+            "Porcentaje-Comision":3.0,
+            "IDComision":         0,
+            "Numero-Operacion":   1,
+            "Tipo-Operacion":     "Pagare",
+            "Estado":             "Pago"
+        },
+        {
+            "Porcentaje-Comision":3.0,
+            "IDComision":         0,
+            "Numero-Operacion":   1,
+            "Tipo-Operacion":     "Pagare",
+            "Estado":             "Pago"
         }
     ],
     "created-at":             "2020-11-13",
@@ -46,9 +116,159 @@
             "numerooperacion": 1,
             "fechavencimiento":"2020-11-26",
             "numerocheque":    1998
+        },
+        {
+            "CUITSocio":       "20-87654321-2",
+            "tipo":            "Cheque Propio",
+            "estado":          "Ingresado",
+            "tasadedescuento": 2.0,
+            "CUITfirmante":    "20-87654321-2",
+            "importetotal":    2.94,
+            "banco":           "BANCO DE GALICIA Y BUENOS AIRES S.A.U.",
+            "numerooperacion": 2,
+            "fechavencimiento":"2020-11-20",
+            "numerocheque":    1515
+        },
+        {
+            "CUITSocio":       "20-87654321-2",
+            "tipo":            "Cheque Propio",
+            "estado":          "Ingresado",
+            "tasadedescuento": 2.0,
+            "CUITfirmante":    "20-87654321-2",
+            "importetotal":    2.94,
+            "banco":           "BANCO DE GALICIA Y BUENOS AIRES S.A.U.",
+            "numerooperacion": 2,
+            "fechavencimiento":"2020-11-20",
+            "numerocheque":    1515
+        },
+        {
+            "CUITSocio":       "20-87654321-2",
+            "tipo":            "Cheque Propio",
+            "estado":          "Ingresado",
+            "tasadedescuento": 2.0,
+            "CUITfirmante":    "20-87654321-2",
+            "importetotal":    2.94,
+            "banco":           "BANCO DE GALICIA Y BUENOS AIRES S.A.U.",
+            "numerooperacion": 2,
+            "fechavencimiento":"2020-11-20",
+            "numerocheque":    1515
+        },
+        {
+            "CUITSocio":       "20-87654321-2",
+            "tipo":            "Cheque Propio",
+            "estado":          "Ingresado",
+            "tasadedescuento": 4.0,
+            "CUITfirmante":    "20-87654321-2",
+            "importetotal":    2.88,
+            "banco":           "BANCO DE GALICIA Y BUENOS AIRES S.A.U.",
+            "numerooperacion": 3,
+            "fechavencimiento":"2020-11-20",
+            "numerocheque":    1234
+        },
+        {
+            "CUITSocio":       "20-87654321-2",
+            "tipo":            "Cheque Propio",
+            "estado":          "Ingresado",
+            "tasadedescuento": 4.0,
+            "CUITfirmante":    "20-87654321-2",
+            "importetotal":    2.88,
+            "banco":           "BANCO DE GALICIA Y BUENOS AIRES S.A.U.",
+            "numerooperacion": 3,
+            "fechavencimiento":"2020-11-20",
+            "numerocheque":    456
+        },
+        {
+            "CUITSocio":       "20-87654321-2",
+            "tipo":            "Cheque Propio",
+            "estado":          "Ingresado",
+            "tasadedescuento": 3.0,
+            "CUITfirmante":    "20-87654321-2",
+            "importetotal":    3.88,
+            "banco":           "BANCO DE GALICIA Y BUENOS AIRES S.A.U.",
+            "numerooperacion": 4,
+            "fechavencimiento":"2020-11-20",
+            "numerocheque":    1234
+        },
+        {
+            "CUITSocio":       "20-87654321-2",
+            "tipo":            "Cheque Propio",
+            "estado":          "Ingresado",
+            "tasadedescuento": 3.0,
+            "CUITfirmante":    "20-87654321-2",
+            "importetotal":    3.88,
+            "banco":           "BANCO DE GALICIA Y BUENOS AIRES S.A.U.",
+            "numerooperacion": 5,
+            "fechavencimiento":"2020-11-20",
+            "numerocheque":    325445
+        },
+        {
+            "CUITSocio":       "20-87654321-2",
+            "tipo":            "Cheque Propio",
+            "estado":          "Ingresado",
+            "tasadedescuento": 1.0,
+            "CUITfirmante":    "20-87654321-2",
+            "importetotal":    64.35,
+            "banco":           "BANCO DE GALICIA Y BUENOS AIRES S.A.U.",
+            "numerooperacion": 6,
+            "fechavencimiento":"2020-11-26",
+            "numerocheque":    2222
+        },
+        {
+            "CUITSocio":       "20-87654321-2",
+            "tipo":            "Cheque Propio",
+            "estado":          "Ingresado",
+            "tasadedescuento": 1.0,
+            "CUITfirmante":    "20-87654321-2",
+            "importetotal":    64.35,
+            "banco":           "BANCO DE GALICIA Y BUENOS AIRES S.A.U.",
+            "numerooperacion": 7,
+            "fechavencimiento":"2020-11-26",
+            "numerocheque":    261198
+        },
+        {
+            "CUITSocio":       "20-87654321-2",
+            "tipo":            "Cheque Propio",
+            "estado":          "Ingresado",
+            "tasadedescuento": 1.0,
+            "CUITfirmante":    "20-87654321-2",
+            "importetotal":    64.35,
+            "banco":           "BANCO DE GALICIA Y BUENOS AIRES S.A.U.",
+            "numerooperacion": 8,
+            "fechavencimiento":"2020-11-26",
+            "numerocheque":    2222
         }
     ],
     "certificado-de-garantia":[
+        {
+            "CUITSocio":"1234"
+        },
+        {
+            "CUITSocio":"1234"
+        },
+        {
+            "CUITSocio":"1234"
+        },
+        {
+            "CUITSocio":"1234"
+        },
+        {
+            "CUITSocio":"1234"
+        },
+        {
+            "CUITSocio":"1234"
+        },
+        {
+            "CUITSocio":"1234"
+        },
+        {
+            "CUITSocio":"1234"
+        },
+        {
+            "CUITSocio":"1234"
+        },
+        {
+            "CUITSocio":"1234"
+        },
         {
             "CUITSocio":"1234"
         }

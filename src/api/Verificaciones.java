@@ -44,5 +44,8 @@ public interface Verificaciones {
 
     //Guarda los datos en .json
     void guardarDatos(JSONObject objeto) throws Exception;
+
+    //Chequea que el socio no tenga deudas, si las tiene, no puede operar.
+    public boolean check_deuda(String CUIT);
 }
 

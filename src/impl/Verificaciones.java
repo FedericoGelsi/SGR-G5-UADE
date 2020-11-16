@@ -209,16 +209,56 @@ public class Verificaciones implements api.Verificaciones {
         return operacionmenorfdr;
     }
 
-    public void crearOT1(LocalDate FDV, String Banco, int NDC, String CUITF, float TDD, String CUITS, String tipo,float importetotal, String estado) throws Exception {
+    public void crearOT1(LocalDate FDV, String Banco, int NDC, String CUITF, float TDD, String CUITS, String tipo, float importetotal, String estado) throws Exception {
+        jsonObjectOPC = (JSONObject) file.readJson(filenamefact);
         JSONArray operacionesList = (JSONArray) jsonObjectOPC.get("operaciones");
         int contador = 0;
         System.out.println("hay algo");
         for (Object op : operacionesList) {
-            contador++;
-            }
-        contador++;
+            JSONObject id = (JSONObject) op;
+            contador = 1+Integer.parseInt(id.get("numerooperacion").toString());
+        }
 
-        api.OPTipo1 nuevaOT1 = new impl.OPTipo1(FDV, Banco, NDC, CUITF, TDD, CUITS, tipo,importetotal,estado,contador);
+        // Pide el monto de la linea de credito y el tope
+        double tope = 0;
+        double monto_utilizado = 0;
+        double montohabilitado= 0;
+        double montodeuda=0;
+        JSONArray socioList = (JSONArray) jsonObject.get("socios-participes");
+        for (Object obj : socioList) {
+            JSONObject socio = (JSONObject) obj;
+            String cuit = socio.get("cuit").toString();
+            if (CUITS.equalsIgnoreCase(cuit)) {
+                JSONObject lineadecredito = (JSONObject) socio.get("lineas-de-credito");
+                tope = (double) lineadecredito.get("tope");
+                monto_utilizado = (double) lineadecredito.get("monto-utilizado");
+                montohabilitado = (tope - monto_utilizado);
+                if (importetotal>montohabilitado && importetotal<=tope) {
+                    lineadecredito.put("monto-utilizado",tope);
+                    System.out.println("Comparo el importe total con el monto habilitado");
+                    int contadordeuda = 0;
+                    JSONArray deudasList = (JSONArray) jsonObject.get("deudas");
+                    montodeuda = importetotal - montohabilitado;
+                    if (deudasList != null) {
+                        for (Object deu : operacionesList) {
+                            JSONObject id = (JSONObject) deu;
+                            contadordeuda = 1 + Integer.parseInt(id.get("id-deuda").toString());
+                            System.out.println(contadordeuda);
+                        }
+                    }
+                    Deuda nuevaDeuda = new Deuda(montodeuda,CUITS,contadordeuda,montodeuda*0.05);
+                    JSONObject deuda1 = nuevaDeuda.toJSON();
+                    JSONArray DeudasList = new JSONArray();
+                    DeudasList.add(deuda1);
+                    socio.put("deudas",DeudasList);
+                    jsonObject.put("socios-participes",socioList);
+                    file.writeJson(filename,jsonObject);
+                }
+            }
+        }
+
+
+        api.OPTipo1 nuevaOT1 = new impl.OPTipo1(FDV, Banco, NDC, CUITF, TDD, CUITS, tipo, importetotal, estado, contador);
         JSONObject operacion1 = nuevaOT1.toJSON();
         guardarDatos(operacion1);
 
@@ -226,14 +266,14 @@ public class Verificaciones implements api.Verificaciones {
         JSONObject CDG = nuevoCDG.toJSON();
         guardarDatosCDG(CDG);
 
-        Comision nuevoCOM = new Comision(0,"Pago",3,1,"Pagare");
+        Comision nuevoCOM = new Comision(0, "Pago", 3, 1, "Pagare");
         JSONObject COM = nuevoCOM.toJSON();
         guardarDatoscomision(COM);
-        }
+    }
 
     @Override
     public void crearOT3(String CDC, String Banco, float Importe, float Tasa, String sist, LocalDate FDA, String CUIT, String estado, String tipo) throws Exception {
-        api.OPTipo3 nuevaOT3 = new impl.OPTipo3(CUIT, CDC, Banco, Importe, Tasa, sist,FDA,estado, tipo);
+        api.OPTipo3 nuevaOT3 = new impl.OPTipo3(CUIT, CDC, Banco, Importe, Tasa, sist, FDA, estado, tipo);
         JSONObject operacion3 = nuevaOT3.toJSON();
         guardarDatos(operacion3);
 
@@ -241,7 +281,7 @@ public class Verificaciones implements api.Verificaciones {
         JSONObject CDG = nuevoCDG.toJSON();
         guardarDatosCDG(CDG);
 
-        Comision nuevoCOM = new Comision(0,"Pago",3,1,"Pagare");
+        Comision nuevoCOM = new Comision(0, "Pago", 3, 1, "Pagare");
         JSONObject COM = nuevoCOM.toJSON();
         guardarDatoscomision(COM);
     }
@@ -254,6 +294,17 @@ public class Verificaciones implements api.Verificaciones {
         JSONArray operacionesList = (JSONArray) jsonObject.get("operaciones");
         operacionesList.add(objeto);
         jsonObject.put("operaciones", operacionesList);
+        file.writeJson(filename, jsonObject);
+    }
+
+    public void guardarDatosDeuda(JSONObject objeto) throws Exception {
+        System.out.println("Entro al guardar datos deuda");
+        String filename = "./src/resources/socios.json";
+        API_JSONHandler file = new JSONHandler();
+        JSONObject jsonObject = (JSONObject) file.readJson(filename);
+        JSONArray DeudaList = (JSONArray) jsonObject.get("deudas");
+        DeudaList.add(objeto);
+        jsonObject.put("deudas", DeudaList);
         file.writeJson(filename, jsonObject);
     }
 
@@ -276,6 +327,30 @@ public class Verificaciones implements api.Verificaciones {
         jsonObject.put("comision", ComisionList);
         file.writeJson(filename, jsonObject);
     }
+
+    public boolean check_deuda(String CUIT) {
+        double montodeuda = 0;
+        boolean existedeuda = false;
+        JSONArray socioList = (JSONArray) jsonObject.get("socios-participes");
+        for (Object obj : socioList) {
+            JSONObject socio = (JSONObject) obj;
+            String cuit = socio.get("cuit").toString();
+            if (CUIT.equalsIgnoreCase(cuit)) {
+                JSONArray deudasList = (JSONArray) socio.get("deudas");
+                for (Object mon : deudasList) {
+                    JSONObject monto = (JSONObject) mon;
+                    montodeuda = (double) monto.get("monto");
+                }
+                if (montodeuda > 0) {
+                    existedeuda = true;
+                    break;
+                }
+            }
+        }
+        return existedeuda;
+    }
+}
+
     /* public void crearOT2(String nombreempresa, float importetotal, LocalDate fechavencimiento, String tipo) throws Exception {
         api.OPTipo2 nuevaOT2 = new impl.OPTipo2(nombreempresa, importetotal, fechavencimiento, tipo);
 
@@ -291,7 +366,7 @@ public class Verificaciones implements api.Verificaciones {
         jsonObject.put("operaciones", operacionesList);
         file.writeJson(filename, jsonObject);
     }*/
-}
+
 
 
 
