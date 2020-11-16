@@ -12,6 +12,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -65,6 +67,13 @@ public class FrmConsultasGenerales extends JDialog {
     private JTextField EmailDSTxf;
     private JTextField FPDSTxf;
     private JTextField APDSTxf;
+    private JButton buscardeudaBTn;
+    private JButton BSC4Btn;
+    private JButton CComiC4Btn;
+    private JTextField CUITC4Txf;
+    private JTextField RSC4Txf;
+    private JTextField COMIC4Txf;
+    private JComboBox TipoOPC4ComboBox;
 
     private FrmConsultasGenerales self;
     private Verificaciones verificar = new impl.Verificaciones();
@@ -113,22 +122,66 @@ public class FrmConsultasGenerales extends JDialog {
         this.setLocationRelativeTo(null);
         this.asociareventos();
         this.self = this;
+
+
+
     }
 
     private void asociareventos(){
-        BuscarSCBtn.addActionListener(new ActionListener() {
+        // CONSULTA 4
+        BSC4Btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    buscarSocioCC();
+                    buscarSocio();
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
             }
         });
+        CComiC4Btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        // CONSULTA 5
+        BuscarMBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    buscarSocio();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
+        });
+
+        buscardeudaBTn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                consultarMora();
+            }
+        });
+
+        // CONSULTA 6
+        BuscarSCBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    buscarSocio();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
+        });
+
+
+
     }
 
-    private void buscarSocioCC() throws Exception {
+    private void buscarSocio() throws Exception {
         sociosList = (JSONArray) jsonObject.get("socios-participes");
         boolean socioEncontrado = false;
         for (Object obj: sociosList){
@@ -136,17 +189,35 @@ public class FrmConsultasGenerales extends JDialog {
             String rs = socioenuso.get("razon-social").toString();
             String cuit = socioenuso.get("cuit").toString();
             String estado = socioenuso.get("estado").toString();
-            if (verificar.CUITValido(CUITCCTxf.getText())) {
-                if (cuit.equals(CUITCCTxf.getText()) && estado.equals("Pleno")) {
-                    RSCCTxf.setText(rs);
-                    calcularRiesgoVivo();
-                    //getoperacionesSocio(cuit);
-                    datossocio();
-                    crearTablas();
-                    socioEncontrado = true;
-                    break;
+
+            if (pnlTabC6.isShowing()) {
+                if (verificar.CUITValido(CUITCCTxf.getText()) && estado.equals("Pleno")) {
+                    if (cuit.equals(CUITCCTxf.getText())) {
+                        RSCCTxf.setText(rs);
+                        calcularRiesgoVivo();
+                        //getoperacionesSocio(cuit);
+                        datossocio();
+                        crearTablas();
+                        socioEncontrado = true;
+                        break;
+                    }
                 }
-            }else if (CUITCCTxf.getText().isEmpty()){
+            }else if(pnlTabC5.isShowing()){
+                if (verificar.CUITValido(CUITMTxf.getText()) && estado.equals("Pleno")) {
+                    if (cuit.equals(CUITMTxf.getText())) {
+                        RSMTxf.setText(rs);
+                        socioEncontrado = true;
+                    }
+                }
+            }else if (pnlTabC4.isShowing()){
+                if (verificar.CUITValido(CUITC4Txf.getText()) && estado.equals("Pleno")) {
+                    if (cuit.equals(CUITC4Txf.getText())) {
+                        RSC4Txf.setText(rs);
+                        socioEncontrado = true;
+                    }
+                }
+            }
+            if (CUITCCTxf.getText().isEmpty() || CUITMTxf.getText().isEmpty() || CUITC4Txf.getText().isEmpty()){
                 showMessageDialog(null, "El campo no puede estar vacío.\nIngrese un CUIT.");
                 socioEncontrado = true;
             }else{
@@ -158,6 +229,26 @@ public class FrmConsultasGenerales extends JDialog {
         }
     }
 
+    // CONSULTA 5
+    private void consultarMora(){
+        JSONArray deudas = (JSONArray) socioenuso.get("deudas");
+        double moradiaria = 0;
+        double moratotal = 0;
+        for (Object d: deudas){
+            Deuda deuda = new impl.Deuda((JSONObject) d);
+            if (deuda.isAplicaMora()) {
+                if (deuda.getFechaDeuda().isBefore(LocalDate.now())){
+                    moratotal += (deuda.getMontoMora() * ChronoUnit.DAYS.between(deuda.getFechaDeuda(), LocalDate.now()));
+                }
+                moradiaria += deuda.getMontoMora();
+            }
+        }
+        moradiariaTxf.setText(String.valueOf(moradiaria));
+        saldomoraTxf.setText(String.valueOf(moratotal));
+        crearTablaDeudas(pnlSMoraTable);
+    }
+
+    // CONSULTA 6
     private void datossocio(){
         CUITDSTxf.setText((String) socioenuso.get("cuit"));
         RSDSTxf.setText((String) socioenuso.get("razon-social"));
@@ -189,7 +280,7 @@ public class FrmConsultasGenerales extends JDialog {
 
     public void crearTablas(){
         crearTablaRecuperos();
-        crearTablaDeudas();
+        crearTablaDeudas(pnlSDeudas);
         crearTablaContragarantias();
         crearTablaLDC();
         crearTablaAccionistas();
@@ -217,7 +308,7 @@ public class FrmConsultasGenerales extends JDialog {
         pnlSRecuperos.setVisible(true);
     }
 
-    private void crearTablaDeudas(){
+    private void crearTablaDeudas(JScrollPane pnlEnUso){
         String [] nombresColumnas = {"ID","Monto","Fecha Ven","Mora","Monto Mora","Subtotal"};
         DefaultTableModel modelo = new DefaultTableModel();
         for ( String column : nombresColumnas) {
@@ -236,8 +327,8 @@ public class FrmConsultasGenerales extends JDialog {
         }
         JTable deudasTable = new JTable(modelo);
 
-        pnlSDeudas.setViewportView(deudasTable);
-        pnlSDeudas.setVisible(true);
+        pnlEnUso.setViewportView(deudasTable);
+        pnlEnUso.setVisible(true);
     }
 
     private void crearTablaAccionistas(){

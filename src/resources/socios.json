@@ -64,7 +64,40 @@
             ],
             "finic-act":          "2020-11-13T09:52:32.914993900",
             "direccion":          "Rivadavia 2630, CABA",
-            "deudas":             [],
+            "deudas":             [
+                {
+                    "monto": 2560,
+                    "cuit-deudor": "20-12345678-2",
+                    "fecha-deuda": "2020-04-25",
+                    "id-deuda": 456953,
+                    "aplica-mora": true,
+                    "monto-mora": 35.5
+                },
+                {
+                    "monto": 560,
+                    "cuit-deudor": "20-12345678-2",
+                    "fecha-deuda": "2020-10-25",
+                    "id-deuda": 456954,
+                    "aplica-mora": true,
+                    "monto-mora": 30.5
+                },
+                {
+                    "monto": 250,
+                    "cuit-deudor": "20-12345678-2",
+                    "fecha-deuda": "2020-12-25",
+                    "id-deuda": 456955,
+                    "aplica-mora": false,
+                    "monto-mora": 0
+                },
+                {
+                    "monto": 256,
+                    "cuit-deudor": "20-12345678-2",
+                    "fecha-deuda": "2020-02-25",
+                    "id-deuda": 456956,
+                    "aplica-mora": true,
+                    "monto-mora": 15.5
+                }
+            ],
             "contragarantias":    [
                 {
                     "tipo":          "Fianza Personal",

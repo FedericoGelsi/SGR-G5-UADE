@@ -25,12 +25,11 @@ public class Deuda implements api.Deuda {
     }
 
     public Deuda(JSONObject jsonDeuda){
-        this.monto = (double) jsonDeuda.get("monto");
+        this.monto = Double.parseDouble(jsonDeuda.get("monto").toString());
         this.CUITDeudor = (String) jsonDeuda.get("cuit-deudor");
-        this.idDeuda = (String) jsonDeuda.get("id-deuda");
-        this.montoMora = (double) jsonDeuda.get("monto-mora");
+        this.idDeuda = jsonDeuda.get("id-deuda").toString();
+        this.montoMora = Double.parseDouble(jsonDeuda.get("monto-mora").toString());
         this.aplicaMora = (boolean) jsonDeuda.get("aplica-mora");
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MMM-dd");
         this.fechaDeuda = LocalDate.parse(jsonDeuda.get("fecha-deuda").toString());
     }
 

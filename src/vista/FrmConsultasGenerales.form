@@ -606,7 +606,7 @@
                       <text value="CUIT:"/>
                     </properties>
                   </component>
-                  <component id="635f" class="javax.swing.JButton">
+                  <component id="635f" class="javax.swing.JButton" binding="CComiC4Btn">
                     <constraints>
                       <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -641,7 +641,7 @@
                       <text value="Comisión"/>
                     </properties>
                   </component>
-                  <component id="3a088" class="javax.swing.JTextField">
+                  <component id="3a088" class="javax.swing.JTextField" binding="COMIC4Txf">
                     <constraints>
                       <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="592" height="30"/>
@@ -665,7 +665,7 @@
                     </properties>
                     <border type="none"/>
                     <children>
-                      <component id="6b8ae" class="javax.swing.JTextField">
+                      <component id="6b8ae" class="javax.swing.JTextField" binding="CUITC4Txf">
                         <constraints>
                           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="592" height="30"/>
@@ -679,7 +679,7 @@
                           <foreground color="-1"/>
                         </properties>
                       </component>
-                      <component id="b21fe" class="javax.swing.JButton">
+                      <component id="b21fe" class="javax.swing.JButton" binding="BSC4Btn">
                         <constraints>
                           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
@@ -696,7 +696,7 @@
                       </component>
                     </children>
                   </grid>
-                  <component id="da6cb" class="javax.swing.JComboBox">
+                  <component id="da6cb" class="javax.swing.JComboBox" binding="TipoOPC4ComboBox">
                     <constraints>
                       <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="592" height="30"/>
@@ -720,7 +720,7 @@
                       <text value="Razón Social:"/>
                     </properties>
                   </component>
-                  <component id="4814d" class="javax.swing.JTextField">
+                  <component id="4814d" class="javax.swing.JTextField" binding="RSC4Txf">
                     <constraints>
                       <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="592" height="30"/>
@@ -857,7 +857,7 @@
                       <foreground color="-1"/>
                     </properties>
                   </component>
-                  <component id="7c918" class="javax.swing.JButton">
+                  <component id="7c918" class="javax.swing.JButton" binding="buscardeudaBTn">
                     <constraints>
                       <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
