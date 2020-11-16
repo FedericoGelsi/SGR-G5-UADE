@@ -215,7 +215,7 @@ public class FrmOperaciones extends JDialog{
                     }
                     if (checks == true) {
                         try {
-                            verif.crearOT1(FDVCHPdateaux,BECHP.toString(),NCCHPint,CDFCHP,TDDCHPint,CDFCHP);
+                            verif.crearOT1(FDVCHPdateaux,BECHP.toString(),NCCHPint,CDFCHP,TDDCHPint,CDFCHP,"Cheque Propio",ITCHPint,"Ingresado");
                         } catch (Exception exception) {
                             exception.printStackTrace();
                         }
@@ -233,7 +233,7 @@ public class FrmOperaciones extends JDialog{
 
                 //Toma el String Numero de Cheque desde el JText Field TFNCCHT y lo transforma en un entero
                 String NCCHT;
-                int NCCHTint;
+                int NCCHTint = 0;
                 NCCHT = TFNDCCHT.getText();
                 if (NCCHT.isEmpty()) {
                     showMessageDialog(null, "El campo Numero de Cheque es mandatorio, por favor ingrese el dato solicitado");
@@ -249,12 +249,15 @@ public class FrmOperaciones extends JDialog{
                 //Toma el String Fecha de Vencimiento desde el JText Field FDVCHT y lo transforma en un date
                 String FDVCHT = "";
                 FDVCHT = TFFDVCHT.getText();
+                String FDVCHTaux= "20/04/1989";
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate FDVCHTdateaux = LocalDate.parse(FDVCHTaux, formatter);
                 if (verif.fechavalida(FDVCHT) == true) {
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                    LocalDate localDate = LocalDate.parse(FDVCHT, formatter);
+                    LocalDate FDVCHPdate = LocalDate.parse(FDVCHT, formatter);
+                    FDVCHTdateaux = FDVCHPdate;
                     //Compara la fecha ingresada con la fecha actual ya que no tendria sentido vender un cheque el dia de su
                     // canje o vender un cheque ya vencido.
-                    String comparacionfecha = verif.fechavshoy(localDate);
+                    String comparacionfecha = verif.fechavshoy(FDVCHPdate);
                     if (comparacionfecha == "Menor") {
                         showMessageDialog(null, "El cheque se encuentra vencido");
                         DatosCorrectosFlagCHT = false;
@@ -298,20 +301,33 @@ public class FrmOperaciones extends JDialog{
                     DatosCorrectosFlagCHT = false;
                 }
                 if (DatosCorrectosFlagCHT == true) {
+                    boolean checks = true;
                     if (verif.lineacreditovigente(CSCHT) == false) {
                         showMessageDialog(null, "La linea de credito se encuentra vencida");
+                        checks=false;
                     }
                     if (verif.contragarantiassuficientes(CSCHT, ITCHTint) == false) {
                         showMessageDialog(null, "Las contragarantias del socio son insuficientes para realizar esta operacion");
+                        checks=false;
                     }
                     if (verif.lineasuficiente(CSCHT, ITCHTint) == false) {
                         showMessageDialog(null, "La linea de credito no tiene disponibilidad para realizar esta operacion");
+                        checks=false;
                     }
                     if (verif.debefacturas(CSCHT) == true) {
                         showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que se adeudan facturas");
+                        checks=false;
                     }
                     if (verif.operacionvsfdr(ITCHTint)==false){
                         showMessageDialog(null,"La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
+                        checks=false;
+                    }
+                    if (checks == true) {
+                        try {
+                            verif.crearOT1(FDVCHTdateaux, BECHT.toString(), NCCHTint, CDFCHT, 0, CSCHT, "Cheque de terceros", ITCHTint, "Ingresado");
+                        } catch (Exception exception) {
+                            exception.printStackTrace();
+                        }
                     }
                 }
             }
@@ -326,7 +342,7 @@ public class FrmOperaciones extends JDialog{
 
                                        //Toma el String Numero de pagare desde el JText Field TFNDPPB y lo transforma en un entero
                                        String NDPPB;
-                                       int NDPPBint;
+                                       int NDPPBint = 0;
                                        NDPPB = TFNDPPB.getText();
                                        if (NDPPB.isEmpty()) {
                                            showMessageDialog(null, "El campo Numero de pagare es mandatorio, por favor ingrese el dato solicitado");
@@ -342,12 +358,15 @@ public class FrmOperaciones extends JDialog{
                                        //Toma el String Fecha de Vencimiento desde el JText Field FDVPB y lo transforma en un date
                                        String FDVPB = "";
                                        FDVPB = TFFDVPB.getText();
+                                       String FDVPBaux= "20/04/1989";
+                                       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                                       LocalDate FDVPBdateaux = LocalDate.parse(FDVPBaux, formatter);
                                        if (verif.fechavalida(FDVPB) == true) {
-                                           DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                                           LocalDate localDate = LocalDate.parse(FDVPB, formatter);
+                                           LocalDate FDVPBdate = LocalDate.parse(FDVPB, formatter);
+                                           FDVPBdateaux = FDVPBdate;
                                            //Compara la fecha ingresada con la fecha actual ya que no tendria sentido vender un pagare el dia de su
                                            // canje o vender un pagare ya vencido.
-                                           String comparacionfecha = verif.fechavshoy(localDate);
+                                           String comparacionfecha = verif.fechavshoy(FDVPBdate);
                                            if (comparacionfecha == "Menor") {
                                                showMessageDialog(null, "El pagare bursatil se encuentra vencido");
                                                DatosCorrectosFlagPB = false;
@@ -392,17 +411,29 @@ public class FrmOperaciones extends JDialog{
                                        }
 
                                        if (DatosCorrectosFlagPB == true) {
-                                           if (verif.lineacreditovigente(CDFPB) == false) {
+                                           boolean checks = true;
+                                           if (verif.lineacreditovigente(CSPB) == false) {
                                                showMessageDialog(null, "La linea de credito se encuentra vencida");
+                                               checks=false;
                                            }
-                                           if (verif.lineasuficiente(CDFPB, ITPBint) == false) {
+                                           if (verif.lineasuficiente(CSPB, ITPBint) == false) {
                                                showMessageDialog(null, "La linea de credito no tiene disponibilidad para realizar esta operacion");
+                                               checks=false;
                                            }
                                            if (verif.debefacturas(CSPB) == true) {
-                                                   showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que se adeudan facturas");
+                                               showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que se adeudan facturas");
+                                               checks=false;
                                            }
                                            if (verif.operacionvsfdr(ITPBint)==false) {
                                                showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
+                                               checks=false;
+                                           }
+                                           if (checks == true) {
+                                               try {
+                                                   verif.crearOT1(FDVPBdateaux, BEPB.toString(), NDPPBint, CDFPB, 0, CSPB, "Pagare Bursatil", ITPBint, "Ingresado");
+                                               } catch (Exception exception) {
+                                                   exception.printStackTrace();
+                                               }
                                            }
                                        }
                                    }

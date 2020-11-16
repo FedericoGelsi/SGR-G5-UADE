@@ -37,7 +37,7 @@ public interface Verificaciones {
     boolean operacionvsfdr(double montototal);
 
     //Crea una operacion
-    public void crearOT1(LocalDate FDV,String Banco, int NDC, String CUITF, float TDD, String CUITS) throws Exception;
+    public void crearOT1(LocalDate FDV,String Banco, int NDC, String CUITF, float TDD, String CUITS,String tipo,float importetotal, String estado) throws Exception;
 
     //Guarda los datos en .json
     void guardarDatos(JSONObject objeto) throws Exception;

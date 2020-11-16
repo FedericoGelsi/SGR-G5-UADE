@@ -1,1 +1,63 @@
-{"facturas":[{"estado":"impago","CUITDestinatario":"20-12345678-2","montofactura":10.0,"idfactura":1,"CUITemisor":"20-11111111-2"},{"estado":"impago","CUITDestinatario":"20-12345678-2","montofactura":1000.0,"idfactura":2,"CUITemisor":"20-11111111-2"},{"estado":"pago","CUITDestinatario":"20-87654321-2","montofactura":20.0,"idfactura":3,"CUITemisor":"20-11111111-2"}],"author":"admin","created-at":"2020-11-13","operaciones":[{"tasadedescuento":3.0,"CUITfirmante":"20-87654321-2","banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","fechavencimiento":"1989-04-20","numerocheque":12332},{"tasadedescuento":3.0,"CUITfirmante":"20-87654321-2","banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","fechavencimiento":"2020-11-20","numerocheque":1234}],"modified-by":"admin"}
+{
+    "facturas":   [
+        {
+            "estado":          "impago",
+            "CUITDestinatario":"20-12345678-2",
+            "montofactura":    10.0,
+            "idfactura":       1,
+            "CUITemisor":      "20-11111111-2"
+        },
+        {
+            "estado":          "impago",
+            "CUITDestinatario":"20-12345678-2",
+            "montofactura":    1000.0,
+            "idfactura":       2,
+            "CUITemisor":      "20-11111111-2"
+        },
+        {
+            "estado":          "pago",
+            "CUITDestinatario":"20-87654321-2",
+            "montofactura":    20.0,
+            "idfactura":       3,
+            "CUITemisor":      "20-11111111-2"
+        }
+    ],
+    "author":     "admin",
+    "created-at": "2020-11-13",
+    "operaciones":[
+        {
+            "CUITSocio":       "20-87654321-2",
+            "tipo":            "Cheque Propio",
+            "estado":          "Ingresado",
+            "tasadedescuento": 2.0,
+            "CUITfirmante":    "20-87654321-2",
+            "importetotal":    6.0,
+            "banco":           "BANCO DE GALICIA Y BUENOS AIRES S.A.U.",
+            "fechavencimiento":"2020-11-20",
+            "numerocheque":    123
+        },
+        {
+            "CUITSocio":       "20-87654321-2",
+            "tipo":            "Cheque de terceros",
+            "estado":          "Ingresado",
+            "tasadedescuento": 0.0,
+            "CUITfirmante":    "20-12348769-2",
+            "importetotal":    3.0,
+            "banco":           "BANCO DE LA PROVINCIA DE CORDOBA S.A.",
+            "fechavencimiento":"2020-11-21",
+            "numerocheque":    12346
+        },
+        {
+            "CUITSocio":       "20-87654321-2",
+            "tipo":            "Pagare Bursatil",
+            "estado":          "Ingresado",
+            "tasadedescuento": 0.0,
+            "CUITfirmante":    "45-78564231-2",
+            "importetotal":    3.0,
+            "banco":           "BANCO SUPERVIELLE S.A.",
+            "fechavencimiento":"2020-11-23",
+            "numerocheque":    15789
+        }
+    ],
+    "modified-by":"admin"
+}
