@@ -210,11 +210,17 @@ public class Verificaciones implements api.Verificaciones {
     }
 
     public void crearOT1(LocalDate FDV, String Banco, int NDC, String CUITF, float TDD, String CUITS, String tipo,float importetotal, String estado) throws Exception {
-        api.OPTipo1 nuevaOT1 = new impl.OPTipo1(FDV, Banco, NDC, CUITF, TDD, CUITS, tipo,importetotal,estado);
-
+        JSONArray operacionesList = (JSONArray) jsonObjectOPC.get("operaciones");
+        int contador = 0;
+        System.out.println("hay algo");
+        for (Object op : operacionesList) {
+            contador++;
+            }
+        contador++;
+        api.OPTipo1 nuevaOT1 = new impl.OPTipo1(FDV, Banco, NDC, CUITF, TDD, CUITS, tipo,importetotal,estado,contador);
         JSONObject operacion1 = nuevaOT1.toJSON();
         guardarDatos(operacion1);
-    }
+        }
 
     @Override
     public void crearOT3(String CDC, String Banco, float Importe, float Tasa, String sist, LocalDate FDA, String CUIT, String estado, String tipo) throws Exception {

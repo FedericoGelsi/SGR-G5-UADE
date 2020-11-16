@@ -20,9 +20,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
 import static javax.swing.JOptionPane.showMessageDialog;
 
-public class FrmOperaciones extends JDialog{
+public class FrmOperaciones extends JDialog {
     private JPanel pnlPrincipal;
     private JPanel pnlTitulo;
     private JTabbedPane pnlTabPanelOps;
@@ -125,6 +126,7 @@ public class FrmOperaciones extends JDialog{
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean DatosCorrectosFlagCHP = true;
+                float totalmenostasa = 0;
                 //Toma el objeto Banco Emisor desde el Combo Box comboBECHP
                 Object BECHP = new Object();
                 BECHP = comboBECHP.getSelectedItem();
@@ -148,7 +150,7 @@ public class FrmOperaciones extends JDialog{
                 //Toma el String Fecha de Vencimiento desde el JText Field FDVCHP y lo transforma en un date
                 String FDVCHP = "";
                 FDVCHP = TFFDVCHP.getText();
-                String FDVCHPaux= "20/04/1989";
+                String FDVCHPaux = "20/04/1989";
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 LocalDate FDVCHPdateaux = LocalDate.parse(FDVCHPaux, formatter);
                 if (verif.fechavalida(FDVCHP) == true) {
@@ -214,8 +216,9 @@ public class FrmOperaciones extends JDialog{
                         checks = false;
                     }
                     if (checks == true) {
+                        totalmenostasa=(float)ITCHPint-((float) ITCHPint *((float) TDDCHPint/100));
                         try {
-                            verif.crearOT1(FDVCHPdateaux,BECHP.toString(),NCCHPint,CDFCHP,TDDCHPint,CDFCHP,"Cheque Propio",ITCHPint,"Ingresado");
+                            verif.crearOT1(FDVCHPdateaux, BECHP.toString(), NCCHPint, CDFCHP, TDDCHPint, CDFCHP, "Cheque Propio", totalmenostasa, "Ingresado");
                         } catch (Exception exception) {
                             exception.printStackTrace();
                         }
@@ -249,7 +252,7 @@ public class FrmOperaciones extends JDialog{
                 //Toma el String Fecha de Vencimiento desde el JText Field FDVCHT y lo transforma en un date
                 String FDVCHT = "";
                 FDVCHT = TFFDVCHT.getText();
-                String FDVCHTaux= "20/04/1989";
+                String FDVCHTaux = "20/04/1989";
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 LocalDate FDVCHTdateaux = LocalDate.parse(FDVCHTaux, formatter);
                 if (verif.fechavalida(FDVCHT) == true) {
@@ -304,23 +307,23 @@ public class FrmOperaciones extends JDialog{
                     boolean checks = true;
                     if (verif.lineacreditovigente(CSCHT) == false) {
                         showMessageDialog(null, "La linea de credito se encuentra vencida");
-                        checks=false;
+                        checks = false;
                     }
                     if (verif.contragarantiassuficientes(CSCHT, ITCHTint) == false) {
                         showMessageDialog(null, "Las contragarantias del socio son insuficientes para realizar esta operacion");
-                        checks=false;
+                        checks = false;
                     }
                     if (verif.lineasuficiente(CSCHT, ITCHTint) == false) {
                         showMessageDialog(null, "La linea de credito no tiene disponibilidad para realizar esta operacion");
-                        checks=false;
+                        checks = false;
                     }
                     if (verif.debefacturas(CSCHT) == true) {
                         showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que se adeudan facturas");
-                        checks=false;
+                        checks = false;
                     }
-                    if (verif.operacionvsfdr(ITCHTint)==false){
-                        showMessageDialog(null,"La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
-                        checks=false;
+                    if (verif.operacionvsfdr(ITCHTint) == false) {
+                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
+                        checks = false;
                     }
                     if (checks == true) {
                         try {
@@ -333,114 +336,111 @@ public class FrmOperaciones extends JDialog{
             }
         });
         JBPB.addActionListener(new ActionListener() {
-                                   @Override
-                                   public void actionPerformed(ActionEvent e) {
-                                       boolean DatosCorrectosFlagPB = true;
-                                       //Toma el objeto Banco Emisor desde el Combo Box comboBEPB
-                                       Object BEPB = new Object();
-                                       BEPB = comboBEPB.getSelectedItem();
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean DatosCorrectosFlagPB = true;
+                //Toma el objeto Banco Emisor desde el Combo Box comboBEPB
+                Object BEPB = new Object();
+                BEPB = comboBEPB.getSelectedItem();
 
-                                       //Toma el String Numero de pagare desde el JText Field TFNDPPB y lo transforma en un entero
-                                       String NDPPB;
-                                       int NDPPBint = 0;
-                                       NDPPB = TFNDPPB.getText();
-                                       if (NDPPB.isEmpty()) {
-                                           showMessageDialog(null, "El campo Numero de pagare es mandatorio, por favor ingrese el dato solicitado");
-                                           DatosCorrectosFlagPB = false;
-                                       } else {
-                                           if (verif.esnumerico(NDPPB)) {
-                                               NDPPBint = Integer.parseInt(NDPPB);
-                                           } else {
-                                               showMessageDialog(null, "El campo Numero de pagare solo admite numeros, no se admiten otros caracteres");
-                                               DatosCorrectosFlagPB = false;
-                                           }
-                                       }
-                                       //Toma el String Fecha de Vencimiento desde el JText Field FDVPB y lo transforma en un date
-                                       String FDVPB = "";
-                                       FDVPB = TFFDVPB.getText();
-                                       String FDVPBaux= "20/04/1989";
-                                       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                                       LocalDate FDVPBdateaux = LocalDate.parse(FDVPBaux, formatter);
-                                       if (verif.fechavalida(FDVPB) == true) {
-                                           LocalDate FDVPBdate = LocalDate.parse(FDVPB, formatter);
-                                           FDVPBdateaux = FDVPBdate;
-                                           //Compara la fecha ingresada con la fecha actual ya que no tendria sentido vender un pagare el dia de su
-                                           // canje o vender un pagare ya vencido.
-                                           String comparacionfecha = verif.fechavshoy(FDVPBdate);
-                                           if (comparacionfecha == "Menor") {
-                                               showMessageDialog(null, "El pagare bursatil se encuentra vencido");
-                                               DatosCorrectosFlagPB = false;
-                                           }
-                                           if (comparacionfecha == "Hoy") {
-                                               showMessageDialog(null, "La fecha de vencimiento del cheque es hoy");
-                                               DatosCorrectosFlagPB = false;
-                                           }
-                                       } else {
-                                           showMessageDialog(null, "La fecha ingresada no cumple con el formato solicitado");
-                                           DatosCorrectosFlagPB = false;
-                                       }
-                                       //Toma el String CUIT firmante desde el JText Field TFCDFPB
-                                       String CDFPB = "";
-                                       CDFPB = TFCDFPB.getText();
-                                       if (verif.CUITValido(CDFPB)) {
-                                       } else {
-                                           showMessageDialog(null, "El CUIT ingresado es invalido");
-                                           DatosCorrectosFlagPB = false;
-                                       }
-                                       //Toma el Entero Importe Total desde el JSpinner spinnerITPB
-                                       Object ITPB;
-                                       ITPB = spinnerITPB.getValue();
-                                       int ITPBint;
-                                       ITPBint= (Integer) ITPB;
-                                       if(ITPBint <= 0){
-                                           showMessageDialog(null, "El pagare bursatil no puede tener un valor menor o igual a 0");
-                                           DatosCorrectosFlagPB = false;
-                                       }
+                //Toma el String Numero de pagare desde el JText Field TFNDPPB y lo transforma en un entero
+                String NDPPB;
+                int NDPPBint = 0;
+                NDPPB = TFNDPPB.getText();
+                if (NDPPB.isEmpty()) {
+                    showMessageDialog(null, "El campo Numero de pagare es mandatorio, por favor ingrese el dato solicitado");
+                    DatosCorrectosFlagPB = false;
+                } else {
+                    if (verif.esnumerico(NDPPB)) {
+                        NDPPBint = Integer.parseInt(NDPPB);
+                    } else {
+                        showMessageDialog(null, "El campo Numero de pagare solo admite numeros, no se admiten otros caracteres");
+                        DatosCorrectosFlagPB = false;
+                    }
+                }
+                //Toma el String Fecha de Vencimiento desde el JText Field FDVPB y lo transforma en un date
+                String FDVPB = "";
+                FDVPB = TFFDVPB.getText();
+                String FDVPBaux = "20/04/1989";
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate FDVPBdateaux = LocalDate.parse(FDVPBaux, formatter);
+                if (verif.fechavalida(FDVPB) == true) {
+                    LocalDate FDVPBdate = LocalDate.parse(FDVPB, formatter);
+                    FDVPBdateaux = FDVPBdate;
+                    //Compara la fecha ingresada con la fecha actual ya que no tendria sentido vender un pagare el dia de su
+                    // canje o vender un pagare ya vencido.
+                    String comparacionfecha = verif.fechavshoy(FDVPBdate);
+                    if (comparacionfecha == "Menor") {
+                        showMessageDialog(null, "El pagare bursatil se encuentra vencido");
+                        DatosCorrectosFlagPB = false;
+                    }
+                    if (comparacionfecha == "Hoy") {
+                        showMessageDialog(null, "La fecha de vencimiento del cheque es hoy");
+                        DatosCorrectosFlagPB = false;
+                    }
+                } else {
+                    showMessageDialog(null, "La fecha ingresada no cumple con el formato solicitado");
+                    DatosCorrectosFlagPB = false;
+                }
+                //Toma el String CUIT firmante desde el JText Field TFCDFPB
+                String CDFPB = "";
+                CDFPB = TFCDFPB.getText();
+                if (verif.CUITValido(CDFPB)) {
+                } else {
+                    showMessageDialog(null, "El CUIT ingresado es invalido");
+                    DatosCorrectosFlagPB = false;
+                }
+                //Toma el Entero Importe Total desde el JSpinner spinnerITPB
+                Object ITPB;
+                ITPB = spinnerITPB.getValue();
+                int ITPBint;
+                ITPBint = (Integer) ITPB;
+                if (ITPBint <= 0) {
+                    showMessageDialog(null, "El pagare bursatil no puede tener un valor menor o igual a 0");
+                    DatosCorrectosFlagPB = false;
+                }
 
-                                       //Toma el String CUIT Socio desde el JTFCSPB
-                                       String CSPB;
-                                       CSPB = JTFCSPB.getText();
-                                       if (verif.CUITValido(CSPB)) {
-                                       } else {
-                                           showMessageDialog(null, "El CUIT ingresado es invalido");
-                                           DatosCorrectosFlagPB = false;
-                                       }
-                                       if (verif.essocioparticipe(CSPB) == false){
-                                           showMessageDialog(null,"El socio ingresado no es un Socio Participe Pleno");
-                                           DatosCorrectosFlagPB = false;
-                                       }
+                //Toma el String CUIT Socio desde el JTFCSPB
+                String CSPB;
+                CSPB = JTFCSPB.getText();
+                if (verif.CUITValido(CSPB)) {
+                } else {
+                    showMessageDialog(null, "El CUIT ingresado es invalido");
+                    DatosCorrectosFlagPB = false;
+                }
+                if (verif.essocioparticipe(CSPB) == false) {
+                    showMessageDialog(null, "El socio ingresado no es un Socio Participe Pleno");
+                    DatosCorrectosFlagPB = false;
+                }
 
-                                       if (DatosCorrectosFlagPB == true) {
-                                           boolean checks = true;
-                                           if (verif.lineacreditovigente(CSPB) == false) {
-                                               showMessageDialog(null, "La linea de credito se encuentra vencida");
-                                               checks=false;
-                                           }
-                                           if (verif.lineasuficiente(CSPB, ITPBint) == false) {
-                                               showMessageDialog(null, "La linea de credito no tiene disponibilidad para realizar esta operacion");
-                                               checks=false;
-                                           }
-                                           if (verif.debefacturas(CSPB) == true) {
-                                               showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que se adeudan facturas");
-                                               checks=false;
-                                           }
-                                           if (verif.operacionvsfdr(ITPBint)==false) {
-                                               showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
-                                               checks=false;
-                                           }
-                                           if (checks == true) {
-                                               try {
-                                                   verif.crearOT1(FDVPBdateaux, BEPB.toString(), NDPPBint, CDFPB, 0, CSPB, "Pagare Bursatil", ITPBint, "Ingresado");
-                                               } catch (Exception exception) {
-                                                   exception.printStackTrace();
-                                               }
-                                           }
-                                       }
-                                   }
-                               });
-
-
-
+                if (DatosCorrectosFlagPB == true) {
+                    boolean checks = true;
+                    if (verif.lineacreditovigente(CSPB) == false) {
+                        showMessageDialog(null, "La linea de credito se encuentra vencida");
+                        checks = false;
+                    }
+                    if (verif.lineasuficiente(CSPB, ITPBint) == false) {
+                        showMessageDialog(null, "La linea de credito no tiene disponibilidad para realizar esta operacion");
+                        checks = false;
+                    }
+                    if (verif.debefacturas(CSPB) == true) {
+                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que se adeudan facturas");
+                        checks = false;
+                    }
+                    if (verif.operacionvsfdr(ITPBint) == false) {
+                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
+                        checks = false;
+                    }
+                    if (checks == true) {
+                        try {
+                            verif.crearOT1(FDVPBdateaux, BEPB.toString(), NDPPBint, CDFPB, 0, CSPB, "Pagare Bursatil", ITPBint, "Ingresado");
+                        } catch (Exception exception) {
+                            exception.printStackTrace();
+                        }
+                    }
+                }
+            }
+        });
 
 
         // El actionListener de Prestamos
@@ -476,7 +476,7 @@ public class FrmOperaciones extends JDialog{
                 //Toma el String Fecha de Vencimiento desde el JText Field FDVPB y lo transforma en un date
                 String FDVPB = "";
                 FDVPB = TFFDAPST.getText();
-                String FDVPBaux= "20/04/1989";
+                String FDVPBaux = "20/04/1989";
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 LocalDate FDVPBdateaux = LocalDate.parse(FDVPBaux, formatter);
                 if (verif.fechavalida(FDVPB) == true) {
@@ -510,8 +510,8 @@ public class FrmOperaciones extends JDialog{
                 cantidadCuotas = comboBoxCDCPST.getSelectedItem();
 
 
-                if (verif.essocioparticipe(CSPST) == false){
-                    showMessageDialog(null,"El socio ingresado no es un Socio Participe Pleno");
+                if (verif.essocioparticipe(CSPST) == false) {
+                    showMessageDialog(null, "El socio ingresado no es un Socio Participe Pleno");
                     DatosCorrectosFlagPST = false;
                 }
 
@@ -519,19 +519,19 @@ public class FrmOperaciones extends JDialog{
                     boolean checks = true;
                     if (verif.lineacreditovigente(CSPST) == false) {
                         showMessageDialog(null, "La linea de credito se encuentra vencida");
-                        checks=false;
+                        checks = false;
                     }
                     if (verif.lineasuficiente(CSPST, ITFloatPST) == false) {
                         showMessageDialog(null, "La linea de credito no tiene disponibilidad para realizar esta operacion");
-                        checks=false;
+                        checks = false;
                     }
                     if (verif.debefacturas(CSPST) == true) {
                         showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que se adeudan facturas");
-                        checks=false;
+                        checks = false;
                     }
-                    if (verif.operacionvsfdr(ITFloatPST)==false) {
+                    if (verif.operacionvsfdr(ITFloatPST) == false) {
                         showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
-                        checks=false;
+                        checks = false;
                     }
                     if (checks == true) {
                         try {
@@ -541,7 +541,6 @@ public class FrmOperaciones extends JDialog{
                         }
                     }
                 }
-
 
 
             }

@@ -16,10 +16,11 @@ public class OPTipo1 extends Operacion implements api.OPTipo1 {
     private float importetotal;
     private String estado;
     private String CUITSocio;
+    private int numerooperacion;
 
     /*======CONSTRUCTOR=======*/
 
-    public OPTipo1(LocalDate fechaVencimiento, String banco, int numeroCheque, String CUITfirmante, float tasaDeDescuento, String CUITSocio,String tipo,float importetotal,String estado) {
+    public OPTipo1(LocalDate fechaVencimiento, String banco, int numeroCheque, String CUITfirmante, float tasaDeDescuento, String CUITSocio,String tipo,float importetotal,String estado,int numerooperacion) {
         super(CUITSocio);
         this.fechaVencimiento = fechaVencimiento;
         this.banco = banco;
@@ -30,6 +31,7 @@ public class OPTipo1 extends Operacion implements api.OPTipo1 {
         this.importetotal = importetotal;
         this.estado = estado;
         this.CUITSocio = CUITSocio;
+        this.numerooperacion = numerooperacion;
     }
 
     public OPTipo1(JSONObject jsonOPT1){
@@ -43,7 +45,7 @@ public class OPTipo1 extends Operacion implements api.OPTipo1 {
         this.importetotal = (float) jsonOPT1.get("importetotal");
         this.estado = (String) jsonOPT1.get("estado");
         this.CUITSocio = (String) jsonOPT1.get("CUITSocio");
-
+        this.numerooperacion = Integer.parseInt(jsonOPT1.get("numerooperacion").toString());
     }
 
     /*======GETTERS=======*/
@@ -93,6 +95,7 @@ public class OPTipo1 extends Operacion implements api.OPTipo1 {
         OP1.put("importetotal",this.importetotal);
         OP1.put("estado",this.estado);
         OP1.put("CUITSocio",this.CUITSocio);
+        OP1.put("numerooperacion",this.numerooperacion);
         return OP1;
     }
 }
