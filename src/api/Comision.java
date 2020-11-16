@@ -1,5 +1,7 @@
 package api;
 
+import org.json.simple.JSONObject;
+
 public interface Comision {
     int getIDComision();
 
@@ -12,4 +14,6 @@ public interface Comision {
     String getTipoOP();
 
     void setEstado(String estado);
+
+    JSONObject toJSON();
 }

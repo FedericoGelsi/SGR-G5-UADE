@@ -217,9 +217,18 @@ public class Verificaciones implements api.Verificaciones {
             contador++;
             }
         contador++;
+
         api.OPTipo1 nuevaOT1 = new impl.OPTipo1(FDV, Banco, NDC, CUITF, TDD, CUITS, tipo,importetotal,estado,contador);
         JSONObject operacion1 = nuevaOT1.toJSON();
         guardarDatos(operacion1);
+
+        CertificadoDeGarantia nuevoCDG = new CertificadoDeGarantia("1234");
+        JSONObject CDG = nuevoCDG.toJSON();
+        guardarDatosCDG(CDG);
+
+        Comision nuevoCOM = new Comision(0,"Pago",3,1,"Pagare");
+        JSONObject COM = nuevoCOM.toJSON();
+        guardarDatoscomision(COM);
         }
 
     @Override
@@ -227,7 +236,16 @@ public class Verificaciones implements api.Verificaciones {
         api.OPTipo3 nuevaOT3 = new impl.OPTipo3(CUIT, CDC, Banco, Importe, Tasa, sist,FDA,estado, tipo);
         JSONObject operacion3 = nuevaOT3.toJSON();
         guardarDatos(operacion3);
+
+        CertificadoDeGarantia nuevoCDG = new CertificadoDeGarantia("1234");
+        JSONObject CDG = nuevoCDG.toJSON();
+        guardarDatosCDG(CDG);
+
+        Comision nuevoCOM = new Comision(0,"Pago",3,1,"Pagare");
+        JSONObject COM = nuevoCOM.toJSON();
+        guardarDatoscomision(COM);
     }
+
 
     public void guardarDatos(JSONObject objeto) throws Exception {
         String filename = "./src/resources/operacioncontroller.json";
@@ -236,6 +254,26 @@ public class Verificaciones implements api.Verificaciones {
         JSONArray operacionesList = (JSONArray) jsonObject.get("operaciones");
         operacionesList.add(objeto);
         jsonObject.put("operaciones", operacionesList);
+        file.writeJson(filename, jsonObject);
+    }
+
+    public void guardarDatosCDG(JSONObject objeto) throws Exception {
+        String filename = "./src/resources/operacioncontroller.json";
+        API_JSONHandler file = new JSONHandler();
+        JSONObject jsonObject = (JSONObject) file.readJson(filename);
+        JSONArray CDGList = (JSONArray) jsonObject.get("certificado-de-garantia");
+        CDGList.add(objeto);
+        jsonObject.put("certificado-de-garantia", CDGList);
+        file.writeJson(filename, jsonObject);
+    }
+
+    public void guardarDatoscomision(JSONObject objeto) throws Exception {
+        String filename = "./src/resources/operacioncontroller.json";
+        API_JSONHandler file = new JSONHandler();
+        JSONObject jsonObject = (JSONObject) file.readJson(filename);
+        JSONArray ComisionList = (JSONArray) jsonObject.get("comision");
+        ComisionList.add(objeto);
+        jsonObject.put("comision", ComisionList);
         file.writeJson(filename, jsonObject);
     }
     /* public void crearOT2(String nombreempresa, float importetotal, LocalDate fechavencimiento, String tipo) throws Exception {
