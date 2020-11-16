@@ -14,6 +14,11 @@ public class Accionista implements api.Accionista {
         this.razonsocial= (String) accionistasJ.get("razon-social-ac");
 
     }
+    public Accionista(String cuitac,String razon, Double por){
+        this.CUITAccionista=  cuitac;
+        this.porcParticipacion= por;
+        this.razonsocial= razon;
+    }
 
     /*======GETTERS=======*/
     @Override
