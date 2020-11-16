@@ -44,21 +44,32 @@ public class Verificaciones implements api.Verificaciones {
         }
     }
 
+    public boolean tarjetavalida(String tarjeta) {
+        String[] tarjetaseparada = tarjeta.split("-");
+        boolean CUITValidoflag = true;
+        for (int i = 0; i<4; i++){
+            if (tarjetaseparada[i].length() != 4 || esnumerico(tarjetaseparada[i])!=true) {
+                CUITValidoflag = false;
+            }
+        }
+        return CUITValidoflag;
+    }
+
     //Chequea que el formato de CUIT ingresado sea valido y que los datos ingresads sean numericos
     @Override
     public boolean CUITValido(String CUIT) {
         String[] cuitseparado = CUIT.split("-");
-        boolean CUITValidoflag = true;
+        boolean tarjetaValidaFlag = true;
         if (cuitseparado[0].length() != 2 || esnumerico(cuitseparado[0])!=true) {
-            CUITValidoflag = false;
+            tarjetaValidaFlag = false;
         }
         if (cuitseparado[1].length() != 8 || esnumerico(cuitseparado[1])!=true ){
-            CUITValidoflag = false;
+            tarjetaValidaFlag = false;
         }
         if (cuitseparado[2].length() != 1 || esnumerico(cuitseparado[2])!=true){
-            CUITValidoflag = false;
+            tarjetaValidaFlag = false;
         }
-        return CUITValidoflag;
+        return tarjetaValidaFlag;
     }
     //Chequea que un String este compuesto unicamente por numeros
     @Override
@@ -95,6 +106,7 @@ public class Verificaciones implements api.Verificaciones {
         }
         return fechavalidaFlag;
     }
+
 
     public boolean lineacreditovigente(String CUIT){
         return true;

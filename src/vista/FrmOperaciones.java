@@ -474,8 +474,30 @@ public class FrmOperaciones extends JDialog{
                     showMessageDialog(null, "El CUIT ingresado es invalido");
                     DatosCorrectosFlagTC = false;
                 }
-                TFNDTTC
+                String NDTTC;
+                int TFNDTTCint;
+                NDTTC = TFNDTTC.getText();
+                if (NDTTC.contains("-") && NDTTC.length() > 18){
+                    if (verif.tarjetavalida(NDTTC)){
+                    }
+                    else {
+                        showMessageDialog(null, "La tarjeta ingresada es inválida");
+                        DatosCorrectosFlagTC = false;
+                    }
+                }
+                else{
+                    if (NDTTC.isEmpty()){
+                        showMessageDialog(null,"Ingrese el número de la tarjeta");
+                    }
+                    else{
+                        showMessageDialog(null,"El número de tarjeta debe contener '-' y 16 números");
+                    }
+
+                }
             }
+
+
+
     });
 }
 }

@@ -20,4 +20,6 @@ public interface Verificaciones {
     String fechavshoytarjeta(YearMonth fecha);
 
     boolean fechavalidatarjeta(String fvtc);
+
+    boolean tarjetavalida(String tarjeta);
 }
