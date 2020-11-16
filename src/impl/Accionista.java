@@ -6,7 +6,14 @@ public class Accionista implements api.Accionista {
 
     private String CUITAccionista;
     private String razonsocial;
-    private float porcParticipacion;
+    private Double porcParticipacion;
+
+    public Accionista(JSONObject accionistasJ) {
+        this.CUITAccionista= (String) accionistasJ.get("cuit-accionista");
+        this.porcParticipacion= Double.parseDouble(accionistasJ.get("porcentaje-participacion").toString());
+        this.razonsocial= (String) accionistasJ.get("razon-social-ac");
+
+    }
 
     /*======GETTERS=======*/
     @Override
@@ -20,7 +27,7 @@ public class Accionista implements api.Accionista {
     }
 
     @Override
-    public float getPorcParticipacion() {
+    public Double getPorcParticipacion() {
         return porcParticipacion;
     }
 
