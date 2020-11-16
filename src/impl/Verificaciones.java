@@ -216,6 +216,13 @@ public class Verificaciones implements api.Verificaciones {
         guardarDatos(operacion1);
     }
 
+    @Override
+    public void crearOT3(String CDC, String Banco, float Importe, float Tasa, String sist, LocalDate FDA, String CUIT, String estado, String tipo) throws Exception {
+        api.OPTipo3 nuevaOT3 = new impl.OPTipo3(CUIT, CDC, Banco, Importe, Tasa, sist,FDA,estado, tipo);
+        JSONObject operacion3 = nuevaOT3.toJSON();
+        guardarDatos(operacion3);
+    }
+
     public void guardarDatos(JSONObject objeto) throws Exception {
         String filename = "./src/resources/operacioncontroller.json";
         API_JSONHandler file = new JSONHandler();

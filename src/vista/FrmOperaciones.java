@@ -461,10 +461,7 @@ public class FrmOperaciones extends JDialog{
                     showMessageDialog(null, "El cheque no puede ser vendido con una tasa de descuento menor o igual a 0");
                     DatosCorrectosFlagPST = false;
                 }
-                if (TDDPSTint >= 100) {
-                    showMessageDialog(null, "El cheque no puede ser vendido con una tasa de descuento superior al 99%");
-                    DatosCorrectosFlagPST = false;
-                }
+
 
                 //Toma el importe total
                 Object ITPST;
@@ -476,17 +473,18 @@ public class FrmOperaciones extends JDialog{
                     DatosCorrectosFlagPST = false;
                 }
 
-                //Toma el String Fecha de Acreeditación desde el JText Field FDFAPST y lo transforma en un date
-                String FDAPST = "";
-                FDAPST = TFFDAPST.getText();
-                if (verif.fechavalida(FDAPST) == true) {
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                    LocalDate localDate = LocalDate.parse(FDAPST, formatter);
-                    //Compara la fecha ingresada con la fecha actual ya que no tendria sentido vender un cheque el dia de su
-                    // canje o vender un cheque ya vencido.
-                    String comparacionfecha = verif.fechavshoy(localDate);
+                //Toma el String Fecha de Vencimiento desde el JText Field FDVPB y lo transforma en un date
+                String FDVPB = "";
+                FDVPB = TFFDAPST.getText();
+                String FDVPBaux= "20/04/1989";
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate FDVPBdateaux = LocalDate.parse(FDVPBaux, formatter);
+                if (verif.fechavalida(FDVPB) == true) {
+                    LocalDate FDVPBdate = LocalDate.parse(FDVPB, formatter);
+                    FDVPBdateaux = FDVPBdate;
+                    String comparacionfecha = verif.fechavshoy(FDVPBdate);
                     if (comparacionfecha == "Menor") {
-                        showMessageDialog(null, "La fecha de acreditación no es valida");
+                        showMessageDialog(null, "La fecha de acreditación del prestamo debe ser en el presente o en el futuro");
                         DatosCorrectosFlagPST = false;
                     }
                 } else {
@@ -510,6 +508,42 @@ public class FrmOperaciones extends JDialog{
                 //Toma el objeto Cantidad de cuotas desde el Combo Box comboSistemaPST
                 Object cantidadCuotas = new Object();
                 cantidadCuotas = comboBoxCDCPST.getSelectedItem();
+
+
+                if (verif.essocioparticipe(CSPST) == false){
+                    showMessageDialog(null,"El socio ingresado no es un Socio Participe Pleno");
+                    DatosCorrectosFlagPST = false;
+                }
+
+                if (DatosCorrectosFlagPST == true) {
+                    boolean checks = true;
+                    if (verif.lineacreditovigente(CSPST) == false) {
+                        showMessageDialog(null, "La linea de credito se encuentra vencida");
+                        checks=false;
+                    }
+                    if (verif.lineasuficiente(CSPST, ITFloatPST) == false) {
+                        showMessageDialog(null, "La linea de credito no tiene disponibilidad para realizar esta operacion");
+                        checks=false;
+                    }
+                    if (verif.debefacturas(CSPST) == true) {
+                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que se adeudan facturas");
+                        checks=false;
+                    }
+                    if (verif.operacionvsfdr(ITFloatPST)==false) {
+                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
+                        checks=false;
+                    }
+                    if (checks == true) {
+                        try {
+                            verif.crearOT3(cantidadCuotas.toString(), BEPST.toString(), ITFloatPST, TDDPSTint, Sistema_PST.toString(), FDVPBdateaux, CSPST, "Ingresado", "Prestamo");
+                        } catch (Exception exception) {
+                            exception.printStackTrace();
+                        }
+                    }
+                }
+
+
+
             }
         });
     }

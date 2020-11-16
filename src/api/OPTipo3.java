@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 public interface OPTipo3 extends Operacion {
-    int getCantCuotas();
+    String getCantCuotas();
 
     String getBanco();
 
