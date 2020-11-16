@@ -1,6 +1,7 @@
 package vista;
 
 import api.*;
+import com.formdev.flatlaf.FlatLightLaf;
 import impl.JSONHandler;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -13,6 +14,8 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+
+import static javax.swing.JOptionPane.showMessageDialog;
 
 public class FrmDyR extends JDialog {
     private JPanel pnlPrincipal;
@@ -50,8 +53,16 @@ public class FrmDyR extends JDialog {
 
     public FrmDyR(Window owner, String Title) throws Exception {
         super(owner, Title);
+
+
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.setLookAndFeel( new FlatLightLaf() );
+        } catch( Exception ex ) {
+            System.err.println( "Failed to initialize LaF" );
+        }
+        /*
+        try {
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {
@@ -61,6 +72,8 @@ public class FrmDyR extends JDialog {
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
+
+         */
 
         // Define el canvas según swing.
         this.setContentPane(this.pnlPrincipal);
@@ -86,7 +99,9 @@ public class FrmDyR extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    crearRecupero();
+                    if( verificarMonto()) {
+                        crearRecupero();
+                    }
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
@@ -126,6 +141,7 @@ public class FrmDyR extends JDialog {
 
     private void buscarSocio() throws Exception {
         JSONArray socioList = (JSONArray) jsonObject.get("socios-participes");
+        boolean socioEncontrado = false;
         for (Object obj: socioList){
             JSONObject socio = (JSONObject) obj;
             String rs = socio.get("razon-social").toString();
@@ -134,26 +150,43 @@ public class FrmDyR extends JDialog {
             if (TipoBusqueda.getSelectedItem().toString().equals("CUIT")){
                 if (verificar.CUITValido(textFieldSocio.getText())) {
                     if (cuit.equals(textFieldSocio.getText()) && estado.equals("Pleno")) {
-                        CUITTxField.setText(cuit);
-                        RSTextField.setText(rs);
                         if (pnlHR.isShowing()) {
                             crearTablaHistorialRecuperos((JSONArray) socio.get("recuperos"));
                         } else {
+                            CUITTxField.setText(cuit);
+                            RSTextField.setText(rs);
                             crearTablaDeudas((JSONArray) socio.get("deudas"));
                         }
+                        socioEncontrado = true;
+                        break;
                     }
+                }else if (textFieldSocio.getText().isEmpty()){
+                    showMessageDialog(null, "El campo no puede estar vacío.\nIngrese un CUIT.");
+                    socioEncontrado = true;
+                }else{
+                    showMessageDialog(null, "CUIT inválido. El mismo debe tener el formato ##-########-#.\nIngreselo nuevamente.");
                 }
             }else if (TipoBusqueda.getSelectedItem().toString().equals("Razon Social")){
                 if (rs.equals(textFieldSocio.getText()) && estado.equals("Pleno")){
-                    CUITTxField.setText(cuit);
-                    RSTextField.setText(rs);
                     if ( pnlHR.isShowing()){
                         crearTablaHistorialRecuperos((JSONArray) socio.get("recuperos"));
+                        socioEncontrado = true;
                     }else {
+                        CUITTxField.setText(cuit);
+                        RSTextField.setText(rs);
                         crearTablaDeudas((JSONArray) socio.get("deudas"));
+                        socioEncontrado = true;
                     }
+
+                    break;
+                }else if (textFieldSocio.getText().isEmpty()){
+                    showMessageDialog(null, "El campo no puede estar vacío.\nIngrese una razón social.");
+                    socioEncontrado = true;
                 }
             }
+        }
+        if (!socioEncontrado){
+            showMessageDialog(null, "El socio no se encuentra en la base de datos o no es Socio Partícipe.\nVerifique los datos e ingreselos nuevamente.");
         }
     }
 
@@ -172,9 +205,9 @@ public class FrmDyR extends JDialog {
             data.add(deuda.getFechaDeuda());
             data.add(deuda.isAplicaMora());
             data.add(deuda.getMontoMora());
-            data.add(calcularSubtotal(deuda));
+            data.add(deuda.calcularSubtotal());
             modelo.addRow(data.toArray());
-            total += calcularSubtotal(deuda);
+            total += deuda.calcularSubtotal();
         }
 
         TotalDeudaTxField.setText(Double.toString(total));
@@ -184,17 +217,10 @@ public class FrmDyR extends JDialog {
         deudasTable = new JTable(modelo);
 
         pnlSTable.setViewportView(deudasTable);
+        pnlSTable.setVisible(true);
     }
 
-    private double calcularSubtotal( Deuda deuda){
-        double subtotal = deuda.getMonto();
-        if (deuda.isAplicaMora()) {
-            if (deuda.getFechaDeuda().isBefore(LocalDate.now())) {
-                subtotal = deuda.getMonto() + (deuda.getMontoMora() * ChronoUnit.DAYS.between(deuda.getFechaDeuda(),LocalDate.now()));
-            }
-        }
-        return subtotal;
-    }
+
 
     private void crearRecupero() throws Exception {
         ArrayList<String> idDeudas = new ArrayList<>();
@@ -226,8 +252,8 @@ public class FrmDyR extends JDialog {
                 JSONArray deudas = (JSONArray) socio.get("deudas");
                 while (monto >= 0){
                     Deuda deuda = new impl.Deuda((JSONObject) deudas.get(0));
-                    if (monto - calcularSubtotal(deuda) >= 0) {
-                        monto -= calcularSubtotal(deuda);
+                    if (monto - deuda.calcularSubtotal() >= 0) {
+                        monto -= deuda.calcularSubtotal();
                         System.out.println("Nuevo Monto - " + monto);
                         deudas.remove(0);
                     }
@@ -261,6 +287,7 @@ public class FrmDyR extends JDialog {
         recuperosTable = new JTable(modelo);
 
         pnlSHTable.setViewportView(recuperosTable);
+        pnlSHTable.setVisible(true);
 
     }
 
@@ -306,6 +333,28 @@ public class FrmDyR extends JDialog {
         }
         desembolsosTable = new JTable(modelo);
         pnlSDesembolsosTable.setViewportView(desembolsosTable);
+        pnlSDesembolsosTable.setVisible(true);
+    }
 
+    private boolean verificarMonto(){
+        if (Double.parseDouble(TotalDeudaTxField.getText()) == 0){
+            showMessageDialog(null, "El socio no tiene deudas asociadas.");
+            return false;
+        }else {
+            if (!verificar.esnumerico(MontoTxField.getText())) {
+                showMessageDialog(null, "El campo debe ser numérico.\nIngrese un monto válido.");
+                return false;
+            } else {
+                if (Double.parseDouble(MontoTxField.getText()) <= 0) {
+                    showMessageDialog(null, "El monto debe ser mayor a 0.\nIngrese un monto válido.");
+                    return false;
+                }
+                if (Double.parseDouble(MontoTxField.getText()) > Double.parseDouble(TotalDeudaTxField.getText())) {
+                    showMessageDialog(null, "El monto no puede ser mayor a la deuda contraida.\nIngrese un monto válido.");
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

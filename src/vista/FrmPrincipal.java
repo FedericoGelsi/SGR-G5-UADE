@@ -1,6 +1,7 @@
 package vista;
 
 import api.Aporte;
+import com.formdev.flatlaf.FlatLightLaf;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,7 +28,14 @@ public class FrmPrincipal extends JFrame {
         super(Title);
 
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.setLookAndFeel( new FlatLightLaf() );
+        } catch( Exception ex ) {
+            System.err.println( "Failed to initialize LaF" );
+        }
+
+        /*
+        try {
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {
@@ -37,6 +45,7 @@ public class FrmPrincipal extends JFrame {
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
+        */
 
         // Define el canvas según swing.
         this.setContentPane(this.pnlPrincipal);
@@ -61,21 +70,27 @@ public class FrmPrincipal extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FrmSocios frame = new FrmSocios(self,"SGR - Socios");
+                self.setVisible(false);
                 frame.setVisible(true);
+                self.setVisible(true);
             }
         });
         líneasYTiposDeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FrmLytiposOP frame = new FrmLytiposOP(self, "SGR - Líneas y tipos de Operaciones asociadas");
+                self.setVisible(false);
                 frame.setVisible(true);
+                self.setVisible(true);
             }
         });
         operacionesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FrmOperaciones frame = new FrmOperaciones(self, "SGR - Operaciones");
+                self.setVisible(false);
                 frame.setVisible(true);
+                self.setVisible(true);
             }
         });
         desembolsosYRecuperosButton.addActionListener(new ActionListener() {
@@ -95,8 +110,15 @@ public class FrmPrincipal extends JFrame {
         consultasGeneralesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FrmConsultasGenerales frame = new FrmConsultasGenerales(self, "SGR - Consultas Generales");
+                FrmConsultasGenerales frame = null;
+                try {
+                    frame = new FrmConsultasGenerales(self, "SGR - Consultas Generales");
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+                self.setVisible(false);
                 frame.setVisible(true);
+                self.setVisible(true);
             }
         });
 

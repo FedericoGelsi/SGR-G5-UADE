@@ -1,5 +1,7 @@
 package vista;
 
+import com.formdev.flatlaf.FlatLightLaf;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,6 +11,13 @@ public class FrmLytiposOP extends JDialog{
 
     public FrmLytiposOP(Window owner, String Title) {
         super(owner, Title);
+
+        try {
+            UIManager.setLookAndFeel( new FlatLightLaf() );
+        } catch( Exception ex ) {
+            System.err.println( "Failed to initialize LaF" );
+        }
+        /*
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException e) {
@@ -20,6 +29,8 @@ public class FrmLytiposOP extends JDialog{
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
+
+         */
 
         // Define el canvas según swing.
         this.setContentPane(this.pnlPrincipal);

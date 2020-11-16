@@ -4,6 +4,7 @@ import org.json.simple.JSONObject;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Deuda implements api.Deuda {
     private double monto;
@@ -83,4 +84,13 @@ public class Deuda implements api.Deuda {
         return deuda;
     }
 
+    public double calcularSubtotal(){
+        double subtotal = this.getMonto();
+        if (this.aplicaMora) {
+            if (this.fechaDeuda.isBefore(LocalDate.now())) {
+                subtotal = this.monto + (this.montoMora * ChronoUnit.DAYS.between(this.fechaDeuda,LocalDate.now()));
+            }
+        }
+        return subtotal;
+    }
 }

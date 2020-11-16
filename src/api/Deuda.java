@@ -20,4 +20,6 @@ public interface Deuda {
     void retirarAporte();
 
     JSONObject toJSON();
+
+    double calcularSubtotal();
 }

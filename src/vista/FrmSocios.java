@@ -1,5 +1,7 @@
 package vista;
 
+import com.formdev.flatlaf.FlatLightLaf;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -18,6 +20,13 @@ public class FrmSocios extends JDialog{
 
     public FrmSocios(Window owner, String Title){
         super(owner, Title);
+
+        try {
+            UIManager.setLookAndFeel( new FlatLightLaf() );
+        } catch( Exception ex ) {
+            System.err.println( "Failed to initialize LaF" );
+        }
+        /*
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException e) {
@@ -30,6 +39,8 @@ public class FrmSocios extends JDialog{
             e.printStackTrace();
         }
 
+         */
+
         // Define el canvas según swing.
         this.setContentPane(this.pnlPrincipal);
         // Tamaño de la pantalla
@@ -40,8 +51,8 @@ public class FrmSocios extends JDialog{
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         // Inicia la pantalla centrada
         this.setLocationRelativeTo(null);
-        this.pnlTabPanel.setBackgroundAt(0,Color.red);
-        this.pnlTabPanel.setBackgroundAt(1,Color.blue);
+        //this.pnlTabPanel.setBackgroundAt(0,Color.red);
+        //this.pnlTabPanel.setBackgroundAt(1,Color.blue);
 
         this.events();
     }

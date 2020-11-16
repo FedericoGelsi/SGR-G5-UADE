@@ -31,6 +31,8 @@ public abstract class Socio implements api.Socio {
         this.email = email;
     }
 
+
+
     /*======GETTERS=======*/
     @Override
     public String getCUITSocio() {

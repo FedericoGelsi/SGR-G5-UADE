@@ -63,12 +63,13 @@
           <background color="-13217941"/>
           <focusable value="false"/>
           <font name="Montserrat" size="14"/>
-          <foreground color="-16777216"/>
+          <foreground color="-1"/>
           <minimumSize width="683" height="101"/>
           <opaque value="true"/>
           <preferredSize width="683" height="101"/>
           <requestFocusEnabled value="false"/>
           <tabPlacement value="2"/>
+          <verifyInputWhenFocusTarget value="false"/>
         </properties>
         <border type="none">
           <font/>

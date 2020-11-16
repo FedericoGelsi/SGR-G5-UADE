@@ -17,6 +17,8 @@ public class Contragarantia implements api.Contragarantia {
         this.CUITPropietario = CUITPropietario;
     }
 
+
+
     /*======GETTERS=======*/
 
     @Override

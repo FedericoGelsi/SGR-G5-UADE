@@ -17,6 +17,7 @@ import java.util.Iterator;
 
 import api.API_JSONHandler;
 import api.API_SHA256;
+import com.formdev.flatlaf.FlatLightLaf;
 import impl.JSONHandler;
 import impl.SHA256;
 import org.json.simple.JSONArray;
@@ -43,6 +44,12 @@ public class FrmLogin extends JFrame{
         super(Title);
 
         try {
+            UIManager.setLookAndFeel( new FlatLightLaf() );
+        } catch( Exception ex ) {
+            System.err.println( "Failed to initialize LaF" );
+        }
+        /*
+        try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -53,6 +60,8 @@ public class FrmLogin extends JFrame{
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
+
+         */
 
         // Define el canvas según swing.
         this.setContentPane(this.pnlPrincipal);
