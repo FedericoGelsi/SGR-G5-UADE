@@ -32,6 +32,78 @@
             "numerooperacion": 0,
             "fechavencimiento":"2020-11-26",
             "numerocheque":    13
+        },
+        {
+            "CUITSocio":       "20-87654321-2",
+            "tipo":            "Cheque Propio",
+            "estado":          "Con certificado emitido",
+            "tasadedescuento": 1.0,
+            "CUITfirmante":    "20-87654321-2",
+            "importetotal":    3.96,
+            "banco":           "BANCO DE GALICIA Y BUENOS AIRES S.A.U.",
+            "numerooperacion": 1,
+            "fechavencimiento":"2020-11-26",
+            "numerocheque":    12321
+        },
+        {
+            "CUITSocio":       "20-87654321-2",
+            "tipo":            "Cheque Propio",
+            "estado":          "Con certificado emitido",
+            "tasadedescuento": 2.0,
+            "CUITfirmante":    "20-87654321-2",
+            "importetotal":    2.94,
+            "banco":           "BANCO DE GALICIA Y BUENOS AIRES S.A.U.",
+            "numerooperacion": 2,
+            "fechavencimiento":"2020-11-26",
+            "numerocheque":    123
+        },
+        {
+            "CUITSocio":       "20-87654321-2",
+            "tipo":            "Cheque Propio",
+            "estado":          "Con certificado emitido",
+            "tasadedescuento": 1.0,
+            "CUITfirmante":    "20-87654321-2",
+            "importetotal":    0.99,
+            "banco":           "BANCO DE GALICIA Y BUENOS AIRES S.A.U.",
+            "numerooperacion": 3,
+            "fechavencimiento":"2020-11-26",
+            "numerocheque":    222
+        },
+        {
+            "CUITSocio":       "20-87654321-2",
+            "tipo":            "Monetizado",
+            "estado":          "Con certificado emitido",
+            "tasadedescuento": 2.0,
+            "CUITfirmante":    "20-87654321-2",
+            "importetotal":    1.96,
+            "banco":           "BANCO DE GALICIA Y BUENOS AIRES S.A.U.",
+            "numerooperacion": 4,
+            "fechavencimiento":"2020-11-26",
+            "numerocheque":    2561
+        },
+        {
+            "CUITSocio":       "20-87654321-2",
+            "tipo":            "Cheque Propio",
+            "estado":          "Con certificado emitido",
+            "tasadedescuento": 2.0,
+            "CUITfirmante":    "20-87654321-2",
+            "importetotal":    1.96,
+            "banco":           "BANCO DE GALICIA Y BUENOS AIRES S.A.U.",
+            "numerooperacion": 5,
+            "fechavencimiento":"2020-11-26",
+            "numerocheque":    266
+        },
+        {
+            "CUITSocio":       "20-87654321-2",
+            "tipo":            "Monetizado",
+            "estado":          "Con certificado emitido",
+            "tasadedescuento": 1.0,
+            "CUITfirmante":    "20-87654321-2",
+            "importetotal":    1.98,
+            "banco":           "BANCO DE GALICIA Y BUENOS AIRES S.A.U.",
+            "numerooperacion": 6,
+            "fechavencimiento":"2020-11-26",
+            "numerocheque":    22
         }
     ],
     "certificado-de-garantia":[
@@ -39,6 +111,36 @@
             "CUITSocio":       "20-87654321-2",
             "numero-operacion":0,
             "idcertificado":   100
+        },
+        {
+            "CUITSocio":       "20-87654321-2",
+            "numero-operacion":1,
+            "idcertificado":   101
+        },
+        {
+            "CUITSocio":       "20-87654321-2",
+            "numero-operacion":2,
+            "idcertificado":   102
+        },
+        {
+            "CUITSocio":       "20-87654321-2",
+            "numero-operacion":3,
+            "idcertificado":   103
+        },
+        {
+            "CUITSocio":       "20-87654321-2",
+            "numero-operacion":4,
+            "idcertificado":   104
+        },
+        {
+            "CUITSocio":       "20-87654321-2",
+            "numero-operacion":5,
+            "idcertificado":   105
+        },
+        {
+            "CUITSocio":       "20-87654321-2",
+            "numero-operacion":6,
+            "idcertificado":   106
         }
     ],
     "modified-by":            "admin"

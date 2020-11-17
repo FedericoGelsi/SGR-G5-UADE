@@ -221,9 +221,21 @@ public class FrmOperaciones extends JDialog {
                         showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que se adeudan facturas");
                         checks = false;
                     }
-                    if (verif.operacionvsfdr(ITCHPint) == false) {
-                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
-                        checks = false;
+                    ArrayList<String> EmpresaComparteSocio = new ArrayList<>();
+
+                    EmpresaComparteSocio = verif.ListaCUITAC(CDFCHP);
+                    if(!EmpresaComparteSocio.isEmpty()) {
+                        if(verif.Computar5FDRAc(EmpresaComparteSocio,CDFCHP,ITCHPint)==true){
+                            showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que supera la suma de los riesgos vivos");
+                            checks = false;
+                        }
+                    }
+                    else{
+                        if (verif.operacionvsfdr(ITCHPint) == false) {
+                            checks = false;
+                            showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
+
+                        }
                     }
                     if(verif.check_deuda(CDFCHP)==true){
                         showMessageDialog(null,"No puede operar porque el socio tiene deudas");
