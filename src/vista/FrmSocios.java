@@ -41,6 +41,8 @@ public class FrmSocios extends JDialog{
     private JPanel pnluntitled;
     private JButton cambiarColorButton;
     private JTable accionistasTabla;
+    private Double total;
+    private Boolean estado;
 
     private Verificaciones verif = new impl.Verificaciones();
 
@@ -167,27 +169,25 @@ public class FrmSocios extends JDialog{
 
                 //Toma Razon Social y checkea si esta vacio
                 String textRazon;
-                textRazon= textFieldRazonS.getText();
-                if (textRazon.isEmpty()){
+                textRazon = textFieldRazonS.getText();
+                if (textRazon.isEmpty()) {
                     showMessageDialog(null, "El campo Razon Social es mandatorio, por favor ingrese el dato solicitado");
                     datosCorrectosFlag = false;
                 }
 
                 //Checkea el CUIT
                 String textCuitEmp;
-                textCuitEmp=textFieldCuitEmpresa.getText();
-                if (verif.CUITValido(textCuitEmp)){
-                }
-                else {
+                textCuitEmp = textFieldCuitEmpresa.getText();
+                if (verif.CUITValido(textCuitEmp)) {
+                } else {
                     showMessageDialog(null, "El CUIT ingresado es invalido");
                     datosCorrectosFlag = false;
                 }
                 //Checkea el CUIT
                 String textCuitac;
-                textCuitac=textFieldCuitAccion.getText();
-                if (verif.CUITValido(textCuitac)){
-                }
-                else {
+                textCuitac = textFieldCuitAccion.getText();
+                if (verif.CUITValido(textCuitac)) {
+                } else {
                     showMessageDialog(null, "El CUIT ingresado es invalido");
                     datosCorrectosFlag = false;
                 }
@@ -196,26 +196,27 @@ public class FrmSocios extends JDialog{
                 Object spinParticipacion;
                 spinParticipacion = spinnerParticipacion.getValue();
                 int partint;
-                partint= (Integer) spinParticipacion;
-                if(partint <= 0){
+                partint = (Integer) spinParticipacion;
+                if (partint <= 0) {
                     showMessageDialog(null, "El porcentaje de Participacion debe ser menor o igual a 0");
                     datosCorrectosFlag = false;
                 }
-                if(partint >=100){
-                    showMessageDialog(null,"El porcentaje de Participacion debe ser superior al 99%");
+                if (partint >= 100) {
+                    showMessageDialog(null, "El porcentaje de Participacion debe ser superior al 99%");
                     datosCorrectosFlag = false;
                 }
-                if (datosCorrectosFlag==true){
-                }
+                if (datosCorrectosFlag == true) {
 
-                //Agregar
-                Double participac= Double.parseDouble(spinParticipacion.toString());
-                try {
-                    agregarAccionista(textCuitEmp,textCuitac,textRazon,participac);
-                } catch (Exception exception) {
-                    exception.printStackTrace();
-                }
 
+                    //Agregar
+                    Double participac = Double.parseDouble(spinParticipacion.toString());
+                    try {
+                        agregarAccionista(textCuitEmp, textCuitac, textRazon, participac);
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+
+                }
             }
         });
     }
@@ -239,18 +240,40 @@ public class FrmSocios extends JDialog{
     }
 
     private void buscarAccionista() throws Exception {
+        Boolean flag= false;
         socioList = (JSONArray) jsonObject.get("socios-participes");
         for (Object obj: socioList){
             socioborrar = (JSONObject) obj;
             String rs = socioborrar.get("razon-social").toString();
             String cuit = socioborrar.get("cuit").toString();
                 if (cuit.equals(textFieldCuit.getText())){
+                    flag= true;
+                    estado=true;
+                    textFieldRazon.setText(rs);
+                    accionistasList= (JSONArray) socioborrar.get("accionistas");
+                    break;
+                }
+
+        }
+        if (flag==false){
+            socioList = (JSONArray) jsonObject.get("socios-protectores");
+            for (Object obj: socioList){
+                socioborrar = (JSONObject) obj;
+                String rs = socioborrar.get("razon-social").toString();
+                String cuit = socioborrar.get("cuit").toString();
+                if (cuit.equals(textFieldCuit.getText())){
+                    estado=false;
                     textFieldRazon.setText(rs);
                     accionistasList= (JSONArray) socioborrar.get("accionistas");
                 }
 
+            }
+        }
+        else {
+            showMessageDialog(null,"El socio no existe");
         }
     }
+
     private void eliminarAccionista(String cuit) throws Exception {
         for (Object ac:accionistasList){
             JSONObject accionis= (JSONObject) ac;
@@ -260,37 +283,96 @@ public class FrmSocios extends JDialog{
             }
         }
         socioborrar.put("accionistas",accionistasList);
-        jsonObject.put("socios-participes",socioList);
-        file.writeJson(filename,jsonObject);
+
+        if (estado) {
+            jsonObject.put("socios-participes", socioList);
+        }
+        else{
+            jsonObject.put("socios-protectores", socioList);
+        }
+        file.writeJson(filename, jsonObject);
     }
+
     private void agregarAccionista(String cuit,String cuitac, String razon, Double porcentaje) throws Exception {
+        Boolean flag= false;
         socioList = (JSONArray) jsonObject.get("socios-participes");
+        total=.0;
         for (Object obj:socioList){
             socioborrar = (JSONObject) obj;
             String cuitsoc = socioborrar.get("cuit").toString();
-            if (cuitsoc.equals(cuit)){
+            if (cuitsoc.equals(textFieldCuitEmpresa.getText())){
+                flag=true;
+                estado=true;
                 accionistasList = (JSONArray) socioborrar.get("accionistas"); //SOCIOBORRAR= AL SOCIO QUE ELEGI
                 for (Object obje: accionistasList){
                     JSONObject accionis= (JSONObject) obje;
-                    String cuitAC= (String) accionis.get("cuit-accionista".toString());
-                    if (cuitAC.equals(cuitac)){
-                        showMessageDialog(null,"El Accionista ya existe");
+                    String cuitAC= (String) accionis.get("cuit-accionista");
+                    if (cuitAC.equals(textFieldCuitAccion.getText())){
+                        showMessageDialog(null,"El Accionista ya existe en Socios Participes");
+                        break;
                     }
                     else {
-                        Accionista accionistaagregar= new impl.Accionista(cuitac,razon,porcentaje);
-                        accionistasList.add(accionistaagregar.toJSON());
+                        if (!accionistasList.isEmpty()){
+                            for (Object por: accionistasList){
+                                accionis= (JSONObject) por;
+                                Double porcen= (Double) accionis.get("porcentaje-participacion");
+                                total=total+porcen;}
+                            if(total+porcentaje>100){
+                                showMessageDialog(null,"El Porcentaje de Participacion debe ser menor que: "+(100-total));
+                                break;
+                             }
+                        }
+                        Accionista accionistagregar= new impl.Accionista(cuitac,razon,porcentaje);
+                        accionistasList.add(accionistagregar.toJSON());
                         socioborrar.put("accionistas",accionistasList);
                         jsonObject.put("socios-participes",socioList);
                         file.writeJson(filename,jsonObject);
-                        showMessageDialog(null,"Se agrego el Accionista con exito");
+                        showMessageDialog(null,"Se agrego el Accionista en Socios Participes con exito");
                         break;
                     }
                 }
             }
-            else{
-                showMessageDialog(null,"El socio no existe");
+        }
+        if (flag==false){
+            socioList = (JSONArray) jsonObject.get("socios-protectores");
+            for (Object obj:socioList){
+                socioborrar = (JSONObject) obj;
+                String cuitsoc = socioborrar.get("cuit").toString();
+                if (cuitsoc.equals(textFieldCuitEmpresa.getText())){
+                    estado=false;
+                    accionistasList = (JSONArray) socioborrar.get("accionistas"); //SOCIOBORRAR= AL SOCIO QUE ELEGI
+                    for (Object obje: accionistasList){
+                        JSONObject accionis= (JSONObject) obje;
+                        String cuitAC= (String) accionis.get("cuit-accionista");
+                        if (cuitAC.equals(textFieldCuitAccion.getText())){
+                            showMessageDialog(null,"El Accionista ya existe en Socios Protectores");
+                            break;
+                        }
+                        else {
+                            if (!accionistasList.isEmpty()){
+                                for (Object por: accionistasList){
+                                    accionis= (JSONObject) por;
+                                    Double porcen= (Double) accionis.get("porcentaje-participacion");
+                                    total=total+porcen;}
+                                if(total+porcentaje>100){
+                                    showMessageDialog(null,"El Porcentaje de Participacion debe ser menor que: "+(100-total));
+                                    break;
+                                }
+                            }
+                            Accionista accionistagregar= new impl.Accionista(cuitac,razon,porcentaje);
+                            accionistasList.add(accionistagregar.toJSON());
+                            socioborrar.put("accionistas",accionistasList);
+                            jsonObject.put("socios-protectores",socioList);
+                            file.writeJson(filename,jsonObject);
+                            showMessageDialog(null,"Se agrego el Accionista en Socios Protectores con exito");
+                            break;
+                        }
+                    }
+                }
             }
-
+        }
+        else{
+            showMessageDialog(null,"El socio no existe");
         }
     }
     private void events(){
