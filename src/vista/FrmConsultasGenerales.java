@@ -4,6 +4,7 @@ import api.*;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.IntelliJTheme;
 import impl.JSONHandler;
+import netscape.javascript.JSObject;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -74,6 +75,12 @@ public class FrmConsultasGenerales extends JDialog {
     private JTextField RSC4Txf;
     private JTextField COMIC4Txf;
     private JComboBox TipoOPC4ComboBox;
+    private JTextField FechaIniC3Txf;
+    private JTextField FechaFinC3Txf;
+    private JTextField TotalOperadoTxf;
+    private JTextField PTDC3Txf;
+    private JButton BuscarOPC3Txf;
+    private JComboBox TEC3ComboBox;
 
     private FrmConsultasGenerales self;
     private Verificaciones verificar = new impl.Verificaciones();
@@ -122,12 +129,22 @@ public class FrmConsultasGenerales extends JDialog {
         this.setLocationRelativeTo(null);
         this.asociareventos();
         this.self = this;
-
-
-
     }
 
     private void asociareventos(){
+
+        // CONSULTA 3
+        BuscarOPC3Txf.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    buscarEmpresas();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
+        });
+
         // CONSULTA 4
         BSC4Btn.addActionListener(new ActionListener() {
             @Override
@@ -142,7 +159,11 @@ public class FrmConsultasGenerales extends JDialog {
         CComiC4Btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                if (TipoOPC4ComboBox.getSelectedItem().equals("Préstamo")){
+                    COMIC4Txf.setText("4%");
+                }else{
+                    COMIC4Txf.setText("3%");
+                }
             }
         });
 
@@ -181,7 +202,64 @@ public class FrmConsultasGenerales extends JDialog {
 
     }
 
+    private void buscarEmpresas() throws Exception {
+        if (verificar.fechavalida(FechaIniC3Txf.getText()) && verificar.fechavalida(FechaFinC3Txf.getText())) {
+            jsonObject = (JSONObject) file.readJson(filename);
+            JSONArray sociosList = (JSONArray) jsonObject.get("socios-participes");
+            ArrayList<String> cuitsocios = new ArrayList<>();
+            for (Object soc : sociosList) {
+                JSONObject socio = (JSONObject) soc;
+                String tipoempresa = socio.get("tipo-empresa").toString();
+                if (TEC3ComboBox.getSelectedItem().equals(tipoempresa)) {
+                    cuitsocios.add(socio.get("cuit").toString());
+                }
+            }
+            if (cuitsocios.isEmpty()){
+                showMessageDialog(null, "No existen socios para ese tipo de empresa.");
+            }else{
+                double totaloperado = 0;
+                double totaltasa = 0;
+                int sociocount = 0;
+                ArrayList<Double> data;
+                for (String cuit: cuitsocios){
+                    getoperacionesSocio(cuit);
+                    data = calcularTotalOperadoSocio();
+                    totaloperado += data.get(0);
+                    totaltasa += data.get(1);
+                    sociocount ++;
+                }
+                TotalOperadoTxf.setText(String.valueOf(totaloperado));
+                PTDC3Txf.setText(String.valueOf(totaltasa/sociocount));
+            }
+
+        }else{
+            showMessageDialog(null, "La fecha debe tener un formato YYYY/MM/DD.\nIngrese una fecha válida.");
+        }
+    }
+
+    private ArrayList<Double> calcularTotalOperadoSocio(){
+        double montooperado = 0;
+        double tasadescuento = 0;
+        int countop = 0;
+        for (Object op : operacionesSocio){
+            JSONObject operacion = (JSONObject) op;
+            // Cheque Propio
+            //Cheque Terceros
+            //Pagaré bursátil
+            if (operacion.get("tipo").equals("Cheque propio") || operacion.get("tipo").equals("Cheque Terceros") || operacion.get("tipo").equals("Pagaré bursátil")) {
+                montooperado += Double.parseDouble(operacion.get("importetotal").toString());
+                tasadescuento += Double.parseDouble(operacion.get("tasadedescuento").toString());
+                countop ++;
+            }
+        }
+        ArrayList<Double> data = new ArrayList<>();
+        data.add(montooperado);
+        data.add(tasadescuento/countop);
+        return data;
+    }
+
     private void buscarSocio() throws Exception {
+        jsonObject = (JSONObject) file.readJson(filename);
         sociosList = (JSONArray) jsonObject.get("socios-participes");
         boolean socioEncontrado = false;
         for (Object obj: sociosList){
@@ -189,7 +267,6 @@ public class FrmConsultasGenerales extends JDialog {
             String rs = socioenuso.get("razon-social").toString();
             String cuit = socioenuso.get("cuit").toString();
             String estado = socioenuso.get("estado").toString();
-
             if (pnlTabC6.isShowing()) {
                 if (verificar.CUITValido(CUITCCTxf.getText()) && estado.equals("Pleno")) {
                     if (cuit.equals(CUITCCTxf.getText())) {

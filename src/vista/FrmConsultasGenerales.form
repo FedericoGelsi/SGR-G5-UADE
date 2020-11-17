@@ -393,7 +393,7 @@
                   <background color="-1"/>
                   <font name="Montserrat" size="14" style="1"/>
                   <foreground color="-1"/>
-                  <text value="Consulta cheques y pagarés según tipo de empresa"/>
+                  <text value="Consulta total cheques y pagarés según tipo de empresa"/>
                 </properties>
               </component>
               <grid id="b6b1b" layout-manager="GridLayoutManager" row-count="10" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -416,7 +416,7 @@
                       <text value="Fecha inicio:"/>
                     </properties>
                   </component>
-                  <component id="3cbd8" class="javax.swing.JTextField">
+                  <component id="3cbd8" class="javax.swing.JTextField" binding="FechaIniC3Txf">
                     <constraints>
                       <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="592" height="30"/>
@@ -440,7 +440,7 @@
                       <text value="Fecha fin:"/>
                     </properties>
                   </component>
-                  <component id="38031" class="javax.swing.JTextField">
+                  <component id="38031" class="javax.swing.JTextField" binding="FechaFinC3Txf">
                     <constraints>
                       <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="592" height="30"/>
@@ -464,7 +464,7 @@
                       <text value="Tipo Empresa:"/>
                     </properties>
                   </component>
-                  <component id="4f4b0" class="javax.swing.JTextField">
+                  <component id="4f4b0" class="javax.swing.JTextField" binding="PTDC3Txf">
                     <constraints>
                       <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="592" height="30"/>
@@ -478,7 +478,7 @@
                       <foreground color="-1"/>
                     </properties>
                   </component>
-                  <component id="f8028" class="javax.swing.JButton">
+                  <component id="f8028" class="javax.swing.JButton" binding="BuscarOPC3Txf">
                     <constraints>
                       <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -523,7 +523,7 @@
                       <text value="Promedio Tasa de Descuento"/>
                     </properties>
                   </component>
-                  <component id="53e87" class="javax.swing.JTextField">
+                  <component id="53e87" class="javax.swing.JTextField" binding="TotalOperadoTxf">
                     <constraints>
                       <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="592" height="30"/>
@@ -537,7 +537,7 @@
                       <foreground color="-1"/>
                     </properties>
                   </component>
-                  <component id="84205" class="javax.swing.JComboBox">
+                  <component id="84205" class="javax.swing.JComboBox" binding="TEC3ComboBox">
                     <constraints>
                       <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="592" height="30"/>
@@ -704,9 +704,12 @@
                     </constraints>
                     <properties>
                       <model>
-                        <item value="Operación tipo 1"/>
-                        <item value="Operación tipo 2"/>
-                        <item value="Operación tipo 3"/>
+                        <item value="Cheque Propio"/>
+                        <item value="Cheque Terceros"/>
+                        <item value="Pagaré bursátil"/>
+                        <item value="Cuenta Corriente"/>
+                        <item value="Tarjeta de Crédito"/>
+                        <item value="Préstamo"/>
                       </model>
                     </properties>
                   </component>
