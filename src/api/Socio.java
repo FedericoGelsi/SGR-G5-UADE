@@ -1,5 +1,6 @@
 package api;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public interface Socio {
@@ -8,7 +9,7 @@ public interface Socio {
 
     String getRazonSocial();
 
-    Date getFinicAct();
+    LocalDate getFinicAct();
 
     String getTipoEmpresa();
 
@@ -20,13 +21,13 @@ public interface Socio {
 
     String getEstado();
 
-    Date getFechaPleno();
+    LocalDate getFechaPleno();
 
     /*======SETTERS=======*/
 
     void setEstado(String estado);
 
-    void setFechaPleno(Date fechaPleno);
+    void setFechaPleno(LocalDate fechaPleno);
 
     /*======CLASS FUNCTIONS=======*/
     void suscribirAccion();

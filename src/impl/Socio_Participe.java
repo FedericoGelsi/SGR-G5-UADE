@@ -16,7 +16,7 @@ public class Socio_Participe extends Socio implements api.Socio_Participe {
     private ArrayList<Recupero> recuperos;
 
     /*======CONSTRUCTOR=======*/
-    public Socio_Participe(String CUITSocio, String razonSocial, Date finicAct, String tipoEmpresa, String actPrincipal, String direccion, String email) {
+    public Socio_Participe(String CUITSocio, String razonSocial, LocalDate finicAct, String tipoEmpresa, String actPrincipal, String direccion, String email) {
         super(CUITSocio, razonSocial, finicAct, tipoEmpresa, actPrincipal, direccion, email);
     }
 

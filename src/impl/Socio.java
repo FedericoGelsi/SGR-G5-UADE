@@ -9,22 +9,22 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public abstract class Socio implements api.Socio {
-    private String CUITSocio;
-    private String RazonSocial;
-    private Date FinicAct;
-    private String tipoEmpresa;
-    private String actPrincipal;
-    private String direccion;
-    private String email;
+    private final String CUITSocio;
+    private final String RazonSocial;
+    private final LocalDate FinicAct;
+    private final String tipoEmpresa;
+    private final String actPrincipal;
+    private final String direccion;
+    private final String email;
     private String estado;
-    private Date FechaPleno;
+    private LocalDate FechaPleno;
 
     private ArrayList<Accionista> accionistas;
     private ArrayList<DocumentacionEmpresa> documentacion;
 
     /*======CONSTRUCTOR=======*/
 
-    public Socio(String CUITSocio, String razonSocial, Date finicAct, String tipoEmpresa, String actPrincipal, String direccion, String email) {
+    public Socio(String CUITSocio, String razonSocial, LocalDate finicAct, String tipoEmpresa, String actPrincipal, String direccion, String email) {
         this.CUITSocio = CUITSocio;
         RazonSocial = razonSocial;
         FinicAct = finicAct;
@@ -34,15 +34,17 @@ public abstract class Socio implements api.Socio {
         this.email = email;
     }
 
-    public Socio(JSONObject jsonSocio){
+    public Socio(JSONObject jsonSocio) {
 
         this.CUITSocio = (String) jsonSocio.get("cuit");
         this.RazonSocial = (String) jsonSocio.get("razon-social");
-        this.FinicAct = (Date) (jsonSocio.get("finic-act"));
+        this.FinicAct = (LocalDate) (jsonSocio.get("finic-act"));
         this.tipoEmpresa = (String) jsonSocio.get("tipo-empresa");
         this.actPrincipal = (String) jsonSocio.get("actividad-principal");
         this.direccion = (String) jsonSocio.get("direccion");
         this.email = (String) jsonSocio.get("email");
+        this.FechaPleno = (LocalDate) jsonSocio.get("fecha-pleno");
+
     }
 
     /*======GETTERS=======*/
@@ -57,7 +59,7 @@ public abstract class Socio implements api.Socio {
     }
 
     @Override
-    public Date getFinicAct() {
+    public LocalDate getFinicAct() {
         return FinicAct;
     }
 
@@ -87,7 +89,7 @@ public abstract class Socio implements api.Socio {
     }
 
     @Override
-    public Date getFechaPleno() {
+    public LocalDate getFechaPleno() {
         return FechaPleno;
     }
 
@@ -99,7 +101,7 @@ public abstract class Socio implements api.Socio {
     }
 
     @Override
-    public void setFechaPleno(Date fechaPleno) {
+    public void setFechaPleno(LocalDate fechaPleno) {
         FechaPleno = fechaPleno;
     }
 
