@@ -1,13 +1,14 @@
 package api;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public interface Contragarantia {
     String getTipo();
 
-    float getMontoContragarantia();
+    double getMontoContragarantia();
 
-    Date getFechaVigencia();
+    LocalDate getFechaVigencia();
 
     String getCUITPropietario();
 }

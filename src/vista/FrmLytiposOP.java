@@ -10,6 +10,8 @@ import org.json.simple.JSONObject;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class FrmLytiposOP extends JDialog{
@@ -66,6 +68,41 @@ public class FrmLytiposOP extends JDialog{
         // Inicia la pantalla centrada
         this.setLocationRelativeTo(null);
     }
+    private void asociarEventos(){
+        confirmarAgregar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    crearContragarantia();
+                } catch (Exception exception){
+                    exception.printStackTrace();
+                }
+            }
+        });
+
+        comboBoxTIPO.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        buscarButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    buscarsocio();
+                } catch (Exception exception){
+                    exception.printStackTrace();
+                }
+            }
+        });
+
+        listarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { buscarContragarantias(); }
+        });
+    }
     private void buscarsocio() throws Exception {
         JSONArray socioList = (JSONArray) jsonObject.get("socios-participes");
         for (Object obj : socioList) {
@@ -85,7 +122,7 @@ public class FrmLytiposOP extends JDialog{
         }
     }
 
-}
+
     private void guardarDatos(JSONObject contragarantia) throws Exception {
         String filename = "./src/resources/socios.json";
         API_JSONHandler file = new JSONHandler();
@@ -126,10 +163,5 @@ public class FrmLytiposOP extends JDialog{
 
     }
 }
-private void crearContragarantia() throws Exception{
-        ArrayList<String> idContrcarantias = new ArrayList<>();
-        for (int i= 0 ; )
 
-        }
 
-}
