@@ -254,21 +254,26 @@ public class Verificaciones implements api.Verificaciones {
                     jsonObject.put("socios-participes",socioList);
                     file.writeJson(filename,jsonObject);
                 }
+                else{
+                    System.out.println("entre al else");
+
+                    lineadecredito.put("monto-utilizado",monto_utilizado+(double)importetotal);
+                    file.writeJson(filename,jsonObject);
+                }
             }
         }
-
 
         api.OPTipo1 nuevaOT1 = new impl.OPTipo1(FDV, Banco, NDC, CUITF, TDD, CUITS, tipo, importetotal, estado, contador);
         JSONObject operacion1 = nuevaOT1.toJSON();
         guardarDatos(operacion1);
 
-        CertificadoDeGarantia nuevoCDG = new CertificadoDeGarantia("1234");
+        /*CertificadoDeGarantia nuevoCDG = new CertificadoDeGarantia("1234");
         JSONObject CDG = nuevoCDG.toJSON();
         guardarDatosCDG(CDG);
 
         Comision nuevoCOM = new Comision(0, "Pago", 3, 1, "Pagare");
         JSONObject COM = nuevoCOM.toJSON();
-        guardarDatoscomision(COM);
+        guardarDatoscomision(COM);*/
     }
 
     @Override

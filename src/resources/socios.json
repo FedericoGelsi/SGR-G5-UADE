@@ -167,9 +167,9 @@
             "direccion":          "Corrientes 2630, CABA",
             "deudas":             [
                 {
-                    "monto":      14.349998474121094,
+                    "monto":      28.200000762939453,
                     "id-deuda":   0,
-                    "monto-mora": 0.7174999237060548,
+                    "monto-mora": 1.4100000381469728,
                     "cuit-deudor":"20-87654321-2"
                 }
             ],
