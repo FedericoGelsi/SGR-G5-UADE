@@ -99,7 +99,9 @@ public class FrmDyR extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    if( verificarMonto()) {
+                    if( verificarMonto() && TipocomboBox.getSelectedItem().equals("Parcial")) {
+                        crearRecupero();
+                    }else{
                         crearRecupero();
                     }
                 } catch (Exception exception) {
@@ -140,6 +142,7 @@ public class FrmDyR extends JDialog {
     }
 
     private void buscarSocio() throws Exception {
+        jsonObject = (JSONObject) file.readJson(filename);
         JSONArray socioList = (JSONArray) jsonObject.get("socios-participes");
         boolean socioEncontrado = false;
         for (Object obj: socioList){
@@ -223,24 +226,11 @@ public class FrmDyR extends JDialog {
 
 
     private void crearRecupero() throws Exception {
-        ArrayList<String> idDeudas = new ArrayList<>();
-        for (int i = 0; i < deudasTable.getRowCount(); i++) {
-            idDeudas.add(deudasTable.getValueAt(i,0).toString());
-        }
-        Recupero nuevoR = new impl.Recupero(
-                TipocomboBox.getSelectedItem().toString(),
-                Double.parseDouble(MontoTxField.getText()),
-                CUITTxField.getText(),
-                idDeudas
-        );
-
-        JSONObject recupero = nuevoR.toJSON();
         cancelarDeudas();
-        guardarDatos(recupero);
-
     }
 
     private void cancelarDeudas() throws Exception {
+        ArrayList<String> idDeudas = new ArrayList<>();
         String filename = "./src/resources/socios.json";
         API_JSONHandler file = new JSONHandler();
         JSONObject jsonObject = (JSONObject) file.readJson(filename);
@@ -250,17 +240,34 @@ public class FrmDyR extends JDialog {
             JSONObject socio = (JSONObject) s;
             if (socio.get("cuit").equals(CUITTxField.getText())){
                 JSONArray deudas = (JSONArray) socio.get("deudas");
+                JSONArray nuevasdeudas = new JSONArray();
+                int index = deudas.size();
                 while (monto >= 0){
                     Deuda deuda = new impl.Deuda((JSONObject) deudas.get(0));
                     if (monto - deuda.calcularSubtotal() >= 0) {
                         monto -= deuda.calcularSubtotal();
-                        System.out.println("Nuevo Monto - " + monto);
-                        deudas.remove(0);
+                        idDeudas.add(deuda.getIdDeuda());
+                    }else{
+                        nuevasdeudas.add(deuda.toJSON());
                     }
-                    if ( monto == 0){
+                    if ( monto == 0 || index == 0){
+                        monto =  Double.parseDouble(MontoTxField.getText()) - monto;
                         break;
                     }
+                    index--;
                 }
+
+                Recupero nuevoR = new impl.Recupero(
+                        TipocomboBox.getSelectedItem().toString(),
+                        monto,
+                        CUITTxField.getText(),
+                        idDeudas
+                );
+                JSONObject recupero = nuevoR.toJSON();
+                socio.put("deudas", nuevasdeudas);
+                JSONArray recuperos = (JSONArray) socio.get("recuperos");
+                recuperos.add(recupero);
+                socio.put("recuperos", recuperos);
                 break;
             }
         }

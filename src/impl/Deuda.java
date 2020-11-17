@@ -16,7 +16,7 @@ public class Deuda implements api.Deuda {
 
     /*======CONSTRUCTOR=======*/
 
-    public Deuda(float monto, String CUITDeudor, String idDeuda, float montoMora) {
+    public Deuda(double monto, String CUITDeudor, String idDeuda, double montoMora) {
         this.monto = monto;
         this.CUITDeudor = CUITDeudor;
         this.idDeuda = idDeuda;

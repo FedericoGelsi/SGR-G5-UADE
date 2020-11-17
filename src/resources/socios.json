@@ -60,42 +60,71 @@
                     "id-deudas":     [
                         "id"
                     ]
+                },
+                {
+                    "tipo":          "Total",
+                    "monto":         15682.0,
+                    "id-socio-pleno":"20-12345678-2",
+                    "id-deudas":     [
+                        "456953",
+                        "456954",
+                        "456955",
+                        "456956"
+                    ]
+                },
+                {
+                    "tipo":          "Parcial",
+                    "monto":         248.0,
+                    "id-socio-pleno":"20-12345678-2",
+                    "id-deudas":     [
+                        "1234",
+                        "1234"
+                    ]
+                },
+                {
+                    "tipo":          "Parcial",
+                    "monto":         248.0,
+                    "id-socio-pleno":"20-12345678-2",
+                    "id-deudas":     [
+                        "12344",
+                        "12344"
+                    ]
                 }
             ],
             "finic-act":          "2020-11-13T09:52:32.914993900",
             "direccion":          "Rivadavia 2630, CABA",
             "deudas":             [
                 {
-                    "monto": 2560,
-                    "cuit-deudor": "20-12345678-2",
-                    "fecha-deuda": "2020-04-25",
-                    "id-deuda": 456953,
-                    "aplica-mora": true,
-                    "monto-mora": 35.5
+                    "fecha-deuda":"2020-10-23",
+                    "monto":      100.0,
+                    "id-deuda":   "12344",
+                    "aplica-mora":true,
+                    "monto-mora": 1.0,
+                    "cuit-deudor":"20-12345678-2"
                 },
                 {
-                    "monto": 560,
-                    "cuit-deudor": "20-12345678-2",
-                    "fecha-deuda": "2020-10-25",
-                    "id-deuda": 456954,
-                    "aplica-mora": true,
-                    "monto-mora": 30.5
+                    "fecha-deuda":"2020-10-23",
+                    "monto":      100.0,
+                    "id-deuda":   "12344",
+                    "aplica-mora":true,
+                    "monto-mora": 1.0,
+                    "cuit-deudor":"20-12345678-2"
                 },
                 {
-                    "monto": 250,
-                    "cuit-deudor": "20-12345678-2",
-                    "fecha-deuda": "2020-12-25",
-                    "id-deuda": 456955,
-                    "aplica-mora": false,
-                    "monto-mora": 0
+                    "fecha-deuda":"2020-10-23",
+                    "monto":      100.0,
+                    "id-deuda":   "12344",
+                    "aplica-mora":true,
+                    "monto-mora": 1.0,
+                    "cuit-deudor":"20-12345678-2"
                 },
                 {
-                    "monto": 256,
-                    "cuit-deudor": "20-12345678-2",
-                    "fecha-deuda": "2020-02-25",
-                    "id-deuda": 456956,
-                    "aplica-mora": true,
-                    "monto-mora": 15.5
+                    "fecha-deuda":"2020-10-23",
+                    "monto":      100.0,
+                    "id-deuda":   "12344",
+                    "aplica-mora":true,
+                    "monto-mora": 1.0,
+                    "cuit-deudor":"20-12345678-2"
                 }
             ],
             "contragarantias":    [
@@ -192,78 +221,78 @@
         }
     ],
     "author":            "admin",
-    "created-at":        "2020-11-13",
-    "modified-by":       "admin",
-    "desembolsos": [
+    "desembolsos":       [
         {
-            "id": 1,
-            "cuit-socio": "20-12345678-2",
-            "razon-social": "Los Pollos Hermanos S.A.",
-            "monto": 123.45,
-            "fecha-op": "2020-10-15"
+            "razon-social":"Los Pollos Hermanos S.A.",
+            "fecha-op":    "2020-10-15",
+            "cuit-socio":  "20-12345678-2",
+            "monto":       123.45,
+            "id":          1
         },
         {
-            "id": 1,
-            "cuit-socio": "20-12345678-2",
-            "razon-social": "Los Pollos Hermanos S.A.",
-            "monto": 123.45,
-            "fecha-op": "2020-10-15"
+            "razon-social":"Los Pollos Hermanos S.A.",
+            "fecha-op":    "2020-10-15",
+            "cuit-socio":  "20-12345678-2",
+            "monto":       123.45,
+            "id":          1
         },
         {
-            "id": 1,
-            "cuit-socio": "20-12345678-2",
-            "razon-social": "Los Pollos Hermanos S.A.",
-            "monto": 123.45,
-            "fecha-op": "2020-10-15"
+            "razon-social":"Los Pollos Hermanos S.A.",
+            "fecha-op":    "2020-10-15",
+            "cuit-socio":  "20-12345678-2",
+            "monto":       123.45,
+            "id":          1
         },
         {
-            "id": 1,
-            "cuit-socio": "20-12345678-2",
-            "razon-social": "Los Pollos Hermanos S.A.",
-            "monto": 123.45,
-            "fecha-op": "2020-10-15"
+            "razon-social":"Los Pollos Hermanos S.A.",
+            "fecha-op":    "2020-10-15",
+            "cuit-socio":  "20-12345678-2",
+            "monto":       123.45,
+            "id":          1
         },
         {
-            "id": 1,
-            "cuit-socio": "20-12345678-2",
-            "razon-social": "Los Pollos Hermanos S.A.",
-            "monto": 123.45,
-            "fecha-op": "2020-10-15"
+            "razon-social":"Los Pollos Hermanos S.A.",
+            "fecha-op":    "2020-10-15",
+            "cuit-socio":  "20-12345678-2",
+            "monto":       123.45,
+            "id":          1
         },
         {
-            "id": 1,
-            "cuit-socio": "20-12345678-2",
-            "razon-social": "Los Pollos Hermanos S.A.",
-            "monto": 123.45,
-            "fecha-op": "2020-10-15"
+            "razon-social":"Los Pollos Hermanos S.A.",
+            "fecha-op":    "2020-10-15",
+            "cuit-socio":  "20-12345678-2",
+            "monto":       123.45,
+            "id":          1
         },
         {
-            "id": 1,
-            "cuit-socio": "20-12345678-2",
-            "razon-social": "Los Pollos Hermanos S.A.",
-            "monto": 123.45,
-            "fecha-op": "2020-10-15"
+            "razon-social":"Los Pollos Hermanos S.A.",
+            "fecha-op":    "2020-10-15",
+            "cuit-socio":  "20-12345678-2",
+            "monto":       123.45,
+            "id":          1
         },
         {
-            "id": 1,
-            "cuit-socio": "20-12345678-2",
-            "razon-social": "Los Pollos Hermanos S.A.",
-            "monto": 123.45,
-            "fecha-op": "2020-10-15"
+            "razon-social":"Los Pollos Hermanos S.A.",
+            "fecha-op":    "2020-10-15",
+            "cuit-socio":  "20-12345678-2",
+            "monto":       123.45,
+            "id":          1
         },
         {
-            "id": 1,
-            "cuit-socio": "20-12345678-2",
-            "razon-social": "Los Pollos Hermanos S.A.",
-            "monto": 123.45,
-            "fecha-op": "2020-10-15"
+            "razon-social":"Los Pollos Hermanos S.A.",
+            "fecha-op":    "2020-10-15",
+            "cuit-socio":  "20-12345678-2",
+            "monto":       123.45,
+            "id":          1
         },
         {
-            "id": 1,
-            "cuit-socio": "20-12345678-2",
-            "razon-social": "Los Pollos Hermanos S.A.",
-            "monto": 123.45,
-            "fecha-op": "2020-10-15"
+            "razon-social":"Los Pollos Hermanos S.A.",
+            "fecha-op":    "2020-10-15",
+            "cuit-socio":  "20-12345678-2",
+            "monto":       123.45,
+            "id":          1
         }
-    ]
+    ],
+    "created-at":        "2020-11-13",
+    "modified-by":       "admin"
 }
