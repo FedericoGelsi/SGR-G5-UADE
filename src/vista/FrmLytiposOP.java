@@ -67,6 +67,9 @@ public class FrmLytiposOP extends JDialog{
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         // Inicia la pantalla centrada
         this.setLocationRelativeTo(null);
+        
+        this.asociarEventos();
+        this.self= this;
     }
     private void asociarEventos(){
         confirmarAgregar.addActionListener(new ActionListener() {
@@ -162,6 +165,7 @@ public class FrmLytiposOP extends JDialog{
         pnlHCTable.setViewportView(HcontraTable);
 
     }
+
 }
 
 
