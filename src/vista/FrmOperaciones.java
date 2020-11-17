@@ -231,9 +231,11 @@ public class FrmOperaciones extends JDialog {
                     }
 
                     if (checks == true) {
+                        int mensaje_numcertificado = 0;
                         totalmenostasa=(float)ITCHPint-((float) ITCHPint *((float) TDDCHPint/100));
                         try {
-                            verif.crearOT1(FDVCHPdateaux, BECHP.toString(), NCCHPint, CDFCHP, TDDCHPint, CDFCHP, "Cheque Propio", totalmenostasa, "Ingresado");
+                            mensaje_numcertificado=verif.crearOT1(FDVCHPdateaux, BECHP.toString(), NCCHPint, CDFCHP, TDDCHPint, CDFCHP, "Cheque Propio", totalmenostasa, "Ingresado");
+                            showMessageDialog(null,"Su operación fue realizada con éxito, el numero del certificado de garantia es: " +mensaje_numcertificado);
                         } catch (Exception exception) {
                             exception.printStackTrace();
                         }
@@ -360,9 +362,11 @@ public class FrmOperaciones extends JDialog {
                         checks = false;
                     }
                     if (checks == true) {
+                        int mensaje_numcertificado = 0;
                         try {
                             totalmenostasacht=(float)ITCHTint-((float) ITCHTint *((float) TDDCHTint/100));
-                            verif.crearOT1(FDVCHTdateaux, BECHT.toString(), NCCHTint, CDFCHT, TDDCHTint, CSCHT, "Cheque de terceros", totalmenostasacht, "Ingresado");
+                            mensaje_numcertificado=verif.crearOT1(FDVCHTdateaux, BECHT.toString(), NCCHTint, CDFCHT, TDDCHTint, CSCHT, "Cheque de terceros", totalmenostasacht, "Ingresado");
+                            showMessageDialog(null,"Su operación fue realizada con éxito, el numero del certificado de garantia es: " +mensaje_numcertificado);
                         } catch (Exception exception) {
                             exception.printStackTrace();
                         }
@@ -486,9 +490,11 @@ public class FrmOperaciones extends JDialog {
                         checks = false;
                     }
                     if (checks == true) {
+                        int mensaje_numcertificado = 0;
                         try {
                             totalmenostasapb=(float)ITPBint-((float) ITPBint *((float) TDDPBint/100));
-                            verif.crearOT1(FDVPBdateaux, BEPB.toString(), NDPPBint, CDFPB, TDDPBint, CSPB, "Pagare Bursatil", totalmenostasapb, "Ingresado");
+                            mensaje_numcertificado=verif.crearOT1(FDVPBdateaux, BEPB.toString(), NDPPBint, CDFPB, TDDPBint, CSPB, "Pagare Bursatil", totalmenostasapb, "Ingresado");
+                            showMessageDialog(null,"Su operación fue realizada con éxito, el numero del certificado de garantia es: " +mensaje_numcertificado);
                         } catch (Exception exception) {
                             exception.printStackTrace();
                         }
@@ -593,15 +599,15 @@ public class FrmOperaciones extends JDialog {
                         checks = false;
                     }
                     if (checks == true) {
+                        int mensaje_numcertificado = 0;
                         try {
-                            verif.crearOT3(cantidadCuotas.toString(), BEPST.toString(), ITFloatPST, TDDPSTint, Sistema_PST.toString(), FDVPBdateaux, CSPST, "Ingresado", "Prestamo");
+                            mensaje_numcertificado=verif.crearOT3(cantidadCuotas.toString(), BEPST.toString(), ITFloatPST, TDDPSTint, Sistema_PST.toString(), FDVPBdateaux, CSPST, "Ingresado", "Prestamo");
+                            showMessageDialog(null,"Su operación fue realizada con éxito, el numero del certificado de garantia es: " +mensaje_numcertificado);
                         } catch (Exception exception) {
                             exception.printStackTrace();
                         }
                     }
                 }
-
-
             }
         });
 

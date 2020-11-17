@@ -5,11 +5,13 @@ import org.json.simple.JSONArray;
 import java.lang.reflect.Array;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+
 import api.API_JSONHandler;
 import impl.JSONHandler;
 import netscape.javascript.JSObject;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -212,7 +214,7 @@ public class Verificaciones implements api.Verificaciones {
         return operacionmenorfdr;
     }
 
-    public void crearOT1(LocalDate FDV, String Banco, int NDC, String CUITF, float TDD, String CUITS, String tipo, float importetotal, String estado) throws Exception {
+    public int crearOT1(LocalDate FDV, String Banco, int NDC, String CUITF, float TDD, String CUITS, String tipo, float importetotal, String estado) throws Exception {
         jsonObjectOPC = (JSONObject) file.readJson(filenamefact);
         JSONArray operacionesList = (JSONArray) jsonObjectOPC.get("operaciones");
         int contador = 0;
@@ -287,10 +289,11 @@ public class Verificaciones implements api.Verificaciones {
                 file.writeJson(filenamefact, jsonObjectOPC);
             }
         }
+        return contadorc;
     }
 
     @Override
-    public void crearOT3(String CDC, String Banco, float Importe, float Tasa, String sist, LocalDate FDA, String CUIT, String estado, String tipo) throws Exception {
+    public int crearOT3(String CDC, String Banco, float Importe, float Tasa, String sist, LocalDate FDA, String CUIT, String estado, String tipo) throws Exception {
         jsonObjectOPC = (JSONObject) file.readJson(filenamefact);
         JSONArray operacionesList = (JSONArray) jsonObjectOPC.get("operaciones");
         int contador = 0;
@@ -368,6 +371,7 @@ public class Verificaciones implements api.Verificaciones {
                 file.writeJson(filenamefact, jsonObjectOPC);
             }
         }
+        return contadorc;
     }
 
     public double nuevacomision(int numerocertificado) throws Exception {
@@ -495,15 +499,17 @@ public class Verificaciones implements api.Verificaciones {
     }
 
 
-
     public void crearFacturas() throws Exception {
         ArrayList<Double> montocomision = new ArrayList<Double>();
+        ArrayList<Integer> numoperacionList = new ArrayList<>();
+        ArrayList<String> cuitsociolist = new ArrayList<>();
         jsonObjectOPC = (JSONObject) file.readJson(filenamefact);
         System.out.println("entro al metodo");
         int contador = 0;
         int contadora = 0;
+        int numoperacion = 0;
         int day = getDayNumberNew(LocalDate.now());
-        double monto_com=0;
+        double monto_com = 0;
         if (day == 2) { // Cambiar a 1
             System.out.println("entro al dia");
             String com_estado = "";
@@ -513,23 +519,47 @@ public class Verificaciones implements api.Verificaciones {
                 JSONObject comisionObject = (JSONObject) com;
                 com_estado = comisionObject.get("Estado").toString();
                 System.out.println(com_estado);
-                if (com_estado.equalsIgnoreCase("Calculada")){
+                if (com_estado.equalsIgnoreCase("Calculada")) {
                     monto_com = (double) comisionObject.get("montocomisiontotal");
                     montocomision.add(monto_com);
+                    numoperacion = Integer.parseInt(comisionObject.get("Numero-Operacion").toString());
+                    numoperacionList.add(numoperacion);
                     contador++;
                     System.out.println(contador);
                     comisionObject.put("Estado", "Facturada");
                     file.writeJson(filenamefact, jsonObjectOPC);
                 }
             }
-            while (contador>0) {
+            int numero_operacion = 0;
+            String cuitsocio = "";
+            int numaux = 0;
+            JSONArray operacionesList = (JSONArray) jsonObjectOPC.get("operaciones");
+            for (Object ops : operacionesList) {
+                JSONObject operaciones = (JSONObject) ops;
+                numero_operacion = Integer.parseInt(operaciones.get("numerooperacion").toString());
+                for (int i = 0; i < numoperacionList.size(); i++) {
+                    numaux = numoperacionList.get(i);
+                    System.out.println(numaux);
+                    if (numaux == numero_operacion) {
+                        cuitsocio = operaciones.get("CUITSocio").toString();
+                        System.out.println(cuitsocio);
+                        cuitsociolist.add(cuitsocio);
+                    }
+                }
+            }
+
+
+            int contadorfact = 1000;
+            while (contador > 0) {
                 System.out.println(contador);
-                Factura nuevaFactura = new Factura(0, montocomision.get(contadora), "20-11111111-2", "20-1155511-2", "Emitida");
+                Factura nuevaFactura = new Factura(contadorfact, montocomision.get(contadora), "20-11111111-2", cuitsociolist.get(contadora), "Emitida");
                 JSONObject Fact = nuevaFactura.toJSON();
                 guardarDatosFactura(Fact);
+                contadorfact++;
                 contadora++;
                 contador--;
             }
+
         }
     }
 

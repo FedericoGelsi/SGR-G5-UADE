@@ -37,10 +37,10 @@ public interface Verificaciones {
     boolean operacionvsfdr(double montototal);
 
     //Crea una operacion
-    public void crearOT1(LocalDate FDV,String Banco, int NDC, String CUITF, float TDD, String CUITS,String tipo,float importetotal, String estado) throws Exception;
+    public int crearOT1(LocalDate FDV,String Banco, int NDC, String CUITF, float TDD, String CUITS,String tipo,float importetotal, String estado) throws Exception;
 
     // Crea una operacion tipo 3
-    public void crearOT3(String CDC, String Banco, float Importe, float Tasa, String sist, LocalDate FDA, String CUIT, String estado, String tipo) throws Exception;
+    public int crearOT3(String CDC, String Banco, float Importe, float Tasa, String sist, LocalDate FDA, String CUIT, String estado, String tipo) throws Exception;
 
     //Guarda los datos en .json
     void guardarDatos(JSONObject objeto) throws Exception;
