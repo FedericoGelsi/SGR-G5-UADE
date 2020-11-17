@@ -547,15 +547,18 @@ public class Verificaciones implements api.Verificaciones {
                     }
                 }
             }
+            int contadorfact = 1999;
+            JSONArray facturasList = (JSONArray) jsonObjectOPC.get("facturas");
+            for (Object fact : facturasList) {
+                contadorfact++;
+            }
 
-
-            int contadorfact = 1000;
             while (contador > 0) {
+                contadorfact++;
                 System.out.println(contador);
                 Factura nuevaFactura = new Factura(contadorfact, montocomision.get(contadora), "20-11111111-2", cuitsociolist.get(contadora), "Emitida");
                 JSONObject Fact = nuevaFactura.toJSON();
                 guardarDatosFactura(Fact);
-                contadorfact++;
                 contadora++;
                 contador--;
             }
@@ -574,23 +577,6 @@ public class Verificaciones implements api.Verificaciones {
     }
 
 }
-
-
-    /* public void crearOT2(String nombreempresa, float importetotal, LocalDate fechavencimiento, String tipo) throws Exception {
-        api.OPTipo2 nuevaOT2 = new impl.OPTipo2(nombreempresa, importetotal, fechavencimiento, tipo);
-
-        JSONObject operacion1 = nuevaOT1.toJSON();
-        guardarDatos(operacion1);
-    }
-    public void guardarDatos(JSONObject objeto) throws Exception {
-        String filename = "./src/resources/operacioncontroller.json";
-        API_JSONHandler file = new JSONHandler();
-        JSONObject jsonObject = (JSONObject) file.readJson(filename);
-        JSONArray operacionesList = (JSONArray) jsonObject.get("operaciones");
-        operacionesList.add(objeto);
-        jsonObject.put("operaciones", operacionesList);
-        file.writeJson(filename, jsonObject);
-    }*/
 
 
 
