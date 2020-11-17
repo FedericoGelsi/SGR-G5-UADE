@@ -21,4 +21,13 @@ public interface OPTipo3 extends Operacion {
     int getCuotasImpagas();
 
     JSONObject toJSON();
+
+    @Override
+    String getCUITSolicitante();
+
+    String getEstado();
+
+    String getTipo();
+
+    int getNumerooperacion();
 }

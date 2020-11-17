@@ -7,7 +7,7 @@ public interface Comision {
 
     String getEstado();
 
-    float getPorcentajeComision();
+    double getPorcentajeComision();
 
     int getNumeroOperacion();
 

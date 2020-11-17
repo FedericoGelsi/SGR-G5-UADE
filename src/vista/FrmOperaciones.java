@@ -5,13 +5,12 @@ import api.OPTipo1;
 import api.Recupero;
 import api.Verificaciones;
 import impl.JSONHandler;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
+import java.awt.event.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -85,6 +84,10 @@ public class FrmOperaciones extends JDialog {
     private JSpinner spinnerITPB;
     private JTextField JTFCSCHT;
     private JTextField JTFCSPB;
+    private JSpinner spinnerTDDCHT;
+    private JSpinner spinnerTDDPB;
+    private JComboBox comboNDOC;
+    private JButton JBC;
     private Verificaciones verif = new impl.Verificaciones();
 
     private String filename = "./src/resources/socios.json";
@@ -119,7 +122,6 @@ public class FrmOperaciones extends JDialog {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         // Inicia la pantalla centrada
         this.setLocationRelativeTo(null);
-
 
         //Action Listener de JButton Cheques Personales
         JBCHP.addActionListener(new ActionListener() {
@@ -235,6 +237,7 @@ public class FrmOperaciones extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean DatosCorrectosFlagCHT = true;
+                float totalmenostasacht=0;
                 //Toma el objeto Banco Emisor desde el Combo Box comboBECHT
                 Object BECHT = new Object();
                 BECHT = comboBECHT.getSelectedItem();
@@ -296,6 +299,20 @@ public class FrmOperaciones extends JDialog {
                     DatosCorrectosFlagCHT = false;
                 }
 
+                //Toma el Entero Tasa desde el JSpinner spinnerTDDCHP
+                Object TDDCHT;
+                TDDCHT = spinnerTDDCHT.getValue();
+                int TDDCHTint;
+                TDDCHTint = (Integer) TDDCHT;
+                if (TDDCHTint <= 0) {
+                    showMessageDialog(null, "El cheque no puede ser vendido con una tasa de descuento menor o igual a 0");
+                    DatosCorrectosFlagCHT = false;
+                }
+                if (TDDCHTint >= 100) {
+                    showMessageDialog(null, "El cheque no puede ser vendido con una tasa de descuento superior al 99%");
+                    DatosCorrectosFlagCHT = false;
+                }
+
                 //Toma el String CUIT Socio desde el JTFCSPB
                 String CSCHT;
                 CSCHT = JTFCSCHT.getText();
@@ -336,7 +353,8 @@ public class FrmOperaciones extends JDialog {
                     }
                     if (checks == true) {
                         try {
-                            verif.crearOT1(FDVCHTdateaux, BECHT.toString(), NCCHTint, CDFCHT, 0, CSCHT, "Cheque de terceros", ITCHTint, "Ingresado");
+                            totalmenostasacht=(float)ITCHTint-((float) ITCHTint *((float) TDDCHTint/100));
+                            verif.crearOT1(FDVCHTdateaux, BECHT.toString(), NCCHTint, CDFCHT, TDDCHTint, CSCHT, "Cheque de terceros", totalmenostasacht, "Ingresado");
                         } catch (Exception exception) {
                             exception.printStackTrace();
                         }
@@ -348,6 +366,7 @@ public class FrmOperaciones extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean DatosCorrectosFlagPB = true;
+                float totalmenostasapb=0;
                 //Toma el objeto Banco Emisor desde el Combo Box comboBEPB
                 Object BEPB = new Object();
                 BEPB = comboBEPB.getSelectedItem();
@@ -409,6 +428,20 @@ public class FrmOperaciones extends JDialog {
                     DatosCorrectosFlagPB = false;
                 }
 
+                //Toma el Entero Tasa desde el JSpinner spinnerTDDPB
+                Object TDDPB;
+                TDDPB = spinnerTDDPB.getValue();
+                int TDDPBint;
+                TDDPBint = (Integer) TDDPB;
+                if (TDDPBint <= 0) {
+                    showMessageDialog(null, "El cheque no puede ser vendido con una tasa de descuento menor o igual a 0");
+                    DatosCorrectosFlagPB = false;
+                }
+                if (TDDPBint >= 100) {
+                    showMessageDialog(null, "El cheque no puede ser vendido con una tasa de descuento superior al 99%");
+                    DatosCorrectosFlagPB = false;
+                }
+
                 //Toma el String CUIT Socio desde el JTFCSPB
                 String CSPB;
                 CSPB = JTFCSPB.getText();
@@ -446,7 +479,8 @@ public class FrmOperaciones extends JDialog {
                     }
                     if (checks == true) {
                         try {
-                            verif.crearOT1(FDVPBdateaux, BEPB.toString(), NDPPBint, CDFPB, 0, CSPB, "Pagare Bursatil", ITPBint, "Ingresado");
+                            totalmenostasapb=(float)ITPBint-((float) ITPBint *((float) TDDPBint/100));
+                            verif.crearOT1(FDVPBdateaux, BEPB.toString(), NDPPBint, CDFPB, TDDPBint, CSPB, "Pagare Bursatil", totalmenostasapb, "Ingresado");
                         } catch (Exception exception) {
                             exception.printStackTrace();
                         }
@@ -560,6 +594,58 @@ public class FrmOperaciones extends JDialog {
                 }
 
 
+            }
+        });
+
+        pnlTabPanelOps.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                //Popula el comboNDOC
+                JSONObject jsonObjectOPC = null;
+                try {
+                    jsonObjectOPC = (JSONObject) file.readJson(filenamefact);
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+                comboNDOC.removeAllItems();
+                String estadoNDOC = "";
+                int numeroopNDOC = 0;
+                int numeroopcdgNDOC = 0;
+                int numerocertificado=0;
+                ArrayList<Integer> listacertificados = new ArrayList<Integer>();
+
+                JSONArray operacioneslist = (JSONArray) jsonObjectOPC.get("operaciones");
+                for (Object ops : operacioneslist) {
+                    JSONObject operacion = (JSONObject) ops;
+                    estadoNDOC = operacion.get("estado").toString();
+                    if (estadoNDOC.equalsIgnoreCase("Con certificado emitido")) {
+                        numeroopNDOC = Integer.parseInt(operacion.get("numerooperacion").toString());
+                    }
+                    JSONArray certdegarlist = (JSONArray) jsonObjectOPC.get("certificado-de-garantia");
+                    for (Object cdg : certdegarlist) {
+                        JSONObject certificado = (JSONObject) cdg;
+                        numeroopcdgNDOC = Integer.parseInt(certificado.get("numero-operacion").toString());
+                        if (numeroopNDOC==numeroopcdgNDOC) {
+                            numerocertificado=Integer.parseInt(certificado.get("idcertificado").toString());
+                            comboNDOC.addItem(numerocertificado);
+                        }
+                    }
+                }
+            }
+        });
+
+        JBC.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                double montocomision=0;
+                int numerooperacion =  Integer.parseInt (comboNDOC.getSelectedItem().toString());
+                try {
+                    montocomision=verif.nuevacomision(numerooperacion);
+                    showMessageDialog(null,"El monto de la comision es:"+montocomision);
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
             }
         });
     }

@@ -5,26 +5,29 @@ import org.json.simple.JSONObject;
 public class Comision implements api.Comision {
     private final int IDComision;
     private String estado;
-    private final float porcentajeComision;
+    private final double porcentajeComision;
     private final int numeroOperacion;
     private final String tipoOP;
+    private double montocomisiontotal;
 
     /*======CONSTRUCTOR=======*/
 
-    public Comision(int IDComision, String estado, float porcentajeComision, int numeroOperacion, String tipoOP) {
+    public Comision(int IDComision, String estado, double porcentajeComision, int numeroOperacion, String tipoOP,double montocomisiontotal) {
         this.IDComision = IDComision;
         this.estado = estado;
         this.porcentajeComision = porcentajeComision;
         this.numeroOperacion = numeroOperacion;
         this.tipoOP = tipoOP;
+        this.montocomisiontotal=montocomisiontotal;
     }
 
     public Comision(JSONObject jsonCMS){
         this.estado = (String) jsonCMS.get("Estado");
-        this.porcentajeComision = (float) jsonCMS.get("Porcentaje-Comision");
+        this.porcentajeComision = (double) jsonCMS.get("Porcentaje-Comision");
         this.numeroOperacion = Integer.parseInt(jsonCMS.get("Numero-Operacion").toString());
         this.tipoOP = (String) jsonCMS.get("Tipo-Operacion");
         this.IDComision = Integer.parseInt(jsonCMS.get("ID-Comision").toString());
+        this.montocomisiontotal = (double) jsonCMS.get("montocomisiontotal");
     }
 
 
@@ -41,7 +44,7 @@ public class Comision implements api.Comision {
     }
 
     @Override
-    public float getPorcentajeComision() {
+    public double getPorcentajeComision() {
         return porcentajeComision;
     }
 
@@ -69,6 +72,7 @@ public class Comision implements api.Comision {
         comision.put("Numero-Operacion", this.numeroOperacion);
         comision.put("Tipo-Operacion", this.tipoOP);
         comision.put("IDComision", this.IDComision);
+        comision.put("montocomisiontotal",this.montocomisiontotal);
         return comision;
     }
 

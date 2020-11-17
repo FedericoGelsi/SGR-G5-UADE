@@ -47,5 +47,8 @@ public interface Verificaciones {
 
     //Chequea que el socio no tenga deudas, si las tiene, no puede operar.
     public boolean check_deuda(String CUIT);
+
+    //Crea una nueva comision
+    double nuevacomision(int numerocertificado) throws Exception;
 }
 

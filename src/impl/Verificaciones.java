@@ -213,17 +213,16 @@ public class Verificaciones implements api.Verificaciones {
         jsonObjectOPC = (JSONObject) file.readJson(filenamefact);
         JSONArray operacionesList = (JSONArray) jsonObjectOPC.get("operaciones");
         int contador = 0;
-        System.out.println("hay algo");
         for (Object op : operacionesList) {
             JSONObject id = (JSONObject) op;
-            contador = 1+Integer.parseInt(id.get("numerooperacion").toString());
+            contador = 1 + Integer.parseInt(id.get("numerooperacion").toString());
         }
 
         // Pide el monto de la linea de credito y el tope
         double tope = 0;
         double monto_utilizado = 0;
-        double montohabilitado= 0;
-        double montodeuda=0;
+        double montohabilitado = 0;
+        double montodeuda = 0;
         JSONArray socioList = (JSONArray) jsonObject.get("socios-participes");
         for (Object obj : socioList) {
             JSONObject socio = (JSONObject) obj;
@@ -233,9 +232,8 @@ public class Verificaciones implements api.Verificaciones {
                 tope = (double) lineadecredito.get("tope");
                 monto_utilizado = (double) lineadecredito.get("monto-utilizado");
                 montohabilitado = (tope - monto_utilizado);
-                if (importetotal>montohabilitado && importetotal<=tope) {
-                    lineadecredito.put("monto-utilizado",tope);
-                    System.out.println("Comparo el importe total con el monto habilitado");
+                if (importetotal > montohabilitado && importetotal <= tope) {
+                    lineadecredito.put("monto-utilizado", tope);
                     int contadordeuda = 0;
                     JSONArray deudasList = (JSONArray) jsonObject.get("deudas");
                     montodeuda = importetotal - montohabilitado;
@@ -243,22 +241,18 @@ public class Verificaciones implements api.Verificaciones {
                         for (Object deu : operacionesList) {
                             JSONObject id = (JSONObject) deu;
                             contadordeuda = 1 + Integer.parseInt(id.get("id-deuda").toString());
-                            System.out.println(contadordeuda);
                         }
                     }
-                    Deuda nuevaDeuda = new Deuda(montodeuda,CUITS,contadordeuda,montodeuda*0.05);
+                    Deuda nuevaDeuda = new Deuda(montodeuda, CUITS, contadordeuda, montodeuda * 0.05);
                     JSONObject deuda1 = nuevaDeuda.toJSON();
                     JSONArray DeudasList = new JSONArray();
                     DeudasList.add(deuda1);
-                    socio.put("deudas",DeudasList);
-                    jsonObject.put("socios-participes",socioList);
-                    file.writeJson(filename,jsonObject);
-                }
-                else{
-                    System.out.println("entre al else");
-
-                    lineadecredito.put("monto-utilizado",monto_utilizado+(double)importetotal);
-                    file.writeJson(filename,jsonObject);
+                    socio.put("deudas", DeudasList);
+                    jsonObject.put("socios-participes", socioList);
+                    file.writeJson(filename, jsonObject);
+                } else {
+                    lineadecredito.put("monto-utilizado", monto_utilizado + (double) importetotal);
+                    file.writeJson(filename, jsonObject);
                 }
             }
         }
@@ -267,30 +261,167 @@ public class Verificaciones implements api.Verificaciones {
         JSONObject operacion1 = nuevaOT1.toJSON();
         guardarDatos(operacion1);
 
-        /*CertificadoDeGarantia nuevoCDG = new CertificadoDeGarantia("1234");
+        JSONArray certList = (JSONArray) jsonObjectOPC.get("certificado-de-garantia");
+        int contadorc = 100;
+        if (certList != null) {
+            for (Object cert : certList) {
+                JSONObject idc = (JSONObject) cert;
+                contadorc = 1 + Integer.parseInt(idc.get("idcertificado").toString());
+            }
+        }
+
+        CertificadoDeGarantia nuevoCDG = new CertificadoDeGarantia(CUITS, contadorc, contador);
         JSONObject CDG = nuevoCDG.toJSON();
         guardarDatosCDG(CDG);
 
-        Comision nuevoCOM = new Comision(0, "Pago", 3, 1, "Pagare");
-        JSONObject COM = nuevoCOM.toJSON();
-        guardarDatoscomision(COM);*/
+        jsonObjectOPC = (JSONObject) file.readJson(filenamefact);
+        JSONArray sociocertestadolist = (JSONArray) jsonObjectOPC.get("operaciones");
+        for (Object sce : sociocertestadolist) {
+            JSONObject scejo = (JSONObject) sce;
+            int nop = Integer.parseInt(scejo.get("numerooperacion").toString());
+            if (contador == nop) {
+                scejo.put("estado", "Con certificado emitido");
+                file.writeJson(filenamefact, jsonObjectOPC);
+            }
+        }
     }
 
     @Override
     public void crearOT3(String CDC, String Banco, float Importe, float Tasa, String sist, LocalDate FDA, String CUIT, String estado, String tipo) throws Exception {
-        api.OPTipo3 nuevaOT3 = new impl.OPTipo3(CUIT, CDC, Banco, Importe, Tasa, sist, FDA, estado, tipo);
+        jsonObjectOPC = (JSONObject) file.readJson(filenamefact);
+        JSONArray operacionesList = (JSONArray) jsonObjectOPC.get("operaciones");
+        int contador = 0;
+        if (operacionesList != null) {
+            for (Object op : operacionesList) {
+                JSONObject id = (JSONObject) op;
+                contador = 1 + Integer.parseInt(id.get("numerooperacion").toString());
+            }
+        }
+
+        // Pide el monto de la linea de credito y el tope
+        double tope = 0;
+        double monto_utilizado = 0;
+        double montohabilitado = 0;
+        double montodeuda = 0;
+        JSONArray socioList = (JSONArray) jsonObject.get("socios-participes");
+        for (Object obj : socioList) {
+            JSONObject socio = (JSONObject) obj;
+            String cuit = socio.get("cuit").toString();
+            if (CUIT.equalsIgnoreCase(cuit)) {
+                JSONObject lineadecredito = (JSONObject) socio.get("lineas-de-credito");
+                tope = (double) lineadecredito.get("tope");
+                monto_utilizado = (double) lineadecredito.get("monto-utilizado");
+                montohabilitado = (tope - monto_utilizado);
+                if (Importe > montohabilitado && Importe <= tope) {
+                    lineadecredito.put("monto-utilizado", tope);
+                    int contadordeuda = 0;
+                    JSONArray deudasList = (JSONArray) jsonObject.get("deudas");
+                    montodeuda = Importe - montohabilitado;
+                    if (deudasList != null) {
+                        for (Object deu : operacionesList) {
+                            JSONObject id = (JSONObject) deu;
+                            contadordeuda = 1 + Integer.parseInt(id.get("id-deuda").toString());
+                        }
+                    }
+                    Deuda nuevaDeuda = new Deuda(montodeuda, CUIT, contadordeuda, montodeuda * 0.05);
+                    JSONObject deuda1 = nuevaDeuda.toJSON();
+                    JSONArray DeudasList = new JSONArray();
+                    DeudasList.add(deuda1);
+                    socio.put("deudas", DeudasList);
+                    jsonObject.put("socios-participes", socioList);
+                    file.writeJson(filename, jsonObject);
+                } else {
+
+                    lineadecredito.put("monto-utilizado", monto_utilizado + (double) Importe);
+                    file.writeJson(filename, jsonObject);
+                }
+            }
+        }
+
+        api.OPTipo3 nuevaOT3 = new impl.OPTipo3(CUIT, CDC, Banco, Importe, Tasa, sist, FDA, estado, tipo, contador);
         JSONObject operacion3 = nuevaOT3.toJSON();
         guardarDatos(operacion3);
 
-        CertificadoDeGarantia nuevoCDG = new CertificadoDeGarantia("1234");
+        JSONArray certList = (JSONArray) jsonObjectOPC.get("certificado-de-garantia");
+        int contadorc = 100;
+        if (certList != null) {
+            for (Object cert : certList) {
+                JSONObject idc = (JSONObject) cert;
+                contadorc = 1 + Integer.parseInt(idc.get("idcertificado").toString());
+            }
+        }
+
+        CertificadoDeGarantia nuevoCDG = new CertificadoDeGarantia(CUIT, contadorc, contador);
         JSONObject CDG = nuevoCDG.toJSON();
         guardarDatosCDG(CDG);
 
-        Comision nuevoCOM = new Comision(0, "Pago", 3, 1, "Pagare");
-        JSONObject COM = nuevoCOM.toJSON();
-        guardarDatoscomision(COM);
+        jsonObjectOPC = (JSONObject) file.readJson(filenamefact);
+        JSONArray sociocertestadolist = (JSONArray) jsonObjectOPC.get("operaciones");
+        for (Object sce : sociocertestadolist) {
+            JSONObject scejo = (JSONObject) sce;
+            int nop = Integer.parseInt(scejo.get("numerooperacion").toString());
+            if (contador == nop) {
+                scejo.put("estado", "Con certificado emitido");
+                file.writeJson(filenamefact, jsonObjectOPC);
+            }
+        }
     }
 
+    public double nuevacomision(int numerocertificado) throws Exception {
+
+        JSONArray certList = (JSONArray) jsonObjectOPC.get("certificado-de-garantia");
+        int numerocertaux;
+        int numerop =0;
+        String tipoop="";
+        double porcentajecomision=0;
+        double importetotal=0;
+
+        if (certList != null) {
+            for (Object cert : certList) {
+                JSONObject idc = (JSONObject) cert;
+               numerocertaux= Integer.parseInt(idc.get("idcertificado").toString());
+               if (numerocertaux == numerocertificado){
+                   numerop= Integer.parseInt(idc.get("numero-operacion").toString());
+               }
+            }
+            jsonObjectOPC = (JSONObject) file.readJson(filenamefact);
+            JSONArray sociocertestadolist = (JSONArray) jsonObjectOPC.get("operaciones");
+            for (Object sce : sociocertestadolist) {
+                JSONObject scejo = (JSONObject) sce;
+                int nop = Integer.parseInt(scejo.get("numerooperacion").toString());
+                if (numerop == nop) {
+                    scejo.put("estado", "Monetizado");
+                    tipoop=scejo.get("tipo").toString();
+                    importetotal= (double) scejo.get("importetotal");
+                    file.writeJson(filenamefact, jsonObjectOPC);
+                }
+            }
+            if (tipoop=="Cheque Propio"||tipoop=="Cheque de terceros"||tipoop=="Pagare Bursatil"||tipoop=="Cuenta Corriente"||tipoop=="Tarjeta de Credito"){
+                porcentajecomision=3;
+            }
+            else{
+                porcentajecomision=4;
+            }
+        }
+
+
+        JSONArray comList = (JSONArray) jsonObjectOPC.get("comision");
+        int contadorco = 1000;
+        if (comList != null) {
+            for (Object com : comList) {
+                JSONObject comision = (JSONObject) com;
+                contadorco = 1 + Integer.parseInt(comision.get("IDComision").toString());
+            }
+        }
+        double comisiontotal=importetotal*(porcentajecomision/100);
+        System.out.println(comisiontotal);
+
+        Comision nuevoCOM = new Comision(contadorco,"Calculada",porcentajecomision,numerop,tipoop,comisiontotal);
+        JSONObject COM = nuevoCOM.toJSON();
+        guardarDatoscomision(COM);
+
+        return comisiontotal;
+    }
 
     public void guardarDatos(JSONObject objeto) throws Exception {
         String filename = "./src/resources/operacioncontroller.json";
@@ -303,7 +434,6 @@ public class Verificaciones implements api.Verificaciones {
     }
 
     public void guardarDatosDeuda(JSONObject objeto) throws Exception {
-        System.out.println("Entro al guardar datos deuda");
         String filename = "./src/resources/socios.json";
         API_JSONHandler file = new JSONHandler();
         JSONObject jsonObject = (JSONObject) file.readJson(filename);
