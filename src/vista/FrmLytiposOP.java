@@ -33,3 +33,4 @@ public class FrmLytiposOP extends JDialog{
         this.setLocationRelativeTo(null);
     }
 }
+//hola
