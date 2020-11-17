@@ -104,7 +104,9 @@ public class FrmSocios extends JDialog{
                     showMessageDialog(null, "El CUIT ingresado es invalido");
                     datosCorrectosFlag = false;
                 }
-                crearTabla(accionistasList);
+                if (datosCorrectosFlag==true) {
+                    crearTabla(accionistasList);
+                }
             }
         });
 
@@ -130,19 +132,21 @@ public class FrmSocios extends JDialog{
                     showMessageDialog(null, "El CUIT ingresado es invalido");
                     datosCorrectosFlag = false;
                 }
-                modelos= (DefaultTableModel) accionistasTabla.getModel();
+                if(datosCorrectosFlag==true) {
+                    modelos = (DefaultTableModel) accionistasTabla.getModel();
 
-                if(accionistasTabla.getSelectedRow() != -1) {
-                    // Elimina la fila seleccionada
-                    String cuit= accionistasTabla.getValueAt(accionistasTabla.getSelectedRow(),0).toString();
-                    try {
-                        eliminarAccionista(cuit);
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
+                    if (accionistasTabla.getSelectedRow() != -1) {
+                        // Elimina la fila seleccionada
+                        String cuit = accionistasTabla.getValueAt(accionistasTabla.getSelectedRow(), 0).toString();
+                        try {
+                            eliminarAccionista(cuit);
+                        } catch (Exception exception) {
+                            exception.printStackTrace();
+                        }
+                        modelos.removeRow(accionistasTabla.getSelectedRow());
+                        JOptionPane.showMessageDialog(null, "Se elimino la fila correctamente");
+                        PnlsAccionistas.setViewportView(accionistasTabla);
                     }
-                    modelos.removeRow(accionistasTabla.getSelectedRow());
-                    JOptionPane.showMessageDialog(null, "Se elimino la fila correctamente");
-                    PnlsAccionistas.setViewportView(accionistasTabla);
                 }
             }
         });
@@ -206,8 +210,6 @@ public class FrmSocios extends JDialog{
                     datosCorrectosFlag = false;
                 }
                 if (datosCorrectosFlag == true) {
-
-
                     //Agregar
                     Double participac = Double.parseDouble(spinParticipacion.toString());
                     try {
