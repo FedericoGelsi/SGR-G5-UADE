@@ -1,6 +1,9 @@
 package impl;
 
 import org.json.simple.JSONArray;
+
+import java.lang.reflect.Array;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import api.API_JSONHandler;
 import impl.JSONHandler;
@@ -371,18 +374,18 @@ public class Verificaciones implements api.Verificaciones {
 
         JSONArray certList = (JSONArray) jsonObjectOPC.get("certificado-de-garantia");
         int numerocertaux;
-        int numerop =0;
-        String tipoop="";
-        double porcentajecomision=0;
-        double importetotal=0;
+        int numerop = 0;
+        String tipoop = "";
+        double porcentajecomision = 0;
+        double importetotal = 0;
 
         if (certList != null) {
             for (Object cert : certList) {
                 JSONObject idc = (JSONObject) cert;
-               numerocertaux= Integer.parseInt(idc.get("idcertificado").toString());
-               if (numerocertaux == numerocertificado){
-                   numerop= Integer.parseInt(idc.get("numero-operacion").toString());
-               }
+                numerocertaux = Integer.parseInt(idc.get("idcertificado").toString());
+                if (numerocertaux == numerocertificado) {
+                    numerop = Integer.parseInt(idc.get("numero-operacion").toString());
+                }
             }
             jsonObjectOPC = (JSONObject) file.readJson(filenamefact);
             JSONArray sociocertestadolist = (JSONArray) jsonObjectOPC.get("operaciones");
@@ -391,16 +394,15 @@ public class Verificaciones implements api.Verificaciones {
                 int nop = Integer.parseInt(scejo.get("numerooperacion").toString());
                 if (numerop == nop) {
                     scejo.put("estado", "Monetizado");
-                    tipoop=scejo.get("tipo").toString();
-                    importetotal= (double) scejo.get("importetotal");
+                    tipoop = scejo.get("tipo").toString();
+                    importetotal = (double) scejo.get("importetotal");
                     file.writeJson(filenamefact, jsonObjectOPC);
                 }
             }
-            if (tipoop=="Cheque Propio"||tipoop=="Cheque de terceros"||tipoop=="Pagare Bursatil"||tipoop=="Cuenta Corriente"||tipoop=="Tarjeta de Credito"){
-                porcentajecomision=3;
-            }
-            else{
-                porcentajecomision=4;
+            if (tipoop == "Cheque Propio" || tipoop == "Cheque de terceros" || tipoop == "Pagare Bursatil" || tipoop == "Cuenta Corriente" || tipoop == "Tarjeta de Credito") {
+                porcentajecomision = 3;
+            } else {
+                porcentajecomision = 4;
             }
         }
 
@@ -413,10 +415,10 @@ public class Verificaciones implements api.Verificaciones {
                 contadorco = 1 + Integer.parseInt(comision.get("IDComision").toString());
             }
         }
-        double comisiontotal=importetotal*(porcentajecomision/100);
+        double comisiontotal = importetotal * (porcentajecomision / 100);
         System.out.println(comisiontotal);
 
-        Comision nuevoCOM = new Comision(contadorco,"Calculada",porcentajecomision,numerop,tipoop,comisiontotal);
+        Comision nuevoCOM = new Comision(contadorco, "Calculada", porcentajecomision, numerop, tipoop, comisiontotal);
         JSONObject COM = nuevoCOM.toJSON();
         guardarDatoscomision(COM);
 
@@ -463,6 +465,7 @@ public class Verificaciones implements api.Verificaciones {
         file.writeJson(filename, jsonObject);
     }
 
+
     public boolean check_deuda(String CUIT) {
         double montodeuda = 0;
         boolean existedeuda = false;
@@ -484,7 +487,64 @@ public class Verificaciones implements api.Verificaciones {
         }
         return existedeuda;
     }
+
+    public int getDayNumberNew(LocalDate date) {
+        DayOfWeek day = date.getDayOfWeek();
+        System.out.println(day.getValue());
+        return day.getValue();
+    }
+
+
+
+    public void crearFacturas() throws Exception {
+        ArrayList<Double> montocomision = new ArrayList<Double>();
+        jsonObjectOPC = (JSONObject) file.readJson(filenamefact);
+        System.out.println("entro al metodo");
+        int contador = 0;
+        int contadora = 0;
+        int day = getDayNumberNew(LocalDate.now());
+        double monto_com=0;
+        if (day == 2) { // Cambiar a 1
+            System.out.println("entro al dia");
+            String com_estado = "";
+            JSONArray comisionList = (JSONArray) jsonObjectOPC.get("comision");
+            for (Object com : comisionList) {
+                System.out.println("entro al for");
+                JSONObject comisionObject = (JSONObject) com;
+                com_estado = comisionObject.get("Estado").toString();
+                System.out.println(com_estado);
+                if (com_estado.equalsIgnoreCase("Calculada")){
+                    monto_com = (double) comisionObject.get("montocomisiontotal");
+                    montocomision.add(monto_com);
+                    contador++;
+                    System.out.println(contador);
+                    comisionObject.put("Estado", "Facturada");
+                    file.writeJson(filenamefact, jsonObjectOPC);
+                }
+            }
+            while (contador>0) {
+                System.out.println(contador);
+                Factura nuevaFactura = new Factura(0, montocomision.get(contadora), "20-11111111-2", "20-1155511-2", "Emitida");
+                JSONObject Fact = nuevaFactura.toJSON();
+                guardarDatosFactura(Fact);
+                contadora++;
+                contador--;
+            }
+        }
+    }
+
+    public void guardarDatosFactura(JSONObject objeto) throws Exception {
+        String filename = "./src/resources/operacioncontroller.json";
+        API_JSONHandler file = new JSONHandler();
+        JSONObject jsonObject = (JSONObject) file.readJson(filename);
+        JSONArray FactList = (JSONArray) jsonObject.get("facturas");
+        FactList.add(objeto);
+        jsonObject.put("facturas", FactList);
+        file.writeJson(filename, jsonObject);
+    }
+
 }
+
 
     /* public void crearOT2(String nombreempresa, float importetotal, LocalDate fechavencimiento, String tipo) throws Exception {
         api.OPTipo2 nuevaOT2 = new impl.OPTipo2(nombreempresa, importetotal, fechavencimiento, tipo);

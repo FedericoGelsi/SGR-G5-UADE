@@ -50,5 +50,12 @@ public interface Verificaciones {
 
     //Crea una nueva comision
     double nuevacomision(int numerocertificado) throws Exception;
+
+    //Te dice el dia de la semana (1 es Lunes, 2 es martes, etc)
+    int getDayNumberNew(LocalDate date);
+
+    // Los dias lunes factura las comisiones calculadas
+    void crearFacturas() throws Exception;
+
 }
 

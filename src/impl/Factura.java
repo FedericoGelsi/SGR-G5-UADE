@@ -7,22 +7,24 @@ import java.time.format.DateTimeFormatter;
 
 public class Factura implements api.Factura {
     private int IDFactura;
-    private float montoFactura;
+    private double montoFactura;
     private String CUITemisor;
     private String CUITdestinatario;
     private String estado;
 
     /*======CONSTRUCTOR=======*/
 
-    public Factura(float montoFactura, String CUITemisor, String CUITdestinatario) {
+    public Factura(int IDFactura,double montoFactura, String CUITemisor, String CUITdestinatario, String estado) {
         this.montoFactura = montoFactura;
         this.CUITemisor = CUITemisor;
         this.CUITdestinatario = CUITdestinatario;
+        this.IDFactura = IDFactura;
+        this.estado = estado;
     }
 
     public Factura(JSONObject jsonFactura) {
         this.IDFactura= Integer.parseInt(jsonFactura.get("idfactura").toString());
-        this.montoFactura = (float) jsonFactura.get("montofactura");
+        this.montoFactura = (double) jsonFactura.get("montofactura");
         this.CUITemisor = (String) jsonFactura.get("CUITemisor");
         this.CUITdestinatario = (String) jsonFactura.get("CUITDestinatario");
         this.estado=(String) jsonFactura.get("estado");
@@ -35,7 +37,7 @@ public class Factura implements api.Factura {
     }
 
     @Override
-    public float getMontoFactura() {
+    public double getMontoFactura() {
         return montoFactura;
     }
 
@@ -55,12 +57,12 @@ public class Factura implements api.Factura {
     }
 
     public JSONObject toJSON() {
-        JSONObject factura = new JSONObject();
-        factura.put("idfactura", this.IDFactura);
-        factura.put("montofactura", this.montoFactura);
-        factura.put("CUITemisor", this.CUITemisor);
-        factura.put("CUITDestinatario", this.CUITdestinatario);
-        factura.put("estado",this.estado);
-        return factura;
+        JSONObject facturas = new JSONObject();
+        facturas.put("idfactura", this.IDFactura);
+        facturas.put("montofactura", this.montoFactura);
+        facturas.put("CUITemisor", this.CUITemisor);
+        facturas.put("CUITDestinatario", this.CUITdestinatario);
+        facturas.put("estado",this.estado);
+        return facturas;
     }
 }

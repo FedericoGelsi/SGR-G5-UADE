@@ -88,6 +88,7 @@ public class FrmOperaciones extends JDialog {
     private JSpinner spinnerTDDPB;
     private JComboBox comboNDOC;
     private JButton JBC;
+    private JPanel pnlComision;
     private Verificaciones verif = new impl.Verificaciones();
 
     private String filename = "./src/resources/socios.json";
@@ -122,6 +123,9 @@ public class FrmOperaciones extends JDialog {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         // Inicia la pantalla centrada
         this.setLocationRelativeTo(null);
+
+
+        verif.crearFacturas(); // CAMBIAR A LOGIN
 
         //Action Listener de JButton Cheques Personales
         JBCHP.addActionListener(new ActionListener() {
@@ -215,6 +219,10 @@ public class FrmOperaciones extends JDialog {
                     }
                     if (verif.debefacturas(CDFCHP) == true) {
                         showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que se adeudan facturas");
+                        checks = false;
+                    }
+                    if (verif.operacionvsfdr(ITCHPint) == false) {
+                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
                         checks = false;
                     }
                     if(verif.check_deuda(CDFCHP)==true){
@@ -621,14 +629,14 @@ public class FrmOperaciones extends JDialog {
                     estadoNDOC = operacion.get("estado").toString();
                     if (estadoNDOC.equalsIgnoreCase("Con certificado emitido")) {
                         numeroopNDOC = Integer.parseInt(operacion.get("numerooperacion").toString());
-                    }
-                    JSONArray certdegarlist = (JSONArray) jsonObjectOPC.get("certificado-de-garantia");
-                    for (Object cdg : certdegarlist) {
-                        JSONObject certificado = (JSONObject) cdg;
-                        numeroopcdgNDOC = Integer.parseInt(certificado.get("numero-operacion").toString());
-                        if (numeroopNDOC==numeroopcdgNDOC) {
-                            numerocertificado=Integer.parseInt(certificado.get("idcertificado").toString());
-                            comboNDOC.addItem(numerocertificado);
+                        JSONArray certdegarlist = (JSONArray) jsonObjectOPC.get("certificado-de-garantia");
+                        for (Object cdg : certdegarlist) {
+                            JSONObject certificado = (JSONObject) cdg;
+                            numeroopcdgNDOC = Integer.parseInt(certificado.get("numero-operacion").toString());
+                            if (numeroopNDOC==numeroopcdgNDOC) {
+                                numerocertificado=Integer.parseInt(certificado.get("idcertificado").toString());
+                                comboNDOC.addItem(numerocertificado);
+                            }
                         }
                     }
                 }
@@ -642,9 +650,41 @@ public class FrmOperaciones extends JDialog {
                 int numerooperacion =  Integer.parseInt (comboNDOC.getSelectedItem().toString());
                 try {
                     montocomision=verif.nuevacomision(numerooperacion);
-                    showMessageDialog(null,"El monto de la comision es:"+montocomision);
+                    showMessageDialog(null,"El monto de la comision es: "+montocomision);
                 } catch (Exception exception) {
                     exception.printStackTrace();
+                }
+
+                //Popula el comboNDOC
+                JSONObject jsonObjectOPC = null;
+                try {
+                    jsonObjectOPC = (JSONObject) file.readJson(filenamefact);
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+                comboNDOC.removeAllItems();
+                String estadoNDOC = "";
+                int numeroopNDOC = 0;
+                int numeroopcdgNDOC = 0;
+                int numerocertificado=0;
+                ArrayList<Integer> listacertificados = new ArrayList<Integer>();
+
+                JSONArray operacioneslist = (JSONArray) jsonObjectOPC.get("operaciones");
+                for (Object ops : operacioneslist) {
+                    JSONObject operacion = (JSONObject) ops;
+                    estadoNDOC = operacion.get("estado").toString();
+                    if (estadoNDOC.equalsIgnoreCase("Con certificado emitido")) {
+                        numeroopNDOC = Integer.parseInt(operacion.get("numerooperacion").toString());
+                        JSONArray certdegarlist = (JSONArray) jsonObjectOPC.get("certificado-de-garantia");
+                        for (Object cdg : certdegarlist) {
+                            JSONObject certificado = (JSONObject) cdg;
+                            numeroopcdgNDOC = Integer.parseInt(certificado.get("numero-operacion").toString());
+                            if (numeroopNDOC==numeroopcdgNDOC) {
+                                numerocertificado=Integer.parseInt(certificado.get("idcertificado").toString());
+                                comboNDOC.addItem(numerocertificado);
+                            }
+                        }
+                    }
                 }
             }
         });
