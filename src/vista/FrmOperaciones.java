@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.awt.event.*;
 
 import static javax.swing.JOptionPane.showMessageDialog;
 
@@ -77,7 +78,6 @@ public class FrmOperaciones extends JDialog {
     private JTextField TFNDCCHP;
     private JButton JBCCC;
     private JButton JBTC;
-    private Verificaciones verif = new impl.Verificaciones();
     private JSpinner spinnerITCHP;
     private JSpinner spinnerITCHT;
     private JSpinner spinnerITPB;
@@ -91,6 +91,11 @@ public class FrmOperaciones extends JDialog {
     private JTextField TFCUIT;
     private JTextField TFCUIT2;
     private JSpinner ITTC;
+    private JLabel TIPOTARJETA;
+    private JLabel IMAGE;
+    private JLabel Image;
+    private final Verificaciones verif = new impl.Verificaciones();
+
 
     private final String filename = "./src/resources/socios.json";
     private final API_JSONHandler file = new JSONHandler();
@@ -1008,8 +1013,11 @@ public class FrmOperaciones extends JDialog {
             }
 
             if (verif.esnumerico(CDSTC)) {
-                if (CDSTC.length() != 3) {
-                    showMessageDialog(null, "El código debe ser de 3 números");
+                if (CDSTC.length() != 3 && TIPOTARJETA.getText().equals("VISA") || CDSTC.length() != 3 && TIPOTARJETA.getText().equals("MASTERCARD")){
+                    showMessageDialog(null, "El código de seguridad para una tarjeta VISA o MASTERCARD debe ser de 3 números");
+                }
+                if(CDSTC.length() != 4 && TIPOTARJETA.getText().equals("AMERICAN")){
+                    showMessageDialog(null, "El código de seguridad para una tarjeta AMERICAN EXPRESS debe ser de 4 números");
                 }
             }
             if (!verif.esnumerico(CDSTC) && !CDSTC.isEmpty()) {
@@ -1028,8 +1036,8 @@ public class FrmOperaciones extends JDialog {
             String NDTTC;
             int TFNDTTCint = 0;
             NDTTC = TFNDTTC.getText();
-            if (NDTTC.contains("-") && NDTTC.length() > 18) {
-                if (verif.tarjetavalida(NDTTC)) {
+            if (NDTTC.contains("-") && NDTTC.length() >= 17) {
+                if (verif.tarjetavalida(NDTTC,TIPOTARJETA)) {
                 } else {
                     showMessageDialog(null, "La tarjeta ingresada es inválida");
                     DatosCorrectosFlagTC = false;
@@ -1038,8 +1046,12 @@ public class FrmOperaciones extends JDialog {
             } else {
                 if (NDTTC.isEmpty()) {
                     showMessageDialog(null, "Ingrese el número de la tarjeta");
+                    DatosCorrectosFlagTC = false;
+                    checks = false;
                 } else {
-                    showMessageDialog(null, "El número de tarjeta debe contener '-' y 16 números");
+                    showMessageDialog(null, "El número de tarjeta debe contener '-' y al menos 15 números");
+                    DatosCorrectosFlagTC = false;
+                    checks = false;
                 }
 
             }
@@ -1103,7 +1115,39 @@ public class FrmOperaciones extends JDialog {
                 }
         }
     });
-}
+        TFNDTTC.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
+                String NDTTC;
+                int TFNDTTCint;
+                NDTTC = TFNDTTC.getText();
+                if (NDTTC.length() > 1){
+                    if(verif.isMaster(NDTTC)){
+                        TIPOTARJETA.setText("MASTERCARD");
+                        Image.setIcon(new ImageIcon("image/mastercard.png"));
+                    }
+                    if(verif.isVisa(NDTTC)){
+                        TIPOTARJETA.setText("VISA");
+                        Image.setIcon(new ImageIcon("image/visa.png"));
+                    }
+                    if (verif.isAmerican(NDTTC)){
+                        TIPOTARJETA.setText("AMERICAN");
+                        Image.setIcon(new ImageIcon("image/american.png"));
+                    }
+                }
+                else{
+                    TIPOTARJETA.setText("-");
+                }
+            }
+        });
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+        Image = new JLabel(new ImageIcon());
+    }
+
 }
 
 
