@@ -815,7 +815,6 @@ public class Verificaciones implements api.Verificaciones {
                         accionistaCUIT = MisAccionistasList.get(i);
                         if (AccionistasOtro.contains(accionistaCUIT) && !AccionistaCompartido.contains(cuit)) {
                             AccionistaCompartido.add(cuit);
-                            System.out.println(cuit);
                         }
                     }
 
@@ -827,6 +826,7 @@ public class Verificaciones implements api.Verificaciones {
 
         public boolean Computar5FDRAc (ArrayList < String > AccionistasCompartidos, String CUIT,double IMPORTEOPERACION)
         {
+
             double totalcomputado = 0.0;
             String accionistaCUIT = "";
             String operacion_cuit = "";
@@ -840,36 +840,40 @@ public class Verificaciones implements api.Verificaciones {
 
 
             for (int i = 0; i < AccionistasCompartidos.size(); i++) {
+                System.out.println("Bokita");
                 accionistaCUIT = AccionistasCompartidos.get(i);
                 JSONArray operacionesList = (JSONArray) jsonObjectOPC.get("operaciones");
                 for (Object ops : operacionesList) {
                     JSONObject operaciones = (JSONObject) ops;
                     operacion_cuit = operaciones.get("CUITSocio").toString();
                     if (accionistaCUIT.equalsIgnoreCase(operacion_cuit)) {
+                        if (operaciones.get("tipo").equals("Tarjeta de Credito")){
+                            fecha_vencimiento = LocalDate.parse(operaciones.get("fechavencimiento").toString().concat("-20"));
+                            fechaAux = fechavshoy(fecha_vencimiento);
+                            System.out.println(fechaAux);
+                        }
+                        else{
                         estado_operacion = operaciones.get("estado").toString();
                         fecha_vencimiento = LocalDate.parse(operaciones.get("fechavencimiento").toString());
                         fechaAux = fechavshoy(fecha_vencimiento);
-                        System.out.println(fechaAux);
-                        System.out.println(estado_operacion);
+                            System.out.println(fechaAux);
                         if (fechaAux.equalsIgnoreCase("Mayor") && estado_operacion.equalsIgnoreCase("Monetizada")) {
                             tipo_operacion = operaciones.get("tipo").toString();
                             importetotal = (double) operaciones.get("importetotal");
-                            System.out.println(importetotal);
+
                             if (tipo_operacion.equalsIgnoreCase("Pagare Bursatil") || tipo_operacion.equalsIgnoreCase("Cheque de terceros") || tipo_operacion.equalsIgnoreCase("Cheque propio")) {
                                 totalcomputado = totalcomputado + importetotal;
-                                System.out.println(totalcomputado);
 
                             }
                             if (tipo_operacion.equalsIgnoreCase("Cuenta Corriente") || tipo_operacion.equalsIgnoreCase("Tarjeta de Credito")) {
                                 totalcomputado = totalcomputado + importetotal;
-                                System.out.println(totalcomputado);
 
                             }
                             if (tipo_operacion.equalsIgnoreCase("Prestamo")) {
                                 totalcomputado = totalcomputado + importetotal;
-                                System.out.println(totalcomputado);
 
                             }
+                        }
                         }
                     }
                 }
@@ -880,29 +884,36 @@ public class Verificaciones implements api.Verificaciones {
                     operacion_cuit = operaciones.get("CUITSocio").toString();
                     if (CUIT.equalsIgnoreCase(operacion_cuit)) {
                         estado_operacion = operaciones.get("estado").toString();
-                        fecha_vencimiento = LocalDate.parse(operaciones.get("fechavencimiento").toString());
+                        if (operaciones.get("tipo").equals("Tarjeta de Credito")){
+                        fecha_vencimiento = LocalDate.parse(operaciones.get("fechavencimiento").toString().concat("-20"));
                         fechaAux = fechavshoy(fecha_vencimiento);
-                        System.out.println(fechaAux);
-                        System.out.println(estado_operacion);
+                            System.out.println(fechaAux);
+                        estado_operacion = operaciones.get("estado").toString();
+                        }
+                        else
+                        {
+                            fecha_vencimiento = LocalDate.parse(operaciones.get("fechavencimiento").toString());
+                            fechaAux = fechavshoy(fecha_vencimiento);
+                            System.out.println(fechaAux);
+                            estado_operacion = operaciones.get("estado").toString();
                         if (fechaAux.equalsIgnoreCase("Mayor") && estado_operacion.equalsIgnoreCase("Monetizada")) {
                             tipo_operacion = operaciones.get("tipo").toString();
                             importetotal = (double) operaciones.get("importetotal");
-                            System.out.println(importetotal);
                             if (tipo_operacion.equalsIgnoreCase("Pagare Bursatil") || tipo_operacion.equalsIgnoreCase("Cheque de terceros") || tipo_operacion.equalsIgnoreCase("Cheque propio")) {
                                 totalcomputado = totalcomputado + importetotal;
-                                System.out.println(totalcomputado);
 
                             }
                             if (tipo_operacion.equalsIgnoreCase("Cuenta Corriente") || tipo_operacion.equalsIgnoreCase("Tarjeta de Credito")) {
                                 totalcomputado = totalcomputado + importetotal;
-                                System.out.println(totalcomputado);
+
 
                             }
                             if (tipo_operacion.equalsIgnoreCase("Prestamo")) {
                                 totalcomputado = totalcomputado + importetotal;
-                                System.out.println(totalcomputado);
+
 
                             }
+                        }
                         }
                     }
                 }
@@ -910,6 +921,7 @@ public class Verificaciones implements api.Verificaciones {
             System.out.println(totalcomputado);
             if (IMPORTEOPERACION > totalcomputado && totalcomputado != 0) {
                 flag = true;
+                System.out.println(totalcomputado);
             }
             return flag;
         }

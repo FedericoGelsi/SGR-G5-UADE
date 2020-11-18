@@ -52,6 +52,30 @@
             "numerooperacion": 1,
             "fechavencimiento":"2020-12-25",
             "numerocheque":    156165161
+        },
+        {
+            "CUITSocio":       "20-12345678-2",
+            "tipo":            "Tarjeta de Credito",
+            "estado":          "Monetizado",
+            "numerotarjeta":   0,
+            "nombreempresa":   "-",
+            "nombretarjeta":   "Bokita",
+            "importetotal":    210.0,
+            "codigoseguridad": 0,
+            "numerooperacion": 2,
+            "fechavencimiento":"2021-10"
+        },
+        {
+            "CUITSocio":       "20-12345678-2",
+            "tipo":            "Cuenta Corriente",
+            "estado":          "Monetizado",
+            "numerotarjeta":   0,
+            "nombreempresa":   "",
+            "nombretarjeta":   "",
+            "importetotal":    10.0,
+            "codigoseguridad": 0,
+            "numerooperacion": 3,
+            "fechavencimiento":"2021-12-10"
         }
     ],
     "certificado-de-garantia":[
@@ -124,6 +148,56 @@
             "CUITSocio":       "20-11112222-2",
             "numero-operacion":1,
             "idcertificado":   114
+        },
+        {
+            "CUITSocio":       "20-11112222-2",
+            "numero-operacion":2,
+            "idcertificado":   115
+        },
+        {
+            "CUITSocio":       "20-11112222-2",
+            "numero-operacion":3,
+            "idcertificado":   116
+        },
+        {
+            "CUITSocio":       "20-12345678-2",
+            "numero-operacion":4,
+            "idcertificado":   117
+        },
+        {
+            "CUITSocio":       "20-87654321-2",
+            "numero-operacion":5,
+            "idcertificado":   118
+        },
+        {
+            "CUITSocio":       "20-11112222-2",
+            "numero-operacion":6,
+            "idcertificado":   119
+        },
+        {
+            "CUITSocio":       "20-11112222-2",
+            "numero-operacion":7,
+            "idcertificado":   120
+        },
+        {
+            "CUITSocio":       "20-11112222-2",
+            "numero-operacion":8,
+            "idcertificado":   121
+        },
+        {
+            "CUITSocio":       "20-11112222-2",
+            "numero-operacion":4,
+            "idcertificado":   122
+        },
+        {
+            "CUITSocio":       "20-12345678-2",
+            "numero-operacion":4,
+            "idcertificado":   123
+        },
+        {
+            "CUITSocio":       "20-11112222-2",
+            "numero-operacion":5,
+            "idcertificado":   124
         }
     ],
     "modified-by":            "admin"

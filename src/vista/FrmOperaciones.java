@@ -92,7 +92,6 @@ public class FrmOperaciones extends JDialog {
     private JTextField TFCUIT2;
     private JSpinner ITTC;
     private JLabel TIPOTARJETA;
-    private JLabel IMAGE;
     private JLabel Image;
     private final Verificaciones verif = new impl.Verificaciones();
 
@@ -1138,16 +1137,17 @@ public class FrmOperaciones extends JDialog {
                 }
                 else{
                     TIPOTARJETA.setText("-");
+                    Image.setIcon(null);
                 }
             }
         });
     }
 
+
     private void createUIComponents() {
         // TODO: place custom component creation code here
         Image = new JLabel(new ImageIcon());
     }
-
 }
 
 
