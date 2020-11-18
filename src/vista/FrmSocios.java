@@ -2,6 +2,7 @@ package vista;
 
 import api.API_JSONHandler;
 import api.Accionista;
+import api.SocioController;
 import api.Verificaciones;
 import com.formdev.flatlaf.FlatLightLaf;
 import impl.JSONHandler;
@@ -89,7 +90,7 @@ public class FrmSocios extends JDialog {
     private JTable accionistasTabla;
     private Double total;
     private Boolean estado;
-
+    private SocioController scController = new impl.SocioController();
 
     public FrmSocios(Window owner, String Title) throws Exception {
         super(owner, Title);
@@ -146,7 +147,39 @@ public class FrmSocios extends JDialog {
                 if (borrarSocioButton.isVisible()) {
                     //modificarSocio();
                 } else {
-                    altaSocio();
+                    if (CBTIPOSOCIO.getSelectedItem().equals("Socio Participe")) {
+                        try {
+                            scController.altaSocioParticipe(
+                                    ABMCUITTextField.getText(),
+                                    razonSocialTextField.getText(),
+                                    fechaInicActTextField.getText(),
+                                    CBTIPOEMP.getSelectedItem().toString(),
+                                    actPrincipalTextField.getText(),
+                                    direccionTextField.getText(),
+                                    emailTextField.getText()
+                            );
+                            showMessageDialog(null, "Socio Partícipe creado con éxito.");
+                            clearABMFields();
+                        } catch (Exception exception) {
+                            exception.printStackTrace();
+                        }
+                    }else{
+                        try {
+                            scController.altaSocioProtector(
+                                    ABMCUITTextField.getText(),
+                                    razonSocialTextField.getText(),
+                                    fechaInicActTextField.getText(),
+                                    CBTIPOEMP.getSelectedItem().toString(),
+                                    actPrincipalTextField.getText(),
+                                    direccionTextField.getText(),
+                                    emailTextField.getText()
+                            );
+                            showMessageDialog(null, "Socio Protector creado con éxito.");
+                            clearABMFields();
+                        } catch (Exception exception) {
+                            exception.printStackTrace();
+                        }
+                    }
                 }
                 modificarDatosButton.setVisible(true);
                 confirmarDatosButton.setVisible(false);
@@ -519,7 +552,6 @@ public class FrmSocios extends JDialog {
     }
 
     private void clearABMFields() {
-        ABMCUITTextField.setText("");
         razonSocialTextField.setText("");
         actPrincipalTextField.setText("");
         fechaInicActTextField.setText("");
@@ -583,62 +615,49 @@ public class FrmSocios extends JDialog {
 
     //busqueda en el panel ABM
     private void buscarSocioXCuit() throws Exception {
-        boolean socioencontrado = false;
         if (verificar.CUITValido(ABMCUITTextField.getText())) {
             jsonObject = (JSONObject) file.readJson(filename);
             confirmarDatosButton.setVisible(false);
             modificarDatosButton.setVisible(false);
             cancelarButton.setVisible(false);
-            JSONArray socioList = (JSONArray) jsonObject.get("socios-participes");
-            for (Object obj : socioList) {
-                api.Socio_Participe socio = new Socio_Participe((JSONObject) obj);
-                if (ABMCUITTextField.getText().equals(socio.getCUITSocio())) {
-                    socioencontrado = true;
-                    razonSocialTextField.setText(socio.getRazonSocial());
-                    CBESTADO.setSelectedItem(socio.getEstado());
-                    fechaInicActTextField.setText(socio.getFinicAct().toString());
-                    actPrincipalTextField.setText(socio.getActPrincipal());
-                    direccionTextField.setText(socio.getDireccion());
-                    emailTextField.setText(socio.getEmail());
-                    CBTIPOEMP.setSelectedItem(socio.getTipoEmpresa());
+            JSONObject socio = scController.buscarSocioParticipe(ABMCUITTextField.getText());
+            if (socio!= null){
+                    razonSocialTextField.setText(socio.get("razon-social").toString());
+                    CBESTADO.setSelectedItem(socio.get("estado"));
+                    fechaInicActTextField.setText(socio.get("finic-act").toString());
+                    actPrincipalTextField.setText(socio.get("actividad-principal").toString());
+                    direccionTextField.setText(socio.get("direccion").toString());
+                    emailTextField.setText(socio.get("email").toString());
+                    CBTIPOEMP.setSelectedItem(socio.get("tipo-empresa").toString());
                     modificarDatosButton.setVisible(true);
                     borrarSocioButton.setVisible(true);
                     borrarCamposButton.setVisible(false);
                     CBTIPOSOCIO.setSelectedIndex(0);
                     CBTIPOSOCIO.setEnabled(false);
+            } else{
+                socio = scController.buscarSocioParticipe(ABMCUITTextField.getText());
+                if (socio != null){
+                    razonSocialTextField.setText(socio.get("razon-social").toString());
+                    CBESTADO.setSelectedItem(socio.get("estado"));
+                    fechaInicActTextField.setText(socio.get("finic-act").toString());
+                    actPrincipalTextField.setText(socio.get("actividad-principal").toString());
+                    direccionTextField.setText(socio.get("direccion").toString());
+                    emailTextField.setText(socio.get("email").toString());
+                    CBTIPOEMP.setSelectedItem(socio.get("tipo-empresa").toString());
+                    modificarDatosButton.setVisible(true);
+                    borrarSocioButton.setVisible(true);
+                    borrarCamposButton.setVisible(false);
+                    CBTIPOSOCIO.setSelectedIndex(1);
+                    CBTIPOSOCIO.setEnabled(false);
+                }else {
+                    clearABMFields();
+                    showMessageDialog(null, "El Socio NO EXISTE, puede crearlo");
+                    borrarSocioButton.setVisible(false);
+                    borrarCamposButton.setVisible(true);
+                    habilitarFields();
+                    confirmarDatosButton.setVisible(true);
                 }
             }
-            if (!socioencontrado) {
-                socioList = (JSONArray) jsonObject.get("socios-protectores");
-                for (Object obj : socioList) {
-                    api.Socio_Protector socio = new Socio_Protector((JSONObject) obj);
-                    if (socio.getCUITSocio().equals(ABMCUITTextField.getText())) {
-                        socioencontrado = true;
-                        razonSocialTextField.setText(socio.getRazonSocial());
-                        CBESTADO.setSelectedItem(socio.getEstado());
-                        fechaInicActTextField.setText(socio.getFinicAct().toString());
-                        actPrincipalTextField.setText(socio.getActPrincipal());
-                        direccionTextField.setText(socio.getDireccion());
-                        emailTextField.setText(socio.getEmail());
-                        CBTIPOEMP.setSelectedItem(socio.getTipoEmpresa());
-                        modificarDatosButton.setVisible(true);
-                        borrarSocioButton.setVisible(true);
-                        borrarCamposButton.setVisible(false);
-                        CBTIPOSOCIO.setSelectedIndex(1);
-                        CBTIPOSOCIO.setEnabled(false);
-                    }
-                }
-            }
-            if (!socioencontrado){
-                clearABMFields();
-                showMessageDialog(null, "El Socio NO EXISTE, puede crearlo");
-                borrarSocioButton.setVisible(false);
-                borrarCamposButton.setVisible(true);
-                habilitarFields();
-                confirmarDatosButton.setVisible(true);
-            }
-        }else{
-            showMessageDialog(null, "Debe ingresar un cuit válido.\nEl mismo debe tener el formato de ##-########-#");
         }
     }
 

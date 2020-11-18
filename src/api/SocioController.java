@@ -12,9 +12,9 @@ public interface SocioController {
     /*======CLASS FUNCTIONS=======*/
     void controlarDocumentacion();
 
-    void altaSocioProtector();
+    void altaSocioProtector(String CUITSocio, String razonSocial, String finicAct, String tipoEmpresa, String actPrincipal, String direccion, String email) throws Exception;
 
-    void altaSocioParticipe();
+    void altaSocioParticipe(String CUITSocio, String razonSocial, String finicAct, String tipoEmpresa, String actPrincipal, String direccion, String email) throws Exception;
 
     ArrayList<String> ComparteAccionistas(String CUITSocio);
 

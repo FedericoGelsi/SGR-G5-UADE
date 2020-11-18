@@ -1,1 +1,408 @@
-{"socios-participes":[{"razon-social":"Los Pollos Hermanos S.A.","actividad-principal":"Cristaleria","estado":"Pleno","recuperos":[{"tipo":"Parcial","monto":10.0,"id-socio-pleno":"id","id-deudas":["id1","id2"]},{"tipo":"Parcial","monto":10.0,"id-socio-pleno":"id","id-deudas":["id1","id2"]}],"finic-act":"2020-11-13","direccion":"Rivadavia 2630, CABA","deudas":[],"contragarantias":[{"fecha-creacion":"2020-08-23","tipo":"Fianza Personal","cuit-socio":"20-12345678-2","monto":1000.0,"fecha-vigencia":"2020-11-13"},{"fecha-creacion":"2020-08-23","tipo":"Hipoteca","monto":10.0,"cuit-socio":"20-12345678-2","fecha-vigencia":"2020-11-13"},{"fecha-creacion":"2020-11-18","tipo":"Hipoteca","monto":15000.0,"cuit-socio":"20-12345678-2","fecha-vigencia":"2021-12-12"},{"fecha-creacion":"2020-11-18","tipo":"Hipoteca","monto":150000.0,"cuit-socio":"20-12345678-2","fecha-vigencia":"2021-10-05"},{"fecha-creacion":"2020-11-18","tipo":"Hipoteca","monto":10000.0,"cuit-socio":"20-12345678-2","fecha-vigencia":"2022-05-09"},{"fecha-creacion":"2020-11-18","tipo":"Fianza personal","monto":45000.0,"cuit-socio":"20-12345678-2","fecha-vigencia":"2025-07-09"},{"fecha-creacion":"2020-11-18","tipo":"Hipoteca","monto":1500.0,"cuit-socio":"20-12345678-2","fecha-vigencia":"2025-11-25"}],"lineas-de-credito":{"tope":1000.0,"id":1,"fecha-vigencia":"2020-12-13","monto-utilizado":0.0,"CUIT-Participe":"20-12345678-2"},"accionistas":[{"cuit-accionista":"20-4534778-2","razon-social-ac":"Pepit3 S.R.L.","porcentaje-participacion":15.0},{"cuit-accionista":"20-55556689-2","razon-social-ac":"Groovy S.R.L.","porcentaje-participacion":45.0},{"cuit-accionista":"20-21654566-8","razon-social-ac":"f","porcentaje-participacion":26.0},{"cuit-accionista":"20-12843179-2","razon-social-ac":"Rosa S.R.L.","porcentaje-participacion":15.0}],"cuit":"20-12345678-2","tipo-empresa":"Mediana","fecha-pleno":"2020-11-13","email":"ventas@polloshrnos.com"},{"razon-social":"Miyagi doujo","actividad-principal":"Karate","estado":"Pleno","recuperos":[{"tipo":"Parcial","monto":20.0,"id-socio-pleno":"id","id-deudas":["id1","id2"]},{"tipo":"Parcial","monto":20.0,"id-socio-pleno":"id","id-deudas":["id1","id2"]},{"tipo":"Total","monto":1925.0,"id-socio-pleno":"20-87654321-2","id-deudas":["id","id","id","id","id","id","id","id"]},{"tipo":"Total","monto":1925.0,"id-socio-pleno":"20-87654321-2","id-deudas":["id","id","id","id","id","id","id","id"]},{"tipo":"Total","monto":121.0,"id-socio-pleno":"20-87654321-2","id-deudas":["id"]}],"finic-act":"2020-11-14","direccion":"Corrientes 2630, CABA","deudas":[],"contragarantias":[{"tipo":"Fianza Personal","monto":2000.0,"fecha-vigencia":"2020-11-15"},{"tipo":"Hipoteca","monto":2000.0,"fecha-vigencia":"2020-11-15"}],"lineas-de-credito":{"tope":2000.0,"id":2,"fecha-vigencia":"2020-12-13","monto-utilizado":1358.0300085544586,"CUIT-Participe":"20-87654321-2"},"accionistas":[{"cuit-accionista":"20-45345678-2","razon-social-ac":"Pepit3 S.R.L.","porcentaje-participacion":15.0},{"cuit-accionista":"20-45252464-2","razon-social-ac":"Pepitf S.R.L.","porcentaje-participacion":15.0}],"cuit":"20-87654321-2","tipo-empresa":"Pequeña","fecha-pleno":"2020-11-10","email":"Inscripciones@Miyagidoujo.com"},{"razon-social":"Rosita","actividad-principal":"Cristaleria","estado":"Pleno","recuperos":[{"tipo":"Total","monto":18.799999237060547,"id-socio-pleno":"20-11112222-2","id-deudas":[0]},{"tipo":"Total","monto":47.0,"id-socio-pleno":"20-11112222-2","id-deudas":[0]}],"finic-act":"2020-11-13","direccion":"Rivadavia 2630, CABA","deudas":[],"contragarantias":[{"tipo":"Fianza Personal","monto":1000.0,"fecha-vigencia":"2020-11-13"},{"tipo":"Hipoteca","monto":100.0,"fecha-vigencia":"2020-11-13"}],"lineas-de-credito":{"tope":100,"id":1,"fecha-vigencia":"2020-11-26","monto-utilizado":-47.0,"CUIT-Participe":"20-12345678-2"},"accionistas":[{"cuit-accionista":"20-4534778-2","razon-social-ac":"Pepit3 S.R.L.","porcentaje-participacion":15.0},{"cuit-accionista":"20-55556689-2","razon-social-ac":"Groovy S.R.L.","porcentaje-participacion":45.0},{"cuit-accionista":"20-12598449-2","razon-social-ac":"Jetison","porcentaje-participacion":14.0},{"cuit-accionista":"20-12843179-2","razon-social-ac":"Rosa S.R.L.","porcentaje-participacion":15.0}],"cuit":"20-11112222-2","tipo-empresa":"Mediana","fecha-pleno":"2020-11-13","email":"ventas@polloshrnos.com"}],"last-modified":"2020-11-13","socios-protectores":[{"razon-social":"Las Carnes S.A.","actividad-principal":"Carnes","accionistas":[{"cuit-accionista":"20-14545489-2","razon-social-ac":"Doña Rosa S.R.L.","porcentaje-participacion":15.0},{"cuit-accionista":"20-34343434-2","razon-social-ac":"Manzanas y Bananas S.R.L.","porcentaje-participacion":15.0}],"estado":"Postulante","cuit":"20-11115555-2","tipo-empresa":"Mediana","fecha-pleno":"2020-11-13","finic-act":"2020-11-13","direccion":"Rivadavia 2630, CABA","aportes":[{"fecha-creacion":"2020-10-12","id-aporte":1,"monto":100.0,"socio-aportante":"20-12345673-1","doc-path":".\/src\/resources\/aportes\/aporte1.pdf"},{"fecha-creacion":"2020-11-12","id-aporte":2,"monto":10000.0,"socio-aportante":"20-12345673-1","doc-path":".\/src\/resources\/aportes\/aporte1.pdf"},{"fecha-creacion":"2019-10-12","id-aporte":3,"monto":1200.0,"socio-aportante":"20-12345673-1","doc-path":".\/src\/resources\/aportes\/aporte1.pdf"}],"email":"ventas@polloshrnos.com"},{"razon-social":"MasterChef S.A","actividad-principal":"Reality Show","accionistas":[{"cuit-accionista":"20-33332255-2","razon-social-ac":"Doña Maria S.A.","porcentaje-participacion":15.0}],"estado":"Postulante","cuit":"20-55556654-2","tipo-empresa":"Mediana","fecha-pleno":"2020-11-13","finic-act":"2020-11-13","direccion":"Rivadavia 2630, CABA","aportes":[],"email":"ventas@polloshrnos.com"},{"razon-social":"Cobra Kai S.A.","actividad-principal":"Karate","estado":"Postulante","accionistas":[{"cuit-accionista":"20-33332255-2","razon-social-ac":"Doña Maria S.A.","porcentaje-participacion":15.0}],"cuit":"20-12345678-9","tipo-empresa":"Grande","fecha-pleno":"","finic-act":"2010-05-06","monto-mora":"No moneda calamelo 2340","aportes":[],"email":"kalate.nomercy@gmail.com"}],"author":"admin","desembolsos":[{"razon-social":"Los Pollos Hermanos S.A.","fecha-op":"2020-10-15","cuit-socio":"20-12345678-2","monto":123.45,"id":1},{"razon-social":"Rosita","fecha-op":"2020-11-18","monto":18.799999237060547,"cuit-socio":"20-11112222-2","id":1},{"razon-social":"Rosita","fecha-op":"2020-11-18","monto":47.0,"cuit-socio":"20-11112222-2","id":2},{"razon-social":"Los Pollos Hermanos S.A.","fecha-op":"2020-11-18","monto":12.880000114440918,"cuit-socio":"20-12345678-2","id":3}],"created-at":"2020-11-13","modified-by":"admin"}
+{
+    "socios-participes": [
+        {
+            "razon-social":       "Los Pollos Hermanos S.A.",
+            "actividad-principal":"Cristaleria",
+            "estado":             "Pleno",
+            "recuperos":          [
+                {
+                    "tipo":          "Parcial",
+                    "monto":         10.0,
+                    "id-socio-pleno":"id",
+                    "id-deudas":     [
+                        "id1",
+                        "id2"
+                    ]
+                },
+                {
+                    "tipo":          "Parcial",
+                    "monto":         10.0,
+                    "id-socio-pleno":"id",
+                    "id-deudas":     [
+                        "id1",
+                        "id2"
+                    ]
+                }
+            ],
+            "finic-act":          "2020-11-13",
+            "direccion":          "Rivadavia 2630, CABA",
+            "deudas":             [],
+            "contragarantias":    [
+                {
+                    "fecha-creacion":"2020-08-23",
+                    "tipo":          "Fianza Personal",
+                    "cuit-socio":    "20-12345678-2",
+                    "monto":         1000.0,
+                    "fecha-vigencia":"2020-11-13"
+                },
+                {
+                    "fecha-creacion":"2020-08-23",
+                    "tipo":          "Hipoteca",
+                    "monto":         10.0,
+                    "cuit-socio":    "20-12345678-2",
+                    "fecha-vigencia":"2020-11-13"
+                },
+                {
+                    "fecha-creacion":"2020-11-18",
+                    "tipo":          "Hipoteca",
+                    "monto":         15000.0,
+                    "cuit-socio":    "20-12345678-2",
+                    "fecha-vigencia":"2021-12-12"
+                },
+                {
+                    "fecha-creacion":"2020-11-18",
+                    "tipo":          "Hipoteca",
+                    "monto":         150000.0,
+                    "cuit-socio":    "20-12345678-2",
+                    "fecha-vigencia":"2021-10-05"
+                },
+                {
+                    "fecha-creacion":"2020-11-18",
+                    "tipo":          "Hipoteca",
+                    "monto":         10000.0,
+                    "cuit-socio":    "20-12345678-2",
+                    "fecha-vigencia":"2022-05-09"
+                },
+                {
+                    "fecha-creacion":"2020-11-18",
+                    "tipo":          "Fianza personal",
+                    "monto":         45000.0,
+                    "cuit-socio":    "20-12345678-2",
+                    "fecha-vigencia":"2025-07-09"
+                },
+                {
+                    "fecha-creacion":"2020-11-18",
+                    "tipo":          "Hipoteca",
+                    "monto":         1500.0,
+                    "cuit-socio":    "20-12345678-2",
+                    "fecha-vigencia":"2025-11-25"
+                }
+            ],
+            "lineas-de-credito":  {
+                "tope":           1000.0,
+                "id":             1,
+                "fecha-vigencia": "2020-12-13",
+                "monto-utilizado":0.0,
+                "CUIT-Participe": "20-12345678-2"
+            },
+            "accionistas":        [
+                {
+                    "cuit-accionista":         "20-4534778-2",
+                    "razon-social-ac":         "Pepit3 S.R.L.",
+                    "porcentaje-participacion":15.0
+                },
+                {
+                    "cuit-accionista":         "20-55556689-2",
+                    "razon-social-ac":         "Groovy S.R.L.",
+                    "porcentaje-participacion":45.0
+                },
+                {
+                    "cuit-accionista":         "20-21654566-8",
+                    "razon-social-ac":         "f",
+                    "porcentaje-participacion":26.0
+                },
+                {
+                    "cuit-accionista":         "20-12843179-2",
+                    "razon-social-ac":         "Rosa S.R.L.",
+                    "porcentaje-participacion":15.0
+                }
+            ],
+            "cuit":               "20-12345678-2",
+            "tipo-empresa":       "Mediana",
+            "fecha-pleno":        "2020-11-13",
+            "email":              "ventas@polloshrnos.com"
+        },
+        {
+            "razon-social":       "Miyagi doujo",
+            "actividad-principal":"Karate",
+            "estado":             "Pleno",
+            "recuperos":          [
+                {
+                    "tipo":          "Parcial",
+                    "monto":         20.0,
+                    "id-socio-pleno":"id",
+                    "id-deudas":     [
+                        "id1",
+                        "id2"
+                    ]
+                },
+                {
+                    "tipo":          "Parcial",
+                    "monto":         20.0,
+                    "id-socio-pleno":"id",
+                    "id-deudas":     [
+                        "id1",
+                        "id2"
+                    ]
+                },
+                {
+                    "tipo":          "Total",
+                    "monto":         1925.0,
+                    "id-socio-pleno":"20-87654321-2",
+                    "id-deudas":     [
+                        "id",
+                        "id",
+                        "id",
+                        "id",
+                        "id",
+                        "id",
+                        "id",
+                        "id"
+                    ]
+                },
+                {
+                    "tipo":          "Total",
+                    "monto":         1925.0,
+                    "id-socio-pleno":"20-87654321-2",
+                    "id-deudas":     [
+                        "id",
+                        "id",
+                        "id",
+                        "id",
+                        "id",
+                        "id",
+                        "id",
+                        "id"
+                    ]
+                },
+                {
+                    "tipo":          "Total",
+                    "monto":         121.0,
+                    "id-socio-pleno":"20-87654321-2",
+                    "id-deudas":     [
+                        "id"
+                    ]
+                }
+            ],
+            "finic-act":          "2020-11-14",
+            "direccion":          "Corrientes 2630, CABA",
+            "deudas":             [],
+            "contragarantias":    [
+                {
+                    "tipo":          "Fianza Personal",
+                    "monto":         2000.0,
+                    "fecha-vigencia":"2020-11-15"
+                },
+                {
+                    "tipo":          "Hipoteca",
+                    "monto":         2000.0,
+                    "fecha-vigencia":"2020-11-15"
+                }
+            ],
+            "lineas-de-credito":  {
+                "tope":           2000.0,
+                "id":             2,
+                "fecha-vigencia": "2020-12-13",
+                "monto-utilizado":1358.0300085544586,
+                "CUIT-Participe": "20-87654321-2"
+            },
+            "accionistas":        [
+                {
+                    "cuit-accionista":         "20-45345678-2",
+                    "razon-social-ac":         "Pepit3 S.R.L.",
+                    "porcentaje-participacion":15.0
+                },
+                {
+                    "cuit-accionista":         "20-45252464-2",
+                    "razon-social-ac":         "Pepitf S.R.L.",
+                    "porcentaje-participacion":15.0
+                }
+            ],
+            "cuit":               "20-87654321-2",
+            "tipo-empresa":       "Pequeña",
+            "fecha-pleno":        "2020-11-10",
+            "email":              "Inscripciones@Miyagidoujo.com"
+        },
+        {
+            "razon-social":       "Rosita",
+            "actividad-principal":"Cristaleria",
+            "estado":             "Pleno",
+            "recuperos":          [
+                {
+                    "tipo":          "Total",
+                    "monto":         18.799999237060547,
+                    "id-socio-pleno":"20-11112222-2",
+                    "id-deudas":     [
+                        0
+                    ]
+                },
+                {
+                    "tipo":          "Total",
+                    "monto":         47.0,
+                    "id-socio-pleno":"20-11112222-2",
+                    "id-deudas":     [
+                        0
+                    ]
+                }
+            ],
+            "finic-act":          "2020-11-13",
+            "direccion":          "Rivadavia 2630, CABA",
+            "deudas":             [],
+            "contragarantias":    [
+                {
+                    "tipo":          "Fianza Personal",
+                    "monto":         1000.0,
+                    "fecha-vigencia":"2020-11-13"
+                },
+                {
+                    "tipo":          "Hipoteca",
+                    "monto":         100.0,
+                    "fecha-vigencia":"2020-11-13"
+                }
+            ],
+            "lineas-de-credito":  {
+                "tope":           100,
+                "id":             1,
+                "fecha-vigencia": "2020-11-26",
+                "monto-utilizado":-47.0,
+                "CUIT-Participe": "20-12345678-2"
+            },
+            "accionistas":        [
+                {
+                    "cuit-accionista":         "20-4534778-2",
+                    "razon-social-ac":         "Pepit3 S.R.L.",
+                    "porcentaje-participacion":15.0
+                },
+                {
+                    "cuit-accionista":         "20-55556689-2",
+                    "razon-social-ac":         "Groovy S.R.L.",
+                    "porcentaje-participacion":45.0
+                },
+                {
+                    "cuit-accionista":         "20-12598449-2",
+                    "razon-social-ac":         "Jetison",
+                    "porcentaje-participacion":14.0
+                },
+                {
+                    "cuit-accionista":         "20-12843179-2",
+                    "razon-social-ac":         "Rosa S.R.L.",
+                    "porcentaje-participacion":15.0
+                }
+            ],
+            "cuit":               "20-11112222-2",
+            "tipo-empresa":       "Mediana",
+            "fecha-pleno":        "2020-11-13",
+            "email":              "ventas@polloshrnos.com"
+        }
+    ],
+    "last-modified":     "2020-11-13",
+    "socios-protectores":[
+        {
+            "razon-social":       "Las Carnes S.A.",
+            "actividad-principal":"Carnes",
+            "accionistas":        [
+                {
+                    "cuit-accionista":         "20-14545489-2",
+                    "razon-social-ac":         "Doña Rosa S.R.L.",
+                    "porcentaje-participacion":15.0
+                },
+                {
+                    "cuit-accionista":         "20-34343434-2",
+                    "razon-social-ac":         "Manzanas y Bananas S.R.L.",
+                    "porcentaje-participacion":15.0
+                }
+            ],
+            "estado":             "Postulante",
+            "cuit":               "20-11115555-2",
+            "tipo-empresa":       "Mediana",
+            "fecha-pleno":        "2020-11-13",
+            "finic-act":          "2020-11-13",
+            "direccion":          "Rivadavia 2630, CABA",
+            "aportes":            [
+                {
+                    "fecha-creacion": "2020-10-12",
+                    "id-aporte":      1,
+                    "monto":          100.0,
+                    "socio-aportante":"20-12345673-1",
+                    "doc-path":       ".\/src\/resources\/aportes\/aporte1.pdf"
+                },
+                {
+                    "fecha-creacion": "2020-11-12",
+                    "id-aporte":      2,
+                    "monto":          10000.0,
+                    "socio-aportante":"20-12345673-1",
+                    "doc-path":       ".\/src\/resources\/aportes\/aporte1.pdf"
+                },
+                {
+                    "fecha-creacion": "2019-10-12",
+                    "id-aporte":      3,
+                    "monto":          1200.0,
+                    "socio-aportante":"20-12345673-1",
+                    "doc-path":       ".\/src\/resources\/aportes\/aporte1.pdf"
+                }
+            ],
+            "email":              "ventas@polloshrnos.com"
+        },
+        {
+            "razon-social":       "MasterChef S.A",
+            "actividad-principal":"Reality Show",
+            "accionistas":        [
+                {
+                    "cuit-accionista":         "20-33332255-2",
+                    "razon-social-ac":         "Doña Maria S.A.",
+                    "porcentaje-participacion":15.0
+                }
+            ],
+            "estado":             "Postulante",
+            "cuit":               "20-55556654-2",
+            "tipo-empresa":       "Mediana",
+            "fecha-pleno":        "2020-11-13",
+            "finic-act":          "2020-11-13",
+            "direccion":          "Rivadavia 2630, CABA",
+            "aportes":            [],
+            "email":              "ventas@polloshrnos.com"
+        },
+        {
+            "razon-social":       "Cobra Kai S.A.",
+            "actividad-principal":"Karate",
+            "estado":             "Postulante",
+            "accionistas":        [
+                {
+                    "cuit-accionista":         "20-33332255-2",
+                    "razon-social-ac":         "Doña Maria S.A.",
+                    "porcentaje-participacion":15.0
+                }
+            ],
+            "cuit":               "20-12345678-9",
+            "tipo-empresa":       "Grande",
+            "fecha-pleno":        "",
+            "finic-act":          "2010-05-06",
+            "monto-mora":         "No moneda calamelo 2340",
+            "aportes":            [],
+            "email":              "kalate.nomercy@gmail.com"
+        }
+    ],
+    "author":            "admin",
+    "desembolsos":       [
+        {
+            "razon-social":"Los Pollos Hermanos S.A.",
+            "fecha-op":    "2020-10-15",
+            "cuit-socio":  "20-12345678-2",
+            "monto":       123.45,
+            "id":          1
+        },
+        {
+            "razon-social":"Rosita",
+            "fecha-op":    "2020-11-18",
+            "monto":       18.799999237060547,
+            "cuit-socio":  "20-11112222-2",
+            "id":          1
+        },
+        {
+            "razon-social":"Rosita",
+            "fecha-op":    "2020-11-18",
+            "monto":       47.0,
+            "cuit-socio":  "20-11112222-2",
+            "id":          2
+        },
+        {
+            "razon-social":"Los Pollos Hermanos S.A.",
+            "fecha-op":    "2020-11-18",
+            "monto":       12.880000114440918,
+            "cuit-socio":  "20-12345678-2",
+            "id":          3
+        }
+    ],
+    "created-at":        "2020-11-13",
+    "modified-by":       "admin"
+}

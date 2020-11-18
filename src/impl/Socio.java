@@ -33,6 +33,7 @@ public abstract class Socio implements api.Socio {
         this.direccion = direccion;
         this.email = email;
         this.estado = "Postulante";
+        this.FechaPleno = null;
     }
 
     public Socio(JSONObject jsonSocio) {
@@ -42,7 +43,11 @@ public abstract class Socio implements api.Socio {
         this.FinicAct = LocalDate.parse(jsonSocio.get("finic-act").toString());
         this.tipoEmpresa = jsonSocio.get("tipo-empresa").toString();
         this.actPrincipal = jsonSocio.get("actividad-principal").toString();
-        this.direccion = jsonSocio.get("direccion").toString();
+        if ( jsonSocio.get("direccion") == null) {
+            this.direccion = "";
+        }else{
+            this.direccion = jsonSocio.get("direccion").toString();
+        }
         this.email = jsonSocio.get("email").toString();
         this.estado = jsonSocio.get("estado").toString();
         this.FechaPleno = LocalDate.parse(jsonSocio.get("fecha-pleno").toString());
@@ -132,22 +137,4 @@ public abstract class Socio implements api.Socio {
         // DEFINIR PARÁMETROS DE ENTRADA
     }
 
-    public JSONObject toJSON(){
-        JSONObject socio = new JSONObject();
-        socio.put("cuit", this.CUITSocio);
-        socio.put("razon-social", this.RazonSocial);
-        socio.put("finic-act", this.FinicAct.toString());
-        socio.put("tipo-empresa", this.tipoEmpresa);
-        socio.put("actividad-principal", this.actPrincipal);
-        socio.put("monto-mora", this.direccion);
-        socio.put("email", this.email);
-        socio.put("estado", this.estado);
-        socio.put("direccion", this.direccion);
-        if (this.FechaPleno == null){
-            socio.put("fecha-pleno","");
-        }else{
-            socio.put("fecha-pleno",this.FechaPleno.toString());
-        }
-        return socio;
-    }
 }

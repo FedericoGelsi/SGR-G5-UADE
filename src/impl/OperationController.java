@@ -661,7 +661,6 @@ public class OperationController implements api.OperationController {
                     accionistaCUIT = MisAccionistasList.get(i);
                     if (AccionistasOtro.contains(accionistaCUIT) && !AccionistaCompartido.contains(cuit)) {
                         AccionistaCompartido.add(cuit);
-                        System.out.println(cuit);
                     }
                 }
 
@@ -687,7 +686,6 @@ public class OperationController implements api.OperationController {
 
 
         for (int i = 0; i < AccionistasCompartidos.size(); i++) {
-            System.out.println("Bokita");
             accionistaCUIT = AccionistasCompartidos.get(i);
             JSONArray operacionesList = (JSONArray) jsonObjectOPC.get("operaciones");
             for (Object ops : operacionesList) {
@@ -697,13 +695,11 @@ public class OperationController implements api.OperationController {
                     if (operaciones.get("tipo").equals("Tarjeta de Credito")){
                         fecha_vencimiento = LocalDate.parse(operaciones.get("fechavencimiento").toString().concat("-20"));
                         fechaAux = verificar.fechavshoy(fecha_vencimiento);
-                        System.out.println(fechaAux);
                     }
                     else{
                         estado_operacion = operaciones.get("estado").toString();
                         fecha_vencimiento = LocalDate.parse(operaciones.get("fechavencimiento").toString());
                         fechaAux = verificar.fechavshoy(fecha_vencimiento);
-                        System.out.println(fechaAux);
                         if (fechaAux.equalsIgnoreCase("Mayor") && estado_operacion.equalsIgnoreCase("Monetizado")) {
                             tipo_operacion = operaciones.get("tipo").toString();
                             importetotal = Double.parseDouble(operaciones.get("importetotal").toString());
@@ -734,14 +730,12 @@ public class OperationController implements api.OperationController {
                     if (operaciones.get("tipo").equals("Tarjeta de Credito")){
                         fecha_vencimiento = LocalDate.parse(operaciones.get("fechavencimiento").toString().concat("-20"));
                         fechaAux = verificar.fechavshoy(fecha_vencimiento);
-                        System.out.println(fechaAux);
                         estado_operacion = operaciones.get("estado").toString();
                     }
                     else
                     {
                         fecha_vencimiento = LocalDate.parse(operaciones.get("fechavencimiento").toString());
                         fechaAux = verificar.fechavshoy(fecha_vencimiento);
-                        System.out.println(fechaAux);
                         estado_operacion = operaciones.get("estado").toString();
                         if (fechaAux.equalsIgnoreCase("Mayor") && estado_operacion.equalsIgnoreCase("Monetizado")) {
                             tipo_operacion = operaciones.get("tipo").toString();
@@ -765,10 +759,8 @@ public class OperationController implements api.OperationController {
                 }
             }
         }
-        System.out.println(totalcomputado);
         if (IMPORTEOPERACION > totalcomputado && totalcomputado != 0) {
             flag = true;
-            System.out.println(totalcomputado);
         }
         return flag;
     }

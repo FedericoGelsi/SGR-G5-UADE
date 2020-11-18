@@ -1,6 +1,7 @@
 package impl;
 
 import api.API_JSONHandler;
+import api.Socio_Protector;
 import api.Verificaciones;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -35,13 +36,23 @@ public class SocioController implements api.SocioController {
     }
 
     @Override
-    public void altaSocioProtector(){
-
+    public void altaSocioProtector(String CUITSocio, String razonSocial, String finicAct, String tipoEmpresa, String actPrincipal, String direccion, String email) throws Exception {
+        Socio_Protector nuevosocio = new impl.Socio_Protector(CUITSocio, razonSocial, LocalDate.parse(finicAct), tipoEmpresa, actPrincipal,direccion,email);
+        jsonObject = (JSONObject) file.readJson(filename);
+        JSONArray sociosList = (JSONArray) jsonObject.get("socios-participes");
+        sociosList.add(nuevosocio.toJSON());
+        jsonObject.put("socios-protectores",sociosList);
+        file.writeJson(filename, jsonObject);
     }
 
     @Override
-    public void altaSocioParticipe(){
-
+    public void altaSocioParticipe(String CUITSocio, String razonSocial, String finicAct, String tipoEmpresa, String actPrincipal, String direccion, String email) throws Exception {
+        Socio_Participe nuevosocio = new impl.Socio_Participe(CUITSocio, razonSocial, LocalDate.parse(finicAct), tipoEmpresa, actPrincipal,direccion,email);
+        jsonObject = (JSONObject) file.readJson(filename);
+        JSONArray sociosList = (JSONArray) jsonObject.get("socios-participes");
+        sociosList.add(nuevosocio.toJSON());
+        jsonObject.put("socios-participes",sociosList);
+        file.writeJson(filename, jsonObject);
     }
 
     @Override

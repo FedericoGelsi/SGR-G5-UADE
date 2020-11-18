@@ -3,6 +3,7 @@ package impl;
 import api.Contragarantia;
 import api.LineaCredito;
 import api.Recupero;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.time.LocalDate;
@@ -42,12 +43,35 @@ public class Socio_Participe extends Socio implements api.Socio_Participe {
 
     @Override
     public void saldarDeuda(){
-
     }
 
     @Override
     public float CalcularContragarantias(String CUIT){
         return 0;
+    }
+
+    public JSONObject toJSON(){
+        JSONObject socio = new JSONObject();
+        socio.put("cuit", this.getCUITSocio());
+        socio.put("razon-social", this.getRazonSocial());
+        socio.put("finic-act", this.getFinicAct().toString());
+        socio.put("tipo-empresa", this.getTipoEmpresa());
+        socio.put("actividad-principal", this.getActPrincipal());
+        socio.put("email", this.getEmail());
+        socio.put("estado", this.getEstado());
+        socio.put("direccion", this.getDireccion());
+        if (this.getFechaPleno() == null){
+            socio.put("fecha-pleno","");
+        }else{
+            socio.put("fecha-pleno",this.getFechaPleno().toString());
+        }
+        socio.put("accionistas", new JSONArray());
+        socio.put("contragarantias", new JSONArray());
+        socio.put("deudas", new JSONArray());
+        socio.put("recuperos", new JSONArray());
+        socio.put("lineas-de-crédito", new JSONObject());
+
+        return  socio;
     }
 
 }
