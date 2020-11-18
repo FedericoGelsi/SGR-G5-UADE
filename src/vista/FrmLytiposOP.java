@@ -31,8 +31,6 @@ public class FrmLytiposOP extends JDialog{
     private JComboBox comboBoxTIPO;
     private JPanel pnlHR;
     private JScrollPane pnlHCTable;
-    private JPanel PnlHistorial;
-    private JScrollPane pnlH;
     private JButton listarButton;
     private JTable HcontraTable;
 
@@ -101,9 +99,17 @@ public class FrmLytiposOP extends JDialog{
             }
         });
 
-        listarButton.addActionListener(new ActionListener() {
+        comboBoxTIPO.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) { buscarContragarantias(); }
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        MontoTxField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
         });
     }
     private void buscarsocio() throws Exception {
