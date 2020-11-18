@@ -973,7 +973,7 @@
               </component>
             </children>
           </grid>
-          <grid id="12738" binding="pnlTC" layout-manager="GridLayoutManager" row-count="8" column-count="11" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="12738" binding="pnlTC" layout-manager="GridLayoutManager" row-count="7" column-count="12" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="10" left="10" bottom="10" right="10"/>
             <constraints>
               <tabbedpane title="Tarjeta de Credito"/>
@@ -994,12 +994,12 @@
             <children>
               <hspacer id="50683">
                 <constraints>
-                  <grid row="0" column="10" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="11" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
               </hspacer>
               <component id="c39c8" class="javax.swing.JLabel" binding="JLEncabezadoTC">
                 <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="9" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <font name="Montserrat SemiBold" size="14"/>
@@ -1024,7 +1024,7 @@
               </component>
               <component id="fb354" class="javax.swing.JTextField" binding="TFNDTTC">
                 <constraints>
-                  <grid row="1" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                  <grid row="1" column="1" row-span="1" col-span="9" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
                   </grid>
                 </constraints>
@@ -1044,7 +1044,7 @@
               </component>
               <component id="f06e6" class="javax.swing.JTextField" binding="TFNombreTC">
                 <constraints>
-                  <grid row="2" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                  <grid row="2" column="1" row-span="1" col-span="11" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
                   </grid>
                 </constraints>
@@ -1062,7 +1062,7 @@
               </component>
               <component id="17a91" class="javax.swing.JTextField" binding="TFFVTC">
                 <constraints>
-                  <grid row="4" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                  <grid row="3" column="1" row-span="1" col-span="11" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
                   </grid>
                 </constraints>
@@ -1082,7 +1082,7 @@
               </component>
               <component id="94f49" class="javax.swing.JTextField" binding="TFCDSTC">
                 <constraints>
-                  <grid row="5" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                  <grid row="4" column="1" row-span="1" col-span="11" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
                   </grid>
                 </constraints>
@@ -1139,7 +1139,7 @@
               </component>
               <component id="41875" class="javax.swing.JTextField" binding="TFCUIT2">
                 <constraints>
-                  <grid row="6" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                  <grid row="5" column="1" row-span="1" col-span="11" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
                   </grid>
                 </constraints>
@@ -1147,23 +1147,22 @@
                   <text value="##-########-#"/>
                 </properties>
               </component>
-              <component id="e5603" class="javax.swing.JSpinner" binding="ITTC">
+              <component id="709a9" class="javax.swing.JLabel" binding="TIPOTARJETA">
                 <constraints>
-                  <grid row="3" column="1" row-span="1" col-span="9" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="11" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <background color="-1"/>
-                  <foreground color="-16777216"/>
+                  <background color="-11636827"/>
+                  <foreground color="-11636827"/>
+                  <text value=""/>
                 </properties>
               </component>
-              <component id="1da0a" class="javax.swing.JLabel">
+              <component id="4e99f" class="javax.swing.JLabel" binding="Image" custom-create="true">
                 <constraints>
-                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="10" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <font name="Roboto" size="12"/>
-                  <foreground color="-1"/>
-                  <text value="Importe Total:"/>
+                  <text value=""/>
                 </properties>
               </component>
             </children>

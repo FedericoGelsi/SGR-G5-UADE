@@ -8,10 +8,7 @@ import org.json.simple.JSONObject;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -89,7 +86,9 @@ public class FrmOperaciones extends JDialog {
     private JTextField TFCUIT;
     private JTextField TFCUIT2;
     private JSpinner ITTC;
-    private final Verificaciones verif = new impl.Verificaciones();
+    private JLabel TIPOTARJETA;
+    private JLabel Image;
+    private Verificaciones verif = new impl.Verificaciones();
 
     private final String filename = "./src/resources/socios.json";
     private final API_JSONHandler file = new JSONHandler();
@@ -830,26 +829,25 @@ public class FrmOperaciones extends JDialog {
                     }
                 }
             }
-        }
-    });
-
-    // Cuenta corriente
-        JBCCC.addActionListener(new
-
-    ActionListener() {
-        @Override
-        public void actionPerformed (ActionEvent e){
-            boolean DatosCorrectosFlagCCC = true;
-            String FDVCCC = "";
-            FDVCCC = TFFDVCCC.getText();
-            if (verif.fechavalida(FDVCCC) == true) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                LocalDate localDate = LocalDate.parse(FDVCCC, formatter);
-                //Compara la fecha ingresada con la fecha actual ya que no tendria sentido vender un cheque el dia de su
-                // canje o vender un cheque ya vencido.
-                String comparacionfecha = verif.fechavshoy(localDate);
-                if (comparacionfecha == "Menor") {
-                    showMessageDialog(null, "La fecha de acreditación no es valida");
+        });
+        JBCCC.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean DatosCorrectosFlagCCC = true;
+                String FDVCCC = "";
+                FDVCCC = TFFDVCCC.getText();
+                if (verif.fechavalida(FDVCCC)) {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    LocalDate localDate = LocalDate.parse(FDVCCC, formatter);
+                    //Compara la fecha ingresada con la fecha actual ya que no tendria sentido vender un cheque el dia de su
+                    // canje o vender un cheque ya vencido.
+                    String comparacionfecha = verif.fechavshoy(localDate);
+                    if (comparacionfecha == "Menor") {
+                        showMessageDialog(null, "La fecha de acreditación no es valida");
+                        DatosCorrectosFlagCCC = false;
+                    }
+                } else {
+                    showMessageDialog(null, "La fecha ingresada no cumple con el formato solicitado");
                     DatosCorrectosFlagCCC = false;
                 }
             } else {
@@ -960,6 +958,20 @@ public class FrmOperaciones extends JDialog {
                     showMessageDialog(null, "La tarjeta se encuentra vencida");
                     DatosCorrectosFlagTC = false;
                 }
+                if(verif.esnumerico(NombreTC)){
+                    showMessageDialog(null,"El nombre del titular no puede contener números");
+                    DatosCorrectosFlagTC = false;
+                }
+                String FVTC = "";
+                FVTC = TFFVTC.getText();
+                if(verif.fechavalidatarjeta(FVTC) == true) {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yyyy");
+                    YearMonth yearMonth = YearMonth.parse(FVTC, formatter);
+                    String comparacionfecha = verif.fechavshoytarjeta(yearMonth);
+                    if (comparacionfecha == "Menor") {
+                        showMessageDialog(null, "La tarjeta se encuentra vencida");
+                        DatosCorrectosFlagTC = false;
+                    }
 
                 FVTC = yearMonth.toString();
 
@@ -976,9 +988,13 @@ public class FrmOperaciones extends JDialog {
                 DatosCorrectosFlagTC = false;
             }
 
-            if (verif.esnumerico(CDSTC)) {
-                if (CDSTC.length() != 3) {
-                    showMessageDialog(null, "El código debe ser de 3 números");
+                if (verif.esnumerico(CDSTC)){
+                    if (CDSTC.length() != 3 && TIPOTARJETA.getText().equals("VISA") || CDSTC.length() != 3 && TIPOTARJETA.getText().equals("MASTERCARD")){
+                        showMessageDialog(null, "El código de seguridad para una tarjeta VISA o MASTERCARD debe ser de 3 números");
+                    }
+                    if(CDSTC.length() != 4 && TIPOTARJETA.getText().equals("AMERICAN")){
+                        showMessageDialog(null, "El código de seguridad para una tarjeta AMERICAN EXPRESS debe ser de 4 números");
+                    }
                 }
             }
             if (!verif.esnumerico(CDSTC) && !CDSTC.isEmpty()) {
@@ -1028,9 +1044,16 @@ public class FrmOperaciones extends JDialog {
                     showMessageDialog(null, "La linea de credito se encuentra vencida");
                     checks = false;
                 }
-                if (verif.lineasuficiente(CUITSocioTC, (float) IT) == false) {
-                    showMessageDialog(null, "La linea de credito no tiene disponibilidad para realizar esta operacion");
-                    checks = false;
+                String NDTTC;
+                int TFNDTTCint;
+                NDTTC = TFNDTTC.getText();
+                if (NDTTC.contains("-") && NDTTC.length() >= 17){
+                    if (verif.tarjetavalida(NDTTC, TIPOTARJETA)){
+                    }
+                    else {
+                        showMessageDialog(null, "La tarjeta ingresada es inválida");
+                        DatosCorrectosFlagTC = false;
+                    }
                 }
                 if (verif.debefacturas(CUITSocioTC) == true) {
                     showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que se adeudan facturas");
@@ -1055,12 +1078,45 @@ public class FrmOperaciones extends JDialog {
                         verif.crearOT2(TFITCCC.toString(), IT, FVTC, CUITSocioTC, TFNDTTCint, TFNombreTC.getText(), "Ingresado", CDSTCint, "Tarjeta de Credito", "-");
                     } catch (Exception exception) {
                         exception.printStackTrace();
+                    }else{
+                        showMessageDialog(null,"El número de tarjeta debe contener '-' y al menos 15 números");
                     }
                 }
             }
-        }
     });
-}
+        TFNDTTC.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
+                String NDTTC;
+                int TFNDTTCint;
+                NDTTC = TFNDTTC.getText();
+                if (NDTTC.length() > 1){
+                    if(verif.isMaster(NDTTC)){
+                        TIPOTARJETA.setText("MASTERCARD");
+                        Image.setIcon(new ImageIcon("image/mastercard.png"));
+                    }
+                    if(verif.isVisa(NDTTC)){
+                        TIPOTARJETA.setText("VISA");
+                        Image.setIcon(new ImageIcon("image/visa.png"));
+                    }
+                    if (verif.isAmerican(NDTTC)){
+                        TIPOTARJETA.setText("AMERICAN");
+                        Image.setIcon(new ImageIcon("image/american.png"));
+                    }
+                }
+                else{
+                    TIPOTARJETA.setText("-");
+                    Image.setIcon(null);
+                }
+            }
+        });
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+        Image = new JLabel(new ImageIcon());
+    }
 }
 
 
