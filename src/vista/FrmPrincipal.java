@@ -5,7 +5,9 @@ import com.formdev.flatlaf.FlatLightLaf;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 
 public class FrmPrincipal extends JFrame {
     private JPanel pnlPrincipal;
@@ -32,20 +34,6 @@ public class FrmPrincipal extends JFrame {
         } catch( Exception ex ) {
             System.err.println( "Failed to initialize LaF" );
         }
-
-        /*
-        try {
-            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
-        }
-        */
 
         // Define el canvas según swing.
         this.setContentPane(this.pnlPrincipal);
@@ -96,8 +84,12 @@ public class FrmPrincipal extends JFrame {
         operacionesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FrmOperaciones frame = new FrmOperaciones(self, "SGR - Operaciones");
-                self.setVisible(false);
+                FrmOperaciones frame = null;
+                try {
+                    frame = new FrmOperaciones(self, "SGR - Operaciones");
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
                 frame.setVisible(true);
                 self.setVisible(true);
             }

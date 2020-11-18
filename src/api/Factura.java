@@ -3,7 +3,7 @@ package api;
 public interface Factura {
     int getIDFatura();
 
-    float getMontoFactura();
+    double getMontoFactura();
 
     String getCUITemisor();
 

@@ -1,5 +1,8 @@
 package impl;
 
+import org.json.simple.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Date;
 
 public class LineaCredito implements api.LineaCredito {
@@ -17,6 +20,11 @@ public class LineaCredito implements api.LineaCredito {
         this.CUITParticipe = CUITParticipe;
     }
 
+    public LineaCredito(JSONObject jsonLineaCredito){
+        this.tope = (float) jsonLineaCredito.get("tope");
+        this.fechaVigencia = (Date) jsonLineaCredito.get("fecha-vigencia");
+        this.CUITParticipe = (String) jsonLineaCredito.get("CUIT-Participe");
+    }
     /*======GETTERS=======*/
 
     @Override

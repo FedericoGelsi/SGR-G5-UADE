@@ -1,0 +1,127 @@
+{
+    "facturas":               [
+        {
+            "estado":          "Impaga",
+            "CUITDestinatario":"20-87654321-2",
+            "montofactura":    4.752,
+            "idfactura":       0,
+            "CUITemisor":      "20-11111111-2"
+        },
+        {
+            "estado":          "Impaga",
+            "CUITDestinatario":"20-11112222-2",
+            "montofactura":    4.554,
+            "idfactura":       1,
+            "CUITemisor":      "20-11111111-2"
+        }
+    ],
+    "author":                 "admin",
+    "comision":               [
+        {
+            "montocomisiontotal": 1.98,
+            "Porcentaje-Comision":4.0,
+            "IDComision":         1000,
+            "Numero-Operacion":   0,
+            "Tipo-Operacion":     "Cheque Propio",
+            "Estado":             "Facturada"
+        },
+        {
+            "montocomisiontotal": 2.772,
+            "Porcentaje-Comision":4.0,
+            "IDComision":         1001,
+            "Numero-Operacion":   1,
+            "Tipo-Operacion":     "Cheque Propio",
+            "Estado":             "Facturada"
+        },
+        {
+            "montocomisiontotal": 1.386,
+            "Porcentaje-Comision":4.0,
+            "IDComision":         1002,
+            "Numero-Operacion":   2,
+            "Tipo-Operacion":     "Cheque Propio",
+            "Estado":             "Facturada"
+        },
+        {
+            "montocomisiontotal": 2.574,
+            "Porcentaje-Comision":4.0,
+            "IDComision":         1003,
+            "Numero-Operacion":   3,
+            "Tipo-Operacion":     "Cheque Propio",
+            "Estado":             "Facturada"
+        }
+    ],
+    "created-at":             "2020-11-13",
+    "operaciones":            [
+        {
+            "CUITSocio":       "20-87654321-2",
+            "tipo":            "Cheque Propio",
+            "estado":          "Monetizado",
+            "tasadedescuento": 1.0,
+            "CUITfirmante":    "20-87654321-2",
+            "importetotal":    49.5,
+            "banco":           "BANCO DE GALICIA Y BUENOS AIRES S.A.U.",
+            "numerooperacion": 0,
+            "fechavencimiento":"2020-11-26",
+            "numerocheque":    333
+        },
+        {
+            "CUITSocio":       "20-87654321-2",
+            "tipo":            "Cheque Propio",
+            "estado":          "Monetizado",
+            "tasadedescuento": 1.0,
+            "CUITfirmante":    "20-87654321-2",
+            "importetotal":    69.3,
+            "banco":           "BANCO DE GALICIA Y BUENOS AIRES S.A.U.",
+            "numerooperacion": 1,
+            "fechavencimiento":"2020-11-26",
+            "numerocheque":    333
+        },
+        {
+            "CUITSocio":       "20-11112222-2",
+            "tipo":            "Cheque Propio",
+            "estado":          "Monetizado",
+            "tasadedescuento": 1.0,
+            "CUITfirmante":    "20-11112222-2",
+            "importetotal":    34.65,
+            "banco":           "BANCO DE GALICIA Y BUENOS AIRES S.A.U.",
+            "numerooperacion": 2,
+            "fechavencimiento":"2020-11-26",
+            "numerocheque":    333
+        },
+        {
+            "CUITSocio":       "20-11112222-2",
+            "tipo":            "Cheque Propio",
+            "estado":          "Monetizado",
+            "tasadedescuento": 1.0,
+            "CUITfirmante":    "20-11112222-2",
+            "importetotal":    64.35,
+            "banco":           "BANCO DE GALICIA Y BUENOS AIRES S.A.U.",
+            "numerooperacion": 3,
+            "fechavencimiento":"2020-11-26",
+            "numerocheque":    333
+        }
+    ],
+    "certificado-de-garantia":[
+        {
+            "CUITSocio":       "20-87654321-2",
+            "numero-operacion":0,
+            "idcertificado":   100
+        },
+        {
+            "CUITSocio":       "20-87654321-2",
+            "numero-operacion":1,
+            "idcertificado":   101
+        },
+        {
+            "CUITSocio":       "20-11112222-2",
+            "numero-operacion":2,
+            "idcertificado":   102
+        },
+        {
+            "CUITSocio":       "20-11112222-2",
+            "numero-operacion":3,
+            "idcertificado":   103
+        }
+    ],
+    "modified-by":            "admin"
+}
