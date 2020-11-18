@@ -2,6 +2,7 @@ package api;
 
 import org.json.simple.JSONObject;
 
+import javax.swing.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.time.YearMonth;
@@ -67,6 +68,12 @@ public interface Verificaciones {
 
     boolean fechavalidatarjeta(String fvtc);
 
-    boolean tarjetavalida(String tarjeta);
+    boolean tarjetavalida(String tarjeta, JLabel tipo);
+
+    boolean isMaster(String tarjeta);
+
+    boolean isVisa (String tarjeta);
+
+    boolean isAmerican (String tarjeta);
 }
 

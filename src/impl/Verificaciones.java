@@ -2,22 +2,16 @@ package impl;
 
 import org.json.simple.JSONArray;
 
-import java.lang.reflect.Array;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
-import java.time.Year;
 import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
 
 import api.API_JSONHandler;
-import impl.JSONHandler;
-import netscape.javascript.JSObject;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Verificaciones implements api.Verificaciones {
 
@@ -70,26 +64,111 @@ public class Verificaciones implements api.Verificaciones {
         }
     }
 
-    public boolean tarjetavalida(String tarjeta) {
+    public boolean tarjetavalida(String tarjeta, JLabel tipo) {
         String[] tarjetaseparada = tarjeta.split("-");
         boolean tarjetaValidaFlag = true;
-        for (int i = 0; i < 4; i++) {
-            if (tarjetaseparada[i].length() != 4 || esnumerico(tarjetaseparada[i]) != true) {
+        for (int i = 0; i < tarjetaseparada.length; i++) {
+            if (tipo.getText().equals("VISA") || tipo.getText().equals("MASTERCARD")){
+                if (tarjetaseparada[i].length() != 4 || !esnumerico(tarjetaseparada[i])) {
+                    tarjetaValidaFlag = false;
+                }
+            }
+
+        }
+        if (tipo.getText().equals("AMERICAN")){
+            if (tarjetaseparada[0].length() != 4 || !esnumerico(tarjetaseparada[0])) {
                 tarjetaValidaFlag = false;
             }
+            if (tarjetaseparada[1].length() != 6 || !esnumerico(tarjetaseparada[1])) {
+                tarjetaValidaFlag = false;
+            }
+            if (tarjetaseparada[2].length() != 5 || !esnumerico(tarjetaseparada[2])) {
+                tarjetaValidaFlag = false;
+            }
+
         }
-        if (tarjetaseparada[0].length() != 2 || esnumerico(tarjetaseparada[0]) != true) {
+
+        return tarjetaValidaFlag;
+    }
+
+    public boolean isMaster(String tarjeta) {
+        boolean tarjetaValidaFlag = true;
+        if (tarjeta.length() == 19) {
+            if (tarjeta.substring(0, 2).equals("55") || tarjeta.substring(0, 2).equals("54") || tarjeta.substring(0, 2).equals("53")
+                    || tarjeta.substring(0, 2).equals("52") || tarjeta.substring(0, 2).equals("51")) {
+                tarjetaValidaFlag = true;
+            }
+            else{
+                tarjetaValidaFlag = false;
+            }
+            if(tarjeta.contains("-")){
+                String[] tarjetaseparada = tarjeta.split("-");
+                for (int i = 0; i < 4; i++) {
+                    if (tarjetaseparada[i].length() != 4 || !esnumerico(tarjetaseparada[i])) {
+                        tarjetaValidaFlag = false;
+                    }
+                }
+            }
+
+        }
+        else {
             tarjetaValidaFlag = false;
         }
-        if (tarjetaseparada[1].length() != 8 || esnumerico(tarjetaseparada[1]) != true) {
+        return tarjetaValidaFlag;
+    }
+
+    public boolean isVisa (String tarjeta){
+        boolean tarjetaValidaFlag = true;
+        if (!tarjeta.isEmpty()){
+            if (tarjeta.charAt(0) != '4') {
+                tarjetaValidaFlag = false;
+            }
+            if (tarjeta.charAt(0) == '4' && tarjeta.length() != 19){
+                tarjetaValidaFlag = false;
+            }
+            if(tarjeta.contains("-") && tarjeta.length() == 19){
+                String[] tarjetaseparada = tarjeta.split("-");
+                for (int i = 0; i < 4; i++) {
+                    if (tarjetaseparada[i].length() != 4 || !esnumerico(tarjetaseparada[i])) {
+                        tarjetaValidaFlag = false;
+                    }
+                }
+            }
+
+        }
+        else{
             tarjetaValidaFlag = false;
         }
-        if (tarjetaseparada[2].length() != 1 || esnumerico(tarjetaseparada[2]) != true) {
+        return tarjetaValidaFlag;
+    }
+
+    public boolean isAmerican (String tarjeta){
+        boolean tarjetaValidaFlag = true;
+        if (!tarjeta.isEmpty()){
+            if (tarjeta.length() != 17){
+                tarjetaValidaFlag = false;
+            }
+            if(tarjeta.contains("-")){
+                String[] tarjetaseparada = tarjeta.split("-");
+                    if (tarjetaseparada[0].length() != 4 || !esnumerico(tarjetaseparada[0])) {
+                        tarjetaValidaFlag = false;
+                    }
+                    if (tarjetaseparada[1].length() != 6 || !esnumerico(tarjetaseparada[1])) {
+                        tarjetaValidaFlag = false;
+                    }
+                    if (tarjetaseparada[2].length() != 5 || !esnumerico(tarjetaseparada[2])) {
+                        tarjetaValidaFlag = false;
+                    }
+                }
+
+        }
+        else{
             tarjetaValidaFlag = false;
         }
         return tarjetaValidaFlag;
 
     }
+
 
     //Chequea que el formato de CUIT ingresado sea valido y que los datos ingresads sean numericos
     @Override
