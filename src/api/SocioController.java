@@ -1,5 +1,7 @@
 package api;
 
+import org.json.simple.JSONArray;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -20,4 +22,8 @@ public interface SocioController {
     void aprobarSocioParticipe(String CUITsocio);
 
     void crearAporte(String CUIT, int Cantidad, File documento);
+
+    JSONArray buscarDesembolsos();
+
+    boolean verificarMonto(double totaldeuda, String monto );
 }

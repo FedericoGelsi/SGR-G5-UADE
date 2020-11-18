@@ -51,6 +51,8 @@ public class FrmDyR extends JDialog {
     private API_JSONHandler file = new JSONHandler();
     private JSONObject jsonObject = (JSONObject) file.readJson(filename);
 
+    private SocioController sc = new impl.SocioController();
+
     public FrmDyR(Window owner, String Title) throws Exception {
         super(owner, Title);
 
@@ -84,7 +86,7 @@ public class FrmDyR extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    if( verificarMonto() ) {
+                    if( sc.verificarMonto(Double.parseDouble(TotalDeudaTxField.getText()), MontoTxField.getText()) ) {
                         crearRecupero();
                     }
                 } catch (Exception exception) {
@@ -119,7 +121,7 @@ public class FrmDyR extends JDialog {
         LDButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                buscarDesembolsos();
+                crearTablaDesembolsos();
             }
         });
     }
@@ -127,6 +129,7 @@ public class FrmDyR extends JDialog {
     private void buscarSocio() throws Exception {
         jsonObject = (JSONObject) file.readJson(filename);
         JSONArray socioList = (JSONArray) jsonObject.get("socios-participes");
+
         boolean socioEncontrado = false;
         for (Object obj: socioList){
             JSONObject socio = (JSONObject) obj;
@@ -306,18 +309,14 @@ public class FrmDyR extends JDialog {
 
     }
 
-    private void buscarDesembolsos(){
-        JSONArray desembolsos = (JSONArray) jsonObject.get("desembolsos");
-        crearTablaDesembolsos(desembolsos);
-    }
 
-    private void crearTablaDesembolsos(JSONArray desembolsos){
+    private void crearTablaDesembolsos(){
         String [] nombresColumnas = {"id", "CUIT", "Razón social", "Monto", "Fecha Operado"};
         DefaultTableModel modelo = new DefaultTableModel();
         for ( String column : nombresColumnas) {
             modelo.addColumn(column);
         }
-        for (Object des: desembolsos) {
+        for (Object des: sc.buscarDesembolsos()) {
             ArrayList data = new ArrayList<>();
             Desembolso desembolso = new impl.Desembolso((JSONObject) des);
             data.add(desembolso.getId());
@@ -330,27 +329,5 @@ public class FrmDyR extends JDialog {
         desembolsosTable = new JTable(modelo);
         pnlSDesembolsosTable.setViewportView(desembolsosTable);
         pnlSDesembolsosTable.setVisible(true);
-    }
-
-    private boolean verificarMonto(){
-        if (Double.parseDouble(TotalDeudaTxField.getText()) == 0){
-            showMessageDialog(null, "El socio no tiene deudas asociadas.");
-            return false;
-        }else {
-            if (!verificar.esnumerico(MontoTxField.getText())) {
-                showMessageDialog(null, "El campo debe ser numérico.\nIngrese un monto válido.");
-                return false;
-            } else {
-                if (Double.parseDouble(MontoTxField.getText()) <= 0) {
-                    showMessageDialog(null, "El monto debe ser mayor a 0.\nIngrese un monto válido.");
-                    return false;
-                }
-                if (Double.parseDouble(MontoTxField.getText()) > Double.parseDouble(TotalDeudaTxField.getText())) {
-                    showMessageDialog(null, "El monto no puede ser mayor a la deuda contraida.\nIngrese un monto válido.");
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 }

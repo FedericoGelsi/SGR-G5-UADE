@@ -1,11 +1,14 @@
 package impl;
 
 import api.API_JSONHandler;
+import api.Verificaciones;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
+
+import static javax.swing.JOptionPane.showMessageDialog;
 
 public class SocioController implements api.SocioController {
     private API_JSONHandler file = new JSONHandler();
@@ -13,6 +16,7 @@ public class SocioController implements api.SocioController {
     private JSONObject jsonObject = (JSONObject) file.readJson(filename);
     private JSONArray sociosList;
     private JSONObject socioenuso;
+    private Verificaciones verificar = new impl.Verificaciones();
 
     public SocioController() throws Exception {
     }
@@ -68,4 +72,33 @@ public class SocioController implements api.SocioController {
     public void crearAporte(String CUIT, int Cantidad, File documento){
 
     }
+
+    public JSONArray buscarDesembolsos(){
+        return (JSONArray) jsonObject.get("desembolsos");
+    }
+
+    public boolean verificarMonto(double totaldeuda, String monto ){
+        if (totaldeuda== 0){
+            showMessageDialog(null, "El socio no tiene deudas asociadas.");
+            return false;
+        }else {
+            if (!verificar.esnumerico(monto)) {
+                showMessageDialog(null, "El campo debe ser numérico.\nIngrese un monto válido.");
+                return false;
+            } else {
+                if (Double.parseDouble(monto) <= 0) {
+                    showMessageDialog(null, "El monto debe ser mayor a 0.\nIngrese un monto válido.");
+                    return false;
+                }
+                if (Double.parseDouble(monto) > totaldeuda {
+                    showMessageDialog(null, "El monto no puede ser mayor a la deuda contraida.\nIngrese un monto válido.");
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+
+
 }
