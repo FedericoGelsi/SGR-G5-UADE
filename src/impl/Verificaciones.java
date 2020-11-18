@@ -63,33 +63,32 @@ public class Verificaciones implements api.Verificaciones {
         if (Año < AñoHoy) {
             return "Menor";
         }
-        if (Año == AñoHoy && Mes.compareTo(MesHoy) < 0){
+        if (Año == AñoHoy && Mes.compareTo(MesHoy) < 0) {
             return "Menor";
-        }
-        else{
+        } else {
             return "Mayor";
         }
     }
 
     public boolean tarjetavalida(String tarjeta) {
         String[] tarjetaseparada = tarjeta.split("-");
-        for (int i = 0; i<4; i++){
-            if (tarjetaseparada[i].length() != 4 || esnumerico(tarjetaseparada[i])!=true) {
-                CUITValidoflag = false;
+        boolean tarjetaValidaFlag = true;
+        for (int i = 0; i < 4; i++) {
+            if (tarjetaseparada[i].length() != 4 || esnumerico(tarjetaseparada[i]) != true) {
+                tarjetaValidaFlag = false;
             }
         }
-        boolean tarjetaValidaFlag = true;
-        if (cuitseparado[0].length() != 2 || esnumerico(cuitseparado[0])!=true) {
+        if (tarjetaseparada[0].length() != 2 || esnumerico(tarjetaseparada[0]) != true) {
             tarjetaValidaFlag = false;
         }
-        if (cuitseparado[1].length() != 8 || esnumerico(cuitseparado[1])!=true ){
+        if (tarjetaseparada[1].length() != 8 || esnumerico(tarjetaseparada[1]) != true) {
             tarjetaValidaFlag = false;
         }
-        if (cuitseparado[2].length() != 1 || esnumerico(cuitseparado[2])!=true){
+        if (tarjetaseparada[2].length() != 1 || esnumerico(tarjetaseparada[2]) != true) {
             tarjetaValidaFlag = false;
         }
         return tarjetaValidaFlag;
-        
+
     }
 
     //Chequea que el formato de CUIT ingresado sea valido y que los datos ingresads sean numericos
@@ -105,13 +104,15 @@ public class Verificaciones implements api.Verificaciones {
         }
         if (cuitseparado[2].length() != 1 || esnumerico(cuitseparado[2]) != true) {
             CUITValidoflag = false;
+        }
         return CUITValidoflag;
-        
-    }
+        }
+
+
 
     //Chequea que un String este compuesto unicamente por numeros
     @Override
-    public boolean esnumerico(String datos) {
+    public boolean esnumerico(String datos){
         String regex = "[0-9]+";
         boolean numerico = datos.matches(regex);
         return numerico;
@@ -746,11 +747,6 @@ public class Verificaciones implements api.Verificaciones {
         file.writeJson(filename, jsonObject);
     }
 
-
-}
-
-
-
     public boolean fechavalidatarjeta(String fechacheck){
         String[] fechaseparada = fechacheck.split("/");
         boolean fechavalidaFlag = true;
@@ -762,6 +758,8 @@ public class Verificaciones implements api.Verificaciones {
         }
         return fechavalidaFlag;
     }
-
 }
+
+
+
 

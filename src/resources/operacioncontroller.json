@@ -6,6 +6,13 @@
             "montofactura":    0.396,
             "idfactura":       2000,
             "CUITemisor":      "20-11111111-2"
+        },
+        {
+            "estado":          "Emitida",
+            "CUITDestinatario":"20-87654321-2",
+            "montofactura":    0.0784,
+            "idfactura":       2001,
+            "CUITemisor":      "20-11111111-2"
         }
     ],
     "author":                 "admin",
@@ -16,6 +23,14 @@
             "IDComision":         1000,
             "Numero-Operacion":   0,
             "Tipo-Operacion":     "Pagare Bursatil",
+            "Estado":             "Facturada"
+        },
+        {
+            "montocomisiontotal": 0.0784,
+            "Porcentaje-Comision":4.0,
+            "IDComision":         1001,
+            "Numero-Operacion":   5,
+            "Tipo-Operacion":     "Cheque Propio",
             "Estado":             "Facturada"
         }
     ],
@@ -84,7 +99,7 @@
         {
             "CUITSocio":       "20-87654321-2",
             "tipo":            "Cheque Propio",
-            "estado":          "Con certificado emitido",
+            "estado":          "Monetizado",
             "tasadedescuento": 2.0,
             "CUITfirmante":    "20-87654321-2",
             "importetotal":    1.96,
