@@ -127,7 +127,51 @@ public class OperationController implements api.OperationController {
 
     @Override
     public double calcularRiesgoVivo(String CUIT){
-        return 0;
+        LocalDate fecha_vencimiento;
+        String fechaAux = "";
+        String estado = "";
+        String tipo = "";
+        double importetotal = 0.0;
+        double totalcomputado = 0.0;
+
+        JSONArray operacionesList = (JSONArray) jsonObjectOPC.get("operaciones");
+        for (Object obj : operacionesList) {
+            JSONObject operaciones = (JSONObject) obj;
+            String cuit = operaciones.get("CUITSocio").toString();
+            if (CUIT.equalsIgnoreCase(cuit)) {
+                estado = operaciones.get("estado").toString();
+                if (operaciones.get("tipo").equals("Tarjeta de Credito")) {
+                    fecha_vencimiento = LocalDate.parse(operaciones.get("fechavencimiento").toString().concat("-20"));
+                    fechaAux = verificar.fechavshoy(fecha_vencimiento);
+                } else {
+                    estado = operaciones.get("estado").toString();
+                    fecha_vencimiento = LocalDate.parse(operaciones.get("fechavencimiento").toString());
+                    fechaAux = verificar.fechavshoy(fecha_vencimiento);
+                    if (fechaAux.equalsIgnoreCase("Mayor") && estado.equalsIgnoreCase("Monetizado")) {
+                        tipo = operaciones.get("tipo").toString();
+                        importetotal = Double.parseDouble(operaciones.get("importetotal").toString());
+
+                        if (tipo.equalsIgnoreCase("Pagare Bursatil") || tipo.equalsIgnoreCase("Cheque de terceros") || tipo.equalsIgnoreCase("Cheque propio")) {
+                            totalcomputado = totalcomputado + importetotal;
+
+                        }
+                        if (tipo.equalsIgnoreCase("Cuenta Corriente") || tipo.equalsIgnoreCase("Tarjeta de Credito")) {
+                            totalcomputado = totalcomputado + importetotal;
+
+                        }
+                        if (tipo.equalsIgnoreCase("Prestamo")) {
+                            totalcomputado = totalcomputado + importetotal;
+
+                        }
+
+                    }
+                }
+
+            }
+
+
+        }
+        return totalcomputado;
     }
 
     @Override
@@ -629,6 +673,7 @@ public class OperationController implements api.OperationController {
 
     public boolean Computar5FDRAc (ArrayList < String > AccionistasCompartidos, String CUIT,double IMPORTEOPERACION)
     {
+
         double totalcomputado = 0.0;
         String accionistaCUIT = "";
         String operacion_cuit = "";
@@ -642,35 +687,39 @@ public class OperationController implements api.OperationController {
 
 
         for (int i = 0; i < AccionistasCompartidos.size(); i++) {
+            System.out.println("Bokita");
             accionistaCUIT = AccionistasCompartidos.get(i);
             JSONArray operacionesList = (JSONArray) jsonObjectOPC.get("operaciones");
             for (Object ops : operacionesList) {
                 JSONObject operaciones = (JSONObject) ops;
                 operacion_cuit = operaciones.get("CUITSocio").toString();
                 if (accionistaCUIT.equalsIgnoreCase(operacion_cuit)) {
-                    estado_operacion = operaciones.get("estado").toString();
-                    fecha_vencimiento = LocalDate.parse(operaciones.get("fechavencimiento").toString());
-                    fechaAux = verificar.fechavshoy(fecha_vencimiento);
-                    System.out.println(fechaAux);
-                    System.out.println(estado_operacion);
-                    if (fechaAux.equalsIgnoreCase("Mayor") && estado_operacion.equalsIgnoreCase("Monetizada")) {
-                        tipo_operacion = operaciones.get("tipo").toString();
-                        importetotal = (double) operaciones.get("importetotal");
-                        System.out.println(importetotal);
-                        if (tipo_operacion.equalsIgnoreCase("Pagare Bursatil") || tipo_operacion.equalsIgnoreCase("Cheque de terceros") || tipo_operacion.equalsIgnoreCase("Cheque propio")) {
-                            totalcomputado = totalcomputado + importetotal;
-                            System.out.println(totalcomputado);
+                    if (operaciones.get("tipo").equals("Tarjeta de Credito")){
+                        fecha_vencimiento = LocalDate.parse(operaciones.get("fechavencimiento").toString().concat("-20"));
+                        fechaAux = verificar.fechavshoy(fecha_vencimiento);
+                        System.out.println(fechaAux);
+                    }
+                    else{
+                        estado_operacion = operaciones.get("estado").toString();
+                        fecha_vencimiento = LocalDate.parse(operaciones.get("fechavencimiento").toString());
+                        fechaAux = verificar.fechavshoy(fecha_vencimiento);
+                        System.out.println(fechaAux);
+                        if (fechaAux.equalsIgnoreCase("Mayor") && estado_operacion.equalsIgnoreCase("Monetizado")) {
+                            tipo_operacion = operaciones.get("tipo").toString();
+                            importetotal = Double.parseDouble(operaciones.get("importetotal").toString());
 
-                        }
-                        if (tipo_operacion.equalsIgnoreCase("Cuenta Corriente") || tipo_operacion.equalsIgnoreCase("Tarjeta de Credito")) {
-                            totalcomputado = totalcomputado + importetotal;
-                            System.out.println(totalcomputado);
+                            if (tipo_operacion.equalsIgnoreCase("Pagare Bursatil") || tipo_operacion.equalsIgnoreCase("Cheque de terceros") || tipo_operacion.equalsIgnoreCase("Cheque propio")) {
+                                totalcomputado = totalcomputado + importetotal;
 
-                        }
-                        if (tipo_operacion.equalsIgnoreCase("Prestamo")) {
-                            totalcomputado = totalcomputado + importetotal;
-                            System.out.println(totalcomputado);
+                            }
+                            if (tipo_operacion.equalsIgnoreCase("Cuenta Corriente") || tipo_operacion.equalsIgnoreCase("Tarjeta de Credito")) {
+                                totalcomputado = totalcomputado + importetotal;
 
+                            }
+                            if (tipo_operacion.equalsIgnoreCase("Prestamo")) {
+                                totalcomputado = totalcomputado + importetotal;
+
+                            }
                         }
                     }
                 }
@@ -682,28 +731,35 @@ public class OperationController implements api.OperationController {
                 operacion_cuit = operaciones.get("CUITSocio").toString();
                 if (CUIT.equalsIgnoreCase(operacion_cuit)) {
                     estado_operacion = operaciones.get("estado").toString();
-                    fecha_vencimiento = LocalDate.parse(operaciones.get("fechavencimiento").toString());
-                    fechaAux = verificar.fechavshoy(fecha_vencimiento);
-                    System.out.println(fechaAux);
-                    System.out.println(estado_operacion);
-                    if (fechaAux.equalsIgnoreCase("Mayor") && estado_operacion.equalsIgnoreCase("Monetizada")) {
-                        tipo_operacion = operaciones.get("tipo").toString();
-                        importetotal = (double) operaciones.get("importetotal");
-                        System.out.println(importetotal);
-                        if (tipo_operacion.equalsIgnoreCase("Pagare Bursatil") || tipo_operacion.equalsIgnoreCase("Cheque de terceros") || tipo_operacion.equalsIgnoreCase("Cheque propio")) {
-                            totalcomputado = totalcomputado + importetotal;
-                            System.out.println(totalcomputado);
+                    if (operaciones.get("tipo").equals("Tarjeta de Credito")){
+                        fecha_vencimiento = LocalDate.parse(operaciones.get("fechavencimiento").toString().concat("-20"));
+                        fechaAux = verificar.fechavshoy(fecha_vencimiento);
+                        System.out.println(fechaAux);
+                        estado_operacion = operaciones.get("estado").toString();
+                    }
+                    else
+                    {
+                        fecha_vencimiento = LocalDate.parse(operaciones.get("fechavencimiento").toString());
+                        fechaAux = verificar.fechavshoy(fecha_vencimiento);
+                        System.out.println(fechaAux);
+                        estado_operacion = operaciones.get("estado").toString();
+                        if (fechaAux.equalsIgnoreCase("Mayor") && estado_operacion.equalsIgnoreCase("Monetizado")) {
+                            tipo_operacion = operaciones.get("tipo").toString();
+                            importetotal = Double.parseDouble(operaciones.get("importetotal").toString());
+                            if (tipo_operacion.equalsIgnoreCase("Pagare Bursatil") || tipo_operacion.equalsIgnoreCase("Cheque de terceros") || tipo_operacion.equalsIgnoreCase("Cheque propio")) {
+                                totalcomputado = totalcomputado + importetotal;
 
-                        }
-                        if (tipo_operacion.equalsIgnoreCase("Cuenta Corriente") || tipo_operacion.equalsIgnoreCase("Tarjeta de Credito")) {
-                            totalcomputado = totalcomputado + importetotal;
-                            System.out.println(totalcomputado);
+                            }
+                            if (tipo_operacion.equalsIgnoreCase("Cuenta Corriente") || tipo_operacion.equalsIgnoreCase("Tarjeta de Credito")) {
+                                totalcomputado = totalcomputado + importetotal;
 
-                        }
-                        if (tipo_operacion.equalsIgnoreCase("Prestamo")) {
-                            totalcomputado = totalcomputado + importetotal;
-                            System.out.println(totalcomputado);
 
+                            }
+                            if (tipo_operacion.equalsIgnoreCase("Prestamo")) {
+                                totalcomputado = totalcomputado + importetotal;
+
+
+                            }
                         }
                     }
                 }
@@ -712,6 +768,7 @@ public class OperationController implements api.OperationController {
         System.out.println(totalcomputado);
         if (IMPORTEOPERACION > totalcomputado && totalcomputado != 0) {
             flag = true;
+            System.out.println(totalcomputado);
         }
         return flag;
     }

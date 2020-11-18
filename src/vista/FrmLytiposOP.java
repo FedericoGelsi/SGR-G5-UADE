@@ -109,11 +109,10 @@ public class FrmLytiposOP extends JDialog{
                         if (pnlHC.isShowing()) {
                             crearTablaHistorialContragarantias((JSONArray) socio.get("contragarantias"));
                         }
-                    }else{
-                        showMessageDialog(null, "No se encuenta el socio o no es pleno.\nIngrese un CUIT válido");
                     }
                 }else{
                     showMessageDialog(null, "Ingrese un CUIT válido");
+                    break;
                 }
             }else if (comboBoxCUIT.getSelectedItem().toString().equals("Razón Social")) {
                 if (rs.equals(textFieldCODCUIT.getText()) && estado.equals("Pleno")) {
@@ -123,6 +122,7 @@ public class FrmLytiposOP extends JDialog{
                     }
                 }else{
                     showMessageDialog(null, "No se encuenta el socio o no es pleno.\nIngrese un CUIT válido");
+                    break;
                 }
             }
         }

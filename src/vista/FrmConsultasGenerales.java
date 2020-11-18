@@ -329,6 +329,7 @@ public class FrmConsultasGenerales extends JDialog {
                 calcularRiesgoVivo();
                 datossocio( socioenuso );
                 crearTablas(1);
+                RVCCTxf.setText(String.valueOf(opController.calcularRiesgoVivo(cuit)));
 
             }else if(pnlTabC5.isShowing()){
                 RSMTxf.setText(socio.getRazonSocial());
@@ -549,7 +550,7 @@ public class FrmConsultasGenerales extends JDialog {
             data.add(operacion.get("tipo"));
             data.add(operacion.get("estado"));
             data.add(operacion.get("importetotal"));
-            if (operacion.get("banco").toString().isEmpty()) {
+            if (operacion.get("banco") == null) {
                 data.add("");
             }else{
                 data.add(operacion.get("banco"));
