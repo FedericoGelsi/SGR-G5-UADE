@@ -25,10 +25,10 @@ public class Verificaciones implements api.Verificaciones {
         String[] cuitseparado = CUIT.split("-");
         boolean CUITValidoflag = true;
         if ( Arrays.stream(cuitseparado).count() == 3) {
-            if (cuitseparado[0].length() != 2 || esnumerico(cuitseparado[0]) != true) {
+            if (cuitseparado[0].length() != 2 ||  esnumerico(cuitseparado[0]) != true) {
                 CUITValidoflag = false;
             }
-            if (cuitseparado[1].length() != 8 || esnumerico(cuitseparado[1]) != true) {
+            if (cuitseparado[1].length() != 8 ||  esnumerico(cuitseparado[1]) != true) {
                 CUITValidoflag = false;
             }
             if (cuitseparado[2].length() != 1 || esnumerico(cuitseparado[2]) != true) {

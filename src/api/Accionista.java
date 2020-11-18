@@ -8,7 +8,7 @@ public interface Accionista {
 
     String getRazonsocial();
 
-    float getPorcParticipacion();
+    Double getPorcParticipacion();
 
     JSONObject toJSON();
 }
