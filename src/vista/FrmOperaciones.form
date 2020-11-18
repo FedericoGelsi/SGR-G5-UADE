@@ -205,14 +205,6 @@
                   <grid row="6" column="6" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
               </hspacer>
-              <component id="14427" class="javax.swing.JButton" binding="JBCHP">
-                <constraints>
-                  <grid row="6" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Confirmar"/>
-                </properties>
-              </component>
               <hspacer id="d5e7f">
                 <constraints>
                   <grid row="6" column="5" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -288,6 +280,21 @@
                 <properties>
                   <background color="-1"/>
                   <foreground color="-16777216"/>
+                </properties>
+              </component>
+              <component id="76dae" class="javax.swing.JButton" binding="JBCHP">
+                <constraints>
+                  <grid row="6" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-12296838"/>
+                  <borderPainted value="true"/>
+                  <enabled value="true"/>
+                  <focusPainted value="false"/>
+                  <focusable value="false"/>
+                  <font name="Roboto" size="14"/>
+                  <foreground color="-1"/>
+                  <text value="Confirmar"/>
                 </properties>
               </component>
             </children>
@@ -421,14 +428,6 @@
                   <grid row="5" column="6" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
               </hspacer>
-              <component id="6e619" class="javax.swing.JButton" binding="JBCHT">
-                <constraints>
-                  <grid row="5" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Confirmar"/>
-                </properties>
-              </component>
               <hspacer id="71c07">
                 <constraints>
                   <grid row="5" column="5" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -485,6 +484,21 @@
                     <item value="BANCO MACRO S.A."/>
                     <item value="BANCO COMAFI SOCIEDAD ANONIMA"/>
                   </model>
+                </properties>
+              </component>
+              <component id="4c819" class="javax.swing.JButton" binding="JBCHT">
+                <constraints>
+                  <grid row="5" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-12296838"/>
+                  <borderPainted value="true"/>
+                  <enabled value="true"/>
+                  <focusPainted value="false"/>
+                  <focusable value="false"/>
+                  <font name="Roboto" size="14"/>
+                  <foreground color="-1"/>
+                  <text value="Confirmar"/>
                 </properties>
               </component>
             </children>
@@ -616,14 +630,6 @@
                   <grid row="5" column="6" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
               </hspacer>
-              <component id="278ac" class="javax.swing.JButton" binding="JBPB">
-                <constraints>
-                  <grid row="5" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Confirmar"/>
-                </properties>
-              </component>
               <hspacer id="f7a1a">
                 <constraints>
                   <grid row="5" column="5" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -680,6 +686,21 @@
                     <item value="BANCO MACRO S.A."/>
                     <item value="BANCO COMAFI SOCIEDAD ANONIMA"/>
                   </model>
+                </properties>
+              </component>
+              <component id="126da" class="javax.swing.JButton" binding="JBPB">
+                <constraints>
+                  <grid row="5" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-12296838"/>
+                  <borderPainted value="true"/>
+                  <enabled value="true"/>
+                  <focusPainted value="false"/>
+                  <focusable value="false"/>
+                  <font name="Roboto" size="14"/>
+                  <foreground color="-1"/>
+                  <text value="Confirmar"/>
                 </properties>
               </component>
             </children>
@@ -791,14 +812,6 @@
                   <grid row="4" column="6" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
               </hspacer>
-              <component id="34ced" class="javax.swing.JButton" binding="JBCCC">
-                <constraints>
-                  <grid row="4" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Confirmar"/>
-                </properties>
-              </component>
               <hspacer id="83ce5">
                 <constraints>
                   <grid row="4" column="5" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -816,6 +829,21 @@
                 <properties>
                   <background color="-1"/>
                   <foreground color="-16777216"/>
+                </properties>
+              </component>
+              <component id="98d27" class="javax.swing.JButton" binding="JBCCC">
+                <constraints>
+                  <grid row="4" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-12296838"/>
+                  <borderPainted value="true"/>
+                  <enabled value="true"/>
+                  <focusPainted value="false"/>
+                  <focusable value="false"/>
+                  <font name="Roboto" size="14"/>
+                  <foreground color="-1"/>
+                  <text value="Confirmar"/>
                 </properties>
               </component>
             </children>
@@ -955,14 +983,6 @@
                   <grid row="5" column="6" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
               </hspacer>
-              <component id="4c547" class="javax.swing.JButton" binding="JBTC">
-                <constraints>
-                  <grid row="5" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Confirmar"/>
-                </properties>
-              </component>
               <hspacer id="c0d3c">
                 <constraints>
                   <grid row="5" column="5" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -973,6 +993,21 @@
                   <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
               </hspacer>
+              <component id="275c0" class="javax.swing.JButton" binding="JBTC">
+                <constraints>
+                  <grid row="5" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-12296838"/>
+                  <borderPainted value="true"/>
+                  <enabled value="true"/>
+                  <focusPainted value="false"/>
+                  <focusable value="false"/>
+                  <font name="Roboto" size="14"/>
+                  <foreground color="-1"/>
+                  <text value="Confirmar"/>
+                </properties>
+              </component>
             </children>
           </grid>
           <grid id="afe13" binding="pnlPST" layout-manager="GridLayoutManager" row-count="9" column-count="11" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -1192,14 +1227,6 @@
                   <text value="CUIT Socio:"/>
                 </properties>
               </component>
-              <component id="59af7" class="javax.swing.JButton" binding="JBPST">
-                <constraints>
-                  <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Confirmar"/>
-                </properties>
-              </component>
               <component id="f2b18" class="javax.swing.JTextField" binding="TFCSPST">
                 <constraints>
                   <grid row="7" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
@@ -1208,6 +1235,21 @@
                 </constraints>
                 <properties>
                   <text value=""/>
+                </properties>
+              </component>
+              <component id="4d19d" class="javax.swing.JButton" binding="JBPST">
+                <constraints>
+                  <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-12296838"/>
+                  <borderPainted value="true"/>
+                  <enabled value="true"/>
+                  <focusPainted value="false"/>
+                  <focusable value="false"/>
+                  <font name="Roboto" size="14"/>
+                  <foreground color="-1"/>
+                  <text value="Confirmar"/>
                 </properties>
               </component>
             </children>

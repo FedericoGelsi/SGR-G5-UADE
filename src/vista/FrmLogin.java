@@ -48,20 +48,6 @@ public class FrmLogin extends JFrame{
         } catch( Exception ex ) {
             System.err.println( "Failed to initialize LaF" );
         }
-        /*
-        try {
-            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
-        }
-
-         */
 
         // Define el canvas según swing.
         this.setContentPane(this.pnlPrincipal);
@@ -81,13 +67,11 @@ public class FrmLogin extends JFrame{
 
     }
 
-    private boolean auth() throws NoSuchAlgorithmException {
-        JSONParser parser = new JSONParser();
+    private boolean auth() {
         API_JSONHandler file = new JSONHandler();
         try{
-            JSONArray usersList = new JSONArray();
             JSONObject jsonObject = (JSONObject) file.readJson("./src/resources/usuarios.json");
-            usersList = (JSONArray) jsonObject.get("users");
+            JSONArray usersList = (JSONArray) jsonObject.get("users");
             API_SHA256 hash = new SHA256();
             String pass = new String(this.passwordField1.getPassword());
 
@@ -101,7 +85,7 @@ public class FrmLogin extends JFrame{
                     this.errorMsg.setText("Usuario incorrecto");
                     this.errorMsg.setVisible(true);
                 }else if (user_data.get("username").equals(hash.getSHA_Str(this.userField.getText())) && !user_data.get("password").equals(hash.getSHA_Str(pass))){
-                    this.errorMsg.setText("Contraseña incorrecto");
+                    this.errorMsg.setText("Contraseña incorrecta");
                     this.errorMsg.setVisible(true);
                 }else{
                     this.errorMsg.setText("El usuario es inexistente");
@@ -124,14 +108,10 @@ public class FrmLogin extends JFrame{
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    if (auth() == true) {
-                        FrmPrincipal frame = new FrmPrincipal("Sistema de Gestión de Sociedades de Garantías Recíprocas", self.userField.getText());
-                        frame.setVisible(true);
-                        self.dispose();
-                    }
-                } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
-                    noSuchAlgorithmException.printStackTrace();
+                if (auth()) {
+                    FrmPrincipal frame = new FrmPrincipal("Sistema de Gestión de Sociedades de Garantías Recíprocas", self.userField.getText());
+                    frame.setVisible(true);
+                    self.dispose();
                 }
             }
         });

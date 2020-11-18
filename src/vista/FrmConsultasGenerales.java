@@ -115,21 +115,6 @@ public class FrmConsultasGenerales extends JDialog {
         } catch( Exception ex ) {
             System.err.println( "Failed to initialize LaF" );
         }
-        /*
-        try {
-            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
-        }
-
-         */
-
         // Define el canvas según swing.
         this.setContentPane(this.pnlPrincipal);
         // Tamaño de la pantalla

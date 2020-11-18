@@ -47,7 +47,6 @@ public class FrmOperaciones extends JDialog{
     private JTextField TFNombreTC;
     private JTextField TFFVTC;
     private JTextField TFCDSTC;
-    private JButton JBTC;
     private JTextField TFNDPPB;
     private JTextField TFFDVPB;
     private JTextField TFCDFPB;
@@ -55,7 +54,6 @@ public class FrmOperaciones extends JDialog{
     private JComboBox comboBEPB;
     private JTextField TFITCCC;
     private JTextField TFFDVCCC;
-    private JButton JBCCC;
     private JSpinner spinnerITCCC;
     private JTextField TFBECHT;
     private JTextField TFFDVCHT;
@@ -74,6 +72,8 @@ public class FrmOperaciones extends JDialog{
     private JComboBox comboBECHT;
     private JTextField TFNDCCHT;
     private JTextField TFNDCCHP;
+    private JButton JBCCC;
+    private JButton JBTC;
     private Verificaciones verif = new impl.Verificaciones();
 
 
@@ -87,20 +87,6 @@ public class FrmOperaciones extends JDialog{
         } catch( Exception ex ) {
             System.err.println("Failed to initialize LaF");
         }
-        /*
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
-        }
-
-         */
 
         // Define el canvas según swing.
         this.setContentPane(this.pnlPrincipal);
@@ -108,6 +94,7 @@ public class FrmOperaciones extends JDialog{
         this.setSize(1000, 600);
         // No permite volver a la pantalla anterior hasta cerrar esta
         this.setModal(true);
+        this.setResizable(false);
         // Establezco el comportamiento al cerrar la pantalla
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         // Inicia la pantalla centrada

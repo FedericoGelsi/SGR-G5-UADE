@@ -83,7 +83,12 @@ public class FrmPrincipal extends JFrame {
         líneasYTiposDeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FrmLytiposOP frame = new FrmLytiposOP(self, "SGR - Líneas y tipos de Operaciones asociadas");
+                FrmLytiposOP frame = null;
+                try {
+                    frame = new FrmLytiposOP(self, "SGR - Líneas y tipos de Operaciones asociadas");
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
                 self.setVisible(false);
                 frame.setVisible(true);
                 self.setVisible(true);

@@ -63,20 +63,6 @@ public class FrmSocios extends JDialog{
         } catch( Exception ex ) {
             System.err.println( "Failed to initialize LaF" );
         }
-        /*
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
-        }
-
-         */
 
         // Define el canvas según swing.
         this.setContentPane(this.pnlPrincipal);
@@ -84,6 +70,7 @@ public class FrmSocios extends JDialog{
         this.setSize(1000,600);
         // No permite volver a la pantalla anterior hasta cerrar esta
         this.setModal(true);
+        this.setResizable(false);
         // Establezco el comportamiento al cerrar la pantalla
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         // Inicia la pantalla centrada
@@ -230,6 +217,7 @@ public class FrmSocios extends JDialog{
         }
         accionistasTabla= new JTable(modelo);
         PnlsAccionistas.setViewportView(accionistasTabla);
+        PnlsAccionistas.setVisible(true);
     }
 
     private void buscarAccionista() throws Exception {

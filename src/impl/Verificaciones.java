@@ -1,7 +1,13 @@
 package impl;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
+import java.util.Date;
+
+import static javax.swing.JOptionPane.showMessageDialog;
 
 public class Verificaciones implements api.Verificaciones {
     //Compara una fecha entregada por parametro contra la fecha actual y devuelve Menor si la fecha ingresada es en el
@@ -49,19 +55,16 @@ public class Verificaciones implements api.Verificaciones {
     //Chequea el formato de fecha en el String recibido y que los datos ingresados sean numericos
     @Override
     public boolean fechavalida(String fechacheck){
-        String[] fechaseparada = fechacheck.split("/");
-        boolean fechavalidaFlag = true;
-        if (fechaseparada[0].length() != 2 || esnumerico(fechaseparada[0])!=true) {
-            fechavalidaFlag = false;
+        DateTimeFormatter formato = DateTimeFormatter.ISO_LOCAL_DATE;
+        try{
+            LocalDate.parse(fechacheck, formato);
+        }catch(DateTimeParseException excep){
+            showMessageDialog(null, "Ingrese una fecha válida.\nEl formato debe ser YYYY-MM-DD");
+            return false;
         }
-        if (fechaseparada[1].length() != 2 || esnumerico(fechaseparada[1])!=true) {
-            fechavalidaFlag = false;
-        }
-        if (fechaseparada[2].length() != 4 || esnumerico(fechaseparada[2])!=true) {
-            fechavalidaFlag = false;
-        }
-        return fechavalidaFlag;
+        return true;
     }
+
     public boolean lineacreditovigente(String CUIT){
         return true;
     }

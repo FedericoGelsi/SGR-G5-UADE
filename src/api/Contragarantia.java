@@ -1,7 +1,8 @@
 package api;
 
+import org.json.simple.JSONObject;
+
 import java.time.LocalDate;
-import java.util.Date;
 
 public interface Contragarantia {
     String getTipo();
@@ -11,4 +12,8 @@ public interface Contragarantia {
     LocalDate getFechaVigencia();
 
     String getCUITPropietario();
+
+    LocalDate getFechacreacion();
+
+    JSONObject toJSON();
 }

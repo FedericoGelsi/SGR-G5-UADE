@@ -206,18 +206,6 @@
                   <text value="Operaciones de un socio monetizadas"/>
                 </properties>
               </component>
-              <scrollpane id="a3233" binding="pnlSOperacionesMTable">
-                <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <background color="-11700571"/>
-                  <opaque value="true"/>
-                  <visible value="false"/>
-                </properties>
-                <border type="none"/>
-                <children/>
-              </scrollpane>
               <grid id="f7d07" layout-manager="GridLayoutManager" row-count="5" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
@@ -238,11 +226,6 @@
                       <text value="Fecha inicio:"/>
                     </properties>
                   </component>
-                  <vspacer id="4a9a3">
-                    <constraints>
-                      <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                  </vspacer>
                   <component id="a0593" class="javax.swing.JTextField" binding="FechaIniTxf">
                     <constraints>
                       <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
@@ -371,6 +354,35 @@
                       </component>
                     </children>
                   </grid>
+                  <vspacer id="54674">
+                    <constraints>
+                      <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="2" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                  </vspacer>
+                </children>
+              </grid>
+              <grid id="55afa" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <opaque value="false"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <scrollpane id="f67a7" binding="pnlSOperacionesMTable">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-11700571"/>
+                      <opaque value="true"/>
+                      <visible value="false"/>
+                    </properties>
+                    <border type="none"/>
+                    <children/>
+                  </scrollpane>
                 </children>
               </grid>
             </children>
@@ -918,18 +930,30 @@
                   </grid>
                 </children>
               </grid>
-              <scrollpane id="6f6f4" binding="pnlSMoraTable">
+              <grid id="d7835" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <background color="-11700571"/>
-                  <opaque value="true"/>
-                  <visible value="false"/>
+                  <opaque value="false"/>
                 </properties>
                 <border type="none"/>
-                <children/>
-              </scrollpane>
+                <children>
+                  <scrollpane id="a1561" binding="pnlSMoraTable">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-11700571"/>
+                      <opaque value="true"/>
+                      <visible value="false"/>
+                    </properties>
+                    <border type="none"/>
+                    <children/>
+                  </scrollpane>
+                </children>
+              </grid>
             </children>
           </grid>
           <grid id="96845" binding="pnlTabC6" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -939,7 +963,7 @@
             </constraints>
             <properties>
               <background color="-11700571"/>
-              <visible value="true"/>
+              <visible value="false"/>
             </properties>
             <border type="none"/>
             <children>
@@ -1467,7 +1491,7 @@
                     </constraints>
                     <properties>
                       <background color="-11766364"/>
-                      <visible value="true"/>
+                      <visible value="false"/>
                     </properties>
                     <border type="none"/>
                     <children>
