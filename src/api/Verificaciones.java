@@ -69,6 +69,8 @@ public interface Verificaciones {
 
     boolean tarjetavalida(String tarjeta);
 
+    boolean lineatope(String CUITSocio, float montooperacion);
+
     int crearOT2(String empresa, double importetotalop2, String fechavencimiento, String CUITSocio, int numerotarjeta, String nombretarjeta, String estado, int codigoseguridad, String tipo, String nombrempresa) throws Exception;
 }
 

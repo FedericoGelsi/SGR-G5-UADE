@@ -8,25 +8,30 @@ import java.time.format.DateTimeFormatter;
 public class Deuda implements api.Deuda {
     private double monto;
     private String CUITDeudor;
-    private int idDeuda;
+    private int  idDeuda;
     private double montoMora;
-    private LocalDate fechaDeuda;
     private boolean aplicaMora;
+    private LocalDate fechaDeuda;
 
     /*======CONSTRUCTOR=======*/
 
-    public Deuda(double monto, String CUITDeudor, int idDeuda, double montoMora) {
+    public Deuda(double monto, String CUITDeudor, int idDeuda, double montoMora,LocalDate fechaDeuda,boolean aplicaMora) {
         this.monto = monto;
         this.CUITDeudor = CUITDeudor;
         this.idDeuda = idDeuda;
         this.montoMora = montoMora;
+        this.aplicaMora = aplicaMora;
+        this.fechaDeuda = fechaDeuda;
     }
 
     public Deuda(JSONObject jsonDeuda){
-        this.monto = (double) jsonDeuda.get("monto");
+        this.monto = Double.parseDouble(jsonDeuda.get("monto").toString());
         this.CUITDeudor = (String) jsonDeuda.get("cuit-deudor");
-        this.idDeuda = Integer.parseInt(jsonDeuda.get("id-deuda").toString()) ;
-        this.montoMora = (double) jsonDeuda.get("monto-mora");
+        this.idDeuda = Integer.parseInt(jsonDeuda.get("id-deuda").toString());
+        this.montoMora = Double.parseDouble(jsonDeuda.get("monto-mora").toString());
+        this.aplicaMora = (boolean) jsonDeuda.get("aplica-mora");
+        this.fechaDeuda = LocalDate.parse(jsonDeuda.get("fecha-deuda").toString());
+
     }
 
     /*======GETTERS=======*/
@@ -72,7 +77,9 @@ public class Deuda implements api.Deuda {
         JSONObject deuda = new JSONObject();
         deuda.put("monto", this.monto);
         deuda.put("cuit-deudor", this.CUITDeudor);
+        deuda.put("fecha-deuda", this.fechaDeuda.toString());
         deuda.put("id-deuda", this.idDeuda);
+        deuda.put("aplica-mora", this.aplicaMora);
         deuda.put("monto-mora", this.montoMora);
         return deuda;
     }

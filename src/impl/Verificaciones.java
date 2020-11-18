@@ -17,8 +17,10 @@ import netscape.javascript.JSObject;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 public class Verificaciones implements api.Verificaciones {
 
@@ -111,19 +113,15 @@ public class Verificaciones implements api.Verificaciones {
 
     //Chequea el formato de fecha en el String recibido y que los datos ingresados sean numericos
     @Override
-    public boolean fechavalida(String fechacheck) {
-        String[] fechaseparada = fechacheck.split("/");
-        boolean fechavalidaFlag = true;
-        if (fechaseparada[0].length() != 2 || esnumerico(fechaseparada[0]) != true) {
-            fechavalidaFlag = false;
+    public boolean fechavalida(String fechacheck){
+        DateTimeFormatter formato = DateTimeFormatter.ISO_LOCAL_DATE;
+        try{
+            LocalDate.parse(fechacheck, formato);
+        }catch(DateTimeParseException excep){
+            showMessageDialog(null, "Ingrese una fecha válida.\nEl formato debe ser YYYY-MM-DD");
+            return false;
         }
-        if (fechaseparada[1].length() != 2 || esnumerico(fechaseparada[1]) != true) {
-            fechavalidaFlag = false;
-        }
-        if (fechaseparada[2].length() != 4 || esnumerico(fechaseparada[2]) != true) {
-            fechavalidaFlag = false;
-        }
-        return fechavalidaFlag;
+        return true;
     }
 
     public boolean lineacreditovigente(String CUITSocio) {
@@ -165,6 +163,24 @@ public class Verificaciones implements api.Verificaciones {
             lineasuficienteFlag = false;
         }
         return lineasuficienteFlag;
+    }
+
+    public boolean lineatope(String CUITSocio, float montooperacion) {
+        double tope = 0;
+        boolean lineatopeFlag = true;
+        JSONArray socioList = (JSONArray) jsonObject.get("socios-participes");
+        for (Object obj : socioList) {
+            JSONObject socio = (JSONObject) obj;
+            String cuit = socio.get("cuit").toString();
+            if (CUITSocio.equalsIgnoreCase(cuit)) {
+                JSONObject lineadecredito = (JSONObject) socio.get("lineas-de-credito");
+                tope = Double.parseDouble(lineadecredito.get("tope").toString());
+            }
+        }
+        if ((double) montooperacion > tope) {
+            lineatopeFlag = false;
+        }
+        return lineatopeFlag;
     }
 
     public boolean contragarantiassuficientes(String CUITSocio, float montooperacion) {
@@ -219,7 +235,7 @@ public class Verificaciones implements api.Verificaciones {
             if (CUITSocio.equalsIgnoreCase(factcuit)) {
                 estado = factura.get("estado").toString();
                 if (estado.equalsIgnoreCase("impago")) {
-                    totalimpago = totalimpago + (double) factura.get("montofactura");
+                    totalimpago = totalimpago + Double.parseDouble(factura.get("montofactura").toString());
                 }
             }
         }
@@ -267,14 +283,15 @@ public class Verificaciones implements api.Verificaciones {
         double monto_utilizado = 0;
         double montohabilitado = 0;
         double montodeuda = 0;
+        LocalDate hoy = LocalDate.now();
         JSONArray socioList = (JSONArray) jsonObject.get("socios-participes");
         for (Object obj : socioList) {
             JSONObject socio = (JSONObject) obj;
             String cuit = socio.get("cuit").toString();
             if (CUITS.equalsIgnoreCase(cuit)) {
                 JSONObject lineadecredito = (JSONObject) socio.get("lineas-de-credito");
-                tope = (double) lineadecredito.get("tope");
-                monto_utilizado = (double) lineadecredito.get("monto-utilizado");
+                tope = Double.parseDouble(lineadecredito.get("tope").toString());
+                monto_utilizado = Double.parseDouble(lineadecredito.get("monto-utilizado").toString());
                 montohabilitado = (tope - monto_utilizado);
                 if (importetotal > montohabilitado && importetotal <= tope) {
                     lineadecredito.put("monto-utilizado", tope);
@@ -287,7 +304,7 @@ public class Verificaciones implements api.Verificaciones {
                             contadordeuda = 1 + Integer.parseInt(id.get("id-deuda").toString());
                         }
                     }
-                    Deuda nuevaDeuda = new Deuda(montodeuda, CUITS, contadordeuda, montodeuda * 0.05);
+                    Deuda nuevaDeuda = new Deuda(montodeuda, CUITS, contadordeuda, montodeuda * 0.05,hoy,true);
                     JSONObject deuda1 = nuevaDeuda.toJSON();
                     JSONArray DeudasList = new JSONArray();
                     DeudasList.add(deuda1);
@@ -348,6 +365,7 @@ public class Verificaciones implements api.Verificaciones {
         double monto_utilizado = 0;
         double montohabilitado = 0;
         double montodeuda = 0;
+        LocalDate hoy = LocalDate.now();
         JSONArray socioList = (JSONArray) jsonObject.get("socios-participes");
         for (Object obj : socioList) {
             JSONObject socio = (JSONObject) obj;
@@ -368,7 +386,7 @@ public class Verificaciones implements api.Verificaciones {
                             contadordeuda = 1 + Integer.parseInt(id.get("id-deuda").toString());
                         }
                     }
-                    Deuda nuevaDeuda = new Deuda(montodeuda, CUIT, contadordeuda, montodeuda * 0.05);
+                    Deuda nuevaDeuda = new Deuda(montodeuda, CUIT, contadordeuda, montodeuda * 0.05,hoy,true);
                     JSONObject deuda1 = nuevaDeuda.toJSON();
                     JSONArray DeudasList = new JSONArray();
                     DeudasList.add(deuda1);
@@ -427,6 +445,7 @@ public class Verificaciones implements api.Verificaciones {
         double monto_utilizado = 0;
         double montohabilitado = 0;
         double montodeuda = 0;
+        LocalDate hoy = LocalDate.now();
         JSONArray socioList = (JSONArray) jsonObject.get("socios-participes");
         for (Object obj : socioList) {
             JSONObject socio = (JSONObject) obj;
@@ -447,7 +466,7 @@ public class Verificaciones implements api.Verificaciones {
                             contadordeuda = 1 + Integer.parseInt(id.get("id-deuda").toString());
                         }
                     }
-                    Deuda nuevaDeuda = new Deuda(montodeuda, CUITSocio, contadordeuda, montodeuda * 0.05);
+                    Deuda nuevaDeuda = new Deuda(montodeuda, CUITSocio, contadordeuda, montodeuda * 0.05,hoy,true);
                     JSONObject deuda1 = nuevaDeuda.toJSON();
                     JSONArray DeudasList = new JSONArray();
                     DeudasList.add(deuda1);
