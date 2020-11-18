@@ -1,1 +1,127 @@
-{"facturas":[{"estado":"impago","CUITDestinatario":"20-87654321-2","montofactura":0.396,"idfactura":2000,"CUITemisor":"20-11111111-2"},{"estado":"impago","CUITDestinatario":"20-87654321-2","montofactura":0.08,"idfactura":2001,"CUITemisor":"20-11111111-2"},{"estado":"impago","CUITDestinatario":"20-87654321-2","montofactura":0.0768,"idfactura":2002,"CUITemisor":"20-11111111-2"},{"estado":"impago","CUITDestinatario":"20-87654321-2","montofactura":0.08,"idfactura":2003,"CUITemisor":"20-11111111-2"},{"estado":"impago","CUITDestinatario":"20-87654321-2","montofactura":0.1552,"idfactura":2004,"CUITemisor":"20-11111111-2"},{"estado":"pago","CUITDestinatario":"20-12345678-2","montofactura":1000,"idfactura":2005,"CUITemisor":"20-11111111-2"}],"author":"admin","comision":[{"montocomisiontotal":0.396,"Porcentaje-Comision":4.0,"IDComision":1000,"Numero-Operacion":0,"Tipo-Operacion":"Pagare Bursatil","Estado":"Facturada"},{"montocomisiontotal":0.08,"Porcentaje-Comision":4.0,"IDComision":1001,"Numero-Operacion":5,"Tipo-Operacion":"Tarjeta de Credito","Estado":"Facturada"},{"montocomisiontotal":0.0768,"Porcentaje-Comision":4.0,"IDComision":1002,"Numero-Operacion":3,"Tipo-Operacion":"Pagare Bursatil","Estado":"Facturada"},{"montocomisiontotal":0.08,"Porcentaje-Comision":4.0,"IDComision":1003,"Numero-Operacion":6,"Tipo-Operacion":"Prestamo","Estado":"Facturada"},{"montocomisiontotal":0.76,"Porcentaje-Comision":4.0,"IDComision":1004,"Numero-Operacion":33,"Tipo-Operacion":"Cuenta Corriente","Estado":"Calculada"}],"created-at":"2020-11-13","operaciones":[{"CUITSocio":"20-87654321-2","tipo":"Pagare Bursatil","estado":"Monetizada","tasadedescuento":1.0,"CUITfirmante":"20-87648431-2","importetotal":9.9,"banco":"INDUSTRIAL AND COMMERCIAL BANK OF CHINA","numerooperacion":0,"fechavencimiento":"2020-11-26","numerocheque":13},{"CUITSocio":"20-87654321-2","tipo":"Cheque Propio","estado":"Monetizada","tasadedescuento":2.0,"CUITfirmante":"20-87654321-2","importetotal":3.92,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":1,"fechavencimiento":"2020-11-26","numerocheque":11},{"CUITSocio":"20-12345678-2","tipo":"Cheque Propio","estado":"Monetizada","tasadedescuento":2.0,"CUITfirmante":"20-87654321-2","importetotal":5.0,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":2,"fechavencimiento":"2020-11-26","numerocheque":11},{"CUITSocio":"20-12345678-2","tipo":"Cheque Propio","estado":"Monetizada","tasadedescuento":2.0,"CUITfirmante":"20-87654321-2","importetotal":6.0,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":3,"fechavencimiento":"2020-11-26","numerocheque":11},{"CUITSocio":"20-87654321-2","tipo":"Cheque Propio","estado":"Con certificado emitido","tasadedescuento":1.0,"CUITfirmante":"20-87654321-2","importetotal":23.76,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":4,"fechavencimiento":"2020-10-26","numerocheque":2244},{"CUITSocio":"20-11112222-2","tipo":"Cheque Propio","estado":"Con certificado emitido","tasadedescuento":1.0,"CUITfirmante":"20-11112222-2","importetotal":12.87,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":5,"fechavencimiento":"2020-10-26","numerocheque":22},{"CUITSocio":"20-11112222-2","tipo":"Cheque Propio","estado":"Con certificado emitido","tasadedescuento":1.0,"CUITfirmante":"20-11112222-2","importetotal":12.87,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":6,"fechavencimiento":"2020-10-26","numerocheque":22},{"CUITSocio":"20-11112222-2","tipo":"Cheque Propio","estado":"Con certificado emitido","tasadedescuento":1.0,"CUITfirmante":"20-11112222-2","importetotal":494.01,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":7,"fechavencimiento":"2020-10-22","numerocheque":22},{"CUITSocio":"20-12345678-2","tipo":"Cheque Propio","estado":"Con certificado emitido","tasadedescuento":1.0,"CUITfirmante":"20-12345678-2","importetotal":69.3,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":8,"fechavencimiento":"2020-11-20","numerocheque":123},{"CUITSocio":"20-12345678-2","tipo":"Cheque Propio","estado":"Con certificado emitido","tasadedescuento":1.0,"CUITfirmante":"20-12345678-2","importetotal":25.74,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":9,"fechavencimiento":"2020-11-20","numerocheque":12},{"CUITSocio":"20-11112222-2","tipo":"Cheque Propio","estado":"Con certificado emitido","tasadedescuento":1.0,"CUITfirmante":"20-11112222-2","importetotal":9.9,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":10,"fechavencimiento":"2020-11-20","numerocheque":123},{"CUITSocio":"20-11112222-2","tipo":"Cheque Propio","estado":"Con certificado emitido","tasadedescuento":2.0,"CUITfirmante":"20-11112222-2","importetotal":49.0,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":11,"fechavencimiento":"2020-11-20","numerocheque":123},{"CUITSocio":"20-11112222-2","tipo":"Cheque Propio","estado":"Con certificado emitido","tasadedescuento":1.0,"CUITfirmante":"20-11112222-2","importetotal":49.5,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":12,"fechavencimiento":"2020-11-20","numerocheque":12},{"CUITSocio":"20-11112222-2","tipo":"Cheque Propio","estado":"Con certificado emitido","tasadedescuento":1.0,"CUITfirmante":"20-11112222-2","importetotal":49.5,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":13,"fechavencimiento":"2020-11-20","numerocheque":12},{"CUITSocio":"20-11112222-2","tipo":"Cheque Propio","estado":"Con certificado emitido","tasadedescuento":1.0,"CUITfirmante":"20-11112222-2","importetotal":49.5,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":14,"fechavencimiento":"2020-11-20","numerocheque":12},{"CUITSocio":"20-11112222-2","tipo":"Cheque Propio","estado":"Con certificado emitido","tasadedescuento":1.0,"CUITfirmante":"20-11112222-2","importetotal":49.5,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":15,"fechavencimiento":"2020-11-20","numerocheque":123},{"CUITSocio":"20-11112222-2","tipo":"Cheque Propio","estado":"Con certificado emitido","tasadedescuento":1.0,"CUITfirmante":"20-11112222-2","importetotal":49.5,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":16,"fechavencimiento":"2020-11-20","numerocheque":123},{"CUITSocio":"20-11112222-2","tipo":"Cheque Propio","estado":"Con certificado emitido","tasadedescuento":1.0,"CUITfirmante":"20-11112222-2","importetotal":79.2,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":17,"fechavencimiento":"2020-11-20","numerocheque":23},{"CUITSocio":"20-11112222-2","tipo":"Cheque Propio","estado":"Con certificado emitido","tasadedescuento":1.0,"CUITfirmante":"20-11112222-2","importetotal":79.2,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":18,"fechavencimiento":"2020-11-20","numerocheque":213},{"CUITSocio":"20-11112222-2","tipo":"Cheque Propio","estado":"Con certificado emitido","tasadedescuento":1.0,"CUITfirmante":"20-11112222-2","importetotal":396.0,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":19,"fechavencimiento":"2020-11-20","numerocheque":222},{"CUITSocio":"20-11112222-2","tipo":"Cheque Propio","estado":"Con certificado emitido","tasadedescuento":1.0,"CUITfirmante":"20-11112222-2","importetotal":54.45,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":20,"fechavencimiento":"2020-11-20","numerocheque":112},{"CUITSocio":"20-11112222-2","tipo":"Cheque Propio","estado":"Con certificado emitido","tasadedescuento":1.0,"CUITfirmante":"20-11112222-2","importetotal":14.85,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":21,"fechavencimiento":"2020-11-20","numerocheque":12314},{"CUITSocio":"20-11112222-2","tipo":"Cheque de terceros","estado":"Con certificado emitido","tasadedescuento":1.0,"CUITfirmante":"2-4314343-2","importetotal":4.95,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":22,"fechavencimiento":"2020-11-20","numerocheque":13134},{"CUITSocio":"20-11112222-2","tipo":"Cheque de terceros","estado":"Con certificado emitido","tasadedescuento":2.0,"CUITfirmante":"20-34343434-2","importetotal":0.98,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":23,"fechavencimiento":"2020-11-20","numerocheque":22},{"CUITSocio":"20-11132222-2","tipo":"Cheque de terceros","estado":"Con certificado emitido","tasadedescuento":2.0,"CUITfirmante":"20-34343434-2","importetotal":0.98,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":24,"fechavencimiento":"2020-11-20","numerocheque":22},{"CUITSocio":"20-12349753-2","tipo":"Cheque de terceros","estado":"Con certificado emitido","tasadedescuento":3.0,"CUITfirmante":"20-11114444-2","importetotal":4.85,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":25,"fechavencimiento":"2020-11-20","numerocheque":22},{"CUITSocio":"20-33334444-2","tipo":"Pagare Bursatil","estado":"Con certificado emitido","tasadedescuento":1.0,"CUITfirmante":"20-11112222-2","importetotal":14.85,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":26,"fechavencimiento":"2020-11-20","numerocheque":123},{"cantcuotas":"3","CUITSocio":"20-11112222-2","estado":"Con certificado emitido","tipo":"Prestamo","sistema":"Frances","importetotal":50.0,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":27,"tasa":1.0,"fecha-acreditacion":"2020-11-20"},{"cantcuotas":"3","CUITSocio":"20-11112222-2","estado":"Con certificado emitido","tipo":"Prestamo","sistema":"Frances","importetotal":50.0,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":28,"tasa":1.0,"fecha-acreditacion":"2020-11-20"},{"cantcuotas":"3","CUITSocio":"20-11112222-2","estado":"Con certificado emitido","tipo":"Prestamo","sistema":"Frances","importetotal":20.0,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":29,"tasa":1.0,"fecha-acreditacion":"2020-11-20"},{"cantcuotas":"3","CUITSocio":"20-11112222-2","estado":"Con certificado emitido","tipo":"Prestamo","sistema":"Americano","importetotal":15.0,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":30,"tasa":-1.0,"fecha-acreditacion":"2020-11-20"},{"cantcuotas":"12","CUITSocio":"20-11112222-2","estado":"Con certificado emitido","tipo":"Prestamo","sistema":"Frances","importetotal":5.0,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":31,"tasa":1.0,"fecha-acreditacion":"2020-12-20"},{"cantcuotas":"12","CUITSocio":"20-11112222-2","estado":"Con certificado emitido","tipo":"Prestamo","sistema":"Frances","importetotal":5.0,"banco":"BANCO DE GALICIA Y BUENOS AIRES S.A.U.","numerooperacion":32,"tasa":1.0,"fecha-acreditacion":"2020-11-20"},{"CUITSocio":"20-11112222-2","tipo":"Cuenta Corriente","estado":"Monetizado","numerotarjeta":0,"nombreempresa":"","nombretarjeta":"","importetotal":19.0,"codigoseguridad":0,"numerooperacion":33,"fechavencimiento":"2020-11-23"},{"CUITSocio":"20-11112222-2","tipo":"Cuenta Corriente","estado":"Con certificado emitido","numerotarjeta":0,"nombreempresa":"","nombretarjeta":"","importetotal":500.0,"codigoseguridad":0,"numerooperacion":34,"fechavencimiento":"2020-11-23"},{"CUITSocio":"20-11112222-2","tipo":"Tarjeta de Credito","estado":"Con certificado emitido","numerotarjeta":0,"nombreempresa":"-","nombretarjeta":"Miyagi","importetotal":29.0,"codigoseguridad":0,"numerooperacion":35,"fechavencimiento":"2021-10"}],"certificado-de-garantia":[{"CUITSocio":"20-87654321-2","numero-operacion":1,"idcertificado":100},{"CUITSocio":"20-87654321-2","numero-operacion":2,"idcertificado":101},{"CUITSocio":"20-87654321-2","numero-operacion":3,"idcertificado":102},{"CUITSocio":"20-87654321-2","numero-operacion":4,"idcertificado":103},{"CUITSocio":"20-87654321-2","numero-operacion":5,"idcertificado":104},{"CUITSocio":"20-87654321-2","numero-operacion":6,"idcertificado":105},{"CUITSocio":"20-87654321-2","numero-operacion":4,"idcertificado":106},{"CUITSocio":"20-87654321-2","numero-operacion":4,"idcertificado":107},{"CUITSocio":"20-87654321-2","numero-operacion":4,"idcertificado":108},{"CUITSocio":"20-87654321-2","numero-operacion":4,"idcertificado":109},{"CUITSocio":"20-87654321-2","numero-operacion":4,"idcertificado":110},{"CUITSocio":"20-87654321-2","numero-operacion":5,"idcertificado":111},{"CUITSocio":"20-87654321-2","numero-operacion":4,"idcertificado":112},{"CUITSocio":"20-11112222-2","numero-operacion":5,"idcertificado":113},{"CUITSocio":"20-11112222-2","numero-operacion":6,"idcertificado":114},{"CUITSocio":"20-11112222-2","numero-operacion":7,"idcertificado":115},{"CUITSocio":"20-12345678-2","numero-operacion":8,"idcertificado":116},{"CUITSocio":"20-12345678-2","numero-operacion":9,"idcertificado":117},{"CUITSocio":"20-11112222-2","numero-operacion":10,"idcertificado":118},{"CUITSocio":"20-11-2020","numero-operacion":11,"idcertificado":119},{"CUITSocio":"20-11112222-2","numero-operacion":12,"idcertificado":120},{"CUITSocio":"20-11112222-2","numero-operacion":10,"idcertificado":121},{"CUITSocio":"20-11112222-2","numero-operacion":11,"idcertificado":122},{"CUITSocio":"20-11112222-2","numero-operacion":12,"idcertificado":123},{"CUITSocio":"20-11112222-2","numero-operacion":13,"idcertificado":124},{"CUITSocio":"20-11112222-2","numero-operacion":14,"idcertificado":125},{"CUITSocio":"20-11112222-2","numero-operacion":15,"idcertificado":126},{"CUITSocio":"20-11112222-2","numero-operacion":16,"idcertificado":127},{"CUITSocio":"20-11112222-2","numero-operacion":17,"idcertificado":128},{"CUITSocio":"20-11112222-2","numero-operacion":18,"idcertificado":129},{"CUITSocio":"20-11112222-2","numero-operacion":19,"idcertificado":130},{"CUITSocio":"20-11112222-2","numero-operacion":20,"idcertificado":131},{"CUITSocio":"20-11112222-2","numero-operacion":21,"idcertificado":132},{"CUITSocio":"20-11112222-2","numero-operacion":22,"idcertificado":133},{"CUITSocio":"20-11112222-2","numero-operacion":23,"idcertificado":134},{"CUITSocio":"20-11132222-2","numero-operacion":24,"idcertificado":135},{"CUITSocio":"20-12349753-2","numero-operacion":25,"idcertificado":136},{"CUITSocio":"20-33334444-2","numero-operacion":26,"idcertificado":137},{"CUITSocio":"20-11112222-2","numero-operacion":27,"idcertificado":138},{"CUITSocio":"20-11112222-2","numero-operacion":28,"idcertificado":139},{"CUITSocio":"20-11112222-2","numero-operacion":29,"idcertificado":140},{"CUITSocio":"20-11112222-2","numero-operacion":30,"idcertificado":141},{"CUITSocio":"20-11112222-2","numero-operacion":31,"idcertificado":142},{"CUITSocio":"20-11112222-2","numero-operacion":32,"idcertificado":143},{"CUITSocio":"20-11112222-2","numero-operacion":33,"idcertificado":144},{"CUITSocio":"20-11112222-2","numero-operacion":34,"idcertificado":145},{"CUITSocio":"20-11112222-2","numero-operacion":35,"idcertificado":146}],"modified-by":"admin"}
+{
+    "facturas":               [
+        {
+            "estado":          "Impaga",
+            "CUITDestinatario":"20-87654321-2",
+            "montofactura":    4.752,
+            "idfactura":       0,
+            "CUITemisor":      "20-11111111-2"
+        },
+        {
+            "estado":          "Impaga",
+            "CUITDestinatario":"20-11112222-2",
+            "montofactura":    4.554,
+            "idfactura":       1,
+            "CUITemisor":      "20-11111111-2"
+        }
+    ],
+    "author":                 "admin",
+    "comision":               [
+        {
+            "montocomisiontotal": 1.98,
+            "Porcentaje-Comision":4.0,
+            "IDComision":         1000,
+            "Numero-Operacion":   0,
+            "Tipo-Operacion":     "Cheque Propio",
+            "Estado":             "Facturada"
+        },
+        {
+            "montocomisiontotal": 2.772,
+            "Porcentaje-Comision":4.0,
+            "IDComision":         1001,
+            "Numero-Operacion":   1,
+            "Tipo-Operacion":     "Cheque Propio",
+            "Estado":             "Facturada"
+        },
+        {
+            "montocomisiontotal": 1.386,
+            "Porcentaje-Comision":4.0,
+            "IDComision":         1002,
+            "Numero-Operacion":   2,
+            "Tipo-Operacion":     "Cheque Propio",
+            "Estado":             "Facturada"
+        },
+        {
+            "montocomisiontotal": 2.574,
+            "Porcentaje-Comision":4.0,
+            "IDComision":         1003,
+            "Numero-Operacion":   3,
+            "Tipo-Operacion":     "Cheque Propio",
+            "Estado":             "Facturada"
+        }
+    ],
+    "created-at":             "2020-11-13",
+    "operaciones":            [
+        {
+            "CUITSocio":       "20-87654321-2",
+            "tipo":            "Cheque Propio",
+            "estado":          "Monetizado",
+            "tasadedescuento": 1.0,
+            "CUITfirmante":    "20-87654321-2",
+            "importetotal":    49.5,
+            "banco":           "BANCO DE GALICIA Y BUENOS AIRES S.A.U.",
+            "numerooperacion": 0,
+            "fechavencimiento":"2020-11-26",
+            "numerocheque":    333
+        },
+        {
+            "CUITSocio":       "20-87654321-2",
+            "tipo":            "Cheque Propio",
+            "estado":          "Monetizado",
+            "tasadedescuento": 1.0,
+            "CUITfirmante":    "20-87654321-2",
+            "importetotal":    69.3,
+            "banco":           "BANCO DE GALICIA Y BUENOS AIRES S.A.U.",
+            "numerooperacion": 1,
+            "fechavencimiento":"2020-11-26",
+            "numerocheque":    333
+        },
+        {
+            "CUITSocio":       "20-11112222-2",
+            "tipo":            "Cheque Propio",
+            "estado":          "Monetizado",
+            "tasadedescuento": 1.0,
+            "CUITfirmante":    "20-11112222-2",
+            "importetotal":    34.65,
+            "banco":           "BANCO DE GALICIA Y BUENOS AIRES S.A.U.",
+            "numerooperacion": 2,
+            "fechavencimiento":"2020-11-26",
+            "numerocheque":    333
+        },
+        {
+            "CUITSocio":       "20-11112222-2",
+            "tipo":            "Cheque Propio",
+            "estado":          "Monetizado",
+            "tasadedescuento": 1.0,
+            "CUITfirmante":    "20-11112222-2",
+            "importetotal":    64.35,
+            "banco":           "BANCO DE GALICIA Y BUENOS AIRES S.A.U.",
+            "numerooperacion": 3,
+            "fechavencimiento":"2020-11-26",
+            "numerocheque":    333
+        }
+    ],
+    "certificado-de-garantia":[
+        {
+            "CUITSocio":       "20-87654321-2",
+            "numero-operacion":0,
+            "idcertificado":   100
+        },
+        {
+            "CUITSocio":       "20-87654321-2",
+            "numero-operacion":1,
+            "idcertificado":   101
+        },
+        {
+            "CUITSocio":       "20-11112222-2",
+            "numero-operacion":2,
+            "idcertificado":   102
+        },
+        {
+            "CUITSocio":       "20-11112222-2",
+            "numero-operacion":3,
+            "idcertificado":   103
+        }
+    ],
+    "modified-by":            "admin"
+}

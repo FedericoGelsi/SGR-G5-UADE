@@ -5,6 +5,8 @@ import org.json.simple.JSONObject;
 public interface Comision {
     int getIDComision();
 
+    double getMontocomisiontotal();
+
     String getEstado();
 
     double getPorcentajeComision();

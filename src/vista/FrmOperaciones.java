@@ -125,7 +125,7 @@ public class FrmOperaciones extends JDialog {
         this.setLocationRelativeTo(null);
 
 
-        verif.crearFacturas(); // CAMBIAR A LOGIN
+        verif.altaFacturas(); // CAMBIAR A LOGIN
 
         //Action Listener de JButton Cheques Personales
         JBCHP.addActionListener(new ActionListener() {

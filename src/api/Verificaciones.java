@@ -57,7 +57,7 @@ public interface Verificaciones {
     int getDayNumberNew(LocalDate date);
 
     // Los dias lunes factura las comisiones calculadas
-    void crearFacturas() throws Exception;
+    void altaFacturas() throws Exception;
 
     ArrayList<String> ListaCUITAC(String CUIT);
 

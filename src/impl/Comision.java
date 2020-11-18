@@ -4,6 +4,13 @@ import org.json.simple.JSONObject;
 
 public class Comision implements api.Comision {
     private final int IDComision;
+
+
+
+    public void setMontocomisiontotal(double montocomisiontotal) {
+        this.montocomisiontotal = montocomisiontotal;
+    }
+
     private String estado;
     private final double porcentajeComision;
     private final int numeroOperacion;
@@ -23,15 +30,18 @@ public class Comision implements api.Comision {
 
     public Comision(JSONObject jsonCMS){
         this.estado = (String) jsonCMS.get("Estado");
-        this.porcentajeComision = (double) jsonCMS.get("Porcentaje-Comision");
+        this.porcentajeComision = Double.parseDouble(jsonCMS.get("Porcentaje-Comision").toString());
         this.numeroOperacion = Integer.parseInt(jsonCMS.get("Numero-Operacion").toString());
         this.tipoOP = (String) jsonCMS.get("Tipo-Operacion");
-        this.IDComision = Integer.parseInt(jsonCMS.get("ID-Comision").toString());
-        this.montocomisiontotal = (double) jsonCMS.get("montocomisiontotal");
+        this.IDComision = Integer.parseInt(jsonCMS.get("IDComision").toString());
+        this.montocomisiontotal = Double.parseDouble(jsonCMS.get("montocomisiontotal").toString()) ;
     }
 
 
     /*======GETTERS=======*/
+    public double getMontocomisiontotal() {
+        return montocomisiontotal;
+    }
 
     @Override
     public int getIDComision() {

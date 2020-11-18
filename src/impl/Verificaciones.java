@@ -20,6 +20,7 @@ import org.json.simple.JSONObject;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Date;
+
 import static javax.swing.JOptionPane.showMessageDialog;
 
 public class Verificaciones implements api.Verificaciones {
@@ -99,13 +100,12 @@ public class Verificaciones implements api.Verificaciones {
             CUITValidoflag = false;
         }
         return CUITValidoflag;
-        }
-
+    }
 
 
     //Chequea que un String este compuesto unicamente por numeros
     @Override
-    public boolean esnumerico(String datos){
+    public boolean esnumerico(String datos) {
         String regex = "[0-9]+";
         boolean numerico = datos.matches(regex);
         return numerico;
@@ -113,11 +113,11 @@ public class Verificaciones implements api.Verificaciones {
 
     //Chequea el formato de fecha en el String recibido y que los datos ingresados sean numericos
     @Override
-    public boolean fechavalida(String fechacheck){
+    public boolean fechavalida(String fechacheck) {
         DateTimeFormatter formato = DateTimeFormatter.ISO_LOCAL_DATE;
-        try{
+        try {
             LocalDate.parse(fechacheck, formato);
-        }catch(DateTimeParseException excep){
+        } catch (DateTimeParseException excep) {
             showMessageDialog(null, "Ingrese una fecha válida.\nEl formato debe ser YYYY-MM-DD");
             return false;
         }
@@ -304,7 +304,7 @@ public class Verificaciones implements api.Verificaciones {
                             contadordeuda = 1 + Integer.parseInt(id.get("id-deuda").toString());
                         }
                     }
-                    Deuda nuevaDeuda = new Deuda(montodeuda, CUITS, contadordeuda, montodeuda * 0.05,hoy,true);
+                    Deuda nuevaDeuda = new Deuda(montodeuda, CUITS, contadordeuda, montodeuda * 0.05, hoy, true);
                     JSONObject deuda1 = nuevaDeuda.toJSON();
                     JSONArray DeudasList = new JSONArray();
                     DeudasList.add(deuda1);
@@ -386,7 +386,7 @@ public class Verificaciones implements api.Verificaciones {
                             contadordeuda = 1 + Integer.parseInt(id.get("id-deuda").toString());
                         }
                     }
-                    Deuda nuevaDeuda = new Deuda(montodeuda, CUIT, contadordeuda, montodeuda * 0.05,hoy,true);
+                    Deuda nuevaDeuda = new Deuda(montodeuda, CUIT, contadordeuda, montodeuda * 0.05, hoy, true);
                     JSONObject deuda1 = nuevaDeuda.toJSON();
                     JSONArray DeudasList = new JSONArray();
                     DeudasList.add(deuda1);
@@ -466,7 +466,7 @@ public class Verificaciones implements api.Verificaciones {
                             contadordeuda = 1 + Integer.parseInt(id.get("id-deuda").toString());
                         }
                     }
-                    Deuda nuevaDeuda = new Deuda(montodeuda, CUITSocio, contadordeuda, montodeuda * 0.05,hoy,true);
+                    Deuda nuevaDeuda = new Deuda(montodeuda, CUITSocio, contadordeuda, montodeuda * 0.05, hoy, true);
                     JSONObject deuda1 = nuevaDeuda.toJSON();
                     JSONArray DeudasList = new JSONArray();
                     DeudasList.add(deuda1);
@@ -479,7 +479,7 @@ public class Verificaciones implements api.Verificaciones {
                 }
             }
         }
-        OPTipo2 nuevaOT2 = new impl.OPTipo2(fechavencimiento, numerotarjeta, CUITSocio, tipo, importetotalop2, estado , nombretarjeta, contador, nombrempresa, codigoseguridad);
+        OPTipo2 nuevaOT2 = new impl.OPTipo2(fechavencimiento, numerotarjeta, CUITSocio, tipo, importetotalop2, estado, nombretarjeta, contador, nombrempresa, codigoseguridad);
         JSONObject operacion2 = nuevaOT2.toJSON();
         guardarDatos(operacion2);
 
@@ -616,7 +616,7 @@ public class Verificaciones implements api.Verificaciones {
                 JSONArray deudasList = (JSONArray) socio.get("deudas");
                 for (Object mon : deudasList) {
                     JSONObject monto = (JSONObject) mon;
-                    montodeuda = (double) monto.get("monto");
+                    montodeuda = Double.parseDouble(monto.get("monto").toString());
                 }
                 if (montodeuda > 0) {
                     existedeuda = true;
@@ -633,224 +633,205 @@ public class Verificaciones implements api.Verificaciones {
     }
 
 
-    public void crearFacturas() throws Exception {
-        ArrayList<Double> montocomision = new ArrayList<Double>();
-        ArrayList<Integer> numoperacionList = new ArrayList<>();
-        ArrayList<String> cuitsociolist = new ArrayList<>();
-        jsonObjectOPC = (JSONObject) file.readJson(filenamefact);
-        int contador = 0;
-        int contadora = 0;
-        int numoperacion = 0;
+    public void altaFacturas() throws Exception {
         int day = getDayNumberNew(LocalDate.now());
         double monto_com = 0;
         if (day == 3) { // Cambiar a 1
-            String com_estado = "";
+            jsonObjectOPC = (JSONObject) file.readJson(filenamefact);
             JSONArray comisionList = (JSONArray) jsonObjectOPC.get("comision");
+            JSONArray comisionListAux = new JSONArray();
+            ArrayList<Comision> ComisionArrayList = new ArrayList<>();
+            JSONArray operacionesList = (JSONArray) jsonObjectOPC.get("operaciones");
+            ArrayList<Double> montoList = new ArrayList<>();
+            ArrayList<String> CUITList = new ArrayList<>();
+            ArrayList<Double> comisionMonto = new ArrayList<>();
             for (Object com : comisionList) {
-                JSONObject comisionObject = (JSONObject) com;
-                com_estado = comisionObject.get("Estado").toString();
-                if (com_estado.equalsIgnoreCase("Calculada")) {
-                    monto_com = (double) comisionObject.get("montocomisiontotal");
-                    montocomision.add(monto_com);
-                    numoperacion = Integer.parseInt(comisionObject.get("Numero-Operacion").toString());
-                    numoperacionList.add(numoperacion);
-                    contador++;
-                    comisionObject.put("Estado", "Facturada");
-                    file.writeJson(filenamefact, jsonObjectOPC);
-                }
-            }
-            int numero_operacion = 0;
-            String cuitsocio = "";
-            int numaux = 0;
-            JSONArray operacionesList = (JSONArray) jsonObjectOPC.get("operaciones");
-            for (Object ops : operacionesList) {
-                JSONObject operaciones = (JSONObject) ops;
-                numero_operacion = Integer.parseInt(operaciones.get("numerooperacion").toString());
-                for (int i = 0; i < numoperacionList.size(); i++) {
-                    numaux = numoperacionList.get(i);
-                    if (numaux == numero_operacion) {
-                        cuitsocio = operaciones.get("CUITSocio").toString();
-                        cuitsociolist.add(cuitsocio);
+                api.Comision Comision = new Comision((JSONObject) com);
+                if (Comision.getEstado().equalsIgnoreCase("Calculada")) {
+                    ComisionArrayList.add((impl.Comision) Comision);
+                    Comision.setEstado("Facturada");
+                    for (Object op : operacionesList) {
+                        JSONObject operacion = (JSONObject) op;
+                        if (Comision.getNumeroOperacion() == Integer.parseInt(operacion.get("numerooperacion").toString())) {
+                            if(!CUITList.contains(operacion.get("CUITSocio").toString())){
+                                CUITList.add(operacion.get("CUITSocio").toString());
+                                comisionMonto.add(Comision.getMontocomisiontotal());
+                            }else{
+                                int index=CUITList.indexOf(operacion.get("CUITSocio").toString());
+                                System.out.println(comisionMonto.get(index));
+                                comisionMonto.add(index,comisionMonto.get(index) + Comision.getMontocomisiontotal());
+                                System.out.println(CUITList.get(index));
+                            }
+                            montoList.add(Double.parseDouble(operacion.get("importetotal").toString()));
+                        }
                     }
                 }
-            }
-            int contadorfact = 1999;
-            JSONArray facturasList = (JSONArray) jsonObjectOPC.get("facturas");
-            for (Object fact : facturasList) {
-                contadorfact++;
+                comisionListAux.add(Comision.toJSON());
             }
 
-            while (contador > 0) {
-                contadorfact++;
-                Factura nuevaFactura = new Factura(contadorfact, montocomision.get(contadora), "20-11111111-2", cuitsociolist.get(contadora), "Emitida");
-                JSONObject Fact = nuevaFactura.toJSON();
-                guardarDatosFactura(Fact);
-                contadora++;
-                contador--;
+            jsonObjectOPC.put("comision", comisionListAux);
+            JSONArray facturaslist = (JSONArray) jsonObjectOPC.get("facturas");
+            for (int i = 0; i < CUITList.size(); i++) {
+                Factura nuevaFactura = new Factura(facturaslist.size(), comisionMonto.get(i), "20-11111111-2", CUITList.get(i), "Impaga");
+                facturaslist.add(nuevaFactura.toJSON());
             }
-
+            jsonObjectOPC.put("facturas", facturaslist);
+            file.writeJson(filenamefact, jsonObjectOPC);
         }
-    }
-
-    public ArrayList<String> ListaCUITAC(String CUIT) {
-        String CUITAccionista = "";
-        ArrayList<String> MisAccionistasList = new ArrayList<>();
-
-        String CUITAccionistasEllos = "";
-        ArrayList<String> AccionistasOtro = new ArrayList<>();
-
-        ArrayList<String> AccionistaCompartido = new ArrayList<>();
-
-        JSONArray socioList = (JSONArray) jsonObject.get("socios-participes");
-        for (Object obj : socioList) {
-            JSONObject socio = (JSONObject) obj;
-            String cuit = socio.get("cuit").toString();
-            if (CUIT.equalsIgnoreCase(cuit)) {
-                JSONArray accionistasList = (JSONArray) socio.get("accionistas");
-                for (Object acc : accionistasList) {
-                    JSONObject accionista = (JSONObject) acc;
-                    CUITAccionista = accionista.get("cuit-accionista").toString();
-                    MisAccionistasList.add(CUITAccionista);
-                }
-            }
         }
 
-        JSONArray socioListEllos = (JSONArray) jsonObject.get("socios-participes");
-        for (Object obj : socioListEllos) {
-            JSONObject socio = (JSONObject) obj;
-            String cuit = socio.get("cuit").toString();
-            if (!CUIT.equalsIgnoreCase(cuit)) {
-                JSONArray accionistasList = (JSONArray) socio.get("accionistas");
-                for (Object acc : accionistasList) {
-                    JSONObject accionista = (JSONObject) acc;
-                    CUITAccionistasEllos = accionista.get("cuit-accionista").toString();
-                    AccionistasOtro.add(CUITAccionistasEllos);
-                }
-                String accionistaCUIT = "";
-                for (int i = 0; i < MisAccionistasList.size(); i++) {
-                    accionistaCUIT = MisAccionistasList.get(i);
-                    if (AccionistasOtro.contains(accionistaCUIT) && !AccionistaCompartido.contains(cuit)) {
-                        AccionistaCompartido.add(cuit);
-                        System.out.println(cuit);
-                    }
-                }
 
-            }
+        public ArrayList<String> ListaCUITAC (String CUIT){
+            String CUITAccionista = "";
+            ArrayList<String> MisAccionistasList = new ArrayList<>();
 
-        }
-        return AccionistaCompartido;
-    }
+            String CUITAccionistasEllos = "";
+            ArrayList<String> AccionistasOtro = new ArrayList<>();
 
-    public boolean Computar5FDRAc(ArrayList<String> AccionistasCompartidos, String CUIT, double IMPORTEOPERACION) {
-        double totalcomputado = 0.0;
-        String accionistaCUIT = "";
-        String operacion_cuit = "";
-        String estado_operacion = "";
-        LocalDate fecha_vencimiento;
-        String fechaAux = "";
-        String tipo_operacion = "";
-        double importetotal = 0.0;
-        String cantidad_cuotas = "";
-        boolean flag = false;
+            ArrayList<String> AccionistaCompartido = new ArrayList<>();
 
-
-        for (int i = 0; i < AccionistasCompartidos.size(); i++) {
-            accionistaCUIT = AccionistasCompartidos.get(i);
-            JSONArray operacionesList = (JSONArray) jsonObjectOPC.get("operaciones");
-            for (Object ops : operacionesList) {
-                JSONObject operaciones = (JSONObject) ops;
-                operacion_cuit = operaciones.get("CUITSocio").toString();
-                if (accionistaCUIT.equalsIgnoreCase(operacion_cuit)) {
-                    estado_operacion = operaciones.get("estado").toString();
-                    fecha_vencimiento = LocalDate.parse(operaciones.get("fechavencimiento").toString());
-                    fechaAux= fechavshoy(fecha_vencimiento);
-                    System.out.println(fechaAux);
-                    System.out.println(estado_operacion);
-                    if (fechaAux.equalsIgnoreCase("Mayor") && estado_operacion.equalsIgnoreCase("Monetizada")) {
-                        tipo_operacion = operaciones.get("tipo").toString();
-                        importetotal = (double) operaciones.get("importetotal");
-                        System.out.println(importetotal);
-                        if (tipo_operacion.equalsIgnoreCase("Pagare Bursatil") || tipo_operacion.equalsIgnoreCase("Cheque de terceros") || tipo_operacion.equalsIgnoreCase("Cheque propio")) {
-                            totalcomputado = totalcomputado + importetotal;
-                            System.out.println(totalcomputado);
-
-                        }
-                        if (tipo_operacion.equalsIgnoreCase("Cuenta Corriente") || tipo_operacion.equalsIgnoreCase("Tarjeta de Credito")) {
-                            totalcomputado = totalcomputado + importetotal;
-                            System.out.println(totalcomputado);
-
-                        }
-                        if (tipo_operacion.equalsIgnoreCase("Prestamo")) {
-                            totalcomputado = totalcomputado + importetotal;
-                            System.out.println(totalcomputado);
-
-                        }
+            JSONArray socioList = (JSONArray) jsonObject.get("socios-participes");
+            for (Object obj : socioList) {
+                JSONObject socio = (JSONObject) obj;
+                String cuit = socio.get("cuit").toString();
+                if (CUIT.equalsIgnoreCase(cuit)) {
+                    JSONArray accionistasList = (JSONArray) socio.get("accionistas");
+                    for (Object acc : accionistasList) {
+                        JSONObject accionista = (JSONObject) acc;
+                        CUITAccionista = accionista.get("cuit-accionista").toString();
+                        MisAccionistasList.add(CUITAccionista);
                     }
                 }
             }
 
-            JSONArray operacionesLista = (JSONArray) jsonObjectOPC.get("operaciones");
-            for (Object ops : operacionesLista) {
-                JSONObject operaciones = (JSONObject) ops;
-                operacion_cuit = operaciones.get("CUITSocio").toString();
-                if (CUIT.equalsIgnoreCase(operacion_cuit)) {
-                    estado_operacion = operaciones.get("estado").toString();
-                    fecha_vencimiento = LocalDate.parse(operaciones.get("fechavencimiento").toString());
-                    fechaAux= fechavshoy(fecha_vencimiento);
-                    System.out.println(fechaAux);
-                    System.out.println(estado_operacion);
-                    if (fechaAux.equalsIgnoreCase("Mayor")  && estado_operacion.equalsIgnoreCase("Monetizada")) {
-                        tipo_operacion = operaciones.get("tipo").toString();
-                        importetotal = (double) operaciones.get("importetotal");
-                        System.out.println(importetotal);
-                        if (tipo_operacion.equalsIgnoreCase("Pagare Bursatil") || tipo_operacion.equalsIgnoreCase("Cheque de terceros") || tipo_operacion.equalsIgnoreCase("Cheque propio")) {
-                            totalcomputado = totalcomputado + importetotal;
-                            System.out.println(totalcomputado);
-
+            JSONArray socioListEllos = (JSONArray) jsonObject.get("socios-participes");
+            for (Object obj : socioListEllos) {
+                JSONObject socio = (JSONObject) obj;
+                String cuit = socio.get("cuit").toString();
+                if (!CUIT.equalsIgnoreCase(cuit)) {
+                    JSONArray accionistasList = (JSONArray) socio.get("accionistas");
+                    for (Object acc : accionistasList) {
+                        JSONObject accionista = (JSONObject) acc;
+                        CUITAccionistasEllos = accionista.get("cuit-accionista").toString();
+                        AccionistasOtro.add(CUITAccionistasEllos);
+                    }
+                    String accionistaCUIT = "";
+                    for (int i = 0; i < MisAccionistasList.size(); i++) {
+                        accionistaCUIT = MisAccionistasList.get(i);
+                        if (AccionistasOtro.contains(accionistaCUIT) && !AccionistaCompartido.contains(cuit)) {
+                            AccionistaCompartido.add(cuit);
+                            System.out.println(cuit);
                         }
-                        if (tipo_operacion.equalsIgnoreCase("Cuenta Corriente") || tipo_operacion.equalsIgnoreCase("Tarjeta de Credito")) {
-                            totalcomputado = totalcomputado + importetotal;
-                            System.out.println(totalcomputado);
+                    }
 
+                }
+
+            }
+            return AccionistaCompartido;
+        }
+
+        public boolean Computar5FDRAc (ArrayList < String > AccionistasCompartidos, String CUIT,double IMPORTEOPERACION)
+        {
+            double totalcomputado = 0.0;
+            String accionistaCUIT = "";
+            String operacion_cuit = "";
+            String estado_operacion = "";
+            LocalDate fecha_vencimiento;
+            String fechaAux = "";
+            String tipo_operacion = "";
+            double importetotal = 0.0;
+            String cantidad_cuotas = "";
+            boolean flag = false;
+
+
+            for (int i = 0; i < AccionistasCompartidos.size(); i++) {
+                accionistaCUIT = AccionistasCompartidos.get(i);
+                JSONArray operacionesList = (JSONArray) jsonObjectOPC.get("operaciones");
+                for (Object ops : operacionesList) {
+                    JSONObject operaciones = (JSONObject) ops;
+                    operacion_cuit = operaciones.get("CUITSocio").toString();
+                    if (accionistaCUIT.equalsIgnoreCase(operacion_cuit)) {
+                        estado_operacion = operaciones.get("estado").toString();
+                        fecha_vencimiento = LocalDate.parse(operaciones.get("fechavencimiento").toString());
+                        fechaAux = fechavshoy(fecha_vencimiento);
+                        System.out.println(fechaAux);
+                        System.out.println(estado_operacion);
+                        if (fechaAux.equalsIgnoreCase("Mayor") && estado_operacion.equalsIgnoreCase("Monetizada")) {
+                            tipo_operacion = operaciones.get("tipo").toString();
+                            importetotal = (double) operaciones.get("importetotal");
+                            System.out.println(importetotal);
+                            if (tipo_operacion.equalsIgnoreCase("Pagare Bursatil") || tipo_operacion.equalsIgnoreCase("Cheque de terceros") || tipo_operacion.equalsIgnoreCase("Cheque propio")) {
+                                totalcomputado = totalcomputado + importetotal;
+                                System.out.println(totalcomputado);
+
+                            }
+                            if (tipo_operacion.equalsIgnoreCase("Cuenta Corriente") || tipo_operacion.equalsIgnoreCase("Tarjeta de Credito")) {
+                                totalcomputado = totalcomputado + importetotal;
+                                System.out.println(totalcomputado);
+
+                            }
+                            if (tipo_operacion.equalsIgnoreCase("Prestamo")) {
+                                totalcomputado = totalcomputado + importetotal;
+                                System.out.println(totalcomputado);
+
+                            }
                         }
-                        if (tipo_operacion.equalsIgnoreCase("Prestamo")) {
-                            totalcomputado = totalcomputado + importetotal;
-                            System.out.println(totalcomputado);
+                    }
+                }
 
+                JSONArray operacionesLista = (JSONArray) jsonObjectOPC.get("operaciones");
+                for (Object ops : operacionesLista) {
+                    JSONObject operaciones = (JSONObject) ops;
+                    operacion_cuit = operaciones.get("CUITSocio").toString();
+                    if (CUIT.equalsIgnoreCase(operacion_cuit)) {
+                        estado_operacion = operaciones.get("estado").toString();
+                        fecha_vencimiento = LocalDate.parse(operaciones.get("fechavencimiento").toString());
+                        fechaAux = fechavshoy(fecha_vencimiento);
+                        System.out.println(fechaAux);
+                        System.out.println(estado_operacion);
+                        if (fechaAux.equalsIgnoreCase("Mayor") && estado_operacion.equalsIgnoreCase("Monetizada")) {
+                            tipo_operacion = operaciones.get("tipo").toString();
+                            importetotal = (double) operaciones.get("importetotal");
+                            System.out.println(importetotal);
+                            if (tipo_operacion.equalsIgnoreCase("Pagare Bursatil") || tipo_operacion.equalsIgnoreCase("Cheque de terceros") || tipo_operacion.equalsIgnoreCase("Cheque propio")) {
+                                totalcomputado = totalcomputado + importetotal;
+                                System.out.println(totalcomputado);
+
+                            }
+                            if (tipo_operacion.equalsIgnoreCase("Cuenta Corriente") || tipo_operacion.equalsIgnoreCase("Tarjeta de Credito")) {
+                                totalcomputado = totalcomputado + importetotal;
+                                System.out.println(totalcomputado);
+
+                            }
+                            if (tipo_operacion.equalsIgnoreCase("Prestamo")) {
+                                totalcomputado = totalcomputado + importetotal;
+                                System.out.println(totalcomputado);
+
+                            }
                         }
                     }
                 }
             }
+            System.out.println(totalcomputado);
+            if (IMPORTEOPERACION > totalcomputado && totalcomputado != 0) {
+                flag = true;
+            }
+            return flag;
         }
-        System.out.println(totalcomputado);
-        if (IMPORTEOPERACION > totalcomputado && totalcomputado!=0) {
-            flag = true;
-        }
-        return flag;
-    }
 
-    public void guardarDatosFactura(JSONObject objeto) throws Exception {
-        String filename = "./src/resources/operacioncontroller.json";
-        API_JSONHandler file = new JSONHandler();
-        JSONObject jsonObject = (JSONObject) file.readJson(filename);
-        JSONArray FactList = (JSONArray) jsonObject.get("facturas");
-        FactList.add(objeto);
-        jsonObject.put("facturas", FactList);
-        file.writeJson(filename, jsonObject);
-    }
 
-    public boolean fechavalidatarjeta(String fechacheck){
-        String[] fechaseparada = fechacheck.split("/");
-        boolean fechavalidaFlag = true;
-        if (fechaseparada[0].length() != 2 || esnumerico(fechaseparada[0])!=true) {
-            fechavalidaFlag = false;
+        public boolean fechavalidatarjeta (String fechacheck){
+            String[] fechaseparada = fechacheck.split("/");
+            boolean fechavalidaFlag = true;
+            if (fechaseparada[0].length() != 2 || esnumerico(fechaseparada[0]) != true) {
+                fechavalidaFlag = false;
+            }
+            if (fechaseparada[1].length() != 4 || esnumerico(fechaseparada[1]) != true) {
+                fechavalidaFlag = false;
+            }
+            return fechavalidaFlag;
         }
-        if (fechaseparada[1].length() != 4 || esnumerico(fechaseparada[1])!=true) {
-            fechavalidaFlag = false;
-        }
-        return fechavalidaFlag;
     }
-}
 
 
 
