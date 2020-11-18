@@ -75,6 +75,7 @@ public class FrmPrincipal extends JFrame {
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
+                self.setVisible(false);
                 frame.setVisible(true);
                 self.setVisible(true);
             }

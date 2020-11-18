@@ -40,7 +40,7 @@ public class Accionista implements api.Accionista {
     public JSONObject toJSON(){
         JSONObject accionista = new JSONObject();
         accionista.put("cuit-accionista", this.CUITAccionista);
-        accionista.put("razon-social", this.razonsocial);
+        accionista.put("razon-social-ac", this.razonsocial);
         accionista.put("porcentaje-participacion", this.porcParticipacion);
         return accionista;
     }

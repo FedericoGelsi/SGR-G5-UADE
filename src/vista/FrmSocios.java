@@ -193,11 +193,11 @@ public class FrmSocios extends JDialog{
                 int partint;
                 partint = (Integer) spinParticipacion;
                 if (partint <= 0) {
-                    showMessageDialog(null, "El porcentaje de Participacion debe ser menor o igual a 0");
+                    showMessageDialog(null, "El porcentaje de Participacion debe ser mayor a 0");
                     datosCorrectosFlag = false;
                 }
-                if (partint >= 100) {
-                    showMessageDialog(null, "El porcentaje de Participacion debe ser superior al 99%");
+                if (partint >= 99) {
+                    showMessageDialog(null, "El porcentaje de Participacion no debe superar el 99%");
                     datosCorrectosFlag = false;
                 }
                 if (datosCorrectosFlag == true) {
@@ -311,10 +311,13 @@ public class FrmSocios extends JDialog{
                                 accionis= (JSONObject) por;
                                 Double porcen= (Double) accionis.get("porcentaje-participacion");
                                 total=total+porcen;}
-                            if(total+porcentaje>100){
-                                showMessageDialog(null,"El Porcentaje de Participacion debe ser menor que: "+(100-total));
+                            if (porcentaje == 0){
+                                showMessageDialog(null,"El Porcentaje de Participacion debe ser mayor a 0");
                                 break;
-                             }
+                            }else if(total+porcentaje>100){
+                                showMessageDialog(null,"El Porcentaje de Participacion debe ser menor o igual que: "+(100-total));
+                                break;
+                            }
                         }
                         Accionista accionistagregar= new impl.Accionista(cuitac,razon,porcentaje);
                         accionistasList.add(accionistagregar.toJSON());
@@ -327,12 +330,13 @@ public class FrmSocios extends JDialog{
                 }
             }
         }
-        if (flag==false){
+        if (!flag){
             socioList = (JSONArray) jsonObject.get("socios-protectores");
             for (Object obj:socioList){
                 socios = (JSONObject) obj;
                 String cuitsoc = socios.get("cuit").toString();
                 if (cuitsoc.equals(textFieldCuitEmpresa.getText())){
+                    flag = true;
                     estado=false;
                     accionistasList = (JSONArray) socios.get("accionistas");
                     for (Object obje: accionistasList){
@@ -348,10 +352,14 @@ public class FrmSocios extends JDialog{
                                     accionis= (JSONObject) por;
                                     Double porcen= (Double) accionis.get("porcentaje-participacion");
                                     total=total+porcen;}
-                                if(total+porcentaje>100){
-                                    showMessageDialog(null,"El Porcentaje de Participacion debe ser menor que: "+(100-total));
+                                if (porcentaje == 0){
+                                    showMessageDialog(null,"El Porcentaje de Participacion debe ser mayor a 0");
+                                    break;
+                                }else if(total+porcentaje>100){
+                                    showMessageDialog(null,"El Porcentaje de Participacion debe ser menor o igual que: "+(100-total));
                                     break;
                                 }
+
                             }
                             Accionista accionistagregar= new impl.Accionista(cuitac,razon,porcentaje);
                             accionistasList.add(accionistagregar.toJSON());
@@ -365,7 +373,7 @@ public class FrmSocios extends JDialog{
                 }
             }
         }
-        else{
+        if (!flag){
             showMessageDialog(null,"El socio no existe");
         }
     }
