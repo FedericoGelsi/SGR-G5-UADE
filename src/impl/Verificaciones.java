@@ -200,17 +200,23 @@ public class Verificaciones implements api.Verificaciones {
     //Chequea el formato de fecha en el String recibido y que los datos ingresados sean numericos
     @Override
     public boolean fechavalida(String fechacheck) {
-        String[] fechaseparada = fechacheck.split("/");
         boolean fechavalidaFlag = true;
-        if (fechaseparada[0].length() != 2 || esnumerico(fechaseparada[0]) != true) {
+        if (fechacheck.contains("/")){
+            String[] fechaseparada = fechacheck.split("/");
+            if (fechaseparada[0].length() != 2 || esnumerico(fechaseparada[0]) != true) {
+                fechavalidaFlag = false;
+            }
+            if (fechaseparada[1].length() != 2 || esnumerico(fechaseparada[1]) != true) {
+                fechavalidaFlag = false;
+            }
+            if (fechaseparada[2].length() != 4 || esnumerico(fechaseparada[2]) != true) {
+                fechavalidaFlag = false;
+            }
+        }
+        else{
             fechavalidaFlag = false;
         }
-        if (fechaseparada[1].length() != 2 || esnumerico(fechaseparada[1]) != true) {
-            fechavalidaFlag = false;
-        }
-        if (fechaseparada[2].length() != 4 || esnumerico(fechaseparada[2]) != true) {
-            fechavalidaFlag = false;
-        }
+
         return fechavalidaFlag;
     }
 

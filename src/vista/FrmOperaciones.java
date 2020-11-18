@@ -710,7 +710,7 @@ public class FrmOperaciones extends JDialog {
                 boolean DatosCorrectosFlagCCC = true;
                 String FDVCCC = "";
                 FDVCCC = TFFDVCCC.getText();
-                if (verif.fechavalida(FDVCCC) == true) {
+                if (verif.fechavalida(FDVCCC)) {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                     LocalDate localDate = LocalDate.parse(FDVCCC, formatter);
                     //Compara la fecha ingresada con la fecha actual ya que no tendria sentido vender un cheque el dia de su
