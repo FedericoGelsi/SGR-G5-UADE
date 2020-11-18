@@ -161,7 +161,7 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <text value="DD/MM/AAAA"/>
+                  <text value="AAAA-MM-DD"/>
                 </properties>
               </component>
               <component id="d4b50" class="javax.swing.JLabel">
@@ -396,7 +396,7 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <text value="DD/MM/AAAA"/>
+                  <text value="AAAA-MM-DD"/>
                 </properties>
               </component>
               <component id="ec6a1" class="javax.swing.JLabel">
@@ -649,7 +649,7 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <text value="DD/MM/AAAA"/>
+                  <text value="AAAA-MM-DD"/>
                 </properties>
               </component>
               <component id="d09fb" class="javax.swing.JLabel">
@@ -892,7 +892,7 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <text value="DD/MM/AAAA"/>
+                  <text value="AAAA-MM-DD"/>
                 </properties>
               </component>
               <hspacer id="e33f5">
@@ -1274,7 +1274,7 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <text value="DD/MM/AAAA"/>
+                  <text value="AAAA-MM-DD"/>
                 </properties>
               </component>
               <component id="b32ed" class="javax.swing.JLabel" binding="JLCDCPST">

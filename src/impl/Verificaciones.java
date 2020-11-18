@@ -857,9 +857,9 @@ public class Verificaciones implements api.Verificaciones {
                         fecha_vencimiento = LocalDate.parse(operaciones.get("fechavencimiento").toString());
                         fechaAux = fechavshoy(fecha_vencimiento);
                             System.out.println(fechaAux);
-                        if (fechaAux.equalsIgnoreCase("Mayor") && estado_operacion.equalsIgnoreCase("Monetizada")) {
+                        if (fechaAux.equalsIgnoreCase("Mayor") && estado_operacion.equalsIgnoreCase("Monetizado")) {
                             tipo_operacion = operaciones.get("tipo").toString();
-                            importetotal = (double) operaciones.get("importetotal");
+                            importetotal = Double.parseDouble(operaciones.get("importetotal").toString());
 
                             if (tipo_operacion.equalsIgnoreCase("Pagare Bursatil") || tipo_operacion.equalsIgnoreCase("Cheque de terceros") || tipo_operacion.equalsIgnoreCase("Cheque propio")) {
                                 totalcomputado = totalcomputado + importetotal;
@@ -896,9 +896,9 @@ public class Verificaciones implements api.Verificaciones {
                             fechaAux = fechavshoy(fecha_vencimiento);
                             System.out.println(fechaAux);
                             estado_operacion = operaciones.get("estado").toString();
-                        if (fechaAux.equalsIgnoreCase("Mayor") && estado_operacion.equalsIgnoreCase("Monetizada")) {
+                            if (fechaAux.equalsIgnoreCase("Mayor") && estado_operacion.equalsIgnoreCase("Monetizado")) {
                             tipo_operacion = operaciones.get("tipo").toString();
-                            importetotal = (double) operaciones.get("importetotal");
+                            importetotal = Double.parseDouble(operaciones.get("importetotal").toString());
                             if (tipo_operacion.equalsIgnoreCase("Pagare Bursatil") || tipo_operacion.equalsIgnoreCase("Cheque de terceros") || tipo_operacion.equalsIgnoreCase("Cheque propio")) {
                                 totalcomputado = totalcomputado + importetotal;
 

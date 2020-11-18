@@ -198,6 +198,11 @@
             "CUITSocio":       "20-11112222-2",
             "numero-operacion":5,
             "idcertificado":   124
+        },
+        {
+            "CUITSocio":       "20-11112222-2",
+            "numero-operacion":4,
+            "idcertificado":   125
         }
     ],
     "modified-by":            "admin"
