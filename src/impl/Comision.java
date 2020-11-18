@@ -2,6 +2,8 @@ package impl;
 
 import org.json.simple.JSONObject;
 
+import java.time.LocalDate;
+
 public class Comision implements api.Comision {
     private final int IDComision;
 
@@ -16,6 +18,7 @@ public class Comision implements api.Comision {
     private final int numeroOperacion;
     private final String tipoOP;
     private double montocomisiontotal;
+    private LocalDate fechaCreacion;
 
     /*======CONSTRUCTOR=======*/
 
@@ -26,6 +29,7 @@ public class Comision implements api.Comision {
         this.numeroOperacion = numeroOperacion;
         this.tipoOP = tipoOP;
         this.montocomisiontotal=montocomisiontotal;
+        this.fechaCreacion = LocalDate.now();
     }
 
     public Comision(JSONObject jsonCMS){
@@ -35,6 +39,7 @@ public class Comision implements api.Comision {
         this.tipoOP = (String) jsonCMS.get("Tipo-Operacion");
         this.IDComision = Integer.parseInt(jsonCMS.get("IDComision").toString());
         this.montocomisiontotal = Double.parseDouble(jsonCMS.get("montocomisiontotal").toString()) ;
+        this.fechaCreacion = LocalDate.parse(jsonCMS.get("fecha-creacion").toString());
     }
 
 
@@ -68,6 +73,10 @@ public class Comision implements api.Comision {
         return tipoOP;
     }
 
+    public LocalDate getFechaCreacion() {
+        return fechaCreacion;
+    }
+
     /*======SETTERS=======*/
 
     @Override
@@ -83,6 +92,7 @@ public class Comision implements api.Comision {
         comision.put("Tipo-Operacion", this.tipoOP);
         comision.put("IDComision", this.IDComision);
         comision.put("montocomisiontotal",this.montocomisiontotal);
+        comision.put("fecha-creacion", this.fechaCreacion.toString());
         return comision;
     }
 

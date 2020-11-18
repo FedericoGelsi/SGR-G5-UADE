@@ -1,7 +1,8 @@
 package api;
 
+import org.json.simple.JSONObject;
+
 import java.time.LocalDate;
-import java.util.Date;
 
 public interface Socio {
     /*======GETTERS=======*/
@@ -39,4 +40,6 @@ public interface Socio {
     void mostrarDocumento(String tipoDocumento);
 
     void getCUITAccionistas();
+
+    JSONObject toJSON();
 }

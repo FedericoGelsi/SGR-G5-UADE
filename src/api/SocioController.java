@@ -1,6 +1,9 @@
 package api;
 
+import impl.Socio_Participe;
+import impl.Socio_Protector;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -26,4 +29,8 @@ public interface SocioController {
     JSONArray buscarDesembolsos();
 
     boolean verificarMontoRecupero(double totaldeuda, String monto );
+
+    JSONObject buscarSocioParticipe(String cuit) throws Exception;
+
+    JSONObject buscarSocioProtector(String cuit) throws Exception;
 }

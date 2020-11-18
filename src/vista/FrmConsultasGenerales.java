@@ -3,7 +3,7 @@ package vista;
 import api.*;
 import com.formdev.flatlaf.FlatLightLaf;
 import impl.JSONHandler;
-import org.apache.commons.io.FilenameUtils;
+import netscape.javascript.JSObject;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -12,13 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -102,6 +96,7 @@ public class FrmConsultasGenerales extends JDialog {
 
     private FrmConsultasGenerales self;
     private Verificaciones verificar = new impl.Verificaciones();
+    private OperationController opController = new impl.OperationController();
 
     private API_JSONHandler file = new JSONHandler();
     private String filename = "./src/resources/socios.json";
@@ -134,10 +129,58 @@ public class FrmConsultasGenerales extends JDialog {
         this.setLocationRelativeTo(null);
         this.asociareventos();
         this.self = this;
+
+
     }
 
     private void asociareventos(){
+        // CONSULTA 1
+        calcularBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (verificar.fechavalida(FechaTxf.getText())){
+                    try {
+                        TotalComisionesTxf.setText(String.valueOf(opController.comisionDiariaTOP(TipocomboBox.getSelectedItem().toString(),LocalDate.parse(FechaTxf.getText()))));
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                }
+            }
+        });
+        // CONSULTA 2
 
+        buscarSocioBtn.addActionListener(new ActionListener() {
+            @Override
+            // BUSCAR SOCIO
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Socio_Participe socio =new impl.Socio_Participe( socioController.buscarSocioParticipe(CUITTxf.getText()));
+                    if (socio != null){
+                        RSTxf.setText(socio.getRazonSocial());
+                        buscarOPBtn.addActionListener(new ActionListener() {
+                            @Override
+                            // BUSCAR OP
+                            public void actionPerformed(ActionEvent e) {
+                                if (verificar.fechavalida(FechaIniTxf.getText()) && verificar.fechavalida(FechaFinTxf.getText())) {
+                                    try {
+                                        opController.operacionesAvaladasPorSocio(
+                                                socio.getCUITSocio(),
+                                                LocalDate.parse(FechaIniTxf.getText()),
+                                                LocalDate.parse(FechaFinTxf.getText()),
+                                                pnlSOperacionesMTable
+                                        );
+                                    } catch (Exception exception) {
+                                        exception.printStackTrace();
+                                    }
+                                }
+                            }
+                        });
+                    }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
+        });
         // CONSULTA 3
         BuscarOPC3Txf.addActionListener(new ActionListener() {
             @Override
@@ -155,7 +198,7 @@ public class FrmConsultasGenerales extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    buscarSocio();
+                    consultaConsolidada();
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
@@ -177,7 +220,7 @@ public class FrmConsultasGenerales extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    buscarSocio();
+                    consultaConsolidada();
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
@@ -187,7 +230,10 @@ public class FrmConsultasGenerales extends JDialog {
         buscardeudaBTn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                consultarMora();
+                ArrayList<Double> datos = opController.ConsultaSaldoMora(socioenuso);
+                moradiariaTxf.setText(String.valueOf(datos.get(0)));
+                saldomoraTxf.setText(String.valueOf(datos.get(0)));
+                crearTablaDeudas(pnlSMoraTable);
             }
         });
 
@@ -197,7 +243,7 @@ public class FrmConsultasGenerales extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 try {
                     resetCampos();
-                    buscarSocio();
+                    consultaConsolidada();
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
@@ -217,7 +263,7 @@ public class FrmConsultasGenerales extends JDialog {
             }else{
                 double totaloperado = 0;
                 double totaltasa = 0;
-                int sociocount = 0;
+                double sociocount = 0;
                 ArrayList<Double> data;
                 for (String cuit: cuitsocios){
                     //getoperacionesSocio(cuit);
@@ -227,6 +273,7 @@ public class FrmConsultasGenerales extends JDialog {
                     sociocount ++;
                 }
                 TotalOperadoTxf.setText(String.valueOf(totaloperado));
+                System.out.println(totaltasa/sociocount);
                 PTDC3Txf.setText(String.valueOf(totaltasa/sociocount));
             }
         }
@@ -235,7 +282,7 @@ public class FrmConsultasGenerales extends JDialog {
     private ArrayList<Double> calcularTotalOperadoSocio(String cuit) throws Exception {
         double montooperado = 0;
         double tasadescuento = 0;
-        int countop = 0;
+        double countop = 1;
         String filenameOP = "./src/resources/operacioncontroller.json";
         JSONObject jsonObjectOP = (JSONObject) file.readJson(filenameOP);
         JSONArray operaciones = (JSONArray) jsonObjectOP.get("operaciones");
@@ -248,125 +295,69 @@ public class FrmConsultasGenerales extends JDialog {
                 if (operacion.get("tipo").equals("Cheque Propio") || operacion.get("tipo").equals("Cheque Terceros") || operacion.get("tipo").equals("Pagare Bursatil")) {
                     montooperado += Double.parseDouble(operacion.get("importetotal").toString());
                     tasadescuento += Double.parseDouble(operacion.get("tasadedescuento").toString());
-                    countop++;
+                    countop += 1;
                 }
-                System.out.println(montooperado);
             }
         }
         ArrayList<Double> data = new ArrayList<>();
         data.add(montooperado);
-        data.add(Double.valueOf(tasadescuento/countop));
+        System.out.println(tasadescuento/countop);
+        data.add(tasadescuento/countop);
         return data;
     }
 
-    private void buscarSocio() throws Exception {
-        jsonObject = (JSONObject) file.readJson(filename);
-        sociosList = (JSONArray) jsonObject.get("socios-participes");
-        boolean socioEncontrado = false;
-        for (Object obj: sociosList){
-            socioenuso = (JSONObject) obj;
-            String rs = socioenuso.get("razon-social").toString();
-            String cuit = socioenuso.get("cuit").toString();
-            String estado = socioenuso.get("estado").toString();
+    private void consultaConsolidada() throws Exception {
+        // CONSULTA 6
+        String cuit = "";
+        if (CUITCCTxf.getText().isEmpty() && CUITMTxf.getText().isEmpty() && CUITC4Txf.getText().isEmpty()) {
+            showMessageDialog(null, "El campo no puede estar vacío.\nIngrese un CUIT.");
+        } else if (CUITC4Txf.isShowing()){
+            cuit = CUITC4Txf.getText();
+        }else if(CUITCCTxf.isShowing()) {
+            cuit = CUITCCTxf.getText();
+        }else if(CUITMTxf.isShowing()) {
+            cuit = CUITMTxf.getText();
+        }else {
+            showMessageDialog(null, "CUIT inválido. El mismo debe tener el formato ##-########-#.\nIngreselo nuevamente.");
+        }
+        socioenuso = socioController.buscarSocioParticipe(cuit);
+        if ( !socioenuso.isEmpty()){
+            Socio_Participe socio = new impl.Socio_Participe(socioenuso);
             if (pnlTabC6.isShowing()) {
-                if (verificar.CUITValido(CUITCCTxf.getText())) {
-                    if (cuit.equals(CUITCCTxf.getText())) {
-                        RSCCTxf.setText(rs);
-                        calcularRiesgoVivo();
-                        //getoperacionesSocio(cuit);
-                        datossocio();
-                        crearTablas(1);
-                        TSDSTxf.setText("Socio Partícipe");
-                        socioEncontrado = true;
-                        break;
-                    }
-                }
-            }else if(pnlTabC5.isShowing()){
-                if (verificar.CUITValido(CUITMTxf.getText()) && estado.equals("Pleno")) {
-                    if (cuit.equals(CUITMTxf.getText())) {
-                        RSMTxf.setText(rs);
-                        socioEncontrado = true;
-                        break;
-                    }
-                }
-            }else if (pnlTabC4.isShowing()){
-                if (verificar.CUITValido(CUITC4Txf.getText()) && estado.equals("Pleno")) {
-                    if (cuit.equals(CUITC4Txf.getText())) {
-                        RSC4Txf.setText(rs);
-                        socioEncontrado = true;
-                        break;
-                    }
-                }
-            }
-            if (CUITCCTxf.getText().isEmpty() && CUITMTxf.getText().isEmpty() && CUITC4Txf.getText().isEmpty()){
-                showMessageDialog(null, "El campo no puede estar vacío.\nIngrese un CUIT.");
-                socioEncontrado = true;
-            }
-        }
-        if (!socioEncontrado) {
-            sociosList = (JSONArray) jsonObject.get("socios-protectores");
-            for (Object obj : sociosList) {
-                socioenuso = (JSONObject) obj;
-                String rs = socioenuso.get("razon-social").toString();
-                String cuit = socioenuso.get("cuit").toString();
-                String estado = socioenuso.get("estado").toString();
-                if (pnlTabC6.isShowing()) {
-                    if (verificar.CUITValido(CUITCCTxf.getText())) {
-                        if (cuit.equals(CUITCCTxf.getText())) {
-                            RSCCTxf.setText(rs);
-                            calcularRiesgoVivo();
-                            getoperacionesSocio(cuit);
-                            datossocio();
-                            crearTablas(2);
-                            TSDSTxf.setText("Socio Protector");
-                            socioEncontrado = true;
-                            break;
-                        }
-                    }
-                    if (CUITCCTxf.getText().isEmpty()) {
-                        showMessageDialog(null, "El campo no puede estar vacío.\nIngrese un CUIT.");
-                        socioEncontrado = true;
-                    } else {
-                        showMessageDialog(null, "CUIT inválido. El mismo debe tener el formato ##-########-#.\nIngreselo nuevamente.");
-                    }
-                }
-            }
-        }
-        if (!socioEncontrado){
-            showMessageDialog(null, "El socio no se encuentra en la base de datos o no es Socio Partícipe.\nVerifique los datos e ingreselos nuevamente.");
-        }
-    }
+                RSCCTxf.setText(socioenuso.get("razon-social").toString());
+                TSDSTxf.setText("Socio Partícipe");
+                calcularRiesgoVivo();
+                datossocio( socioenuso );
+                crearTablas(1);
 
-    // CONSULTA 5
-    private void consultarMora(){
-        JSONArray deudas = (JSONArray) socioenuso.get("deudas");
-        double moradiaria = 0;
-        double moratotal = 0;
-        for (Object d: deudas){
-            Deuda deuda = new impl.Deuda((JSONObject) d);
-            if (deuda.isAplicaMora()) {
-                if (deuda.getFechaDeuda().isBefore(LocalDate.now())){
-                    moratotal += (deuda.getMontoMora() * ChronoUnit.DAYS.between(deuda.getFechaDeuda(), LocalDate.now()));
-                }
-                moradiaria += deuda.getMontoMora();
+            }else if(pnlTabC5.isShowing()){
+                RSMTxf.setText(socio.getRazonSocial());
+            }else if (pnlTabC4.isShowing()){
+                RSC4Txf.setText(socio.getRazonSocial());
             }
+        }else{
+            socioenuso = socioController.buscarSocioProtector(cuit);
+            RSCCTxf.setText(socioenuso.get("razon-social").toString());
+            TSDSTxf.setText("Socio Protector");
+            calcularRiesgoVivo();
+            getoperacionesSocio(cuit);
+            datossocio( socioenuso);
+            crearTablas(2);
+
         }
-        moradiariaTxf.setText(String.valueOf(moradiaria));
-        saldomoraTxf.setText(String.valueOf(moratotal));
-        crearTablaDeudas(pnlSMoraTable);
     }
 
     // CONSULTA 6
-    private void datossocio(){
-        CUITDSTxf.setText((String) socioenuso.get("cuit"));
-        RSDSTxf.setText((String) socioenuso.get("razon-social"));
-        FIADSTxf.setText((String) socioenuso.get("finic-act"));
-        TEDSTxf.setText((String) socioenuso.get("tipo-empresa"));
-        DDSTxf.setText((String) socioenuso.get("direccion"));
-        EmailDSTxf.setText((String) socioenuso.get("email"));
-        EDSTxf.setText((String) socioenuso.get("estado"));
-        FPDSTxf.setText((String) socioenuso.get("fecha-pleno"));
-        APDSTxf.setText((String) socioenuso.get("actividad-principal"));
+    private void datossocio(JSONObject socio){
+        CUITDSTxf.setText((String) socio.get("cuit"));
+        RSDSTxf.setText((String) socio.get("razon-social"));
+        FIADSTxf.setText((String) socio.get("finic-act"));
+        TEDSTxf.setText((String) socio.get("tipo-empresa"));
+        DDSTxf.setText((String) socio.get("direccion"));
+        EmailDSTxf.setText((String) socio.get("email"));
+        EDSTxf.setText((String) socio.get("estado"));
+        FPDSTxf.setText((String) socio.get("fecha-pleno"));
+        APDSTxf.setText((String) socio.get("actividad-principal"));
 
 
     }
@@ -540,7 +531,7 @@ public class FrmConsultasGenerales extends JDialog {
 
     }
 
-    private void crearTablaOperaciones() throws Exception {
+    private void crearTablaOperaciones( ) throws Exception {
         // CAMBIAR POR LOS CAMPOS DEL JSON
         String filenameOP = "./src/resources/operacioncontroller.json";
         JSONObject jsonObjectOP = (JSONObject) file.readJson(filenameOP);

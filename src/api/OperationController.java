@@ -2,8 +2,12 @@ package api;
 
 import impl.LineaCredito;
 import impl.OPTipo3;
+import org.json.simple.JSONObject;
 
+import javax.swing.*;
 import java.io.File;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 
 public interface OperationController {
@@ -17,21 +21,21 @@ public interface OperationController {
 
     void altaDeuda();
 
-    float calcularRiesgoVivo(String CUIT);
+    double calcularRiesgoVivo(String CUIT);
 
-    float calcularTotalComputado(String CUIT);
+    double calcularTotalComputado(String CUIT);
 
-    float comisionesDelDiaPorCheques(Date fecha);
+    double comisionesDelDiaPorCheques(Date fecha);
 
-    void operacionesAvaladasPorSocio(String CUITSocio, Date FechaInicio, Date FechaFin);
+    void operacionesAvaladasPorSocio(String CUITSocio, LocalDate FechaInicio, LocalDate FechaFin, JScrollPane viewport) throws Exception;
 
-    float PromedioTasaDescuentoYTotalOperado(String tipoEmpresa, Date FechaInicio, Date FechaFin);
+    double PromedioTasaDescuentoYTotalOperado(String tipoEmpresa, LocalDate FechaInicio, LocalDate FechaFin);
 
-    float ConsultaSaldoMora(String CUITSocio);
+    ArrayList<Double> ConsultaSaldoMora(JSONObject socio);
 
-    float ConsultaConsolidada(String CUITSocio);
+    double ConsultaConsolidada(String CUITSocio);
 
-    float comisiónSocioTipoOperacion(String CUIT, String TipoOP);
+    double comisionDiariaTOP(String TipoOP, LocalDate fecha) throws Exception;
 
     void agregarAporte(String CUIT, float Cantidad, File documento);
 }

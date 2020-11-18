@@ -2,6 +2,8 @@ package api;
 
 import org.json.simple.JSONObject;
 
+import java.time.LocalDate;
+
 public interface Comision {
     int getIDComision();
 
@@ -18,4 +20,6 @@ public interface Comision {
     void setEstado(String estado);
 
     JSONObject toJSON();
+
+    LocalDate getFechaCreacion();
 }

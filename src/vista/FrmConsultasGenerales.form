@@ -138,9 +138,12 @@
                 </constraints>
                 <properties>
                   <model>
-                    <item value="Operación tipo 1"/>
-                    <item value="Operación tipo 2"/>
-                    <item value="Operación tipo 3"/>
+                    <item value="Cheque Propio"/>
+                    <item value="Cheque Terceros"/>
+                    <item value="Pagare Bursatil"/>
+                    <item value="Cuenta Corriente"/>
+                    <item value="Tarjeta de Credito"/>
+                    <item value="Prestamo"/>
                   </model>
                 </properties>
               </component>
@@ -1372,6 +1375,16 @@
                               <foreground color="-1"/>
                             </properties>
                           </component>
+                          <component id="a6491" class="javax.swing.JLabel">
+                            <constraints>
+                              <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <font name="Montserrat" size="14" style="0"/>
+                              <foreground color="-1"/>
+                              <text value="Tipo Socio:"/>
+                            </properties>
+                          </component>
                           <component id="90e33" class="javax.swing.JTextField" binding="TSDSTxf">
                             <constraints>
                               <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="8" fill="1" indent="0" use-parent-layout="false">
@@ -1384,16 +1397,6 @@
                               <editable value="false"/>
                               <font name="Roboto" size="12" style="0"/>
                               <foreground color="-1"/>
-                            </properties>
-                          </component>
-                          <component id="a6491" class="javax.swing.JLabel">
-                            <constraints>
-                              <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-                            </constraints>
-                            <properties>
-                              <font name="Montserrat" size="14" style="0"/>
-                              <foreground color="-1"/>
-                              <text value="Tipo Socio:"/>
                             </properties>
                           </component>
                         </children>
@@ -1471,7 +1474,7 @@
                     </constraints>
                     <properties>
                       <background color="-11766364"/>
-                      <visible value="true"/>
+                      <visible value="false"/>
                     </properties>
                     <border type="none"/>
                     <children>

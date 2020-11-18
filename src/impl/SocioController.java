@@ -100,6 +100,36 @@ public class SocioController implements api.SocioController {
         return true;
     }
 
+    public JSONObject buscarSocioParticipe(String cuit) throws Exception {
+        jsonObject = (JSONObject) file.readJson(filename);
+        sociosList = (JSONArray) jsonObject.get("socios-participes");
+        if (!sociosList.isEmpty()) {
+            for (Object sc : sociosList) {
+                //api.Socio_Participe socio = new Socio_Participe((JSONObject) sc);
+                JSONObject socio = (JSONObject) sc;
+                if (socio.get("cuit").equals(cuit) && socio.get("estado").equals("Pleno")) {
+                    return socio;
+                }
+            }
+            showMessageDialog(null, "El socio no existe, no es partícipe o no es pleno.");
+        }
+        return null;
+    }
 
+    public JSONObject buscarSocioProtector(String cuit) throws Exception{
+        jsonObject = (JSONObject) file.readJson(filename);
+        sociosList = (JSONArray) jsonObject.get("socios-protector");
+        if (!sociosList.isEmpty()) {
+            for (Object sc : sociosList) {
+                //api.Socio_Protector socio = new Socio_Protector((JSONObject) sc);
+                JSONObject socio = (JSONObject) sc;
+                if (socio.get("cuit").equals(cuit) && socio.get("estado").equals("Pleno")) {
+                    return socio;
+                }
+            }
+            showMessageDialog(null, "El socio no existe, no es protector o no es pleno.");
+        }
+        return null;
+    }
 
 }

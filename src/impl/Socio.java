@@ -46,7 +46,6 @@ public abstract class Socio implements api.Socio {
         this.email = jsonSocio.get("email").toString();
         this.estado = jsonSocio.get("estado").toString();
         this.FechaPleno = LocalDate.parse(jsonSocio.get("fecha-pleno").toString());
-
     }
 
     /*======GETTERS=======*/
@@ -143,6 +142,7 @@ public abstract class Socio implements api.Socio {
         socio.put("monto-mora", this.direccion);
         socio.put("email", this.email);
         socio.put("estado", this.estado);
+        socio.put("direccion", this.direccion);
         if (this.FechaPleno == null){
             socio.put("fecha-pleno","");
         }else{

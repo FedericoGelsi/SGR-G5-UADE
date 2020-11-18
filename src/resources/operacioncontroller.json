@@ -15,8 +15,9 @@
             "Porcentaje-Comision":4.0,
             "IDComision":         0,
             "Numero-Operacion":   0,
-            "Tipo-Operacion":     "Cheque Propio",
-            "Estado":             "Facturada"
+            "Tipo-Operacion":     "Pagare Bursatil",
+            "Estado":             "Facturada",
+            "fecha-creacion": "2020-11-18"
         },
         {
             "montocomisiontotal": 2.88,
@@ -24,7 +25,8 @@
             "IDComision":         1,
             "Numero-Operacion":   1,
             "Tipo-Operacion":     "Pagare Bursatil",
-            "Estado":             "Facturada"
+            "Estado":             "Facturada",
+            "fecha-creacion": "2020-11-18"
         }
     ],
     "created-at":             "2020-11-13",
@@ -50,7 +52,7 @@
             "importetotal":    72.0,
             "banco":           "BANCO DE GALICIA Y BUENOS AIRES S.A.U.",
             "numerooperacion": 1,
-            "fechavencimiento":"2020-12-25",
+            "fechavencimiento":"2020-11-25",
             "numerocheque":    156165161
         }
     ],
