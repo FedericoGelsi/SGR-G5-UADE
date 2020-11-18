@@ -2,7 +2,7 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="vista.FrmSocios">
   <grid id="27dc6" binding="pnlPrincipal" layout-manager="BorderLayout" hgap="0" vgap="0">
     <constraints>
-      <xy x="20" y="20" width="816" height="494"/>
+      <xy x="20" y="20" width="882" height="494"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -330,7 +330,7 @@
               </grid>
             </children>
           </grid>
-          <grid id="f6aa" binding="pnlDocumentacion" layout-manager="GridLayoutManager" row-count="5" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="f6aa" binding="pnlDocumentacion" layout-manager="GridLayoutManager" row-count="8" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="10" left="10" bottom="10" right="10"/>
             <constraints>
               <tabbedpane title="Documentación"/>
@@ -359,25 +359,6 @@
                   <text value="CUIT del Socio"/>
                 </properties>
               </component>
-              <component id="b21a9" class="javax.swing.JTextField" binding="CUITField">
-                <constraints>
-                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="2" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="-1"/>
-                  </grid>
-                </constraints>
-                <properties>
-                  <background color="-11700571"/>
-                  <caretColor color="-1"/>
-                  <enabled value="true"/>
-                  <font name="Roboto" size="12"/>
-                  <foreground color="-1"/>
-                  <horizontalAlignment value="2"/>
-                  <opaque value="true"/>
-                  <requestFocusEnabled value="false"/>
-                  <text value=""/>
-                  <toolTipText value="Ingrese el CUIT con guiones"/>
-                </properties>
-              </component>
               <component id="16ef1" class="javax.swing.JLabel">
                 <constraints>
                   <grid row="0" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -386,22 +367,6 @@
                   <font name="Montserrat SemiBold" size="14"/>
                   <foreground color="-1"/>
                   <text value="Para ingresar o controlar documentación ingrese los siguientes datos:"/>
-                </properties>
-              </component>
-              <component id="1238e" class="javax.swing.JButton" binding="buscarButton" default-binding="true">
-                <constraints>
-                  <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Buscar"/>
-                </properties>
-              </component>
-              <component id="d9710" class="javax.swing.JButton" binding="borrarButton" default-binding="true">
-                <constraints>
-                  <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Borrar"/>
                 </properties>
               </component>
               <component id="ff015" class="javax.swing.JLabel" binding="rznSocialLabel">
@@ -413,11 +378,6 @@
                   <text value="Razon Social"/>
                 </properties>
               </component>
-              <vspacer id="33244">
-                <constraints>
-                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-                </constraints>
-              </vspacer>
               <component id="67936" class="javax.swing.JTextField" binding="rznSocialField">
                 <constraints>
                   <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
@@ -430,14 +390,147 @@
                   <text value=""/>
                 </properties>
               </component>
-              <component id="1bb7a" class="javax.swing.JButton" binding="agregarDocumentacionButton" default-binding="true">
+              <component id="53f7" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Agregar Documentacion"/>
+                  <text value="Tipo"/>
                 </properties>
               </component>
+              <component id="621f2" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Estado"/>
+                </properties>
+              </component>
+              <component id="35dfb" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Usuario Carga"/>
+                </properties>
+              </component>
+              <component id="78d6a" class="javax.swing.JComboBox" binding="estadoTextField">
+                <constraints>
+                  <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <model>
+                    <item value="Ingresado"/>
+                    <item value="Controlado"/>
+                    <item value="Rechazado"/>
+                  </model>
+                </properties>
+              </component>
+              <component id="317d" class="javax.swing.JTextField" binding="usuarioCargaTextField">
+                <constraints>
+                  <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="855b9" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Archivos"/>
+                </properties>
+              </component>
+              <component id="1bb7a" class="javax.swing.JButton" binding="adjDocButton">
+                <constraints>
+                  <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Adjuntar Documentacion"/>
+                </properties>
+              </component>
+              <component id="bd55" class="javax.swing.JButton" binding="confirmarButton" default-binding="true">
+                <constraints>
+                  <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Confirmar"/>
+                </properties>
+              </component>
+              <grid id="4d4f3" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <opaque value="false"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="b21a9" class="javax.swing.JTextField" binding="CUITField">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="2" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="150" height="-1"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <background color="-11700571"/>
+                      <caretColor color="-1"/>
+                      <enabled value="true"/>
+                      <font name="Roboto" size="12"/>
+                      <foreground color="-1"/>
+                      <horizontalAlignment value="2"/>
+                      <opaque value="true"/>
+                      <requestFocusEnabled value="false"/>
+                      <text value=""/>
+                      <toolTipText value="Ingrese el CUIT con guiones"/>
+                    </properties>
+                  </component>
+                  <component id="1238e" class="javax.swing.JButton" binding="buscarButton" default-binding="true">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Buscar Socio"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="e3eb8" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <opaque value="false"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="3943d" class="javax.swing.JCheckBox" binding="obligatorioCheckBox" default-binding="true">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <opaque value="false"/>
+                      <text value="Obligatorio"/>
+                    </properties>
+                  </component>
+                  <component id="44d9" class="javax.swing.JComboBox" binding="CBTIPODOC">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <model>
+                        <item value="Estatuto"/>
+                        <item value="Contrato Social"/>
+                        <item value="Balances"/>
+                        <item value="Manifestacion Bienes Socios"/>
+                      </model>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
             </children>
           </grid>
           <grid id="51776" binding="pnlAccionistas" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">

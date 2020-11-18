@@ -12,6 +12,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.*;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -45,6 +48,12 @@ public class FrmSocios extends JDialog {
     private JButton confirmarDatosButton;
     private JButton borrarSocioButton;
     private JButton cancelarButton;
+    private JComboBox estadoTextField;
+    private JTextField usuarioCargaTextField;
+    private JCheckBox obligatorioCheckBox;
+    private JButton confirmarButton;
+    private JComboBox CBTIPODOC;
+    private JButton adjDocButton;
     private JPasswordField passwordField1;
     private JButton altaSocioParticipeButton;
     private JPanel pnluntitled;
@@ -114,6 +123,13 @@ public class FrmSocios extends JDialog {
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
+
+            }
+        });
+        adjDocButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                adjuntarFile();
 
             }
         });
@@ -407,4 +423,37 @@ private void deshabilitarFields(){
 
 
     }
+
+    private void adjuntarFile() {
+
+
+        JFileChooser fileChooser = new JFileChooser();
+        int selection = fileChooser.showOpenDialog(pnlPrincipal);
+
+        if (selection == JFileChooser.APPROVE_OPTION) {
+            File archivo = fileChooser.getSelectedFile();
+            String path = archivo.getAbsolutePath();
+            try {
+                copyFile(path, CUITField.getText());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
+
+    }
+
+    public static void copyFile(String from, String to) throws IOException {
+        Path origen = Paths.get(from);
+        Path destino = Paths.get("./src/resources/documentacion/" + to + "/test");
+        if (origen.toString().endsWith(".pdf") || origen.toString().endsWith(".jpeg") || origen.toString().endsWith(".png")) {
+            Files.copy(origen, destino, StandardCopyOption.REPLACE_EXISTING);
+        } else {
+            //
+        }
+
+    }
+
 }
