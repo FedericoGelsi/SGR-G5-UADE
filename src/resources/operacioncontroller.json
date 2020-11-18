@@ -2,103 +2,56 @@
     "facturas":               [
         {
             "estado":          "Impaga",
-            "CUITDestinatario":"20-87654321-2",
-            "montofactura":    4.752,
-            "idfactura":       0,
-            "CUITemisor":      "20-11111111-2"
-        },
-        {
-            "estado":          "Impaga",
             "CUITDestinatario":"20-11112222-2",
-            "montofactura":    4.554,
-            "idfactura":       1,
+            "montofactura":    4.76,
+            "idfactura":       0,
             "CUITemisor":      "20-11111111-2"
         }
     ],
     "author":                 "admin",
     "comision":               [
         {
-            "montocomisiontotal": 1.98,
+            "montocomisiontotal": 1.8800000000000001,
             "Porcentaje-Comision":4.0,
-            "IDComision":         1000,
+            "IDComision":         0,
             "Numero-Operacion":   0,
             "Tipo-Operacion":     "Cheque Propio",
             "Estado":             "Facturada"
         },
         {
-            "montocomisiontotal": 2.772,
+            "montocomisiontotal": 2.88,
             "Porcentaje-Comision":4.0,
-            "IDComision":         1001,
+            "IDComision":         1,
             "Numero-Operacion":   1,
-            "Tipo-Operacion":     "Cheque Propio",
-            "Estado":             "Facturada"
-        },
-        {
-            "montocomisiontotal": 1.386,
-            "Porcentaje-Comision":4.0,
-            "IDComision":         1002,
-            "Numero-Operacion":   2,
-            "Tipo-Operacion":     "Cheque Propio",
-            "Estado":             "Facturada"
-        },
-        {
-            "montocomisiontotal": 2.574,
-            "Porcentaje-Comision":4.0,
-            "IDComision":         1003,
-            "Numero-Operacion":   3,
-            "Tipo-Operacion":     "Cheque Propio",
+            "Tipo-Operacion":     "Pagare Bursatil",
             "Estado":             "Facturada"
         }
     ],
     "created-at":             "2020-11-13",
     "operaciones":            [
         {
-            "CUITSocio":       "20-87654321-2",
+            "CUITSocio":       "20-11112222-2",
             "tipo":            "Cheque Propio",
             "estado":          "Monetizado",
-            "tasadedescuento": 1.0,
-            "CUITfirmante":    "20-87654321-2",
-            "importetotal":    49.5,
+            "tasadedescuento": 6.0,
+            "CUITfirmante":    "20-11112222-2",
+            "importetotal":    47.0,
             "banco":           "BANCO DE GALICIA Y BUENOS AIRES S.A.U.",
             "numerooperacion": 0,
-            "fechavencimiento":"2020-11-26",
-            "numerocheque":    333
+            "fechavencimiento":"2020-12-12",
+            "numerocheque":    12345
         },
         {
-            "CUITSocio":       "20-87654321-2",
-            "tipo":            "Cheque Propio",
+            "CUITSocio":       "20-11112222-2",
+            "tipo":            "Pagare Bursatil",
             "estado":          "Monetizado",
-            "tasadedescuento": 1.0,
-            "CUITfirmante":    "20-87654321-2",
-            "importetotal":    69.3,
+            "tasadedescuento": 10.0,
+            "CUITfirmante":    "20-15651654-4",
+            "importetotal":    72.0,
             "banco":           "BANCO DE GALICIA Y BUENOS AIRES S.A.U.",
             "numerooperacion": 1,
-            "fechavencimiento":"2020-11-26",
-            "numerocheque":    333
-        },
-        {
-            "CUITSocio":       "20-11112222-2",
-            "tipo":            "Cheque Propio",
-            "estado":          "Monetizado",
-            "tasadedescuento": 1.0,
-            "CUITfirmante":    "20-11112222-2",
-            "importetotal":    34.65,
-            "banco":           "BANCO DE GALICIA Y BUENOS AIRES S.A.U.",
-            "numerooperacion": 2,
-            "fechavencimiento":"2020-11-26",
-            "numerocheque":    333
-        },
-        {
-            "CUITSocio":       "20-11112222-2",
-            "tipo":            "Cheque Propio",
-            "estado":          "Monetizado",
-            "tasadedescuento": 1.0,
-            "CUITfirmante":    "20-11112222-2",
-            "importetotal":    64.35,
-            "banco":           "BANCO DE GALICIA Y BUENOS AIRES S.A.U.",
-            "numerooperacion": 3,
-            "fechavencimiento":"2020-11-26",
-            "numerocheque":    333
+            "fechavencimiento":"2020-12-25",
+            "numerocheque":    156165161
         }
     ],
     "certificado-de-garantia":[
@@ -121,6 +74,56 @@
             "CUITSocio":       "20-11112222-2",
             "numero-operacion":3,
             "idcertificado":   103
+        },
+        {
+            "CUITSocio":       "20-11112222-2",
+            "numero-operacion":4,
+            "idcertificado":   104
+        },
+        {
+            "CUITSocio":       "20-11112222-2",
+            "numero-operacion":5,
+            "idcertificado":   105
+        },
+        {
+            "CUITSocio":       "20-12345678-2",
+            "numero-operacion":6,
+            "idcertificado":   106
+        },
+        {
+            "CUITSocio":       "20-12345678-2",
+            "numero-operacion":8,
+            "idcertificado":   108
+        },
+        {
+            "CUITSocio":       "20-12345678-2",
+            "numero-operacion":9,
+            "idcertificado":   109
+        },
+        {
+            "CUITSocio":       "20-12345678-2",
+            "numero-operacion":10,
+            "idcertificado":   110
+        },
+        {
+            "CUITSocio":       "20-12345678-2",
+            "numero-operacion":11,
+            "idcertificado":   111
+        },
+        {
+            "CUITSocio":       "20-11112222-2",
+            "numero-operacion":11,
+            "idcertificado":   112
+        },
+        {
+            "CUITSocio":       "20-11112222-2",
+            "numero-operacion":0,
+            "idcertificado":   113
+        },
+        {
+            "CUITSocio":       "20-11112222-2",
+            "numero-operacion":1,
+            "idcertificado":   114
         }
     ],
     "modified-by":            "admin"

@@ -77,23 +77,24 @@ public class SocioController implements api.SocioController {
         return (JSONArray) jsonObject.get("desembolsos");
     }
 
-    public boolean verificarMonto(double totaldeuda, String monto ){
+    public boolean verificarMontoRecupero(double totaldeuda, String monto ){
         if (totaldeuda== 0){
             showMessageDialog(null, "El socio no tiene deudas asociadas.");
             return false;
         }else {
-            if (!verificar.esnumerico(monto)) {
+            try{
+                Double.parseDouble(monto);
+            }catch (Exception er){
                 showMessageDialog(null, "El campo debe ser numérico.\nIngrese un monto válido.");
                 return false;
-            } else {
-                if (Double.parseDouble(monto) <= 0) {
-                    showMessageDialog(null, "El monto debe ser mayor a 0.\nIngrese un monto válido.");
-                    return false;
-                }
-                if (Double.parseDouble(monto) > totaldeuda {
-                    showMessageDialog(null, "El monto no puede ser mayor a la deuda contraida.\nIngrese un monto válido.");
-                    return false;
-                }
+            }
+            if (Double.parseDouble(monto) <= 0) {
+                showMessageDialog(null, "El monto debe ser mayor a 0.\nIngrese un monto válido.");
+                return false;
+            }
+            if (Double.parseDouble(monto) > totaldeuda) {
+                showMessageDialog(null, "El monto no puede ser mayor a la deuda contraida.\nIngrese un monto válido.");
+                return false;
             }
         }
         return true;

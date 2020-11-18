@@ -86,7 +86,7 @@ public class FrmDyR extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    if( sc.verificarMonto(Double.parseDouble(TotalDeudaTxField.getText()), MontoTxField.getText()) ) {
+                    if( sc.verificarMontoRecupero(Double.parseDouble(TotalDeudaTxField.getText()), MontoTxField.getText()) ) {
                         crearRecupero();
                     }
                 } catch (Exception exception) {

@@ -25,5 +25,5 @@ public interface SocioController {
 
     JSONArray buscarDesembolsos();
 
-    boolean verificarMonto(double totaldeuda, String monto );
+    boolean verificarMontoRecupero(double totaldeuda, String monto );
 }

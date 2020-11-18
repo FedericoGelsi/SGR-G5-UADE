@@ -91,7 +91,6 @@ public class FrmOperaciones extends JDialog {
     private JTextField TFCUIT;
     private JTextField TFCUIT2;
     private JSpinner ITTC;
-    private final Verificaciones verif = new impl.Verificaciones();
 
     private final String filename = "./src/resources/socios.json";
     private final API_JSONHandler file = new JSONHandler();
@@ -588,16 +587,16 @@ public class FrmOperaciones extends JDialog {
                     }
                 }
             }
-                if (checks == true) {
-                    int mensaje_numcertificado = 0;
-                    try {
-                        totalmenostasapb = (float) ITPBint - ((float) ITPBint * ((float) TDDPBint / 100));
-                        mensaje_numcertificado = verif.crearOT1(FDVPBdate, BEPB.toString(), NDPPBint, CDSPB, TDDPBint, CUITFirmante, "Pagare Bursatil", totalmenostasapb, "Ingresado");
-                        showMessageDialog(null, "Su operación fue realizada con éxito, el numero del certificado de garantia es: " + mensaje_numcertificado);
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
-                    }
+            if (checks == true) {
+                int mensaje_numcertificado = 0;
+                try {
+                    totalmenostasapb = (float) ITPBint - ((float) ITPBint * ((float) TDDPBint / 100));
+                    mensaje_numcertificado = verif.crearOT1(FDVPBdate, BEPB.toString(), NDPPBint, CUITFirmante, TDDPBint, CDSPB, "Pagare Bursatil", totalmenostasapb, "Ingresado");
+                    showMessageDialog(null, "Su operación fue realizada con éxito, el numero del certificado de garantia es: " + mensaje_numcertificado);
+                } catch (Exception exception) {
+                    exception.printStackTrace();
                 }
+            }
             }
     });
 
@@ -1096,7 +1095,8 @@ public class FrmOperaciones extends JDialog {
                     int mensaje_numcertificado = 0;
                     try {
                         System.out.println("mando la tarjeta");
-                        verif.crearOT2(TFITCCC.toString(), IT, FVTC, CUITSocioTC, TFNDTTCint, TFNombreTC.getText(), "Ingresado", CDSTCint, "Tarjeta de Credito", "-");
+                        mensaje_numcertificado = verif.crearOT2(TFITCCC.toString(), IT, FVTC, CUITSocioTC, TFNDTTCint, TFNombreTC.getText(), "Ingresado", CDSTCint, "Tarjeta de Credito", "-");
+                        showMessageDialog(null, "Su operación fue realizada con éxito, el numero del certificado de garantia es: " + mensaje_numcertificado);
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }

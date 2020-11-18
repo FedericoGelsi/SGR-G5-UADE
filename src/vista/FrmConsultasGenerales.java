@@ -220,8 +220,8 @@ public class FrmConsultasGenerales extends JDialog {
                 int sociocount = 0;
                 ArrayList<Double> data;
                 for (String cuit: cuitsocios){
-                    getoperacionesSocio(cuit);
-                    data = calcularTotalOperadoSocio();
+                    //getoperacionesSocio(cuit);
+                    data = calcularTotalOperadoSocio(cuit);
                     totaloperado += data.get(0);
                     totaltasa += data.get(1);
                     sociocount ++;
@@ -232,24 +232,30 @@ public class FrmConsultasGenerales extends JDialog {
         }
     }
 
-    private ArrayList<Double> calcularTotalOperadoSocio(){
+    private ArrayList<Double> calcularTotalOperadoSocio(String cuit) throws Exception {
         double montooperado = 0;
         double tasadescuento = 0;
         int countop = 0;
-        for (Object op : operacionesSocio){
+        String filenameOP = "./src/resources/operacioncontroller.json";
+        JSONObject jsonObjectOP = (JSONObject) file.readJson(filenameOP);
+        JSONArray operaciones = (JSONArray) jsonObjectOP.get("operaciones");
+        for (Object op : operaciones){
             JSONObject operacion = (JSONObject) op;
             // Cheque Propio
             //Cheque Terceros
             //Pagaré bursátil
-            if (operacion.get("tipo").equals("Cheque propio") || operacion.get("tipo").equals("Cheque Terceros") || operacion.get("tipo").equals("Pagaré bursátil")) {
-                montooperado += Double.parseDouble(operacion.get("importetotal").toString());
-                tasadescuento += Double.parseDouble(operacion.get("tasadedescuento").toString());
-                countop ++;
+            if (operacion.get("CUITSocio").toString().equals(cuit)) {
+                if (operacion.get("tipo").equals("Cheque Propio") || operacion.get("tipo").equals("Cheque Terceros") || operacion.get("tipo").equals("Pagare Bursatil")) {
+                    montooperado += Double.parseDouble(operacion.get("importetotal").toString());
+                    tasadescuento += Double.parseDouble(operacion.get("tasadedescuento").toString());
+                    countop++;
+                }
+                System.out.println(montooperado);
             }
         }
         ArrayList<Double> data = new ArrayList<>();
         data.add(montooperado);
-        data.add(tasadescuento/countop);
+        data.add(Double.valueOf(tasadescuento/countop));
         return data;
     }
 
@@ -309,7 +315,7 @@ public class FrmConsultasGenerales extends JDialog {
                         if (cuit.equals(CUITCCTxf.getText())) {
                             RSCCTxf.setText(rs);
                             calcularRiesgoVivo();
-                            //getoperacionesSocio(cuit);
+                            getoperacionesSocio(cuit);
                             datossocio();
                             crearTablas(2);
                             TSDSTxf.setText("Socio Protector");
@@ -366,12 +372,12 @@ public class FrmConsultasGenerales extends JDialog {
     }
 
     private void getoperacionesSocio(String cuit) throws Exception {
-        filename = "./src/resources/operacionescontroller.json";
-        jsonObject = (JSONObject) file.readJson(filename);
-        JSONArray operaciones = (JSONArray) jsonObject.get("operaciones");
+        String filenameOP = "./src/resources/operacioncontroller.json";
+        JSONObject jsonObjectOP = (JSONObject) file.readJson(filenameOP);
+        JSONArray operaciones = (JSONArray) jsonObjectOP.get("operaciones");
         for( Object obj: operaciones){
             JSONObject op = (JSONObject) obj;
-            if (op.get("cuit-solicitante").equals(cuit)){
+            if (op.get("CUITfirmante").equals(cuit)){
                 operacionesSocio.add(op);
             }
         }
@@ -403,13 +409,13 @@ public class FrmConsultasGenerales extends JDialog {
 
     }
 
-    public void crearTablas(int opc){
+    public void crearTablas(int opc) throws Exception {
         if (opc==1) {
             crearTablaRecuperos();
             crearTablaDeudas(pnlSDeudas);
             crearTablaContragarantias();
             crearTablaLDC();
-            //crearTablaOperaciones();
+            crearTablaOperaciones();
         }else if(opc==2){
             crearTablaAportes();
         }
@@ -522,19 +528,24 @@ public class FrmConsultasGenerales extends JDialog {
     }
 
     private void crearTablaLDC(){
-        JSONObject LDC = (JSONObject) socioenuso.get("linea-de-credito");
+        JSONObject LDC = (JSONObject) socioenuso.get("lineas-de-credito");
         RSLDCTxf.setText(RSCCTxf.getText());
         CUITLDCTxf.setText(CUITCCTxf.getText());
         IDLDCTxf.setText(LDC.get("id").toString());
         TopeLDCTxf.setText(LDC.get("tope").toString());
         MontoLDCTxf.setText(LDC.get("monto-utilizado").toString());
+        TUCCTxf.setText(MontoLDCTxf.getText());
         FVLDCTxf.setText(LDC.get("fecha-vigencia").toString());
         pnlSLDC.setVisible(true);
+
     }
 
-    private void crearTablaOperaciones(){
+    private void crearTablaOperaciones() throws Exception {
         // CAMBIAR POR LOS CAMPOS DEL JSON
-        String [] nombresColumnas = {"ID","CUIT","Tope", "Monto Utilizado", "Fecha Vigencia"};
+        String filenameOP = "./src/resources/operacioncontroller.json";
+        JSONObject jsonObjectOP = (JSONObject) file.readJson(filenameOP);
+        operacionesSocio = (JSONArray) jsonObjectOP.get("operaciones");
+        String [] nombresColumnas = {"ID","CUIT","Tipo","Estado", "Monto","Banco", "Fecha Vencimiento"};
         DefaultTableModel modelo = new DefaultTableModel();
         for ( String column : nombresColumnas) {
             modelo.addColumn(column);
@@ -542,13 +553,25 @@ public class FrmConsultasGenerales extends JDialog {
         for ( Object op: operacionesSocio){
             ArrayList data = new ArrayList<>();
             JSONObject operacion = (JSONObject) op;
-            data.add(operacion.get(""));
+            data.add(operacion.get("numerooperacion"));
+            data.add(operacion.get("CUITSocio"));
+            data.add(operacion.get("tipo"));
+            data.add(operacion.get("estado"));
+            data.add(operacion.get("importetotal"));
+            if (operacion.get("banco").toString().isEmpty()) {
+                data.add("");
+            }else{
+                data.add(operacion.get("banco"));
+            }
+            data.add(operacion.get("fechavencimiento"));
+
+
             modelo.addRow(data.toArray());
         }
         JTable accionistasTable = new JTable(modelo);
 
-        pnlSOperacionesMTable.setViewportView(accionistasTable);
-        pnlSOperacionesMTable.setVisible(true);
+        pnlSOP.setViewportView(accionistasTable);
+        pnlSOP.setVisible(true);
     }
 
 

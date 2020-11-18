@@ -130,36 +130,35 @@
                     "id-deudas":     [
                         "3"
                     ]
+                },
+                {
+                    "tipo":          "Parcial",
+                    "monto":         3816.0,
+                    "id-socio-pleno":"20-12345678-2",
+                    "id-deudas":     [
+                        1,
+                        2,
+                        4
+                    ]
+                },
+                {
+                    "tipo":          "Parcial",
+                    "monto":         0.0,
+                    "id-socio-pleno":"20-12345678-2",
+                    "id-deudas":     []
+                },
+                {
+                    "tipo":          "Parcial",
+                    "monto":         196.0,
+                    "id-socio-pleno":"20-12345678-2",
+                    "id-deudas":     [
+                        0
+                    ]
                 }
             ],
             "finic-act":          "2020-11-13",
             "direccion":          "Rivadavia 2630, CABA",
-            "deudas":             [
-                {
-                    "fecha-deuda":"2020-02-23",
-                    "monto":      100.0,
-                    "id-deuda":   "1",
-                    "aplica-mora":true,
-                    "monto-mora": 3.0,
-                    "cuit-deudor":"20-12345678-2"
-                },
-                {
-                    "fecha-deuda":"2020-02-23",
-                    "monto":      100.0,
-                    "id-deuda":   "2",
-                    "aplica-mora":true,
-                    "monto-mora": 3.0,
-                    "cuit-deudor":"20-12345678-2"
-                },
-                {
-                    "fecha-deuda":"2019-02-23",
-                    "monto":      100.0,
-                    "id-deuda":   "4",
-                    "aplica-mora":true,
-                    "monto-mora": 3.0,
-                    "cuit-deudor":"20-12345678-2"
-                }
-            ],
+            "deudas":             [],
             "contragarantias":    [
                 {
                     "fecha-creacion":"2020-08-23",
@@ -215,24 +214,29 @@
                 "tope":           1000.0,
                 "id":             1,
                 "fecha-vigencia": "2020-12-13",
-                "monto-utilizado":100.0,
+                "monto-utilizado":1000.0,
                 "CUIT-Participe": "20-12345678-2"
             },
             "accionistas":        [
-                {
-                    "cuit-accionista":         "20-3444444-2",
-                    "razon-social-ac":         "Pepita S.R.L.",
-                    "porcentaje-participacion":15.0
-                },
                 {
                     "cuit-accionista":         "20-4534778-2",
                     "razon-social-ac":         "Pepit3 S.R.L.",
                     "porcentaje-participacion":15.0
                 },
                 {
-                    "cuit-accionista":         "20-45845655-2",
-                    "razon-social-ac":         "Pepitf S.R.L.",
-                    "porcentaje-participacion":15.0
+                    "cuit-accionista":         "20-55556689-2",
+                    "razon-social-ac":         "Groovy S.R.L.",
+                    "porcentaje-participacion":45.0
+                },
+                {
+                    "cuit-accionista":         "20-21654566-8",
+                    "razon-social-ac":         "f",
+                    "porcentaje-participacion":26.0
+                },
+                {
+                    "cuit-accionista":         "20-21664566-8",
+                    "razon-social-ac":         "fede",
+                    "porcentaje-participacion":10.0
                 }
             ],
             "cuit":               "20-12345678-2",
@@ -302,7 +306,7 @@
                     ]
                 }
             ],
-            "finic-act":          "2020-11-14T09:52:32.914993900",
+            "finic-act":          "2020-11-14",
             "direccion":          "Corrientes 2630, CABA",
             "deudas":             [],
             "contragarantias":    [
@@ -350,8 +354,25 @@
             "razon-social":       "Rosita",
             "actividad-principal":"Cristaleria",
             "estado":             "Pleno",
-            "recuperos":          [],
-            "finic-act":          "2020-11-13T09:52:32.914993900",
+            "recuperos":          [
+                {
+                    "tipo":          "Total",
+                    "monto":         18.799999237060547,
+                    "id-socio-pleno":"20-11112222-2",
+                    "id-deudas":     [
+                        0
+                    ]
+                },
+                {
+                    "tipo":          "Total",
+                    "monto":         47.0,
+                    "id-socio-pleno":"20-11112222-2",
+                    "id-deudas":     [
+                        0
+                    ]
+                }
+            ],
+            "finic-act":          "2020-11-13",
             "direccion":          "Rivadavia 2630, CABA",
             "deudas":             [],
             "contragarantias":    [
@@ -367,27 +388,32 @@
                 }
             ],
             "lineas-de-credito":  {
-                "tope":           1000,
+                "tope":           100,
                 "id":             1,
                 "fecha-vigencia": "2020-11-26",
-                "monto-utilizado":862.7800002098083,
+                "monto-utilizado":-47.0,
                 "CUIT-Participe": "20-12345678-2"
             },
             "accionistas":        [
                 {
-                    "cuit-accionista":         "20-31434444-2",
-                    "razon-social-ac":         "Pepita S.R.L.",
-                    "porcentaje-participacion":15.0
-                },
-                {
-                    "cuit-accionista":         "20-45364278-2",
+                    "cuit-accionista":         "20-4534778-2",
                     "razon-social-ac":         "Pepit3 S.R.L.",
                     "porcentaje-participacion":15.0
                 },
                 {
-                    "cuit-accionista":         "20-46431334-2",
-                    "razon-social-ac":         "Pepitf S.R.L.",
-                    "porcentaje-participacion":15.0
+                    "cuit-accionista":         "20-55556689-2",
+                    "razon-social-ac":         "Groovy S.R.L.",
+                    "porcentaje-participacion":45.0
+                },
+                {
+                    "cuit-accionista":         "20-21654566-8",
+                    "razon-social-ac":         "f",
+                    "porcentaje-participacion":26.0
+                },
+                {
+                    "cuit-accionista":         "20-21664566-8",
+                    "razon-social-ac":         "fede",
+                    "porcentaje-participacion":10.0
                 }
             ],
             "cuit":               "20-11112222-2",
@@ -462,6 +488,25 @@
             "direccion":          "Rivadavia 2630, CABA",
             "aportes":            [],
             "email":              "ventas@polloshrnos.com"
+        },
+        {
+            "razon-social":       "Cobra Kai S.A.",
+            "actividad-principal":"Karate",
+            "estado":             "Postulante",
+            "accionistas":        [
+                {
+                    "cuit-accionista":         "20-33332255-2",
+                    "razon-social-ac":         "Doña Maria S.A.",
+                    "porcentaje-participacion":15.0
+                }
+            ],
+            "cuit":               "20-12345678-9",
+            "tipo-empresa":       "Grande",
+            "fecha-pleno":        "",
+            "finic-act":          "2010-05-06",
+            "monto-mora":         "No moneda calamelo 2340",
+            "aportes":            [],
+            "email":              "kalate.nomercy@gmail.com"
         }
     ],
     "author":            "admin",
@@ -472,6 +517,20 @@
             "cuit-socio":  "20-12345678-2",
             "monto":       123.45,
             "id":          1
+        },
+        {
+            "razon-social":"Rosita",
+            "fecha-op":    "2020-11-18",
+            "monto":       18.799999237060547,
+            "cuit-socio":  "20-11112222-2",
+            "id":          1
+        },
+        {
+            "razon-social":"Rosita",
+            "fecha-op":    "2020-11-18",
+            "monto":       47.0,
+            "cuit-socio":  "20-11112222-2",
+            "id":          2
         }
     ],
     "created-at":        "2020-11-13",
