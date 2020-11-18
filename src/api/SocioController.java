@@ -28,9 +28,22 @@ public interface SocioController {
 
     JSONArray buscarDesembolsos();
 
-    boolean verificarMontoRecupero(double totaldeuda, String monto );
+    boolean verificarMontoRecupero(double totaldeuda, String monto);
 
     JSONObject buscarSocioParticipe(String cuit) throws Exception;
 
     JSONObject buscarSocioProtector(String cuit) throws Exception;
+
+    boolean lineacreditovigente(String CUITSocio);
+
+    boolean lineasuficiente(String CUITSocio, float montooperacion);
+
+    boolean contragarantiassuficientes(String CUITSocio, float montooperacion);
+
+    boolean essocioparticipe(String CUITSocio);
+
+    boolean lineatope(String CUITSocio, float montooperacion);
+
+
+
 }

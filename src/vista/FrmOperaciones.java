@@ -1,9 +1,12 @@
 package vista;
 
 import api.API_JSONHandler;
+import api.OperationController;
+import api.SocioController;
 import api.Verificaciones;
 import com.formdev.flatlaf.FlatLightLaf;
 import impl.JSONHandler;
+import jdk.dynalink.Operation;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -99,6 +102,9 @@ public class FrmOperaciones extends JDialog {
     private final String filenamefact = "./src/resources/operacioncontroller.json";
     private final JSONObject jsonObjectOPC = (JSONObject) file.readJson(filenamefact);
 
+    private final OperationController opController = new impl.OperationController();
+
+    private final SocioController scController = new impl.SocioController();
 
     public FrmOperaciones(Window owner, String Title) throws Exception {
         super(owner, Title);
@@ -123,7 +129,7 @@ public class FrmOperaciones extends JDialog {
         this.setLocationRelativeTo(null);
 
 
-        verif.altaFacturas(); // CAMBIAR A LOGIN
+        opController.altaFactura(); // CAMBIAR A LOGIN
 
         //Action Listener de JButton Cheques Personales
         JBCHP.addActionListener(new ActionListener() {
@@ -238,36 +244,36 @@ public class FrmOperaciones extends JDialog {
                 }
 
                 ArrayList<String> EmpresaComparteSocio = new ArrayList<>();
-                EmpresaComparteSocio = verif.ListaCUITAC(CDFCHP);
+                EmpresaComparteSocio = opController.ListaCUITAC(CDFCHP);
                 boolean fdrflag = false;
                 if (DatosCorrectosFlagCHP == true) {
-                    if (verif.essocioparticipe(CDFCHP) != true) {
+                    if (scController.essocioparticipe(CDFCHP) != true) {
                         showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio no es un socio participe pleno");
                         checks = false;
-                    } else if (verif.lineacreditovigente(CDFCHP) == false) {
+                    } else if (scController.lineacreditovigente(CDFCHP) == false) {
                         showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que la linea de credito se encuentra vencida");
                         checks = false;
-                    } else if (verif.debefacturas(CDFCHP) == true) {
+                    } else if (opController.debefacturas(CDFCHP) == true) {
                         showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio adeuda facturas");
                         checks = false;
-                    } else if (verif.check_deuda(CDFCHP) == true) {
+                    } else if (opController.check_deuda(CDFCHP) == true) {
                         showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio registra deudas");
                         checks = false;
                     } else if (!EmpresaComparteSocio.isEmpty()) {
-                        if (verif.Computar5FDRAc(EmpresaComparteSocio, CDFCHP, ITCHPint) == true) {
+                        if (opController.Computar5FDRAc(EmpresaComparteSocio, CDFCHP, ITCHPint) == true) {
                             showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que supera la suma de los riesgos vivos de los socios que comparten accionistas");
                             checks = false;
                             fdrflag = true;
                         }
-                    } else if (verif.lineatope(CDFCHP, ITCHPint) == false) {
+                    } else if (scController.lineatope(CDFCHP, ITCHPint) == false) {
                         showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el importe total excede el tope de la linea de credito asignada");
                         checks = false;
-                    } else if (verif.contragarantiassuficientes(CDFCHP, ITCHPint) == false) {
+                    } else if (scController.contragarantiassuficientes(CDFCHP, ITCHPint) == false) {
                         showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor al total de las contragarantias presentadas");
                         checks = false;
                     } else if (fdrflag != true) {
                         try {
-                            if (verif.operacionvsfdr(ITCHPint) == false) {
+                            if (opController.operacionvsfdr(ITCHPint) == false) {
                                 showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor al 5% del fondo de riesgo");
                                 checks = false;
                             }
@@ -281,7 +287,7 @@ public class FrmOperaciones extends JDialog {
                         int mensaje_numcertificado = 0;
                         totalmenostasa = (float) ITCHPint - ((float) ITCHPint * ((float) TDDCHPint / 100));
                         try {
-                            mensaje_numcertificado = verif.crearOT1(FDVCHPdate, BECHP.toString(), NCCHPint, CDFCHP, TDDCHPint, CDFCHP, "Cheque Propio", totalmenostasa, "Ingresado");
+                            mensaje_numcertificado = opController.crearOT1(FDVCHPdate, BECHP.toString(), NCCHPint, CDFCHP, TDDCHPint, CDFCHP, "Cheque Propio", totalmenostasa, "Ingresado");
                             showMessageDialog(null, "Su operación fue realizada con éxito, el numero del certificado de garantia es: " + mensaje_numcertificado);
                         } catch (Exception exception) {
                             exception.printStackTrace();
@@ -394,36 +400,36 @@ public class FrmOperaciones extends JDialog {
                 CUITfirmante = TFCDFCHP.getText();
 
                 ArrayList<String> EmpresaComparteSocio = new ArrayList<>();
-                EmpresaComparteSocio = verif.ListaCUITAC(CDSCHT);
+                EmpresaComparteSocio = opController.ListaCUITAC(CDSCHT);
                 boolean fdrflag = false;
                 if (DatosCorrectosFlagCHT == true) {
-                    if (verif.essocioparticipe(CDSCHT) != true) {
+                    if (scController.essocioparticipe(CDSCHT) != true) {
                         showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio no es un socio participe pleno");
                         checks = false;
-                    } else if (verif.lineacreditovigente(CDSCHT) == false) {
+                    } else if (scController.lineacreditovigente(CDSCHT) == false) {
                         showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que la linea de credito se encuentra vencida");
                         checks = false;
-                    } else if (verif.debefacturas(CDSCHT) == true) {
+                    } else if (opController.debefacturas(CDSCHT) == true) {
                         showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio adeuda facturas");
                         checks = false;
-                    } else if (verif.check_deuda(CDSCHT) == true) {
+                    } else if (opController.check_deuda(CDSCHT) == true) {
                         showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio registra deudas");
                         checks = false;
                     } else if (!EmpresaComparteSocio.isEmpty()) {
-                        if (verif.Computar5FDRAc(EmpresaComparteSocio, CDSCHT, ITCHTint) == true) {
+                        if (opController.Computar5FDRAc(EmpresaComparteSocio, CDSCHT, ITCHTint) == true) {
                             showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que supera la suma de los riesgos vivos de los socios que comparten accionistas");
                             checks = false;
                             fdrflag = true;
                         }
-                    } else if (verif.lineatope(CDSCHT, ITCHTint) == false) {
+                    } else if (scController.lineatope(CDSCHT, ITCHTint) == false) {
                         showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el importe total excede el tope de la linea de credito asignada");
                         checks = false;
-                    } else if (verif.contragarantiassuficientes(CDSCHT, ITCHTint) == false) {
+                    } else if (scController.contragarantiassuficientes(CDSCHT, ITCHTint) == false) {
                         showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor al total de las contragarantias presentadas");
                         checks = false;
                     } else if (fdrflag != true) {
                         try {
-                            if (verif.operacionvsfdr(ITCHTint) == false) {
+                            if (opController.operacionvsfdr(ITCHTint) == false) {
                                 showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor al 5% del fondo de riesgo");
                                 checks = false;
                             }
@@ -437,7 +443,7 @@ public class FrmOperaciones extends JDialog {
                     int mensaje_numcertificado = 0;
                     try {
                         totalmenostasacht = (float) ITCHTint - ((float) ITCHTint * ((float) TDDCHTint / 100));
-                        mensaje_numcertificado = verif.crearOT1(FDVCHTdate, BECHT.toString(), NCCHTint, CDSCHT, TDDCHTint, CUITfirmante, "Cheque de terceros", totalmenostasacht, "Ingresado");
+                        mensaje_numcertificado = opController.crearOT1(FDVCHTdate, BECHT.toString(), NCCHTint, CDSCHT, TDDCHTint, CUITfirmante, "Cheque de terceros", totalmenostasacht, "Ingresado");
                         showMessageDialog(null, "Su operación fue realizada con éxito, el numero del certificado de garantia es: " + mensaje_numcertificado);
                     } catch (Exception exception) {
                         exception.printStackTrace();
@@ -549,36 +555,36 @@ public class FrmOperaciones extends JDialog {
             CUITFirmante = TFCDFPB.getText();
 
             ArrayList<String> EmpresaComparteSocio = new ArrayList<>();
-            EmpresaComparteSocio = verif.ListaCUITAC(CDSPB);
+            EmpresaComparteSocio = opController.ListaCUITAC(CDSPB);
             boolean fdrflag = false;
             if (DatosCorrectosFlagPB == true) {
-                if (verif.essocioparticipe(CDSPB) != true) {
+                if (scController.essocioparticipe(CDSPB) != true) {
                     showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio no es un socio participe pleno");
                     checks = false;
-                } else if (verif.lineacreditovigente(CDSPB) == false) {
+                } else if (scController.lineacreditovigente(CDSPB) == false) {
                     showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que la linea de credito se encuentra vencida");
                     checks = false;
-                } else if (verif.debefacturas(CDSPB) == true) {
+                } else if (opController.debefacturas(CDSPB) == true) {
                     showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio adeuda facturas");
                     checks = false;
-                } else if (verif.check_deuda(CDSPB) == true) {
+                } else if (opController.check_deuda(CDSPB) == true) {
                     showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio registra deudas");
                     checks = false;
                 } else if (!EmpresaComparteSocio.isEmpty()) {
-                    if (verif.Computar5FDRAc(EmpresaComparteSocio, CDSPB, ITPBint) == true) {
+                    if (opController.Computar5FDRAc(EmpresaComparteSocio, CDSPB, ITPBint) == true) {
                         showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que supera la suma de los riesgos vivos de los socios que comparten accionistas");
                         checks = false;
                         fdrflag = true;
                     }
-                } else if (verif.lineatope(CDSPB, ITPBint) == false) {
+                } else if (scController.lineatope(CDSPB, ITPBint) == false) {
                     showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el importe total excede el tope de la linea de credito asignada");
                     checks = false;
-                } else if (verif.contragarantiassuficientes(CDSPB, ITPBint) == false) {
+                } else if (scController.contragarantiassuficientes(CDSPB, ITPBint) == false) {
                     showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor al total de las contragarantias presentadas");
                     checks = false;
                 } else if (fdrflag != true) {
                     try {
-                        if (verif.operacionvsfdr(ITPBint) == false) {
+                        if (opController.operacionvsfdr(ITPBint) == false) {
                             showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor al 5% del fondo de riesgo");
                             checks = false;
                         }
@@ -591,7 +597,7 @@ public class FrmOperaciones extends JDialog {
                 int mensaje_numcertificado = 0;
                 try {
                     totalmenostasapb = (float) ITPBint - ((float) ITPBint * ((float) TDDPBint / 100));
-                    mensaje_numcertificado = verif.crearOT1(FDVPBdate, BEPB.toString(), NDPPBint, CUITFirmante, TDDPBint, CDSPB, "Pagare Bursatil", totalmenostasapb, "Ingresado");
+                    mensaje_numcertificado = opController.crearOT1(FDVPBdate, BEPB.toString(), NDPPBint, CUITFirmante, TDDPBint, CDSPB, "Pagare Bursatil", totalmenostasapb, "Ingresado");
                     showMessageDialog(null, "Su operación fue realizada con éxito, el numero del certificado de garantia es: " + mensaje_numcertificado);
                 } catch (Exception exception) {
                     exception.printStackTrace();
@@ -690,36 +696,36 @@ public class FrmOperaciones extends JDialog {
 
 
             ArrayList<String> EmpresaComparteSocio = new ArrayList<>();
-            EmpresaComparteSocio = verif.ListaCUITAC(CSPST);
+            EmpresaComparteSocio = opController.ListaCUITAC(CSPST);
             boolean fdrflag = false;
             if (DatosCorrectosFlagPST == true) {
-                if (verif.essocioparticipe(CSPST) != true) {
+                if (scController.essocioparticipe(CSPST) != true) {
                     showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio no es un socio participe pleno");
                     checks = false;
-                } else if (verif.lineacreditovigente(CSPST) == false) {
+                } else if (scController.lineacreditovigente(CSPST) == false) {
                     showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que la linea de credito se encuentra vencida");
                     checks = false;
-                } else if (verif.debefacturas(CSPST) == true) {
+                } else if (opController.debefacturas(CSPST) == true) {
                     showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio adeuda facturas");
                     checks = false;
-                } else if (verif.check_deuda(CSPST) == true) {
+                } else if (opController.check_deuda(CSPST) == true) {
                     showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio registra deudas");
                     checks = false;
                 } else if (!EmpresaComparteSocio.isEmpty()) {
-                    if (verif.Computar5FDRAc(EmpresaComparteSocio, CSPST, ITFloatPST) == true) {
+                    if (opController.Computar5FDRAc(EmpresaComparteSocio, CSPST, ITFloatPST) == true) {
                         showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que supera la suma de los riesgos vivos de los socios que comparten accionistas");
                         checks = false;
                         fdrflag = true;
                     }
-                } else if (verif.lineatope(CSPST, ITFloatPST) == false) {
+                } else if (scController.lineatope(CSPST, ITFloatPST) == false) {
                     showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el importe total excede el tope de la linea de credito asignada");
                     checks = false;
-                } else if (verif.contragarantiassuficientes(CSPST, ITFloatPST) == false) {
+                } else if (scController.contragarantiassuficientes(CSPST, ITFloatPST) == false) {
                     showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor al total de las contragarantias presentadas");
                     checks = false;
                 } else if (fdrflag != true) {
                     try {
-                        if (verif.operacionvsfdr(ITFloatPST) == false) {
+                        if (opController.operacionvsfdr(ITFloatPST) == false) {
                             showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor al 5% del fondo de riesgo");
                             checks = false;
                         }
@@ -731,7 +737,7 @@ public class FrmOperaciones extends JDialog {
                 if (checks == true) {
                     int mensaje_numcertificado = 0;
                     try {
-                        mensaje_numcertificado = verif.crearOT3(cantidadCuotas.toString(), BEPST.toString(), ITFloatPST, TDDPSTint, Sistema_PST.toString(), FDVPSTdate, CSPST, "Ingresado", "Prestamo");
+                        mensaje_numcertificado = opController.crearOT3(cantidadCuotas.toString(), BEPST.toString(), ITFloatPST, TDDPSTint, Sistema_PST.toString(), FDVPSTdate, CSPST, "Ingresado", "Prestamo");
                         showMessageDialog(null, "Su operación fue realizada con éxito, el numero del certificado de garantia es: " + mensaje_numcertificado);
                     } catch (Exception exception) {
                         exception.printStackTrace();
@@ -788,7 +794,7 @@ public class FrmOperaciones extends JDialog {
             double montocomision = 0;
             int numerooperacion = Integer.parseInt(comboNDOC.getSelectedItem().toString());
             try {
-                montocomision = verif.nuevacomision(numerooperacion);
+                montocomision = opController.nuevacomision(numerooperacion);
                 showMessageDialog(null, "El monto de la comision es: " + montocomision);
             } catch (Exception exception) {
                 exception.printStackTrace();
@@ -909,36 +915,36 @@ public class FrmOperaciones extends JDialog {
 
 
             ArrayList<String> EmpresaComparteSocio = new ArrayList<>();
-            EmpresaComparteSocio = verif.ListaCUITAC(CSCCC);
+            EmpresaComparteSocio = opController.ListaCUITAC(CSCCC);
             boolean fdrflag = false;
             if (DatosCorrectosFlagCCC == true) {
-                if (verif.essocioparticipe(CSCCC) != true) {
+                if (scController.essocioparticipe(CSCCC) != true) {
                     showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio no es un socio participe pleno");
                     checks = false;
-                } else if (verif.lineacreditovigente(CSCCC) == false) {
+                } else if (scController.lineacreditovigente(CSCCC) == false) {
                     showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que la linea de credito se encuentra vencida");
                     checks = false;
-                } else if (verif.debefacturas(CSCCC) == true) {
+                } else if (opController.debefacturas(CSCCC) == true) {
                     showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio adeuda facturas");
                     checks = false;
-                } else if (verif.check_deuda(CSCCC) == true) {
+                } else if (opController.check_deuda(CSCCC) == true) {
                     showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio registra deudas");
                     checks = false;
                 } else if (!EmpresaComparteSocio.isEmpty()) {
-                    if (verif.Computar5FDRAc(EmpresaComparteSocio, CSCCC, importetotal) == true) {
+                    if (opController.Computar5FDRAc(EmpresaComparteSocio, CSCCC, importetotal) == true) {
                         showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que supera la suma de los riesgos vivos de los socios que comparten accionistas");
                         checks = false;
                         fdrflag = true;
                     }
-                } else if (verif.lineatope(CSCCC, (float) importetotal) == false) {
+                } else if (scController.lineatope(CSCCC, (float) importetotal) == false) {
                     showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el importe total excede el tope de la linea de credito asignada");
                     checks = false;
-                } else if (verif.contragarantiassuficientes(CSCCC, (float) importetotal) == false) {
+                } else if (scController.contragarantiassuficientes(CSCCC, (float) importetotal) == false) {
                     showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor al total de las contragarantias presentadas");
                     checks = false;
                 } else if (fdrflag != true) {
                     try {
-                        if (verif.operacionvsfdr(importetotal) == false) {
+                        if (opController.operacionvsfdr(importetotal) == false) {
                             showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor al 5% del fondo de riesgo");
                             checks = false;
                         }
@@ -950,7 +956,7 @@ public class FrmOperaciones extends JDialog {
             if (checks == true) {
                 int mensaje_numcertificado = 0;
                 try {
-                    mensaje_numcertificado = verif.crearOT2("",importetotal,FDV,CSCCC,0,"","Ingresado",0,"Cuenta Corriente",nombre);
+                    mensaje_numcertificado = opController.crearOT2("",importetotal,FDV,CSCCC,0,"","Ingresado",0,"Cuenta Corriente",nombre);
                     showMessageDialog(null, "Su operación fue realizada con éxito, el numero del certificado de garantia es: " + mensaje_numcertificado);
                 } catch (Exception exception) {
                     exception.printStackTrace();
@@ -1052,36 +1058,36 @@ public class FrmOperaciones extends JDialog {
 
 
             ArrayList<String> EmpresaComparteSocio = new ArrayList<>();
-            EmpresaComparteSocio = verif.ListaCUITAC(CUITSocioTC);
+            EmpresaComparteSocio = opController.ListaCUITAC(CUITSocioTC);
             boolean fdrflag = false;
             if (DatosCorrectosFlagTC == true) {
-                if (verif.essocioparticipe(CUITSocioTC) != true) {
+                if (scController.essocioparticipe(CUITSocioTC) != true) {
                     showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio no es un socio participe pleno");
                     checks = false;
-                } else if (verif.lineacreditovigente(CUITSocioTC) == false) {
+                } else if (scController.lineacreditovigente(CUITSocioTC) == false) {
                     showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que la linea de credito se encuentra vencida");
                     checks = false;
-                } else if (verif.debefacturas(CUITSocioTC) == true) {
+                } else if (opController.debefacturas(CUITSocioTC) == true) {
                     showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio adeuda facturas");
                     checks = false;
-                } else if (verif.check_deuda(CUITSocioTC) == true) {
+                } else if (opController.check_deuda(CUITSocioTC) == true) {
                     showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio registra deudas");
                     checks = false;
                 } else if (!EmpresaComparteSocio.isEmpty()) {
-                    if (verif.Computar5FDRAc(EmpresaComparteSocio, CUITSocioTC, IT) == true) {
+                    if (opController.Computar5FDRAc(EmpresaComparteSocio, CUITSocioTC, IT) == true) {
                         showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que supera la suma de los riesgos vivos de los socios que comparten accionistas");
                         checks = false;
                         fdrflag = true;
                     }
-                } else if (verif.lineatope(CUITSocioTC, (float) IT) == false) {
+                } else if (scController.lineatope(CUITSocioTC, (float) IT) == false) {
                     showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el importe total excede el tope de la linea de credito asignada");
                     checks = false;
-                } else if (verif.contragarantiassuficientes(CUITSocioTC, (float) IT) == false) {
+                } else if (scController.contragarantiassuficientes(CUITSocioTC, (float) IT) == false) {
                     showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor al total de las contragarantias presentadas");
                     checks = false;
                 } else if (fdrflag != true) {
                     try {
-                        if (verif.operacionvsfdr(IT) == false) {
+                        if (opController.operacionvsfdr(IT) == false) {
                             showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor al 5% del fondo de riesgo");
                             checks = false;
                         }
@@ -1095,7 +1101,7 @@ public class FrmOperaciones extends JDialog {
                     int mensaje_numcertificado = 0;
                     try {
                         System.out.println("mando la tarjeta");
-                        mensaje_numcertificado = verif.crearOT2(TFITCCC.toString(), IT, FVTC, CUITSocioTC, TFNDTTCint, TFNombreTC.getText(), "Ingresado", CDSTCint, "Tarjeta de Credito", "-");
+                        mensaje_numcertificado = opController.crearOT2(TFITCCC.toString(), IT, FVTC, CUITSocioTC, TFNDTTCint, TFNombreTC.getText(), "Ingresado", CDSTCint, "Tarjeta de Credito", "-");
                         showMessageDialog(null, "Su operación fue realizada con éxito, el numero del certificado de garantia es: " + mensaje_numcertificado);
                     } catch (Exception exception) {
                         exception.printStackTrace();
