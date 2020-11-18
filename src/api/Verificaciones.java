@@ -4,6 +4,7 @@ import org.json.simple.JSONObject;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.time.YearMonth;
 
 public interface Verificaciones {
     //Compara una fecha entregada por parametro contra la fecha actual y devuelve Menor si la fecha ingresada es en el
@@ -62,5 +63,10 @@ public interface Verificaciones {
 
     boolean Computar5FDRAc(ArrayList<String> AccionistasCompartidos, String CUIT, double IMPORTEOPERACION);
 
+    String fechavshoytarjeta(YearMonth fecha);
+
+    boolean fechavalidatarjeta(String fvtc);
+
+    boolean tarjetavalida(String tarjeta);
 }
 

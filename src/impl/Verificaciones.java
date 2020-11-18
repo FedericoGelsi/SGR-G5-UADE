@@ -5,6 +5,10 @@ import org.json.simple.JSONArray;
 import java.lang.reflect.Array;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.Month;
+import java.time.Year;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 
 import api.API_JSONHandler;
 import impl.JSONHandler;
@@ -46,6 +50,48 @@ public class Verificaciones implements api.Verificaciones {
         }
     }
 
+    public String fechavshoytarjeta(YearMonth fecha) {
+        LocalDate hoy = LocalDate.now(); //2020-09-13 --> 09/2
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yy");
+        //LocalDate localDate = LocalDate.parse(hoy, formatter);
+        Month MesHoy = hoy.getMonth();
+        int AñoHoy = hoy.getYear();
+
+        Month Mes = fecha.getMonth();
+        int Año = fecha.getYear();
+
+        if (Año < AñoHoy) {
+            return "Menor";
+        }
+        if (Año == AñoHoy && Mes.compareTo(MesHoy) < 0){
+            return "Menor";
+        }
+        else{
+            return "Mayor";
+        }
+    }
+
+    public boolean tarjetavalida(String tarjeta) {
+        String[] tarjetaseparada = tarjeta.split("-");
+        for (int i = 0; i<4; i++){
+            if (tarjetaseparada[i].length() != 4 || esnumerico(tarjetaseparada[i])!=true) {
+                CUITValidoflag = false;
+            }
+        }
+        boolean tarjetaValidaFlag = true;
+        if (cuitseparado[0].length() != 2 || esnumerico(cuitseparado[0])!=true) {
+            tarjetaValidaFlag = false;
+        }
+        if (cuitseparado[1].length() != 8 || esnumerico(cuitseparado[1])!=true ){
+            tarjetaValidaFlag = false;
+        }
+        if (cuitseparado[2].length() != 1 || esnumerico(cuitseparado[2])!=true){
+            tarjetaValidaFlag = false;
+        }
+        return tarjetaValidaFlag;
+        
+    }
+
     //Chequea que el formato de CUIT ingresado sea valido y que los datos ingresads sean numericos
     @Override
     public boolean CUITValido(String CUIT) {
@@ -59,8 +105,8 @@ public class Verificaciones implements api.Verificaciones {
         }
         if (cuitseparado[2].length() != 1 || esnumerico(cuitseparado[2]) != true) {
             CUITValidoflag = false;
-        }
         return CUITValidoflag;
+        
     }
 
     //Chequea que un String este compuesto unicamente por numeros
@@ -704,4 +750,18 @@ public class Verificaciones implements api.Verificaciones {
 }
 
 
+
+    public boolean fechavalidatarjeta(String fechacheck){
+        String[] fechaseparada = fechacheck.split("/");
+        boolean fechavalidaFlag = true;
+        if (fechaseparada[0].length() != 2 || esnumerico(fechaseparada[0])!=true) {
+            fechavalidaFlag = false;
+        }
+        if (fechaseparada[1].length() != 4 || esnumerico(fechaseparada[1])!=true) {
+            fechavalidaFlag = false;
+        }
+        return fechavalidaFlag;
+    }
+
+}
 
