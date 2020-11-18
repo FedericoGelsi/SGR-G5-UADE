@@ -862,6 +862,7 @@ public class FrmOperaciones extends JDialog {
                 }
                 else{
                     TIPOTARJETA.setText("-");
+                    Image.setIcon(null);
                 }
             }
         });

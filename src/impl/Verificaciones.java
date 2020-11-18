@@ -148,8 +148,9 @@ public class Verificaciones implements api.Verificaciones {
             if (tarjeta.length() != 17){
                 tarjetaValidaFlag = false;
             }
-            if(tarjeta.contains("-")){
+            if(tarjeta.contains("-")) {
                 String[] tarjetaseparada = tarjeta.split("-");
+                if (tarjetaseparada.length == 2) {
                     if (tarjetaseparada[0].length() != 4 || !esnumerico(tarjetaseparada[0])) {
                         tarjetaValidaFlag = false;
                     }
@@ -160,6 +161,10 @@ public class Verificaciones implements api.Verificaciones {
                         tarjetaValidaFlag = false;
                     }
                 }
+                else{
+                    tarjetaValidaFlag = false;
+                }
+            }
 
         }
         else{
