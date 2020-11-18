@@ -1,10 +1,21 @@
 package impl;
 
+import api.API_JSONHandler;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import java.io.File;
 import java.util.ArrayList;
 
 public class SocioController implements api.SocioController {
-    private ArrayList<Socio> socios;
+    private API_JSONHandler file = new JSONHandler();
+    private String filename = "./src/resources/socios.json";
+    private JSONObject jsonObject = (JSONObject) file.readJson(filename);
+    private JSONArray sociosList;
+    private JSONObject socioenuso;
+
+    public SocioController() throws Exception {
+    }
 
     /*======CLASS FUNCTIONS=======*/
     @Override
@@ -29,8 +40,18 @@ public class SocioController implements api.SocioController {
     }
 
     @Override
-    public void ListarCUITSocioPorTipoEmpresa(String tipoEmpresa){
-
+    public ArrayList<String> ListarCUITSocioPorTipoEmpresa(String tipoEmpresa) throws Exception {
+        jsonObject = (JSONObject) file.readJson(filename);
+        sociosList = (JSONArray) jsonObject.get("socios-participes");
+        ArrayList<String> cuitsocios = new ArrayList<>();
+        for (Object soc : sociosList) {
+            socioenuso = (JSONObject) soc;
+            String tipoempresa = socioenuso.get("tipo-empresa").toString();
+            if (tipoEmpresa.equals(tipoempresa)) {
+                cuitsocios.add(socioenuso.get("cuit").toString());
+            }
+        }
+        return cuitsocios;
     }
 
     @Override

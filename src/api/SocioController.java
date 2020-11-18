@@ -13,7 +13,7 @@ public interface SocioController {
 
     ArrayList<String> ComparteAccionistas(String CUITSocio);
 
-    void ListarCUITSocioPorTipoEmpresa(String tipoEmpresa);
+    ArrayList<String> ListarCUITSocioPorTipoEmpresa(String tipoEmpresa) throws Exception;
 
     void aprobarSocioProtector(String CUITsocio);
 

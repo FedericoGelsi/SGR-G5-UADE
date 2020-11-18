@@ -2,9 +2,8 @@ package vista;
 
 import api.*;
 import com.formdev.flatlaf.FlatLightLaf;
-import com.formdev.flatlaf.IntelliJTheme;
 import impl.JSONHandler;
-import netscape.javascript.JSObject;
+import org.apache.commons.io.FilenameUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -13,6 +12,11 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -106,6 +110,8 @@ public class FrmConsultasGenerales extends JDialog {
     private JSONObject socioenuso;
     private JSONArray operacionesSocio;
 
+    private SocioController socioController = new impl.SocioController();
+
 
     public FrmConsultasGenerales(Window owner, String Title) throws Exception {
         super(owner, Title);
@@ -137,7 +143,7 @@ public class FrmConsultasGenerales extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    buscarEmpresas();
+                    calcularTotalOperado();
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
@@ -202,18 +208,10 @@ public class FrmConsultasGenerales extends JDialog {
 
     }
 
-    private void buscarEmpresas() throws Exception {
+    // CONSULTA 3
+    private void calcularTotalOperado() throws Exception {
         if (verificar.fechavalida(FechaIniC3Txf.getText()) && verificar.fechavalida(FechaFinC3Txf.getText())) {
-            jsonObject = (JSONObject) file.readJson(filename);
-            JSONArray sociosList = (JSONArray) jsonObject.get("socios-participes");
-            ArrayList<String> cuitsocios = new ArrayList<>();
-            for (Object soc : sociosList) {
-                JSONObject socio = (JSONObject) soc;
-                String tipoempresa = socio.get("tipo-empresa").toString();
-                if (TEC3ComboBox.getSelectedItem().equals(tipoempresa)) {
-                    cuitsocios.add(socio.get("cuit").toString());
-                }
-            }
+            ArrayList<String> cuitsocios = socioController.ListarCUITSocioPorTipoEmpresa(TEC3ComboBox.getSelectedItem().toString());
             if (cuitsocios.isEmpty()){
                 showMessageDialog(null, "No existen socios para ese tipo de empresa.");
             }else{
@@ -231,9 +229,6 @@ public class FrmConsultasGenerales extends JDialog {
                 TotalOperadoTxf.setText(String.valueOf(totaloperado));
                 PTDC3Txf.setText(String.valueOf(totaltasa/sociocount));
             }
-
-        }else{
-            showMessageDialog(null, "La fecha debe tener un formato YYYY/MM/DD.\nIngrese una fecha válida.");
         }
     }
 
@@ -527,7 +522,6 @@ public class FrmConsultasGenerales extends JDialog {
     }
 
     private void crearTablaLDC(){
-
         JSONObject LDC = (JSONObject) socioenuso.get("linea-de-credito");
         RSLDCTxf.setText(RSCCTxf.getText());
         CUITLDCTxf.setText(CUITCCTxf.getText());
@@ -536,7 +530,6 @@ public class FrmConsultasGenerales extends JDialog {
         MontoLDCTxf.setText(LDC.get("monto-utilizado").toString());
         FVLDCTxf.setText(LDC.get("fecha-vigencia").toString());
         pnlSLDC.setVisible(true);
-
     }
 
     private void crearTablaOperaciones(){
@@ -556,5 +549,14 @@ public class FrmConsultasGenerales extends JDialog {
 
         pnlSOperacionesMTable.setViewportView(accionistasTable);
         pnlSOperacionesMTable.setVisible(true);
+    }
+
+    private void copiarArchivo(String from, String to) throws IOException {
+        Path origen = Paths.get(from);
+        Path destino = Paths.get(to);
+        String ext = FilenameUtils.getExtension(origen.toString());
+        if (ext.equals("pdf") || ext.equals("jpg") || ext.equals("png") || ext.equals("jpeg")) {
+            Files.copy(origen, destino, StandardCopyOption.REPLACE_EXISTING);
+        }
     }
 }
