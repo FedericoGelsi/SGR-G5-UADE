@@ -703,7 +703,7 @@ public class FrmSocios extends JDialog {
     }
 
     private void verArchivos(String cuit) throws IOException {
-        if (!cuit.isBlank()){
+        if (!cuit.isEmpty()){
             String dir = "./src/resources/documentacion/".concat(cuit);
             File file = new File(dir);
             Desktop d = Desktop.getDesktop();
