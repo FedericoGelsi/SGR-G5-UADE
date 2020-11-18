@@ -766,6 +766,10 @@ public class FrmOperaciones extends JDialog {
                     showMessageDialog(null, "Debe ingresar el nombre completo tal como figura en la tarjeta");
                     DatosCorrectosFlagTC = false;
                 }
+                if(verif.esnumerico(NombreTC)){
+                    showMessageDialog(null,"El nombre del titular no puede contener números");
+                    DatosCorrectosFlagTC = false;
+                }
                 String FVTC = "";
                 FVTC = TFFVTC.getText();
                 if(verif.fechavalidatarjeta(FVTC) == true) {
