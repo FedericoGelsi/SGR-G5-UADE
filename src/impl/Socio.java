@@ -1,27 +1,30 @@
 package impl;
 
 import api.DocumentacionEmpresa;
+import org.json.simple.JSONObject;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
 public abstract class Socio implements api.Socio {
-    private String CUITSocio;
-    private String RazonSocial;
-    private Date FinicAct;
-    private String tipoEmpresa;
-    private String actPrincipal;
-    private String direccion;
-    private String email;
+    private final String CUITSocio;
+    private final String RazonSocial;
+    private final LocalDate FinicAct;
+    private final String tipoEmpresa;
+    private final String actPrincipal;
+    private final String direccion;
+    private final String email;
     private String estado;
-    private Date FechaPleno;
+    private LocalDate FechaPleno;
 
     private ArrayList<Accionista> accionistas;
     private ArrayList<DocumentacionEmpresa> documentacion;
 
     /*======CONSTRUCTOR=======*/
 
-    public Socio(String CUITSocio, String razonSocial, Date finicAct, String tipoEmpresa, String actPrincipal, String direccion, String email) {
+    public Socio(String CUITSocio, String razonSocial, LocalDate finicAct, String tipoEmpresa, String actPrincipal, String direccion, String email) {
         this.CUITSocio = CUITSocio;
         RazonSocial = razonSocial;
         FinicAct = finicAct;
@@ -31,7 +34,18 @@ public abstract class Socio implements api.Socio {
         this.email = email;
     }
 
+    public Socio(JSONObject jsonSocio) {
 
+        this.CUITSocio = (String) jsonSocio.get("cuit");
+        this.RazonSocial = (String) jsonSocio.get("razon-social");
+        this.FinicAct = (LocalDate) (jsonSocio.get("finic-act"));
+        this.tipoEmpresa = (String) jsonSocio.get("tipo-empresa");
+        this.actPrincipal = (String) jsonSocio.get("actividad-principal");
+        this.direccion = (String) jsonSocio.get("direccion");
+        this.email = (String) jsonSocio.get("email");
+        this.FechaPleno = (LocalDate) jsonSocio.get("fecha-pleno");
+
+    }
 
     /*======GETTERS=======*/
     @Override
@@ -45,7 +59,7 @@ public abstract class Socio implements api.Socio {
     }
 
     @Override
-    public Date getFinicAct() {
+    public LocalDate getFinicAct() {
         return FinicAct;
     }
 
@@ -75,7 +89,7 @@ public abstract class Socio implements api.Socio {
     }
 
     @Override
-    public Date getFechaPleno() {
+    public LocalDate getFechaPleno() {
         return FechaPleno;
     }
 
@@ -87,7 +101,7 @@ public abstract class Socio implements api.Socio {
     }
 
     @Override
-    public void setFechaPleno(Date fechaPleno) {
+    public void setFechaPleno(LocalDate fechaPleno) {
         FechaPleno = fechaPleno;
     }
 
@@ -115,5 +129,17 @@ public abstract class Socio implements api.Socio {
     @Override
     public void getCUITAccionistas(){
         // DEFINIR PARÁMETROS DE ENTRADA
+    }
+
+    public JSONObject toJSON(){
+        JSONObject socio = new JSONObject();
+        socio.put("cuit", this.CUITSocio);
+        socio.put("razon-social", this.RazonSocial);
+        socio.put("finic-act", this.FinicAct);
+        socio.put("tipo-empresa", this.tipoEmpresa);
+        socio.put("actividad-principal", this.actPrincipal);
+        socio.put("monto-mora", this.direccion);
+        socio.put("email", this.email);
+        return socio;
     }
 }
