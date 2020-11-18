@@ -51,7 +51,7 @@ public class FrmSocios extends JDialog{
     private JSONObject jsonObject = (JSONObject) file.readJson(filename);
     private JSONArray accionistasList;
     private DefaultTableModel modelos = new DefaultTableModel();
-    private JSONObject socioborrar;
+    private JSONObject socios;
     private JSONArray socioList;
 
     public FrmSocios(Window owner, String Title) throws Exception {
@@ -87,14 +87,6 @@ public class FrmSocios extends JDialog{
             public void actionPerformed(ActionEvent e) {
                 boolean datosCorrectosFlag = true;
 
-                //Toma Razon Social y checkea si esta vacio
-                String textRazon="";
-                textRazon= textFieldRazon.getText();
-                if (textRazon.isEmpty()){
-                    showMessageDialog(null, "El campo Razon Social es mandatorio, por favor ingrese el dato solicitado");
-                    datosCorrectosFlag = false;
-                }
-
                 //Checkea el CUIT
                 String textCuit="";
                 textCuit=textFieldCuit.getText();
@@ -105,6 +97,11 @@ public class FrmSocios extends JDialog{
                     datosCorrectosFlag = false;
                 }
                 if (datosCorrectosFlag==true) {
+                    try {
+                        buscarAccionista();
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
                     crearTabla(accionistasList);
                 }
             }
@@ -147,22 +144,6 @@ public class FrmSocios extends JDialog{
                         JOptionPane.showMessageDialog(null, "Se elimino la fila correctamente");
                         PnlsAccionistas.setViewportView(accionistasTabla);
                     }
-                }
-            }
-        });
-        textFieldRazon.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                super.focusGained(e);
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                super.focusLost(e);
-                try {
-                    buscarAccionista();
-                } catch (Exception exception) {
-                    exception.printStackTrace();
                 }
             }
         });
@@ -245,14 +226,14 @@ public class FrmSocios extends JDialog{
         Boolean flag= false;
         socioList = (JSONArray) jsonObject.get("socios-participes");
         for (Object obj: socioList){
-            socioborrar = (JSONObject) obj;
-            String rs = socioborrar.get("razon-social").toString();
-            String cuit = socioborrar.get("cuit").toString();
+            socios = (JSONObject) obj;
+            String rs = socios.get("razon-social").toString();
+            String cuit = socios.get("cuit").toString();
                 if (cuit.equals(textFieldCuit.getText())){
                     flag= true;
                     estado=true;
                     textFieldRazon.setText(rs);
-                    accionistasList= (JSONArray) socioborrar.get("accionistas");
+                    accionistasList= (JSONArray) socios.get("accionistas");
                     break;
                 }
 
@@ -260,18 +241,19 @@ public class FrmSocios extends JDialog{
         if (flag==false){
             socioList = (JSONArray) jsonObject.get("socios-protectores");
             for (Object obj: socioList){
-                socioborrar = (JSONObject) obj;
-                String rs = socioborrar.get("razon-social").toString();
-                String cuit = socioborrar.get("cuit").toString();
+                socios = (JSONObject) obj;
+                String rs = socios.get("razon-social").toString();
+                String cuit = socios.get("cuit").toString();
                 if (cuit.equals(textFieldCuit.getText())){
+                    flag=true;
                     estado=false;
                     textFieldRazon.setText(rs);
-                    accionistasList= (JSONArray) socioborrar.get("accionistas");
+                    accionistasList= (JSONArray) socios.get("accionistas");
                 }
 
             }
         }
-        else {
+        if (flag==false){
             showMessageDialog(null,"El socio no existe");
         }
     }
@@ -284,7 +266,7 @@ public class FrmSocios extends JDialog{
                 break;
             }
         }
-        socioborrar.put("accionistas",accionistasList);
+        socios.put("accionistas",accionistasList);
 
         if (estado) {
             jsonObject.put("socios-participes", socioList);
@@ -300,12 +282,12 @@ public class FrmSocios extends JDialog{
         socioList = (JSONArray) jsonObject.get("socios-participes");
         total=.0;
         for (Object obj:socioList){
-            socioborrar = (JSONObject) obj;
-            String cuitsoc = socioborrar.get("cuit").toString();
+            socios = (JSONObject) obj;
+            String cuitsoc = socios.get("cuit").toString();
             if (cuitsoc.equals(textFieldCuitEmpresa.getText())){
                 flag=true;
                 estado=true;
-                accionistasList = (JSONArray) socioborrar.get("accionistas"); //SOCIOBORRAR= AL SOCIO QUE ELEGI
+                accionistasList = (JSONArray) socios.get("accionistas");
                 for (Object obje: accionistasList){
                     JSONObject accionis= (JSONObject) obje;
                     String cuitAC= (String) accionis.get("cuit-accionista");
@@ -326,7 +308,7 @@ public class FrmSocios extends JDialog{
                         }
                         Accionista accionistagregar= new impl.Accionista(cuitac,razon,porcentaje);
                         accionistasList.add(accionistagregar.toJSON());
-                        socioborrar.put("accionistas",accionistasList);
+                        socios.put("accionistas",accionistasList);
                         jsonObject.put("socios-participes",socioList);
                         file.writeJson(filename,jsonObject);
                         showMessageDialog(null,"Se agrego el Accionista en Socios Participes con exito");
@@ -338,11 +320,11 @@ public class FrmSocios extends JDialog{
         if (flag==false){
             socioList = (JSONArray) jsonObject.get("socios-protectores");
             for (Object obj:socioList){
-                socioborrar = (JSONObject) obj;
-                String cuitsoc = socioborrar.get("cuit").toString();
+                socios = (JSONObject) obj;
+                String cuitsoc = socios.get("cuit").toString();
                 if (cuitsoc.equals(textFieldCuitEmpresa.getText())){
                     estado=false;
-                    accionistasList = (JSONArray) socioborrar.get("accionistas"); //SOCIOBORRAR= AL SOCIO QUE ELEGI
+                    accionistasList = (JSONArray) socios.get("accionistas");
                     for (Object obje: accionistasList){
                         JSONObject accionis= (JSONObject) obje;
                         String cuitAC= (String) accionis.get("cuit-accionista");
@@ -363,7 +345,7 @@ public class FrmSocios extends JDialog{
                             }
                             Accionista accionistagregar= new impl.Accionista(cuitac,razon,porcentaje);
                             accionistasList.add(accionistagregar.toJSON());
-                            socioborrar.put("accionistas",accionistasList);
+                            socios.put("accionistas",accionistasList);
                             jsonObject.put("socios-protectores",socioList);
                             file.writeJson(filename,jsonObject);
                             showMessageDialog(null,"Se agrego el Accionista en Socios Protectores con exito");
