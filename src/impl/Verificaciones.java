@@ -245,7 +245,7 @@ public class Verificaciones implements api.Verificaciones {
             String cuit = socio.get("cuit").toString();
             if (CUITSocio.equalsIgnoreCase(cuit)) {
                 JSONObject lineadecredito = (JSONObject) socio.get("lineas-de-credito");
-                tope = (double) lineadecredito.get("tope");
+                tope = Double.parseDouble(lineadecredito.get("tope").toString());
             }
         }
         if (totalimpago > (tope * 0.1)) {
@@ -372,8 +372,8 @@ public class Verificaciones implements api.Verificaciones {
             String cuit = socio.get("cuit").toString();
             if (CUIT.equalsIgnoreCase(cuit)) {
                 JSONObject lineadecredito = (JSONObject) socio.get("lineas-de-credito");
-                tope = (double) lineadecredito.get("tope");
-                monto_utilizado = (double) lineadecredito.get("monto-utilizado");
+                tope = Double.parseDouble(lineadecredito.get("tope").toString());
+                monto_utilizado = Double.parseDouble(lineadecredito.get("monto-utilizado").toString());
                 montohabilitado = (tope - monto_utilizado);
                 if (Importe > montohabilitado && Importe <= tope) {
                     lineadecredito.put("monto-utilizado", tope);

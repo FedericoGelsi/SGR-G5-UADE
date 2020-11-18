@@ -131,6 +131,7 @@ public class FrmOperaciones extends JDialog {
         JBCHP.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                boolean checks = true;
                 boolean DatosCorrectosFlagCHP = true;
                 float totalmenostasa = 0;
                 int ITCHPint = 0;
@@ -146,12 +147,14 @@ public class FrmOperaciones extends JDialog {
                 if (NCCHP.isEmpty()) {
                     showMessageDialog(null, "El campo Numero de Cheque es mandatorio, por favor ingrese el dato solicitado");
                     DatosCorrectosFlagCHP = false;
+                    checks = false;
                 } else {
                     if (verif.esnumerico(NCCHP)) {
                         NCCHPint = Integer.parseInt(NCCHP);
                     } else {
                         showMessageDialog(null, "El campo Numero de Cheque solo admite numeros, no se admiten otros caracteres");
                         DatosCorrectosFlagCHP = false;
+                        checks = false;
                     }
                 }
 
@@ -162,11 +165,13 @@ public class FrmOperaciones extends JDialog {
                 if (FDVCHP.isEmpty()) {
                     showMessageDialog(null, "El campo fecha de vencimiento es mandatorio y no puede estar vacio");
                     DatosCorrectosFlagCHP = false;
+                    checks = false;
                 }
                 DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
                 if (verif.fechavalida(FDVCHP) == false) {
                     showMessageDialog(null, "La fecha ingresada es invalida");
                     DatosCorrectosFlagCHP = false;
+                    checks = false;
                 } else {
                     //Compara la fecha ingresada con la fecha actual ya que no tendria sentido vender un cheque el dia de su
                     // canje o vender un cheque ya vencido.
@@ -174,10 +179,12 @@ public class FrmOperaciones extends JDialog {
                     if (comparacionfecha == "Menor") {
                         showMessageDialog(null, "El cheque se encuentra vencido");
                         DatosCorrectosFlagCHP = false;
+                        checks = false;
                     }
                     if (comparacionfecha == "Hoy") {
                         showMessageDialog(null, "La fecha de vencimiento del cheque es hoy");
                         DatosCorrectosFlagCHP = false;
+                        checks = false;
                     }
                 }
 
@@ -187,10 +194,12 @@ public class FrmOperaciones extends JDialog {
                 if (CDFCHP.equalsIgnoreCase("")) {
                     showMessageDialog(null, "El campo CUIT del firmante es mandatorio y no puede estar vacio");
                     DatosCorrectosFlagCHP = false;
+                    checks = false;
                 }
                 if (verif.CUITValido(CDFCHP) != true) {
                     showMessageDialog(null, "El CUIT ingresado es invalido");
                     DatosCorrectosFlagCHP = false;
+                    checks = false;
                 }
 
                 //Toma el Entero Tasa desde el JSpinner spinnerTDDCHP
@@ -199,15 +208,18 @@ public class FrmOperaciones extends JDialog {
                 if (TDDCHP.equals(null)) {
                     showMessageDialog(null, "El campo Tasa de descuento es mandatorio y no puede estar vacio");
                     DatosCorrectosFlagCHP = false;
+                    checks = false;
                 } else {
                     TDDCHPint = (Integer) TDDCHP;
                     if (TDDCHPint <= 0) {
                         showMessageDialog(null, "El cheque no puede ser vendido con una tasa de descuento menor o igual a 0");
                         DatosCorrectosFlagCHP = false;
+                        checks = false;
                     }
                     if (TDDCHPint >= 100) {
                         showMessageDialog(null, "El cheque no puede ser vendido con una tasa de descuento superior al 99%");
                         DatosCorrectosFlagCHP = false;
+                        checks = false;
                     }
                 }
 
@@ -217,17 +229,18 @@ public class FrmOperaciones extends JDialog {
                 if (ITCHP.equals(null)) {
                     showMessageDialog(null, "El campo Importe Total es mandatorio y no puede estar vacio");
                     DatosCorrectosFlagCHP = false;
+                    checks = false;
                 } else {
                     ITCHPint = (Integer) ITCHP;
                     if (ITCHPint <= 0) {
                         showMessageDialog(null, "El cheque no puede tener un valor menor o igual a 0");
                         DatosCorrectosFlagCHP = false;
+                        checks = false;
                     }
                 }
 
                 ArrayList<String> EmpresaComparteSocio = new ArrayList<>();
                 EmpresaComparteSocio = verif.ListaCUITAC(CDFCHP);
-                boolean checks = true;
                 boolean fdrflag = false;
                 if (DatosCorrectosFlagCHP == true) {
                     if (verif.essocioparticipe(CDFCHP) != true) {
@@ -248,6 +261,12 @@ public class FrmOperaciones extends JDialog {
                             checks = false;
                             fdrflag = true;
                         }
+                    } else if (verif.lineatope(CDFCHP, ITCHPint) == false) {
+                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el importe total excede el tope de la linea de credito asignada");
+                        checks = false;
+                    } else if (verif.contragarantiassuficientes(CDFCHP, ITCHPint) == false) {
+                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor al total de las contragarantias presentadas");
+                        checks = false;
                     } else if (fdrflag != true) {
                         try {
                             if (verif.operacionvsfdr(ITCHPint) == false) {
@@ -256,32 +275,28 @@ public class FrmOperaciones extends JDialog {
                             }
                         } catch (Exception exception) {
                             exception.printStackTrace();
-                            System.out.println("estoy en el catch");
                         }
-                    } else if (verif.lineatope(CDFCHP, ITCHPint) == false) {
-                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el importe total excede el tope de la linea de credito asignada");
-                        checks = false;
-                    } else if (verif.contragarantiassuficientes(CDFCHP, ITCHPint) == false) {
-                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor al total de las contragarantias presentadas");
-                        checks = false;
                     }
                 }
-                if (checks == true) {
-                    int mensaje_numcertificado = 0;
-                    totalmenostasa = (float) ITCHPint - ((float) ITCHPint * ((float) TDDCHPint / 100));
-                    try {
-                        mensaje_numcertificado = verif.crearOT1(FDVCHPdate, BECHP.toString(), NCCHPint, CDFCHP, TDDCHPint, CDFCHP, "Cheque Propio", totalmenostasa, "Ingresado");
-                        showMessageDialog(null, "Su operación fue realizada con éxito, el numero del certificado de garantia es: " + mensaje_numcertificado);
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
+
+                    if (checks == true) {
+                        int mensaje_numcertificado = 0;
+                        totalmenostasa = (float) ITCHPint - ((float) ITCHPint * ((float) TDDCHPint / 100));
+                        try {
+                            mensaje_numcertificado = verif.crearOT1(FDVCHPdate, BECHP.toString(), NCCHPint, CDFCHP, TDDCHPint, CDFCHP, "Cheque Propio", totalmenostasa, "Ingresado");
+                            showMessageDialog(null, "Su operación fue realizada con éxito, el numero del certificado de garantia es: " + mensaje_numcertificado);
+                        } catch (Exception exception) {
+                            exception.printStackTrace();
+                        }
                     }
                 }
-            }
         });
+
         JBCHT.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean DatosCorrectosFlagCHT = true;
+                boolean checks = true;
                 float totalmenostasacht = 0;
                 //Toma el objeto Banco Emisor desde el Combo Box comboBECHT
                 Object BECHT = new Object();
@@ -300,40 +315,55 @@ public class FrmOperaciones extends JDialog {
                     } else {
                         showMessageDialog(null, "El campo Numero de Cheque solo admite numeros, no se admiten otros caracteres");
                         DatosCorrectosFlagCHT = false;
+                        checks = false;
                     }
                 }
-                //Toma el String Fecha de Vencimiento desde el JText Field FDVCHT y lo transforma en un date
+
+                //Toma el String Fecha de Vencimiento desde el JText Field FDVCHP y lo transforma en un date
                 String FDVCHT = "";
                 FDVCHT = TFFDVCHT.getText();
-                String FDVCHTaux = "20/04/1989";
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                LocalDate FDVCHTdateaux = LocalDate.parse(FDVCHTaux, formatter);
-                if (verif.fechavalida(FDVCHT) == true) {
-                    LocalDate FDVCHPdate = LocalDate.parse(FDVCHT, formatter);
-                    FDVCHTdateaux = FDVCHPdate;
+                LocalDate FDVCHTdate = LocalDate.parse(FDVCHT);
+                if (FDVCHT.isEmpty()) {
+                    showMessageDialog(null, "El campo fecha de vencimiento es mandatorio y no puede estar vacio");
+                    DatosCorrectosFlagCHT = false;
+                    checks = false;
+                }
+                DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+                if (verif.fechavalida(FDVCHT) == false) {
+                    showMessageDialog(null, "La fecha ingresada es invalida");
+                    DatosCorrectosFlagCHT = false;
+                    checks = false;
+                } else {
                     //Compara la fecha ingresada con la fecha actual ya que no tendria sentido vender un cheque el dia de su
                     // canje o vender un cheque ya vencido.
-                    String comparacionfecha = verif.fechavshoy(FDVCHPdate);
+                    String comparacionfecha = verif.fechavshoy(FDVCHTdate);
                     if (comparacionfecha == "Menor") {
                         showMessageDialog(null, "El cheque se encuentra vencido");
                         DatosCorrectosFlagCHT = false;
+                        checks = false;
                     }
                     if (comparacionfecha == "Hoy") {
                         showMessageDialog(null, "La fecha de vencimiento del cheque es hoy");
                         DatosCorrectosFlagCHT = false;
+                        checks = false;
                     }
-                } else {
-                    showMessageDialog(null, "La fecha ingresada no cumple con el formato solicitado");
-                    DatosCorrectosFlagCHT = false;
                 }
-                //Toma el String CUIT firmante desde el JText Field TFCDFCHT
-                String CDFCHT = "";
-                CDFCHT = TFCDFCHT.getText();
-                if (verif.CUITValido(CDFCHT)) {
-                } else {
+
+
+                //Toma el String CUIT Socio desde el JText Field TFCDFCHT
+                String CDSCHT = "";
+                CDSCHT = JTFCSCHT.getText();
+                if (CDSCHT.equalsIgnoreCase("")) {
+                    showMessageDialog(null, "El campo CUIT del firmante es mandatorio y no puede estar vacio");
+                    DatosCorrectosFlagCHT = false;
+                    checks = false;
+                }
+                if (verif.CUITValido(CDSCHT) != true) {
                     showMessageDialog(null, "El CUIT ingresado es invalido");
                     DatosCorrectosFlagCHT = false;
+                    checks = false;
                 }
+
                 //Toma el Entero Importe Total desde el JSpinner spinnerITCHT
                 Object ITCHT;
                 ITCHT = spinnerITCHT.getValue();
@@ -342,6 +372,7 @@ public class FrmOperaciones extends JDialog {
                 if (ITCHTint <= 0) {
                     showMessageDialog(null, "El cheque no puede tener un valor menor o igual a 0");
                     DatosCorrectosFlagCHT = false;
+                    checks = false;
                 }
 
                 //Toma el Entero Tasa desde el JSpinner spinnerTDDCHP
@@ -352,632 +383,684 @@ public class FrmOperaciones extends JDialog {
                 if (TDDCHTint <= 0) {
                     showMessageDialog(null, "El cheque no puede ser vendido con una tasa de descuento menor o igual a 0");
                     DatosCorrectosFlagCHT = false;
+                    checks = false;
                 }
                 if (TDDCHTint >= 100) {
                     showMessageDialog(null, "El cheque no puede ser vendido con una tasa de descuento superior al 99%");
                     DatosCorrectosFlagCHT = false;
+                    checks = false;
                 }
 
-                //Toma el String CUIT Socio desde el JTFCSPB
-                String CSCHT;
-                CSCHT = JTFCSCHT.getText();
-                if (verif.CUITValido(CDFCHT)) {
-                } else {
-                    showMessageDialog(null, "El CUIT ingresado es invalido");
-                    DatosCorrectosFlagCHT = false;
-                }
-                if (verif.essocioparticipe(CSCHT) == false) {
-                    showMessageDialog(null, "El socio ingresado no es un Socio Participe Pleno");
-                    DatosCorrectosFlagCHT = false;
-                }
+                // Cuit Firmante
+                String CUITfirmante = "";
+                CUITfirmante = TFCDFCHP.getText();
+
+                ArrayList<String> EmpresaComparteSocio = new ArrayList<>();
+                EmpresaComparteSocio = verif.ListaCUITAC(CDSCHT);
+                boolean fdrflag = false;
                 if (DatosCorrectosFlagCHT == true) {
-                    boolean checks = true;
-                    if (verif.lineacreditovigente(CSCHT) == false) {
-                        showMessageDialog(null, "La linea de credito se encuentra vencida");
+                    if (verif.essocioparticipe(CDSCHT) != true) {
+                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio no es un socio participe pleno");
                         checks = false;
-                    }
-                    if (verif.contragarantiassuficientes(CSCHT, ITCHTint) == false) {
-                        showMessageDialog(null, "Las contragarantias del socio son insuficientes para realizar esta operacion");
+                    } else if (verif.lineacreditovigente(CDSCHT) == false) {
+                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que la linea de credito se encuentra vencida");
                         checks = false;
-                    }
-                    if (verif.lineasuficiente(CSCHT, ITCHTint) == false) {
-                        showMessageDialog(null, "La linea de credito no tiene disponibilidad para realizar esta operacion");
+                    } else if (verif.debefacturas(CDSCHT) == true) {
+                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio adeuda facturas");
                         checks = false;
-                    }
-                    if (verif.debefacturas(CSCHT) == true) {
-                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que se adeudan facturas");
+                    } else if (verif.check_deuda(CDSCHT) == true) {
+                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio registra deudas");
                         checks = false;
-                    }
-                    try {
-                        if (verif.operacionvsfdr(ITCHTint) == false) {
-                            showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
+                    } else if (!EmpresaComparteSocio.isEmpty()) {
+                        if (verif.Computar5FDRAc(EmpresaComparteSocio, CDSCHT, ITCHTint) == true) {
+                            showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que supera la suma de los riesgos vivos de los socios que comparten accionistas");
                             checks = false;
+                            fdrflag = true;
                         }
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
-                    }
-                    if (verif.check_deuda(CSCHT) == true) {
-                        showMessageDialog(null, "No puede operar porque el socio tiene deudas");
+                    } else if (verif.lineatope(CDSCHT, ITCHTint) == false) {
+                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el importe total excede el tope de la linea de credito asignada");
                         checks = false;
-                    }
-                    if (checks == true) {
-                        int mensaje_numcertificado = 0;
+                    } else if (verif.contragarantiassuficientes(CDSCHT, ITCHTint) == false) {
+                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor al total de las contragarantias presentadas");
+                        checks = false;
+                    } else if (fdrflag != true) {
                         try {
-                            totalmenostasacht = (float) ITCHTint - ((float) ITCHTint * ((float) TDDCHTint / 100));
-                            mensaje_numcertificado = verif.crearOT1(FDVCHTdateaux, BECHT.toString(), NCCHTint, CDFCHT, TDDCHTint, CSCHT, "Cheque de terceros", totalmenostasacht, "Ingresado");
-                            showMessageDialog(null, "Su operación fue realizada con éxito, el numero del certificado de garantia es: " + mensaje_numcertificado);
+                            if (verif.operacionvsfdr(ITCHTint) == false) {
+                                showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor al 5% del fondo de riesgo");
+                                checks = false;
+                            }
                         } catch (Exception exception) {
                             exception.printStackTrace();
                         }
                     }
                 }
+
+                if (checks == true) {
+                    int mensaje_numcertificado = 0;
+                    try {
+                        totalmenostasacht = (float) ITCHTint - ((float) ITCHTint * ((float) TDDCHTint / 100));
+                        mensaje_numcertificado = verif.crearOT1(FDVCHTdate, BECHT.toString(), NCCHTint, CDSCHT, TDDCHTint, CUITfirmante, "Cheque de terceros", totalmenostasacht, "Ingresado");
+                        showMessageDialog(null, "Su operación fue realizada con éxito, el numero del certificado de garantia es: " + mensaje_numcertificado);
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                }
             }
-        });
+    });
+
+        // Pagare Bursatil
         JBPB.addActionListener(new
+    ActionListener() {
+        @Override
+        public void actionPerformed (ActionEvent e){
+            boolean DatosCorrectosFlagPB = true;
+            boolean checks = true;
+            float totalmenostasapb = 0;
+            //Toma el objeto Banco Emisor desde el Combo Box comboBEPB
+            Object BEPB = new Object();
+            BEPB = comboBEPB.getSelectedItem();
 
-                                       ActionListener() {
-                                           @Override
-                                           public void actionPerformed(ActionEvent e) {
-                                               boolean DatosCorrectosFlagPB = true;
-                                               float totalmenostasapb = 0;
-                                               //Toma el objeto Banco Emisor desde el Combo Box comboBEPB
-                                               Object BEPB = new Object();
-                                               BEPB = comboBEPB.getSelectedItem();
-
-                                               //Toma el String Numero de pagare desde el JText Field TFNDPPB y lo transforma en un entero
-                                               String NDPPB;
-                                               int NDPPBint = 0;
-                                               NDPPB = TFNDPPB.getText();
-                                               if (NDPPB.isEmpty()) {
-                                                   showMessageDialog(null, "El campo Numero de pagare es mandatorio, por favor ingrese el dato solicitado");
-                                                   DatosCorrectosFlagPB = false;
-                                               } else {
-                                                   if (verif.esnumerico(NDPPB)) {
-                                                       NDPPBint = Integer.parseInt(NDPPB);
-                                                   } else {
-                                                       showMessageDialog(null, "El campo Numero de pagare solo admite numeros, no se admiten otros caracteres");
-                                                       DatosCorrectosFlagPB = false;
-                                                   }
-                                               }
-                                               //Toma el String Fecha de Vencimiento desde el JText Field FDVPB y lo transforma en un date
-                                               String FDVPB = "";
-                                               FDVPB = TFFDVPB.getText();
-                                               String FDVPBaux = "20/04/1989";
-                                               DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                                               LocalDate FDVPBdateaux = LocalDate.parse(FDVPBaux, formatter);
-                                               if (verif.fechavalida(FDVPB) == true) {
-                                                   LocalDate FDVPBdate = LocalDate.parse(FDVPB, formatter);
-                                                   FDVPBdateaux = FDVPBdate;
-                                                   //Compara la fecha ingresada con la fecha actual ya que no tendria sentido vender un pagare el dia de su
-                                                   // canje o vender un pagare ya vencido.
-                                                   String comparacionfecha = verif.fechavshoy(FDVPBdate);
-                                                   if (comparacionfecha == "Menor") {
-                                                       showMessageDialog(null, "El pagare bursatil se encuentra vencido");
-                                                       DatosCorrectosFlagPB = false;
-                                                   }
-                                                   if (comparacionfecha == "Hoy") {
-                                                       showMessageDialog(null, "La fecha de vencimiento del cheque es hoy");
-                                                       DatosCorrectosFlagPB = false;
-                                                   }
-                                               } else {
-                                                   showMessageDialog(null, "La fecha ingresada no cumple con el formato solicitado");
-                                                   DatosCorrectosFlagPB = false;
-                                               }
-                                               //Toma el String CUIT firmante desde el JText Field TFCDFPB
-                                               String CDFPB = "";
-                                               CDFPB = TFCDFPB.getText();
-                                               if (verif.CUITValido(CDFPB)) {
-                                               } else {
-                                                   showMessageDialog(null, "El CUIT ingresado es invalido");
-                                                   DatosCorrectosFlagPB = false;
-                                               }
-                                               //Toma el Entero Importe Total desde el JSpinner spinnerITPB
-                                               Object ITPB;
-                                               ITPB = spinnerITPB.getValue();
-                                               int ITPBint;
-                                               ITPBint = (Integer) ITPB;
-                                               if (ITPBint <= 0) {
-                                                   showMessageDialog(null, "El pagare bursatil no puede tener un valor menor o igual a 0");
-                                                   DatosCorrectosFlagPB = false;
-                                               }
-
-                                               //Toma el Entero Tasa desde el JSpinner spinnerTDDPB
-                                               Object TDDPB;
-                                               TDDPB = spinnerTDDPB.getValue();
-                                               int TDDPBint;
-                                               TDDPBint = (Integer) TDDPB;
-                                               if (TDDPBint <= 0) {
-                                                   showMessageDialog(null, "El cheque no puede ser vendido con una tasa de descuento menor o igual a 0");
-                                                   DatosCorrectosFlagPB = false;
-                                               }
-                                               if (TDDPBint >= 100) {
-                                                   showMessageDialog(null, "El cheque no puede ser vendido con una tasa de descuento superior al 99%");
-                                                   DatosCorrectosFlagPB = false;
-                                               }
-
-                                               //Toma el String CUIT Socio desde el JTFCSPB
-                                               String CSPB;
-                                               CSPB = JTFCSPB.getText();
-                                               if (verif.CUITValido(CSPB)) {
-                                               } else {
-                                                   showMessageDialog(null, "El CUIT ingresado es invalido");
-                                                   DatosCorrectosFlagPB = false;
-                                               }
-                                               if (verif.essocioparticipe(CSPB) == false) {
-                                                   showMessageDialog(null, "El socio ingresado no es un Socio Participe Pleno");
-                                                   DatosCorrectosFlagPB = false;
-                                               }
-
-                                               if (DatosCorrectosFlagPB == true) {
-                                                   boolean checks = true;
-                                                   if (verif.lineacreditovigente(CSPB) == false) {
-                                                       showMessageDialog(null, "La linea de credito se encuentra vencida");
-                                                       checks = false;
-                                                   }
-                                                   if (verif.lineasuficiente(CSPB, ITPBint) == false) {
-                                                       showMessageDialog(null, "La linea de credito no tiene disponibilidad para realizar esta operacion");
-                                                       checks = false;
-                                                   }
-                                                   if (verif.debefacturas(CSPB) == true) {
-                                                       showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que se adeudan facturas");
-                                                       checks = false;
-                                                   }
-                                                   try {
-                                                       if (verif.operacionvsfdr(ITPBint) == false) {
-                                                           showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
-                                                           checks = false;
-                                                       }
-                                                   } catch (Exception exception) {
-                                                       exception.printStackTrace();
-                                                   }
-                                                   if (verif.check_deuda(CSPB) == true) {
-                                                       showMessageDialog(null, "No puede operar porque el socio tiene deudas");
-                                                       checks = false;
-                                                   }
-                                                   if (checks == true) {
-                                                       int mensaje_numcertificado = 0;
-                                                       try {
-                                                           totalmenostasapb = (float) ITPBint - ((float) ITPBint * ((float) TDDPBint / 100));
-                                                           mensaje_numcertificado = verif.crearOT1(FDVPBdateaux, BEPB.toString(), NDPPBint, CDFPB, TDDPBint, CSPB, "Pagare Bursatil", totalmenostasapb, "Ingresado");
-                                                           showMessageDialog(null, "Su operación fue realizada con éxito, el numero del certificado de garantia es: " + mensaje_numcertificado);
-                                                       } catch (Exception exception) {
-                                                           exception.printStackTrace();
-                                                       }
-                                                   }
-                                               }
-                                           }
-                                       });
+            //Toma el String Numero de pagare desde el JText Field TFNDPPB y lo transforma en un entero
+            String NDPPB;
+            int NDPPBint = 0;
+            NDPPB = TFNDPPB.getText();
+            if (NDPPB.isEmpty()) {
+                showMessageDialog(null, "El campo Numero de pagare es mandatorio, por favor ingrese el dato solicitado");
+                DatosCorrectosFlagPB = false;
+                checks = false;
+            } else {
+                if (verif.esnumerico(NDPPB)) {
+                    NDPPBint = Integer.parseInt(NDPPB);
+                } else {
+                    showMessageDialog(null, "El campo Numero de pagare solo admite numeros, no se admiten otros caracteres");
+                    DatosCorrectosFlagPB = false;
+                    checks = false;
+                }
+            }
 
 
-        // El actionListener de Prestamos
+            //Toma el String Fecha de Vencimiento desde el JText Field FDVCHP y lo transforma en un date
+            String FDVPB = "";
+            FDVPB = TFFDVPB.getText();
+            LocalDate FDVPBdate = LocalDate.parse(FDVPB);
+            if (FDVPB.isEmpty()) {
+                showMessageDialog(null, "El campo fecha de vencimiento es mandatorio y no puede estar vacio");
+                DatosCorrectosFlagPB = false;
+                checks = false;
+            }
+            DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+            if (verif.fechavalida(FDVPB) == false) {
+                showMessageDialog(null, "La fecha ingresada es invalida");
+                DatosCorrectosFlagPB = false;
+                checks = false;
+            } else {
+                //Compara la fecha ingresada con la fecha actual ya que no tendria sentido vender un cheque el dia de su
+                // canje o vender un cheque ya vencido.
+                String comparacionfecha = verif.fechavshoy(FDVPBdate);
+                if (comparacionfecha == "Menor") {
+                    showMessageDialog(null, "El cheque se encuentra vencido");
+                    DatosCorrectosFlagPB = false;
+                    checks = false;
+                }
+                if (comparacionfecha == "Hoy") {
+                    showMessageDialog(null, "La fecha de vencimiento del cheque es hoy");
+                    DatosCorrectosFlagPB = false;
+                    checks = false;
+                }
+            }
+
+            //Toma el String CUIT Socio desde el JText Field TFCDFCHT
+            String CDSPB = "";
+            CDSPB = JTFCSPB.getText();
+            if (CDSPB.equalsIgnoreCase("")) {
+                showMessageDialog(null, "El campo CUIT del firmante es mandatorio y no puede estar vacio");
+                DatosCorrectosFlagPB = false;
+                checks = false;
+            }
+            if (verif.CUITValido(CDSPB) != true) {
+                showMessageDialog(null, "El CUIT ingresado es invalido");
+                DatosCorrectosFlagPB = false;
+                checks = false;
+            }
+
+            //Toma el Entero Importe Total desde el JSpinner spinnerITPB
+            Object ITPB;
+            ITPB = spinnerITPB.getValue();
+            int ITPBint;
+            ITPBint = (Integer) ITPB;
+            if (ITPBint <= 0) {
+                showMessageDialog(null, "El pagare bursatil no puede tener un valor menor o igual a 0");
+                DatosCorrectosFlagPB = false;
+                checks = false;
+            }
+
+            //Toma el Entero Tasa desde el JSpinner spinnerTDDPB
+            Object TDDPB;
+            TDDPB = spinnerTDDPB.getValue();
+            int TDDPBint;
+            TDDPBint = (Integer) TDDPB;
+            if (TDDPBint <= 0) {
+                showMessageDialog(null, "El cheque no puede ser vendido con una tasa de descuento menor o igual a 0");
+                DatosCorrectosFlagPB = false;
+            }
+            if (TDDPBint >= 100) {
+                showMessageDialog(null, "El cheque no puede ser vendido con una tasa de descuento superior al 99%");
+                DatosCorrectosFlagPB = false;
+            }
+
+            String CUITFirmante="";
+            CUITFirmante = TFCDFPB.getText();
+
+            ArrayList<String> EmpresaComparteSocio = new ArrayList<>();
+            EmpresaComparteSocio = verif.ListaCUITAC(CDSPB);
+            boolean fdrflag = false;
+            if (DatosCorrectosFlagPB == true) {
+                if (verif.essocioparticipe(CDSPB) != true) {
+                    showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio no es un socio participe pleno");
+                    checks = false;
+                } else if (verif.lineacreditovigente(CDSPB) == false) {
+                    showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que la linea de credito se encuentra vencida");
+                    checks = false;
+                } else if (verif.debefacturas(CDSPB) == true) {
+                    showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio adeuda facturas");
+                    checks = false;
+                } else if (verif.check_deuda(CDSPB) == true) {
+                    showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio registra deudas");
+                    checks = false;
+                } else if (!EmpresaComparteSocio.isEmpty()) {
+                    if (verif.Computar5FDRAc(EmpresaComparteSocio, CDSPB, ITPBint) == true) {
+                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que supera la suma de los riesgos vivos de los socios que comparten accionistas");
+                        checks = false;
+                        fdrflag = true;
+                    }
+                } else if (verif.lineatope(CDSPB, ITPBint) == false) {
+                    showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el importe total excede el tope de la linea de credito asignada");
+                    checks = false;
+                } else if (verif.contragarantiassuficientes(CDSPB, ITPBint) == false) {
+                    showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor al total de las contragarantias presentadas");
+                    checks = false;
+                } else if (fdrflag != true) {
+                    try {
+                        if (verif.operacionvsfdr(ITPBint) == false) {
+                            showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor al 5% del fondo de riesgo");
+                            checks = false;
+                        }
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                }
+            }
+                if (checks == true) {
+                    int mensaje_numcertificado = 0;
+                    try {
+                        totalmenostasapb = (float) ITPBint - ((float) ITPBint * ((float) TDDPBint / 100));
+                        mensaje_numcertificado = verif.crearOT1(FDVPBdate, BEPB.toString(), NDPPBint, CDSPB, TDDPBint, CUITFirmante, "Pagare Bursatil", totalmenostasapb, "Ingresado");
+                        showMessageDialog(null, "Su operación fue realizada con éxito, el numero del certificado de garantia es: " + mensaje_numcertificado);
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                }
+            }
+    });
+
+
+    // El actionListener de Prestamos
         JBPST.addActionListener(new
 
-                                        ActionListener() {
-                                            @Override
-                                            public void actionPerformed(ActionEvent e) {
-                                                boolean DatosCorrectosFlagPST = true;
-                                                //Toma el objeto Banco Emisor desde el Combo Box comboBECHP
-                                                Object BEPST = new Object();
-                                                BEPST = comboBEPST.getSelectedItem();
+    ActionListener() {
+        @Override
+        public void actionPerformed (ActionEvent e){
+            boolean DatosCorrectosFlagPST = true;
+            boolean checks = true;
+            //Toma el objeto Banco Emisor desde el Combo Box comboBECHP
+            Object BEPST = new Object();
+            BEPST = comboBEPST.getSelectedItem();
 
-                                                //Toma el Entero Tasa desde el JSpinner spinnerTDDCHP
-                                                Object TDDPST;
-                                                TDDPST = spinnerTDDPST.getValue();
-                                                int TDDPSTint;
-                                                TDDPSTint = (Integer) TDDPST;
-                                                if (TDDPSTint <= 0) {
-                                                    showMessageDialog(null, "El cheque no puede ser vendido con una tasa de descuento menor o igual a 0");
-                                                    DatosCorrectosFlagPST = false;
-                                                }
+            //Toma el Entero Tasa desde el JSpinner spinnerTDDCHP
+            Object TDDPST;
+            TDDPST = spinnerTDDPST.getValue();
+            int TDDPSTint;
+            TDDPSTint = (Integer) TDDPST;
+            if (TDDPSTint <= 0) {
+                DatosCorrectosFlagPST = false;
+                checks = false;
+                showMessageDialog(null, "El cheque no puede ser vendido con una tasa de descuento menor o igual a 0");
+            }
+
+            //Toma el importe total
+            Object ITPST;
+            ITPST = spinnerITPST.getValue();
+            int ITFloatPST;
+            ITFloatPST = (Integer) ITPST;
+            if (ITFloatPST <= 0) {
+                DatosCorrectosFlagPST = false;
+                checks = false;
+                showMessageDialog(null, "El importe total del prestamo no puede ser igual o menor que 0");
+            }
+
+            //Toma el String Fecha de Vencimiento desde el JText Field FDVCHP y lo transforma en un date
+            String FDVPST = "";
+            FDVPST = TFFDAPST.getText();
+            LocalDate FDVPSTdate = LocalDate.parse(FDVPST);
+            if (FDVPST.isEmpty()) {
+                showMessageDialog(null, "El campo fecha de vencimiento es mandatorio y no puede estar vacio");
+                DatosCorrectosFlagPST = false;
+                checks = false;
+            }
+            DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+            if (verif.fechavalida(FDVPST) == false) {
+                showMessageDialog(null, "La fecha ingresada es invalida");
+                DatosCorrectosFlagPST = false;
+                checks = false;
+            } else {
+                //Compara la fecha ingresada con la fecha actual ya que no tendria sentido vender un cheque el dia de su
+                // canje o vender un cheque ya vencido.
+                String comparacionfecha = verif.fechavshoy(FDVPSTdate);
+                if (comparacionfecha == "Menor") {
+                    DatosCorrectosFlagPST = false;
+                    checks = false;
+                    showMessageDialog(null, "El prestamo tiene que ser a futuro");
+                }
+                if (comparacionfecha == "Hoy") {
+                    DatosCorrectosFlagPST = false;
+                    checks = false;
+                    showMessageDialog(null, "La fecha de vencimiento del cheque es hoy");
+                }
+            }
+
+            //Toma el String CUIT Socio desde el JText Field TFCDFCHT
+            String CSPST = "";
+            CSPST = TFCSPST.getText();
+            if (CSPST.equalsIgnoreCase("")) {
+                showMessageDialog(null, "El campo CUIT del firmante es mandatorio y no puede estar vacio");
+                DatosCorrectosFlagPST = false;
+                checks = false;
+            }
+            if (verif.CUITValido(CSPST) != true) {
+                showMessageDialog(null, "El CUIT ingresado es invalido");
+                DatosCorrectosFlagPST = false;
+                checks = false;
+            }
+
+            //Toma el objeto Sistema desde el Combo Box comboSistemaPST
+            Object Sistema_PST = new Object();
+            Sistema_PST = comboSistemaPST.getSelectedItem();
+
+            //Toma el objeto Cantidad de cuotas desde el Combo Box comboSistemaPST
+            Object cantidadCuotas = new Object();
+            cantidadCuotas = comboBoxCDCPST.getSelectedItem();
 
 
-                                                //Toma el importe total
-                                                Object ITPST;
-                                                ITPST = spinnerITPST.getValue();
-                                                int ITFloatPST;
-                                                ITFloatPST = (Integer) ITPST;
-                                                if (ITFloatPST <= 0) {
-                                                    showMessageDialog(null, "El importe total del prestamo no puede ser igual o menor que 0");
-                                                    DatosCorrectosFlagPST = false;
-                                                }
-
-                                                //Toma el String Fecha de Vencimiento desde el JText Field FDVPB y lo transforma en un date
-                                                String FDVPB = "";
-                                                FDVPB = TFFDAPST.getText();
-                                                String FDVPBaux = "20/04/1989";
-                                                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                                                LocalDate FDVPBdateaux = LocalDate.parse(FDVPBaux, formatter);
-                                                if (verif.fechavalida(FDVPB) == true) {
-                                                    LocalDate FDVPBdate = LocalDate.parse(FDVPB, formatter);
-                                                    FDVPBdateaux = FDVPBdate;
-                                                    String comparacionfecha = verif.fechavshoy(FDVPBdate);
-                                                    if (comparacionfecha == "Menor") {
-                                                        showMessageDialog(null, "La fecha de acreditación del prestamo debe ser en el presente o en el futuro");
-                                                        DatosCorrectosFlagPST = false;
-                                                    }
-                                                } else {
-                                                    showMessageDialog(null, "La fecha ingresada no cumple con el formato solicitado");
-                                                    DatosCorrectosFlagPST = false;
-                                                }
-
-                                                //Toma el String CUIT Socio desde el JText Field TFCSPST
-                                                String CSPST = "";
-                                                CSPST = TFCSPST.getText();
-                                                if (verif.CUITValido(CSPST)) {
-                                                } else {
-                                                    showMessageDialog(null, "El CUIT ingresado es invalido");
-                                                    DatosCorrectosFlagPST = false;
-                                                }
-
-                                                //Toma el objeto Sistema desde el Combo Box comboSistemaPST
-                                                Object Sistema_PST = new Object();
-                                                Sistema_PST = comboSistemaPST.getSelectedItem();
-
-                                                //Toma el objeto Cantidad de cuotas desde el Combo Box comboSistemaPST
-                                                Object cantidadCuotas = new Object();
-                                                cantidadCuotas = comboBoxCDCPST.getSelectedItem();
 
 
-                                                if (verif.essocioparticipe(CSPST) == false) {
-                                                    showMessageDialog(null, "El socio ingresado no es un Socio Participe Pleno");
-                                                    DatosCorrectosFlagPST = false;
-                                                }
 
-                                                if (DatosCorrectosFlagPST == true) {
-                                                    boolean checks = true;
-                                                    if (verif.lineacreditovigente(CSPST) == false) {
-                                                        showMessageDialog(null, "La linea de credito se encuentra vencida");
-                                                        checks = false;
-                                                    }
-                                                    if (verif.lineasuficiente(CSPST, ITFloatPST) == false) {
-                                                        showMessageDialog(null, "La linea de credito no tiene disponibilidad para realizar esta operacion");
-                                                        checks = false;
-                                                    }
-                                                    if (verif.debefacturas(CSPST) == true) {
-                                                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que se adeudan facturas");
-                                                        checks = false;
-                                                    }
-                                                    try {
-                                                        if (verif.operacionvsfdr(ITFloatPST) == false) {
-                                                            showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
-                                                            checks = false;
-                                                        }
-                                                    } catch (Exception exception) {
-                                                        exception.printStackTrace();
-                                                    }
-                                                    if (verif.check_deuda(CSPST) == true) {
-                                                        showMessageDialog(null, "No puede operar porque el socio tiene deudas");
-                                                        checks = false;
-                                                    }
-                                                    if (checks == true) {
-                                                        int mensaje_numcertificado = 0;
-                                                        try {
-                                                            mensaje_numcertificado = verif.crearOT3(cantidadCuotas.toString(), BEPST.toString(), ITFloatPST, TDDPSTint, Sistema_PST.toString(), FDVPBdateaux, CSPST, "Ingresado", "Prestamo");
-                                                            showMessageDialog(null, "Su operación fue realizada con éxito, el numero del certificado de garantia es: " + mensaje_numcertificado);
-                                                        } catch (Exception exception) {
-                                                            exception.printStackTrace();
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        });
+            ArrayList<String> EmpresaComparteSocio = new ArrayList<>();
+            EmpresaComparteSocio = verif.ListaCUITAC(CSPST);
+            boolean fdrflag = false;
+            if (DatosCorrectosFlagPST == true) {
+                if (verif.essocioparticipe(CSPST) != true) {
+                    showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio no es un socio participe pleno");
+                    checks = false;
+                } else if (verif.lineacreditovigente(CSPST) == false) {
+                    showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que la linea de credito se encuentra vencida");
+                    checks = false;
+                } else if (verif.debefacturas(CSPST) == true) {
+                    showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio adeuda facturas");
+                    checks = false;
+                } else if (verif.check_deuda(CSPST) == true) {
+                    showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio registra deudas");
+                    checks = false;
+                } else if (!EmpresaComparteSocio.isEmpty()) {
+                    if (verif.Computar5FDRAc(EmpresaComparteSocio, CSPST, ITFloatPST) == true) {
+                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que supera la suma de los riesgos vivos de los socios que comparten accionistas");
+                        checks = false;
+                        fdrflag = true;
+                    }
+                } else if (verif.lineatope(CSPST, ITFloatPST) == false) {
+                    showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el importe total excede el tope de la linea de credito asignada");
+                    checks = false;
+                } else if (verif.contragarantiassuficientes(CSPST, ITFloatPST) == false) {
+                    showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor al total de las contragarantias presentadas");
+                    checks = false;
+                } else if (fdrflag != true) {
+                    try {
+                        if (verif.operacionvsfdr(ITFloatPST) == false) {
+                            showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor al 5% del fondo de riesgo");
+                            checks = false;
+                        }
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                }
+            }
+                if (checks == true) {
+                    int mensaje_numcertificado = 0;
+                    try {
+                        mensaje_numcertificado = verif.crearOT3(cantidadCuotas.toString(), BEPST.toString(), ITFloatPST, TDDPSTint, Sistema_PST.toString(), FDVPSTdate, CSPST, "Ingresado", "Prestamo");
+                        showMessageDialog(null, "Su operación fue realizada con éxito, el numero del certificado de garantia es: " + mensaje_numcertificado);
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                }
+            }
+    });
 
         pnlTabPanelOps.addMouseListener(new
 
-                                                MouseAdapter() {
-                                                    @Override
-                                                    public void mouseClicked(MouseEvent e) {
-                                                        super.mouseClicked(e);
-                                                        //Popula el comboNDOC
-                                                        JSONObject jsonObjectOPC = null;
-                                                        try {
-                                                            jsonObjectOPC = (JSONObject) file.readJson(filenamefact);
-                                                        } catch (Exception exception) {
-                                                            exception.printStackTrace();
-                                                        }
-                                                        comboNDOC.removeAllItems();
-                                                        String estadoNDOC = "";
-                                                        int numeroopNDOC = 0;
-                                                        int numeroopcdgNDOC = 0;
-                                                        int numerocertificado = 0;
-                                                        ArrayList<Integer> listacertificados = new ArrayList<Integer>();
+    MouseAdapter() {
+        @Override
+        public void mouseClicked (MouseEvent e){
+            super.mouseClicked(e);
+            //Popula el comboNDOC
+            JSONObject jsonObjectOPC = null;
+            try {
+                jsonObjectOPC = (JSONObject) file.readJson(filenamefact);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+            comboNDOC.removeAllItems();
+            String estadoNDOC = "";
+            int numeroopNDOC = 0;
+            int numeroopcdgNDOC = 0;
+            int numerocertificado = 0;
+            ArrayList<Integer> listacertificados = new ArrayList<Integer>();
 
-                                                        JSONArray operacioneslist = (JSONArray) jsonObjectOPC.get("operaciones");
-                                                        for (Object ops : operacioneslist) {
-                                                            JSONObject operacion = (JSONObject) ops;
-                                                            estadoNDOC = operacion.get("estado").toString();
-                                                            if (estadoNDOC.equalsIgnoreCase("Con certificado emitido")) {
-                                                                numeroopNDOC = Integer.parseInt(operacion.get("numerooperacion").toString());
-                                                                JSONArray certdegarlist = (JSONArray) jsonObjectOPC.get("certificado-de-garantia");
-                                                                for (Object cdg : certdegarlist) {
-                                                                    JSONObject certificado = (JSONObject) cdg;
-                                                                    numeroopcdgNDOC = Integer.parseInt(certificado.get("numero-operacion").toString());
-                                                                    if (numeroopNDOC == numeroopcdgNDOC) {
-                                                                        numerocertificado = Integer.parseInt(certificado.get("idcertificado").toString());
-                                                                        comboNDOC.addItem(numerocertificado);
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                });
+            JSONArray operacioneslist = (JSONArray) jsonObjectOPC.get("operaciones");
+            for (Object ops : operacioneslist) {
+                JSONObject operacion = (JSONObject) ops;
+                estadoNDOC = operacion.get("estado").toString();
+                if (estadoNDOC.equalsIgnoreCase("Con certificado emitido")) {
+                    numeroopNDOC = Integer.parseInt(operacion.get("numerooperacion").toString());
+                    JSONArray certdegarlist = (JSONArray) jsonObjectOPC.get("certificado-de-garantia");
+                    for (Object cdg : certdegarlist) {
+                        JSONObject certificado = (JSONObject) cdg;
+                        numeroopcdgNDOC = Integer.parseInt(certificado.get("numero-operacion").toString());
+                        if (numeroopNDOC == numeroopcdgNDOC) {
+                            numerocertificado = Integer.parseInt(certificado.get("idcertificado").toString());
+                            comboNDOC.addItem(numerocertificado);
+                        }
+                    }
+                }
+            }
+        }
+    });
 
         JBC.addActionListener(new
 
-                                      ActionListener() {
-                                          @Override
-                                          public void actionPerformed(ActionEvent e) {
-                                              double montocomision = 0;
-                                              int numerooperacion = Integer.parseInt(comboNDOC.getSelectedItem().toString());
-                                              try {
-                                                  montocomision = verif.nuevacomision(numerooperacion);
-                                                  showMessageDialog(null, "El monto de la comision es: " + montocomision);
-                                              } catch (Exception exception) {
-                                                  exception.printStackTrace();
-                                              }
+    ActionListener() {
+        @Override
+        public void actionPerformed (ActionEvent e){
+            double montocomision = 0;
+            int numerooperacion = Integer.parseInt(comboNDOC.getSelectedItem().toString());
+            try {
+                montocomision = verif.nuevacomision(numerooperacion);
+                showMessageDialog(null, "El monto de la comision es: " + montocomision);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
 
-                                              //Popula el comboNDOC
-                                              JSONObject jsonObjectOPC = null;
-                                              try {
-                                                  jsonObjectOPC = (JSONObject) file.readJson(filenamefact);
-                                              } catch (Exception exception) {
-                                                  exception.printStackTrace();
-                                              }
-                                              comboNDOC.removeAllItems();
-                                              String estadoNDOC = "";
-                                              int numeroopNDOC = 0;
-                                              int numeroopcdgNDOC = 0;
-                                              int numerocertificado = 0;
-                                              ArrayList<Integer> listacertificados = new ArrayList<Integer>();
+            //Popula el comboNDOC
+            JSONObject jsonObjectOPC = null;
+            try {
+                jsonObjectOPC = (JSONObject) file.readJson(filenamefact);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+            comboNDOC.removeAllItems();
+            String estadoNDOC = "";
+            int numeroopNDOC = 0;
+            int numeroopcdgNDOC = 0;
+            int numerocertificado = 0;
+            ArrayList<Integer> listacertificados = new ArrayList<Integer>();
 
-                                              JSONArray operacioneslist = (JSONArray) jsonObjectOPC.get("operaciones");
-                                              for (Object ops : operacioneslist) {
-                                                  JSONObject operacion = (JSONObject) ops;
-                                                  estadoNDOC = operacion.get("estado").toString();
-                                                  if (estadoNDOC.equalsIgnoreCase("Con certificado emitido")) {
-                                                      numeroopNDOC = Integer.parseInt(operacion.get("numerooperacion").toString());
-                                                      JSONArray certdegarlist = (JSONArray) jsonObjectOPC.get("certificado-de-garantia");
-                                                      for (Object cdg : certdegarlist) {
-                                                          JSONObject certificado = (JSONObject) cdg;
-                                                          numeroopcdgNDOC = Integer.parseInt(certificado.get("numero-operacion").toString());
-                                                          if (numeroopNDOC == numeroopcdgNDOC) {
-                                                              numerocertificado = Integer.parseInt(certificado.get("idcertificado").toString());
-                                                              comboNDOC.addItem(numerocertificado);
-                                                          }
-                                                      }
-                                                  }
-                                              }
-                                          }
-                                      });
+            JSONArray operacioneslist = (JSONArray) jsonObjectOPC.get("operaciones");
+            for (Object ops : operacioneslist) {
+                JSONObject operacion = (JSONObject) ops;
+                estadoNDOC = operacion.get("estado").toString();
+                if (estadoNDOC.equalsIgnoreCase("Con certificado emitido")) {
+                    numeroopNDOC = Integer.parseInt(operacion.get("numerooperacion").toString());
+                    JSONArray certdegarlist = (JSONArray) jsonObjectOPC.get("certificado-de-garantia");
+                    for (Object cdg : certdegarlist) {
+                        JSONObject certificado = (JSONObject) cdg;
+                        numeroopcdgNDOC = Integer.parseInt(certificado.get("numero-operacion").toString());
+                        if (numeroopNDOC == numeroopcdgNDOC) {
+                            numerocertificado = Integer.parseInt(certificado.get("idcertificado").toString());
+                            comboNDOC.addItem(numerocertificado);
+                        }
+                    }
+                }
+            }
+        }
+    });
 
-        // Cuenta corriente
+    // Cuenta corriente
         JBCCC.addActionListener(new
 
-                                        ActionListener() {
-                                            @Override
-                                            public void actionPerformed(ActionEvent e) {
-                                                boolean DatosCorrectosFlagCCC = true;
-                                                String FDVCCC = "";
-                                                FDVCCC = TFFDVCCC.getText();
-                                                if (verif.fechavalida(FDVCCC) == true) {
-                                                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                                                    LocalDate localDate = LocalDate.parse(FDVCCC, formatter);
-                                                    //Compara la fecha ingresada con la fecha actual ya que no tendria sentido vender un cheque el dia de su
-                                                    // canje o vender un cheque ya vencido.
-                                                    String comparacionfecha = verif.fechavshoy(localDate);
-                                                    if (comparacionfecha == "Menor") {
-                                                        showMessageDialog(null, "La fecha de acreditación no es valida");
-                                                        DatosCorrectosFlagCCC = false;
-                                                    }
-                                                } else {
-                                                    showMessageDialog(null, "La fecha ingresada no cumple con el formato solicitado");
-                                                    DatosCorrectosFlagCCC = false;
-                                                }
-                                                //Toma el String CUIT firmante desde el JText Field TFCDFCHT
-                                                String CUIT = "";
-                                                CUIT = TFCUIT.getText();
-                                                if (verif.CUITValido(CUIT)) {
-                                                } else {
-                                                    showMessageDialog(null, "El CUIT ingresado es invalido");
-                                                    DatosCorrectosFlagCCC = false;
-                                                }
-                                                //Toma el String Numero de Cheque desde el JText Field TFNCCHP y lo transforma en un entero
-                                                String ITCCC;
-                                                int ITCCCint;
-                                                ITCCC = TFITCCC.getText();
-                                                if (ITCCC.isEmpty()) {
-                                                    showMessageDialog(null, "El campo Empresa es mandatorio, por favor ingrese el dato solicitado");
-                                                    DatosCorrectosFlagCCC = false;
-                                                }
-                                                Object SITCCC;
-                                                SITCCC = spinnerITCCC.getValue();
-                                                int SITCCCint;
-                                                SITCCCint = (Integer) SITCCC;
-                                                if (SITCCCint <= 0) {
-                                                    showMessageDialog(null, "El importe total debe ser mayor que 0");
-                                                    DatosCorrectosFlagCCC = false;
-                                                }
+    ActionListener() {
+        @Override
+        public void actionPerformed (ActionEvent e){
+            boolean DatosCorrectosFlagCCC = true;
+            String FDVCCC = "";
+            FDVCCC = TFFDVCCC.getText();
+            if (verif.fechavalida(FDVCCC) == true) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate localDate = LocalDate.parse(FDVCCC, formatter);
+                //Compara la fecha ingresada con la fecha actual ya que no tendria sentido vender un cheque el dia de su
+                // canje o vender un cheque ya vencido.
+                String comparacionfecha = verif.fechavshoy(localDate);
+                if (comparacionfecha == "Menor") {
+                    showMessageDialog(null, "La fecha de acreditación no es valida");
+                    DatosCorrectosFlagCCC = false;
+                }
+            } else {
+                showMessageDialog(null, "La fecha ingresada no cumple con el formato solicitado");
+                DatosCorrectosFlagCCC = false;
+            }
+            //Toma el String CUIT firmante desde el JText Field TFCDFCHT
+            String CUIT = "";
+            CUIT = TFCUIT.getText();
+            if (verif.CUITValido(CUIT)) {
+            } else {
+                showMessageDialog(null, "El CUIT ingresado es invalido");
+                DatosCorrectosFlagCCC = false;
+            }
+            //Toma el String Numero de Cheque desde el JText Field TFNCCHP y lo transforma en un entero
+            String ITCCC;
+            int ITCCCint;
+            ITCCC = TFITCCC.getText();
+            if (ITCCC.isEmpty()) {
+                showMessageDialog(null, "El campo Empresa es mandatorio, por favor ingrese el dato solicitado");
+                DatosCorrectosFlagCCC = false;
+            }
+            Object SITCCC;
+            SITCCC = spinnerITCCC.getValue();
+            int SITCCCint;
+            SITCCCint = (Integer) SITCCC;
+            if (SITCCCint <= 0) {
+                showMessageDialog(null, "El importe total debe ser mayor que 0");
+                DatosCorrectosFlagCCC = false;
+            }
 
-                                                double importetotal = 0.0;
-                                                importetotal = Double.parseDouble(spinnerITCCC.getValue().toString());
+            double importetotal = 0.0;
+            importetotal = Double.parseDouble(spinnerITCCC.getValue().toString());
 
-                                                String fechavencimiento;
-                                                fechavencimiento = TFFDVCCC.getText();
-                                                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                                                LocalDate FDVCCCC = LocalDate.parse(fechavencimiento, formatter);
+            String fechavencimiento;
+            fechavencimiento = TFFDVCCC.getText();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate FDVCCCC = LocalDate.parse(fechavencimiento, formatter);
 
-                                                String CUITSocioCCC;
-                                                CUITSocioCCC = TFCUIT.getText();
+            String CUITSocioCCC;
+            CUITSocioCCC = TFCUIT.getText();
 
-                                                if (verif.essocioparticipe(CUITSocioCCC) == false) {
-                                                    showMessageDialog(null, "El socio ingresado no es un Socio Participe Pleno");
-                                                    DatosCorrectosFlagCCC = false;
-                                                }
+            if (verif.essocioparticipe(CUITSocioCCC) == false) {
+                showMessageDialog(null, "El socio ingresado no es un Socio Participe Pleno");
+                DatosCorrectosFlagCCC = false;
+            }
 
-                                                if (DatosCorrectosFlagCCC == true) {
-                                                    boolean checks = true;
-                                                    if (verif.lineacreditovigente(CUITSocioCCC) == false) {
-                                                        showMessageDialog(null, "La linea de credito se encuentra vencida");
-                                                        checks = false;
-                                                    }
-                                                    if (verif.lineasuficiente(CUITSocioCCC, SITCCCint) == false) {
-                                                        showMessageDialog(null, "La linea de credito no tiene disponibilidad para realizar esta operacion");
-                                                        checks = false;
-                                                    }
-                                                    if (verif.debefacturas(CUITSocioCCC) == true) {
-                                                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que se adeudan facturas");
-                                                        checks = false;
-                                                    }
-                                                    try {
-                                                        if (verif.operacionvsfdr(SITCCCint) == false) {
-                                                            showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
-                                                            checks = false;
-                                                        }
-                                                    } catch (Exception exception) {
-                                                        exception.printStackTrace();
-                                                    }
-                                                    if (verif.check_deuda(CUITSocioCCC) == true) {
-                                                        showMessageDialog(null, "No puede operar porque el socio tiene deudas");
-                                                        checks = false;
-                                                    }
-                                                    if (checks == true) {
-                                                        int mensaje_numcertificado = 0;
-                                                        try {
-                                                            verif.crearOT2(TFITCCC.toString(), importetotal, FDVCCCC.toString(), CUITSocioCCC, 0, "-", "Ingresado", 0, "Cuenta Corriente", "");
-                                                        } catch (Exception exception) {
-                                                            exception.printStackTrace();
-                                                        }
-                                                    }
-                                                }
-                                            }
+            if (DatosCorrectosFlagCCC == true) {
+                boolean checks = true;
+                if (verif.lineacreditovigente(CUITSocioCCC) == false) {
+                    showMessageDialog(null, "La linea de credito se encuentra vencida");
+                    checks = false;
+                }
+                if (verif.lineasuficiente(CUITSocioCCC, SITCCCint) == false) {
+                    showMessageDialog(null, "La linea de credito no tiene disponibilidad para realizar esta operacion");
+                    checks = false;
+                }
+                if (verif.debefacturas(CUITSocioCCC) == true) {
+                    showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que se adeudan facturas");
+                    checks = false;
+                }
+                try {
+                    if (verif.operacionvsfdr(SITCCCint) == false) {
+                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
+                        checks = false;
+                    }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+                if (verif.check_deuda(CUITSocioCCC) == true) {
+                    showMessageDialog(null, "No puede operar porque el socio tiene deudas");
+                    checks = false;
+                }
+                if (checks == true) {
+                    int mensaje_numcertificado = 0;
+                    try {
+                        verif.crearOT2(TFITCCC.toString(), importetotal, FDVCCCC.toString(), CUITSocioCCC, 0, "-", "Ingresado", 0, "Cuenta Corriente", "");
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                }
+            }
+        }
 
-                                        });
+    });
 
-        // Tarjeta de credito
+    // Tarjeta de credito
         JBTC.addActionListener(new
 
-                                       ActionListener() {
-                                           @Override
-                                           public void actionPerformed(ActionEvent e) {
-                                               boolean DatosCorrectosFlagTC = true;
-                                               String NombreTC;
-                                               int NombreTCint;
-                                               NombreTC = TFNombreTC.getText();
-                                               if (NombreTC.isEmpty()) {
-                                                   showMessageDialog(null, "Debe ingresar el nombre completo tal como figura en la tarjeta");
-                                                   DatosCorrectosFlagTC = false;
-                                               }
-                                               String FVTC = "";
-                                               FVTC = TFFVTC.getText();
-                                               if (verif.fechavalidatarjeta(FVTC) == true) {
-                                                   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yyyy");
-                                                   YearMonth yearMonth = YearMonth.parse(FVTC, formatter);
-                                                   String comparacionfecha = verif.fechavshoytarjeta(yearMonth);
-                                                   if (comparacionfecha == "Menor") {
-                                                       showMessageDialog(null, "La tarjeta se encuentra vencida");
-                                                       DatosCorrectosFlagTC = false;
-                                                   }
+    ActionListener() {
+        @Override
+        public void actionPerformed (ActionEvent e){
+            boolean DatosCorrectosFlagTC = true;
+            String NombreTC;
+            int NombreTCint;
+            NombreTC = TFNombreTC.getText();
+            if (NombreTC.isEmpty()) {
+                showMessageDialog(null, "Debe ingresar el nombre completo tal como figura en la tarjeta");
+                DatosCorrectosFlagTC = false;
+            }
+            String FVTC = "";
+            FVTC = TFFVTC.getText();
+            if (verif.fechavalidatarjeta(FVTC) == true) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yyyy");
+                YearMonth yearMonth = YearMonth.parse(FVTC, formatter);
+                String comparacionfecha = verif.fechavshoytarjeta(yearMonth);
+                if (comparacionfecha == "Menor") {
+                    showMessageDialog(null, "La tarjeta se encuentra vencida");
+                    DatosCorrectosFlagTC = false;
+                }
 
-                                                   FVTC = yearMonth.toString();
+                FVTC = yearMonth.toString();
 
-                                               } else {
-                                                   showMessageDialog(null, "La fecha de vencimiento ingresada no cumple con el formato solicitado");
-                                                   DatosCorrectosFlagTC = false;
-                                               }
+            } else {
+                showMessageDialog(null, "La fecha de vencimiento ingresada no cumple con el formato solicitado");
+                DatosCorrectosFlagTC = false;
+            }
 
-                                               String CDSTC;
-                                               int CDSTCint = 0;
-                                               CDSTC = TFCDSTC.getText();
-                                               if (CDSTC.isEmpty()) {
-                                                   showMessageDialog(null, "El código no puede quedar vacío");
-                                                   DatosCorrectosFlagTC = false;
-                                               }
+            String CDSTC;
+            int CDSTCint = 0;
+            CDSTC = TFCDSTC.getText();
+            if (CDSTC.isEmpty()) {
+                showMessageDialog(null, "El código no puede quedar vacío");
+                DatosCorrectosFlagTC = false;
+            }
 
-                                               if (verif.esnumerico(CDSTC)) {
-                                                   if (CDSTC.length() != 3) {
-                                                       showMessageDialog(null, "El código debe ser de 3 números");
-                                                   }
-                                               }
-                                               if (!verif.esnumerico(CDSTC) && !CDSTC.isEmpty()) {
-                                                   showMessageDialog(null, "El código debe ser numérico");
-                                                   DatosCorrectosFlagTC = false;
-                                               }
-                                               String CUIT2 = "";
-                                               CUIT2 = TFCUIT2.getText();
-                                               if (verif.CUITValido(CUIT2)) {
-                                               } else {
-                                                   showMessageDialog(null, "El CUIT ingresado es invalido");
-                                                   DatosCorrectosFlagTC = false;
-                                               }
-                                               String NDTTC;
-                                               int TFNDTTCint = 0;
-                                               NDTTC = TFNDTTC.getText();
-                                               if (NDTTC.contains("-") && NDTTC.length() > 18) {
-                                                   if (verif.tarjetavalida(NDTTC)) {
-                                                   } else {
-                                                       showMessageDialog(null, "La tarjeta ingresada es inválida");
-                                                       DatosCorrectosFlagTC = false;
-                                                   }
-                                               } else {
-                                                   if (NDTTC.isEmpty()) {
-                                                       showMessageDialog(null, "Ingrese el número de la tarjeta");
-                                                   } else {
-                                                       showMessageDialog(null, "El número de tarjeta debe contener '-' y 16 números");
-                                                   }
+            if (verif.esnumerico(CDSTC)) {
+                if (CDSTC.length() != 3) {
+                    showMessageDialog(null, "El código debe ser de 3 números");
+                }
+            }
+            if (!verif.esnumerico(CDSTC) && !CDSTC.isEmpty()) {
+                showMessageDialog(null, "El código debe ser numérico");
+                DatosCorrectosFlagTC = false;
+            }
+            String CUIT2 = "";
+            CUIT2 = TFCUIT2.getText();
+            if (verif.CUITValido(CUIT2)) {
+            } else {
+                showMessageDialog(null, "El CUIT ingresado es invalido");
+                DatosCorrectosFlagTC = false;
+            }
+            String NDTTC;
+            int TFNDTTCint = 0;
+            NDTTC = TFNDTTC.getText();
+            if (NDTTC.contains("-") && NDTTC.length() > 18) {
+                if (verif.tarjetavalida(NDTTC)) {
+                } else {
+                    showMessageDialog(null, "La tarjeta ingresada es inválida");
+                    DatosCorrectosFlagTC = false;
+                }
+            } else {
+                if (NDTTC.isEmpty()) {
+                    showMessageDialog(null, "Ingrese el número de la tarjeta");
+                } else {
+                    showMessageDialog(null, "El número de tarjeta debe contener '-' y 16 números");
+                }
 
-                                               }
+            }
 
 
-                                               double IT;
-                                               IT = Double.parseDouble(ITTC.getValue().toString());
+            double IT;
+            IT = Double.parseDouble(ITTC.getValue().toString());
 
-                                               String CUITSocioTC;
-                                               CUITSocioTC = TFCUIT2.getText();
+            String CUITSocioTC;
+            CUITSocioTC = TFCUIT2.getText();
 
-                                               if (verif.essocioparticipe(CUITSocioTC) == false) {
-                                                   showMessageDialog(null, "El socio ingresado no es un Socio Participe Pleno");
-                                                   DatosCorrectosFlagTC = false;
-                                               }
+            if (verif.essocioparticipe(CUITSocioTC) == false) {
+                showMessageDialog(null, "El socio ingresado no es un Socio Participe Pleno");
+                DatosCorrectosFlagTC = false;
+            }
 
-                                               if (DatosCorrectosFlagTC == true) {
-                                                   boolean checks = true;
-                                                   if (verif.lineacreditovigente(CUITSocioTC) == false) {
-                                                       showMessageDialog(null, "La linea de credito se encuentra vencida");
-                                                       checks = false;
-                                                   }
-                                                   if (verif.lineasuficiente(CUITSocioTC, (float) IT) == false) {
-                                                       showMessageDialog(null, "La linea de credito no tiene disponibilidad para realizar esta operacion");
-                                                       checks = false;
-                                                   }
-                                                   if (verif.debefacturas(CUITSocioTC) == true) {
-                                                       showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que se adeudan facturas");
-                                                       checks = false;
-                                                   }
-                                                   try {
-                                                       if (verif.operacionvsfdr(IT) == false) {
-                                                           showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
-                                                           checks = false;
-                                                       }
-                                                   } catch (Exception exception) {
-                                                       exception.printStackTrace();
-                                                   }
-                                                   if (verif.check_deuda(CUITSocioTC) == true) {
-                                                       showMessageDialog(null, "No puede operar porque el socio tiene deudas");
-                                                       checks = false;
-                                                   }
-                                                   if (checks == true) {
-                                                       int mensaje_numcertificado = 0;
-                                                       try {
-                                                           System.out.println("mando la tarjeta");
-                                                           verif.crearOT2(TFITCCC.toString(), IT, FVTC, CUITSocioTC, TFNDTTCint, TFNombreTC.getText(), "Ingresado", CDSTCint, "Tarjeta de Credito", "-");
-                                                       } catch (Exception exception) {
-                                                           exception.printStackTrace();
-                                                       }
-                                                   }
-                                               }
-                                           }
-                                       });
-    }
+            if (DatosCorrectosFlagTC == true) {
+                boolean checks = true;
+                if (verif.lineacreditovigente(CUITSocioTC) == false) {
+                    showMessageDialog(null, "La linea de credito se encuentra vencida");
+                    checks = false;
+                }
+                if (verif.lineasuficiente(CUITSocioTC, (float) IT) == false) {
+                    showMessageDialog(null, "La linea de credito no tiene disponibilidad para realizar esta operacion");
+                    checks = false;
+                }
+                if (verif.debefacturas(CUITSocioTC) == true) {
+                    showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que se adeudan facturas");
+                    checks = false;
+                }
+                try {
+                    if (verif.operacionvsfdr(IT) == false) {
+                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
+                        checks = false;
+                    }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+                if (verif.check_deuda(CUITSocioTC) == true) {
+                    showMessageDialog(null, "No puede operar porque el socio tiene deudas");
+                    checks = false;
+                }
+                if (checks == true) {
+                    int mensaje_numcertificado = 0;
+                    try {
+                        System.out.println("mando la tarjeta");
+                        verif.crearOT2(TFITCCC.toString(), IT, FVTC, CUITSocioTC, TFNDTTCint, TFNombreTC.getText(), "Ingresado", CDSTCint, "Tarjeta de Credito", "-");
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                }
+            }
+        }
+    });
+}
 }
 
 
