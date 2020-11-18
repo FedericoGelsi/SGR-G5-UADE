@@ -1,5 +1,6 @@
 package impl;
 
+import api.OPTipo2;
 import org.json.simple.JSONArray;
 
 import java.lang.reflect.Array;
@@ -78,17 +79,7 @@ public class Verificaciones implements api.Verificaciones {
                 tarjetaValidaFlag = false;
             }
         }
-        if (tarjetaseparada[0].length() != 2 || esnumerico(tarjetaseparada[0]) != true) {
-            tarjetaValidaFlag = false;
-        }
-        if (tarjetaseparada[1].length() != 8 || esnumerico(tarjetaseparada[1]) != true) {
-            tarjetaValidaFlag = false;
-        }
-        if (tarjetaseparada[2].length() != 1 || esnumerico(tarjetaseparada[2]) != true) {
-            tarjetaValidaFlag = false;
-        }
         return tarjetaValidaFlag;
-
     }
 
     //Chequea que el formato de CUIT ingresado sea valido y que los datos ingresads sean numericos
@@ -247,7 +238,8 @@ public class Verificaciones implements api.Verificaciones {
         return debefacturasflag;
     }
 
-    public boolean operacionvsfdr(double montototal) {
+    public boolean operacionvsfdr(double montototal) throws Exception {
+        jsonObjectfdr = (JSONObject) file.readJson(filenamefdr);
         double montofdr = 0;
         boolean operacionmenorfdr = true;
         JSONArray aporteslist = (JSONArray) jsonObjectfdr.get("aportes");
@@ -421,6 +413,84 @@ public class Verificaciones implements api.Verificaciones {
         return contadorc;
     }
 
+    public int crearOT2(String empresa, double importetotalop2, String fechavencimiento, String CUITSocio, int numerotarjeta, String nombretarjeta, String estado, int codigoseguridad, String tipo, String nombrempresa) throws Exception {
+        jsonObjectOPC = (JSONObject) file.readJson(filenamefact);
+        JSONArray operacionesList = (JSONArray) jsonObjectOPC.get("operaciones");
+        int contador = 0;
+        for (Object op : operacionesList) {
+            JSONObject id = (JSONObject) op;
+            contador = 1 + Integer.parseInt(id.get("numerooperacion").toString());
+        }
+
+        // Pide el monto de la linea de credito y el tope
+        double tope = 0;
+        double monto_utilizado = 0;
+        double montohabilitado = 0;
+        double montodeuda = 0;
+        JSONArray socioList = (JSONArray) jsonObject.get("socios-participes");
+        for (Object obj : socioList) {
+            JSONObject socio = (JSONObject) obj;
+            String cuit = socio.get("cuit").toString();
+            if (CUITSocio.equalsIgnoreCase(cuit)) {
+                JSONObject lineadecredito = (JSONObject) socio.get("lineas-de-credito");
+                tope = (double) lineadecredito.get("tope");
+                monto_utilizado = (double) lineadecredito.get("monto-utilizado");
+                montohabilitado = (tope - monto_utilizado);
+                if (importetotalop2 > montohabilitado && importetotalop2 <= tope) {
+                    lineadecredito.put("monto-utilizado", tope);
+                    int contadordeuda = 0;
+                    JSONArray deudasList = (JSONArray) jsonObject.get("deudas");
+                    montodeuda = importetotalop2 - montohabilitado;
+                    if (deudasList != null) {
+                        for (Object deu : operacionesList) {
+                            JSONObject id = (JSONObject) deu;
+                            contadordeuda = 1 + Integer.parseInt(id.get("id-deuda").toString());
+                        }
+                    }
+                    Deuda nuevaDeuda = new Deuda(montodeuda, CUITSocio, contadordeuda, montodeuda * 0.05);
+                    JSONObject deuda1 = nuevaDeuda.toJSON();
+                    JSONArray DeudasList = new JSONArray();
+                    DeudasList.add(deuda1);
+                    socio.put("deudas", DeudasList);
+                    jsonObject.put("socios-participes", socioList);
+                    file.writeJson(filename, jsonObject);
+                } else {
+                    lineadecredito.put("monto-utilizado", monto_utilizado + (double) importetotalop2);
+                    file.writeJson(filename, jsonObject);
+                }
+            }
+        }
+        OPTipo2 nuevaOT2 = new impl.OPTipo2(fechavencimiento, numerotarjeta, CUITSocio, tipo, importetotalop2, estado , nombretarjeta, contador, nombrempresa, codigoseguridad);
+        JSONObject operacion2 = nuevaOT2.toJSON();
+        guardarDatos(operacion2);
+
+        JSONArray certList = (JSONArray) jsonObjectOPC.get("certificado-de-garantia");
+        int contadorc = 100;
+        if (certList != null) {
+            for (Object cert : certList) {
+                JSONObject idc = (JSONObject) cert;
+                contadorc = 1 + Integer.parseInt(idc.get("idcertificado").toString());
+            }
+        }
+
+        CertificadoDeGarantia nuevoCDG = new CertificadoDeGarantia(CUITSocio, contadorc, contador);
+        JSONObject CDG = nuevoCDG.toJSON();
+        guardarDatosCDG(CDG);
+
+        jsonObjectOPC = (JSONObject) file.readJson(filenamefact);
+        JSONArray sociocertestadolist = (JSONArray) jsonObjectOPC.get("operaciones");
+        for (Object sce : sociocertestadolist) {
+            JSONObject scejo = (JSONObject) sce;
+            int nop = Integer.parseInt(scejo.get("numerooperacion").toString());
+            if (contador == nop) {
+                scejo.put("estado", "Con certificado emitido");
+                file.writeJson(filenamefact, jsonObjectOPC);
+            }
+        }
+        return contadorc;
+    }
+
+
     public double nuevacomision(int numerocertificado) throws Exception {
 
         JSONArray certList = (JSONArray) jsonObjectOPC.get("certificado-de-garantia");
@@ -554,7 +624,7 @@ public class Verificaciones implements api.Verificaciones {
         int numoperacion = 0;
         int day = getDayNumberNew(LocalDate.now());
         double monto_com = 0;
-        if (day == 2) { // Cambiar a 1
+        if (day == 3) { // Cambiar a 1
             String com_estado = "";
             JSONArray comisionList = (JSONArray) jsonObjectOPC.get("comision");
             for (Object com : comisionList) {
@@ -674,9 +744,10 @@ public class Verificaciones implements api.Verificaciones {
                 if (accionistaCUIT.equalsIgnoreCase(operacion_cuit)) {
                     estado_operacion = operaciones.get("estado").toString();
                     fecha_vencimiento = LocalDate.parse(operaciones.get("fechavencimiento").toString());
-                    fechavshoy(fecha_vencimiento);
+                    fechaAux= fechavshoy(fecha_vencimiento);
+                    System.out.println(fechaAux);
                     System.out.println(estado_operacion);
-                    if (fechaAux == "Menor" && estado_operacion.equalsIgnoreCase("Monetizado")) {
+                    if (fechaAux.equalsIgnoreCase("Mayor") && estado_operacion.equalsIgnoreCase("Monetizada")) {
                         tipo_operacion = operaciones.get("tipo").toString();
                         importetotal = (double) operaciones.get("importetotal");
                         System.out.println(importetotal);
@@ -706,9 +777,10 @@ public class Verificaciones implements api.Verificaciones {
                 if (CUIT.equalsIgnoreCase(operacion_cuit)) {
                     estado_operacion = operaciones.get("estado").toString();
                     fecha_vencimiento = LocalDate.parse(operaciones.get("fechavencimiento").toString());
-                    fechavshoy(fecha_vencimiento);
+                    fechaAux= fechavshoy(fecha_vencimiento);
+                    System.out.println(fechaAux);
                     System.out.println(estado_operacion);
-                    if (fechaAux == "Menor" && estado_operacion.equalsIgnoreCase("Monetizado")) {
+                    if (fechaAux.equalsIgnoreCase("Mayor")  && estado_operacion.equalsIgnoreCase("Monetizada")) {
                         tipo_operacion = operaciones.get("tipo").toString();
                         importetotal = (double) operaciones.get("importetotal");
                         System.out.println(importetotal);
@@ -731,7 +803,8 @@ public class Verificaciones implements api.Verificaciones {
                 }
             }
         }
-        if (IMPORTEOPERACION > totalcomputado) {
+        System.out.println(totalcomputado);
+        if (IMPORTEOPERACION > totalcomputado && totalcomputado!=0) {
             flag = true;
         }
         return flag;

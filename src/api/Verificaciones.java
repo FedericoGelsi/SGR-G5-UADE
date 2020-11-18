@@ -36,7 +36,7 @@ public interface Verificaciones {
     boolean debefacturas(String CUITSocio);
 
     //Chequea que el monto ingresado por parametro sea menor que el 5% del FDR
-    boolean operacionvsfdr(double montototal);
+    boolean operacionvsfdr(double montototal) throws Exception;
 
     //Crea una operacion
     public int crearOT1(LocalDate FDV,String Banco, int NDC, String CUITF, float TDD, String CUITS,String tipo,float importetotal, String estado) throws Exception;
@@ -68,5 +68,7 @@ public interface Verificaciones {
     boolean fechavalidatarjeta(String fvtc);
 
     boolean tarjetavalida(String tarjeta);
+
+    int crearOT2(String empresa, double importetotalop2, String fechavencimiento, String CUITSocio, int numerotarjeta, String nombretarjeta, String estado, int codigoseguridad, String tipo, String nombrempresa) throws Exception;
 }
 

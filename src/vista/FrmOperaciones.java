@@ -88,6 +88,7 @@ public class FrmOperaciones extends JDialog {
     private JPanel pnlComision;
     private JTextField TFCUIT;
     private JTextField TFCUIT2;
+    private JSpinner ITTC;
     private Verificaciones verif = new impl.Verificaciones();
 
     private String filename = "./src/resources/socios.json";
@@ -210,6 +211,7 @@ public class FrmOperaciones extends JDialog {
                     DatosCorrectosFlagCHP = false;
                 }
 
+
                 if (DatosCorrectosFlagCHP == true) {
                     boolean checks = true;
                     if (verif.lineacreditovigente(CDFCHP) == false) {
@@ -230,10 +232,14 @@ public class FrmOperaciones extends JDialog {
                         }
                     }
                     else{
-                        if (verif.operacionvsfdr(ITCHPint) == false) {
-                            checks = false;
-                            showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
+                        try {
+                            if (verif.operacionvsfdr(ITCHPint) == false) {
+                                checks = false;
+                                showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
 
+                            }
+                        } catch (Exception exception) {
+                            exception.printStackTrace();
                         }
                     }
                     if(verif.check_deuda(CDFCHP)==true){
@@ -364,9 +370,13 @@ public class FrmOperaciones extends JDialog {
                         showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que se adeudan facturas");
                         checks = false;
                     }
-                    if (verif.operacionvsfdr(ITCHTint) == false) {
-                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
-                        checks = false;
+                    try {
+                        if (verif.operacionvsfdr(ITCHTint) == false) {
+                            showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
+                            checks = false;
+                        }
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
                     }
                     if(verif.check_deuda(CSCHT)==true){
                         showMessageDialog(null,"No puede operar porque el socio tiene deudas");
@@ -492,9 +502,13 @@ public class FrmOperaciones extends JDialog {
                         showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que se adeudan facturas");
                         checks = false;
                     }
-                    if (verif.operacionvsfdr(ITPBint) == false) {
-                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
-                        checks = false;
+                    try {
+                        if (verif.operacionvsfdr(ITPBint) == false) {
+                            showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
+                            checks = false;
+                        }
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
                     }
                     if(verif.check_deuda(CSPB)==true){
                         showMessageDialog(null,"No puede operar porque el socio tiene deudas");
@@ -601,9 +615,13 @@ public class FrmOperaciones extends JDialog {
                         showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que se adeudan facturas");
                         checks = false;
                     }
-                    if (verif.operacionvsfdr(ITFloatPST) == false) {
-                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
-                        checks = false;
+                    try {
+                        if (verif.operacionvsfdr(ITFloatPST) == false) {
+                            showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
+                            checks = false;
+                        }
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
                     }
                     if(verif.check_deuda(CSPST)==true){
                         showMessageDialog(null,"No puede operar porque el socio tiene deudas");
@@ -705,6 +723,8 @@ public class FrmOperaciones extends JDialog {
                 }
             }
         });
+
+        // Cuenta corriente
         JBCCC.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -751,11 +771,62 @@ public class FrmOperaciones extends JDialog {
                     DatosCorrectosFlagCCC = false;
                 }
 
+                double importetotal = 0.0;
+                importetotal = Double.parseDouble(spinnerITCCC.getValue().toString());
 
+                String fechavencimiento;
+                fechavencimiento = TFFDVCCC.getText();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate FDVCCCC = LocalDate.parse(fechavencimiento, formatter);
 
+                String CUITSocioCCC;
+                CUITSocioCCC = TFCUIT.getText();
 
+                if (verif.essocioparticipe(CUITSocioCCC) == false) {
+                    showMessageDialog(null, "El socio ingresado no es un Socio Participe Pleno");
+                    DatosCorrectosFlagCCC = false;
+                }
+
+                if (DatosCorrectosFlagCCC == true) {
+                    boolean checks = true;
+                    if (verif.lineacreditovigente(CUITSocioCCC) == false) {
+                        showMessageDialog(null, "La linea de credito se encuentra vencida");
+                        checks = false;
+                    }
+                    if (verif.lineasuficiente(CUITSocioCCC, SITCCCint) == false) {
+                        showMessageDialog(null, "La linea de credito no tiene disponibilidad para realizar esta operacion");
+                        checks = false;
+                    }
+                    if (verif.debefacturas(CUITSocioCCC) == true) {
+                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que se adeudan facturas");
+                        checks = false;
+                    }
+                    try {
+                        if (verif.operacionvsfdr(SITCCCint) == false) {
+                            showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
+                            checks = false;
+                        }
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                    if(verif.check_deuda(CUITSocioCCC)==true){
+                        showMessageDialog(null,"No puede operar porque el socio tiene deudas");
+                        checks = false;
+                    }
+                    if (checks == true) {
+                        int mensaje_numcertificado = 0;
+                        try {
+                            verif.crearOT2(TFITCCC.toString(),importetotal,FDVCCCC.toString(),CUITSocioCCC,0,"-","Ingresado",0,"Cuenta Corriente","");
+                        } catch (Exception exception) {
+                            exception.printStackTrace();
+                        }
+                    }
+                }
             }
+
         });
+
+        // Tarjeta de credito
         JBTC.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -769,7 +840,7 @@ public class FrmOperaciones extends JDialog {
                 }
                 String FVTC = "";
                 FVTC = TFFVTC.getText();
-                if(verif.fechavalidatarjeta(FVTC) == true) {
+                if (verif.fechavalidatarjeta(FVTC) == true) {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yyyy");
                     YearMonth yearMonth = YearMonth.parse(FVTC, formatter);
                     String comparacionfecha = verif.fechavshoytarjeta(yearMonth);
@@ -778,60 +849,110 @@ public class FrmOperaciones extends JDialog {
                         DatosCorrectosFlagTC = false;
                     }
 
-            }
-                else {
+                    FVTC = yearMonth.toString();
+
+                } else {
                     showMessageDialog(null, "La fecha de vencimiento ingresada no cumple con el formato solicitado");
-                    DatosCorrectosFlagTC = false;}
+                    DatosCorrectosFlagTC = false;
+                }
 
                 String CDSTC;
-                int CDSTCint;
+                int CDSTCint = 0;
                 CDSTC = TFCDSTC.getText();
-                if (CDSTC.isEmpty()){
+                if (CDSTC.isEmpty()) {
                     showMessageDialog(null, "El código no puede quedar vacío");
                     DatosCorrectosFlagTC = false;
                 }
 
-                if (verif.esnumerico(CDSTC)){
-                    if (CDSTC.length() != 3){
+                if (verif.esnumerico(CDSTC)) {
+                    if (CDSTC.length() != 3) {
                         showMessageDialog(null, "El código debe ser de 3 números");
                     }
                 }
-                if(!verif.esnumerico(CDSTC) && !CDSTC.isEmpty()){
-                    showMessageDialog(null,"El código debe ser numérico");
+                if (!verif.esnumerico(CDSTC) && !CDSTC.isEmpty()) {
+                    showMessageDialog(null, "El código debe ser numérico");
                     DatosCorrectosFlagTC = false;
                 }
                 String CUIT2 = "";
                 CUIT2 = TFCUIT2.getText();
-                if (verif.CUITValido(CUIT2)){
-                }
-                else {
+                if (verif.CUITValido(CUIT2)) {
+                } else {
                     showMessageDialog(null, "El CUIT ingresado es invalido");
                     DatosCorrectosFlagTC = false;
                 }
                 String NDTTC;
-                int TFNDTTCint;
+                int TFNDTTCint = 0;
                 NDTTC = TFNDTTC.getText();
-                if (NDTTC.contains("-") && NDTTC.length() > 18){
-                    if (verif.tarjetavalida(NDTTC)){
-                    }
-                    else {
+                if (NDTTC.contains("-") && NDTTC.length() > 18) {
+                    if (verif.tarjetavalida(NDTTC)) {
+                    } else {
                         showMessageDialog(null, "La tarjeta ingresada es inválida");
                         DatosCorrectosFlagTC = false;
                     }
-                }
-                else{
-                    if (NDTTC.isEmpty()){
-                        showMessageDialog(null,"Ingrese el número de la tarjeta");
-                    }
-                    else{
-                        showMessageDialog(null,"El número de tarjeta debe contener '-' y 16 números");
+                } else {
+                    if (NDTTC.isEmpty()) {
+                        showMessageDialog(null, "Ingrese el número de la tarjeta");
+                    } else {
+                        showMessageDialog(null, "El número de tarjeta debe contener '-' y 16 números");
                     }
 
+                }
+
+
+                double IT;
+                IT = Double.parseDouble(ITTC.getValue().toString());
+
+                String CUITSocioTC;
+                CUITSocioTC = TFCUIT2.getText();
+
+                if (verif.essocioparticipe(CUITSocioTC) == false) {
+                    showMessageDialog(null, "El socio ingresado no es un Socio Participe Pleno");
+                    DatosCorrectosFlagTC = false;
+                }
+
+                if (DatosCorrectosFlagTC == true) {
+                    boolean checks = true;
+                    if (verif.lineacreditovigente(CUITSocioTC) == false) {
+                        showMessageDialog(null, "La linea de credito se encuentra vencida");
+                        checks = false;
+                    }
+                    if (verif.lineasuficiente(CUITSocioTC, (float) IT) == false) {
+                        showMessageDialog(null, "La linea de credito no tiene disponibilidad para realizar esta operacion");
+                        checks = false;
+                    }
+                    if (verif.debefacturas(CUITSocioTC) == true) {
+                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que se adeudan facturas");
+                        checks = false;
+                    }
+                    try {
+                        if (verif.operacionvsfdr(IT) == false) {
+                            showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
+                            checks = false;
+                        }
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                    if (verif.check_deuda(CUITSocioTC) == true) {
+                        showMessageDialog(null, "No puede operar porque el socio tiene deudas");
+                        checks = false;
+                    }
+                    if (checks == true) {
+                        int mensaje_numcertificado = 0;
+                        try {
+                            System.out.println("mando la tarjeta");
+                            verif.crearOT2(TFITCCC.toString(), IT, FVTC, CUITSocioTC, TFNDTTCint, TFNombreTC.getText(), "Ingresado", CDSTCint, "Tarjeta de Credito", "-");
+                        } catch (Exception exception) {
+                            exception.printStackTrace();
+                        }
+                    }
                 }
             }
+        });
+        }
+    }
 
 
 
-    });
-}
-}
+
+
+

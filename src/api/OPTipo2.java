@@ -8,9 +8,9 @@ import java.util.Date;
 public interface OPTipo2 extends Operacion {
     String getNombreEmpresa();
 
-    float getImporteTotal();
+    double getImporteTotal();
 
-    LocalDate getFechaVencimiento();
+    String getFechaVencimiento();
 
     String getTipo();
 
