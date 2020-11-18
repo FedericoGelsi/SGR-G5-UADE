@@ -99,9 +99,7 @@ public class FrmDyR extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    if( verificarMonto() && TipocomboBox.getSelectedItem().equals("Parcial")) {
-                        crearRecupero();
-                    }else{
+                    if( verificarMonto() ) {
                         crearRecupero();
                     }
                 } catch (Exception exception) {
@@ -200,19 +198,20 @@ public class FrmDyR extends JDialog {
             modelo.addColumn(column);
         }
         double total = 0;
-        for ( Object deudaJ: deudas){
-            ArrayList data = new ArrayList<>();
-            Deuda deuda = new impl.Deuda((JSONObject) deudaJ);
-            data.add(deuda.getIdDeuda());
-            data.add(deuda.getMonto());
-            data.add(deuda.getFechaDeuda());
-            data.add(deuda.isAplicaMora());
-            data.add(deuda.getMontoMora());
-            data.add(deuda.calcularSubtotal());
-            modelo.addRow(data.toArray());
-            total += deuda.calcularSubtotal();
+        if (!deudas.isEmpty()) {
+            for (Object deudaJ : deudas) {
+                ArrayList data = new ArrayList<>();
+                Deuda deuda = new impl.Deuda((JSONObject) deudaJ);
+                data.add(deuda.getIdDeuda());
+                data.add(deuda.getMonto());
+                data.add(deuda.getFechaDeuda());
+                data.add(deuda.isAplicaMora());
+                data.add(deuda.getMontoMora());
+                data.add(deuda.calcularSubtotal());
+                modelo.addRow(data.toArray());
+                total += deuda.calcularSubtotal();
+            }
         }
-
         TotalDeudaTxField.setText(Double.toString(total));
         if (TipocomboBox.getSelectedItem().equals("Total")){
             MontoTxField.setText(Double.toString(total));
@@ -241,22 +240,27 @@ public class FrmDyR extends JDialog {
             if (socio.get("cuit").equals(CUITTxField.getText())){
                 JSONArray deudas = (JSONArray) socio.get("deudas");
                 JSONArray nuevasdeudas = new JSONArray();
-                int index = deudas.size();
-                while (monto >= 0){
-                    Deuda deuda = new impl.Deuda((JSONObject) deudas.get(0));
-                    if (monto - deuda.calcularSubtotal() >= 0) {
-                        monto -= deuda.calcularSubtotal();
-                        idDeudas.add(deuda.getIdDeuda());
-                    }else{
-                        nuevasdeudas.add(deuda.toJSON());
-                    }
-                    if ( monto == 0 || index == 0){
-                        monto =  Double.parseDouble(MontoTxField.getText()) - monto;
-                        break;
-                    }
-                    index--;
-                }
+                int size = deudas.size();
+                int index = 0;
+                if (!deudas.isEmpty()) {
+                    while (monto >= 0) {
+                        if (monto == 0 || index == size) {
+                            monto = Double.parseDouble(MontoTxField.getText()) - monto;
+                            showMessageDialog(null, "Se creó un recupero por un monto de "+monto);
+                            break;
+                        }else{
+                            Deuda deuda = new impl.Deuda((JSONObject) deudas.get(index));
+                            if (monto - deuda.calcularSubtotal() >= 0) {
+                                monto -= deuda.calcularSubtotal();
+                                idDeudas.add(deuda.getIdDeuda());
+                            } else {
+                                nuevasdeudas.add(deuda.toJSON());
+                            }
+                            index++;
+                        }
 
+                    }
+                }
                 Recupero nuevoR = new impl.Recupero(
                         TipocomboBox.getSelectedItem().toString(),
                         monto,

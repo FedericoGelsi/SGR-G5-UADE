@@ -51,7 +51,7 @@ public class FrmConsultasGenerales extends JDialog {
     private JScrollPane pnlSDeudas;
     private JScrollPane pnlSContragarantias;
     private JScrollPane pnlSAportes;
-    private JScrollPane pnlSLDC;
+    private JPanel pnlSLDC;
     private JScrollPane pnlSAccionistas;
     private JScrollPane pnlSOP;
     private JButton BuscarSCBtn;
@@ -81,6 +81,20 @@ public class FrmConsultasGenerales extends JDialog {
     private JTextField PTDC3Txf;
     private JButton BuscarOPC3Txf;
     private JComboBox TEC3ComboBox;
+    private JTextField CUITLDCTxf;
+    private JTextField RSLDCTxf;
+    private JTextField IDLDCTxf;
+    private JTextField FVLDCTxf;
+    private JTextField TopeLDCTxf;
+    private JTextField MontoLDCTxf;
+    private JTextField TSDSTxf;
+    private JPanel CCRecuTab;
+    private JPanel CCDeudasTab;
+    private JPanel CCContraTab;
+    private JPanel CCAccionTab;
+    private JPanel CCLDCTab;
+    private JPanel CCOPTab;
+    private JPanel CCAportesTab;
 
     private FrmConsultasGenerales self;
     private Verificaciones verificar = new impl.Verificaciones();
@@ -191,6 +205,7 @@ public class FrmConsultasGenerales extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    resetCampos();
                     buscarSocio();
                 } catch (Exception exception) {
                     exception.printStackTrace();
@@ -268,13 +283,14 @@ public class FrmConsultasGenerales extends JDialog {
             String cuit = socioenuso.get("cuit").toString();
             String estado = socioenuso.get("estado").toString();
             if (pnlTabC6.isShowing()) {
-                if (verificar.CUITValido(CUITCCTxf.getText()) && estado.equals("Pleno")) {
+                if (verificar.CUITValido(CUITCCTxf.getText())) {
                     if (cuit.equals(CUITCCTxf.getText())) {
                         RSCCTxf.setText(rs);
                         calcularRiesgoVivo();
                         //getoperacionesSocio(cuit);
                         datossocio();
-                        crearTablas();
+                        crearTablas(1);
+                        TSDSTxf.setText("Socio Partícipe");
                         socioEncontrado = true;
                         break;
                     }
@@ -284,6 +300,7 @@ public class FrmConsultasGenerales extends JDialog {
                     if (cuit.equals(CUITMTxf.getText())) {
                         RSMTxf.setText(rs);
                         socioEncontrado = true;
+                        break;
                     }
                 }
             }else if (pnlTabC4.isShowing()){
@@ -291,14 +308,42 @@ public class FrmConsultasGenerales extends JDialog {
                     if (cuit.equals(CUITC4Txf.getText())) {
                         RSC4Txf.setText(rs);
                         socioEncontrado = true;
+                        break;
                     }
                 }
             }
-            if (CUITCCTxf.getText().isEmpty() || CUITMTxf.getText().isEmpty() || CUITC4Txf.getText().isEmpty()){
+            if (CUITCCTxf.getText().isEmpty() && CUITMTxf.getText().isEmpty() && CUITC4Txf.getText().isEmpty()){
                 showMessageDialog(null, "El campo no puede estar vacío.\nIngrese un CUIT.");
                 socioEncontrado = true;
-            }else{
-                showMessageDialog(null, "CUIT inválido. El mismo debe tener el formato ##-########-#.\nIngreselo nuevamente.");
+            }
+        }
+        if (!socioEncontrado) {
+            sociosList = (JSONArray) jsonObject.get("socios-protectores");
+            for (Object obj : sociosList) {
+                socioenuso = (JSONObject) obj;
+                String rs = socioenuso.get("razon-social").toString();
+                String cuit = socioenuso.get("cuit").toString();
+                String estado = socioenuso.get("estado").toString();
+                if (pnlTabC6.isShowing()) {
+                    if (verificar.CUITValido(CUITCCTxf.getText())) {
+                        if (cuit.equals(CUITCCTxf.getText())) {
+                            RSCCTxf.setText(rs);
+                            calcularRiesgoVivo();
+                            //getoperacionesSocio(cuit);
+                            datossocio();
+                            crearTablas(2);
+                            TSDSTxf.setText("Socio Protector");
+                            socioEncontrado = true;
+                            break;
+                        }
+                    }
+                    if (CUITCCTxf.getText().isEmpty()) {
+                        showMessageDialog(null, "El campo no puede estar vacío.\nIngrese un CUIT.");
+                        socioEncontrado = true;
+                    } else {
+                        showMessageDialog(null, "CUIT inválido. El mismo debe tener el formato ##-########-#.\nIngreselo nuevamente.");
+                    }
+                }
             }
         }
         if (!socioEncontrado){
@@ -337,6 +382,7 @@ public class FrmConsultasGenerales extends JDialog {
         FPDSTxf.setText((String) socioenuso.get("fecha-pleno"));
         APDSTxf.setText((String) socioenuso.get("actividad-principal"));
 
+
     }
 
     private void getoperacionesSocio(String cuit) throws Exception {
@@ -351,17 +397,64 @@ public class FrmConsultasGenerales extends JDialog {
         }
     }
 
+    private void resetCampos(){
+        // RESET DATOS
+        CUITDSTxf.setText("");
+        RSDSTxf.setText("");
+        FIADSTxf.setText("");
+        TEDSTxf.setText("");
+        DDSTxf.setText("");
+        EmailDSTxf.setText("");
+        EDSTxf.setText("");
+        FPDSTxf.setText("");
+        APDSTxf.setText("");
+
+        // RESET TABLAS
+        pnlSAccionistas.setVisible(false);
+        pnlSContragarantias.setVisible(false);
+        pnlSLDC.setVisible(false);
+        pnlSOperacionesMTable.setVisible(false);
+        pnlSAportes.setVisible(false);
+        pnlSDeudas.setVisible(false);
+        pnlSRecuperos.setVisible(false);
+    }
+
     private void calcularRiesgoVivo(){
 
     }
 
-    public void crearTablas(){
-        crearTablaRecuperos();
-        crearTablaDeudas(pnlSDeudas);
-        crearTablaContragarantias();
-        crearTablaLDC();
+    public void crearTablas(int opc){
+        if (opc==1) {
+            crearTablaRecuperos();
+            crearTablaDeudas(pnlSDeudas);
+            crearTablaContragarantias();
+            crearTablaLDC();
+            //crearTablaOperaciones();
+        }else if(opc==2){
+            crearTablaAportes();
+        }
         crearTablaAccionistas();
-        //crearTablaOperaciones();
+    }
+
+    private void crearTablaAportes(){
+        String [] nombresColumnas = {"ID","CUIT","Monto", "Fecha creación"};
+        DefaultTableModel modelo = new DefaultTableModel();
+        for ( String column : nombresColumnas) {
+            modelo.addColumn(column);
+        }
+        for ( Object aport: (JSONArray) socioenuso.get("aportes")){
+            ArrayList data = new ArrayList<>();
+            Aporte aporte = new impl.Aporte((JSONObject) aport);
+            data.add(aporte.getIDAporte());
+            data.add(aporte.getSocioAportante());
+            data.add(aporte.getMontoAporte());
+            data.add(aporte.getFechaCreacion());
+            modelo.addRow(data.toArray());
+        }
+        JTable aportesTable= new JTable(modelo);
+
+        pnlSAportes.setViewportView(aportesTable);
+        pnlSAportes.setVisible(true);
     }
 
     private void crearTablaRecuperos(){
@@ -449,24 +542,16 @@ public class FrmConsultasGenerales extends JDialog {
     }
 
     private void crearTablaLDC(){
-        String [] nombresColumnas = {"ID","CUIT","Tope", "Monto Utilizado", "Fecha Vigencia"};
-        DefaultTableModel modelo = new DefaultTableModel();
-        for ( String column : nombresColumnas) {
-            modelo.addColumn(column);
-        }
-        for ( Object ldc: (JSONArray) socioenuso.get("lineas-de-credito")){
-            ArrayList data = new ArrayList<>();
-            JSONObject LDC = (JSONObject) ldc;
-            data.add(LDC.get("id"));
-            data.add(LDC.get("tope"));
-            data.add(LDC.get("monto-utilizado"));
-            data.add(LDC.get("fecha-vigencia"));
-            modelo.addRow(data.toArray());
-        }
-        JTable ldcTable = new JTable(modelo);
 
-        pnlSLDC.setViewportView(ldcTable);
+        JSONObject LDC = (JSONObject) socioenuso.get("linea-de-credito");
+        RSLDCTxf.setText(RSCCTxf.getText());
+        CUITLDCTxf.setText(CUITCCTxf.getText());
+        IDLDCTxf.setText(LDC.get("id").toString());
+        TopeLDCTxf.setText(LDC.get("tope").toString());
+        MontoLDCTxf.setText(LDC.get("monto-utilizado").toString());
+        FVLDCTxf.setText(LDC.get("fecha-vigencia").toString());
         pnlSLDC.setVisible(true);
+
     }
 
     private void crearTablaOperaciones(){

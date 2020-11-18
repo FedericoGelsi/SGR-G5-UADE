@@ -10,6 +10,7 @@ public class Contragarantia implements api.Contragarantia {
 
     /*======CONSTRUCTOR=======*/
             // FALTA EN EL DDC
+
     public Contragarantia(String tipo, float montoContragarantia, Date fechaVigencia, String CUITPropietario) {
         this.tipo = tipo;
         this.montoContragarantia = montoContragarantia;
