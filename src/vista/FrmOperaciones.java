@@ -449,8 +449,7 @@ public class FrmOperaciones extends JDialog {
     });
 
         // Pagare Bursatil
-        JBPB.addActionListener(new
-    ActionListener() {
+        JBPB.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed (ActionEvent e){
             boolean DatosCorrectosFlagPB = true;
@@ -605,9 +604,7 @@ public class FrmOperaciones extends JDialog {
 
 
     // El actionListener de Prestamos
-        JBPST.addActionListener(new
-
-    ActionListener() {
+        JBPST.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed (ActionEvent e){
             boolean DatosCorrectosFlagPST = true;
@@ -840,30 +837,50 @@ public class FrmOperaciones extends JDialog {
         @Override
         public void actionPerformed (ActionEvent e){
             boolean DatosCorrectosFlagCCC = true;
+            boolean checks = true;
+            //Toma el String Fecha de Vencimiento desde el JText Field FDVCHP y lo transforma en un date
             String FDVCCC = "";
             FDVCCC = TFFDVCCC.getText();
-            if (verif.fechavalida(FDVCCC) == true) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                LocalDate localDate = LocalDate.parse(FDVCCC, formatter);
+            LocalDate FDVCCCdate = LocalDate.parse(FDVCCC);
+            if (FDVCCC.isEmpty()) {
+                showMessageDialog(null, "El campo fecha de vencimiento es mandatorio y no puede estar vacio");
+                DatosCorrectosFlagCCC = false;
+                checks = false;
+            }
+            DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+            if (verif.fechavalida(FDVCCC) == false) {
+                showMessageDialog(null, "La fecha ingresada es invalida");
+                DatosCorrectosFlagCCC = false;
+                checks = false;
+            } else {
                 //Compara la fecha ingresada con la fecha actual ya que no tendria sentido vender un cheque el dia de su
                 // canje o vender un cheque ya vencido.
-                String comparacionfecha = verif.fechavshoy(localDate);
+                String comparacionfecha = verif.fechavshoy(FDVCCCdate);
                 if (comparacionfecha == "Menor") {
-                    showMessageDialog(null, "La fecha de acreditación no es valida");
+                    showMessageDialog(null, "El cheque se encuentra vencido");
                     DatosCorrectosFlagCCC = false;
+                    checks = false;
                 }
-            } else {
-                showMessageDialog(null, "La fecha ingresada no cumple con el formato solicitado");
-                DatosCorrectosFlagCCC = false;
+                if (comparacionfecha == "Hoy") {
+                    showMessageDialog(null, "La fecha de vencimiento del cheque es hoy");
+                    DatosCorrectosFlagCCC = false;
+                    checks = false;
+                }
             }
-            //Toma el String CUIT firmante desde el JText Field TFCDFCHT
-            String CUIT = "";
-            CUIT = TFCUIT.getText();
-            if (verif.CUITValido(CUIT)) {
-            } else {
+
+            String CSCCC = "";
+            CSCCC = TFCUIT.getText();
+            if (CSCCC.equalsIgnoreCase("")) {
+                showMessageDialog(null, "El campo CUIT del firmante es mandatorio y no puede estar vacio");
+                DatosCorrectosFlagCCC = false;
+                checks = false;
+            }
+            if (verif.CUITValido(CSCCC) != true) {
                 showMessageDialog(null, "El CUIT ingresado es invalido");
                 DatosCorrectosFlagCCC = false;
+                checks = false;
             }
+
             //Toma el String Numero de Cheque desde el JText Field TFNCCHP y lo transforma en un entero
             String ITCCC;
             int ITCCCint;
@@ -871,6 +888,7 @@ public class FrmOperaciones extends JDialog {
             if (ITCCC.isEmpty()) {
                 showMessageDialog(null, "El campo Empresa es mandatorio, por favor ingrese el dato solicitado");
                 DatosCorrectosFlagCCC = false;
+                checks = false;
             }
             Object SITCCC;
             SITCCC = spinnerITCCC.getValue();
@@ -879,57 +897,65 @@ public class FrmOperaciones extends JDialog {
             if (SITCCCint <= 0) {
                 showMessageDialog(null, "El importe total debe ser mayor que 0");
                 DatosCorrectosFlagCCC = false;
+                checks = false;
             }
 
-            double importetotal = 0.0;
+            String nombre = "";
+            nombre = TFNombreTC.getText();
+
+            double importetotal = 0;
             importetotal = Double.parseDouble(spinnerITCCC.getValue().toString());
 
-            String fechavencimiento;
-            fechavencimiento = TFFDVCCC.getText();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate FDVCCCC = LocalDate.parse(fechavencimiento, formatter);
+            String FDV = "";
+            FDV = FDVCCCdate.toString();
 
-            String CUITSocioCCC;
-            CUITSocioCCC = TFCUIT.getText();
 
-            if (verif.essocioparticipe(CUITSocioCCC) == false) {
-                showMessageDialog(null, "El socio ingresado no es un Socio Participe Pleno");
-                DatosCorrectosFlagCCC = false;
-            }
-
+            ArrayList<String> EmpresaComparteSocio = new ArrayList<>();
+            EmpresaComparteSocio = verif.ListaCUITAC(CSCCC);
+            boolean fdrflag = false;
             if (DatosCorrectosFlagCCC == true) {
-                boolean checks = true;
-                if (verif.lineacreditovigente(CUITSocioCCC) == false) {
-                    showMessageDialog(null, "La linea de credito se encuentra vencida");
+                if (verif.essocioparticipe(CSCCC) != true) {
+                    showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio no es un socio participe pleno");
                     checks = false;
-                }
-                if (verif.lineasuficiente(CUITSocioCCC, SITCCCint) == false) {
-                    showMessageDialog(null, "La linea de credito no tiene disponibilidad para realizar esta operacion");
+                } else if (verif.lineacreditovigente(CSCCC) == false) {
+                    showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que la linea de credito se encuentra vencida");
                     checks = false;
-                }
-                if (verif.debefacturas(CUITSocioCCC) == true) {
-                    showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que se adeudan facturas");
+                } else if (verif.debefacturas(CSCCC) == true) {
+                    showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio adeuda facturas");
                     checks = false;
-                }
-                try {
-                    if (verif.operacionvsfdr(SITCCCint) == false) {
-                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
+                } else if (verif.check_deuda(CSCCC) == true) {
+                    showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio registra deudas");
+                    checks = false;
+                } else if (!EmpresaComparteSocio.isEmpty()) {
+                    if (verif.Computar5FDRAc(EmpresaComparteSocio, CSCCC, importetotal) == true) {
+                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que supera la suma de los riesgos vivos de los socios que comparten accionistas");
                         checks = false;
+                        fdrflag = true;
                     }
-                } catch (Exception exception) {
-                    exception.printStackTrace();
-                }
-                if (verif.check_deuda(CUITSocioCCC) == true) {
-                    showMessageDialog(null, "No puede operar porque el socio tiene deudas");
+                } else if (verif.lineatope(CSCCC, (float) importetotal) == false) {
+                    showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el importe total excede el tope de la linea de credito asignada");
                     checks = false;
-                }
-                if (checks == true) {
-                    int mensaje_numcertificado = 0;
+                } else if (verif.contragarantiassuficientes(CSCCC, (float) importetotal) == false) {
+                    showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor al total de las contragarantias presentadas");
+                    checks = false;
+                } else if (fdrflag != true) {
                     try {
-                        verif.crearOT2(TFITCCC.toString(), importetotal, FDVCCCC.toString(), CUITSocioCCC, 0, "-", "Ingresado", 0, "Cuenta Corriente", "");
+                        if (verif.operacionvsfdr(importetotal) == false) {
+                            showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor al 5% del fondo de riesgo");
+                            checks = false;
+                        }
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }
+                }
+            }
+            if (checks == true) {
+                int mensaje_numcertificado = 0;
+                try {
+                    mensaje_numcertificado = verif.crearOT2("",importetotal,FDV,CSCCC,0,"","Ingresado",0,"Cuenta Corriente",nombre);
+                    showMessageDialog(null, "Su operación fue realizada con éxito, el numero del certificado de garantia es: " + mensaje_numcertificado);
+                } catch (Exception exception) {
+                    exception.printStackTrace();
                 }
             }
         }
@@ -943,13 +969,17 @@ public class FrmOperaciones extends JDialog {
         @Override
         public void actionPerformed (ActionEvent e){
             boolean DatosCorrectosFlagTC = true;
+            boolean checks = true;
             String NombreTC;
             int NombreTCint;
             NombreTC = TFNombreTC.getText();
             if (NombreTC.isEmpty()) {
                 showMessageDialog(null, "Debe ingresar el nombre completo tal como figura en la tarjeta");
                 DatosCorrectosFlagTC = false;
+                checks = false;
             }
+
+
             String FVTC = "";
             FVTC = TFFVTC.getText();
             if (verif.fechavalidatarjeta(FVTC) == true) {
@@ -959,6 +989,7 @@ public class FrmOperaciones extends JDialog {
                 if (comparacionfecha == "Menor") {
                     showMessageDialog(null, "La tarjeta se encuentra vencida");
                     DatosCorrectosFlagTC = false;
+                    checks = false;
                 }
 
                 FVTC = yearMonth.toString();
@@ -966,6 +997,7 @@ public class FrmOperaciones extends JDialog {
             } else {
                 showMessageDialog(null, "La fecha de vencimiento ingresada no cumple con el formato solicitado");
                 DatosCorrectosFlagTC = false;
+                checks = false;
             }
 
             String CDSTC;
@@ -974,6 +1006,7 @@ public class FrmOperaciones extends JDialog {
             if (CDSTC.isEmpty()) {
                 showMessageDialog(null, "El código no puede quedar vacío");
                 DatosCorrectosFlagTC = false;
+                checks = false;
             }
 
             if (verif.esnumerico(CDSTC)) {
@@ -984,6 +1017,7 @@ public class FrmOperaciones extends JDialog {
             if (!verif.esnumerico(CDSTC) && !CDSTC.isEmpty()) {
                 showMessageDialog(null, "El código debe ser numérico");
                 DatosCorrectosFlagTC = false;
+                checks = false;
             }
             String CUIT2 = "";
             CUIT2 = TFCUIT2.getText();
@@ -991,6 +1025,7 @@ public class FrmOperaciones extends JDialog {
             } else {
                 showMessageDialog(null, "El CUIT ingresado es invalido");
                 DatosCorrectosFlagTC = false;
+                checks = false;
             }
             String NDTTC;
             int TFNDTTCint = 0;
@@ -1000,6 +1035,7 @@ public class FrmOperaciones extends JDialog {
                 } else {
                     showMessageDialog(null, "La tarjeta ingresada es inválida");
                     DatosCorrectosFlagTC = false;
+                    checks = false;
                 }
             } else {
                 if (NDTTC.isEmpty()) {
@@ -1010,45 +1046,54 @@ public class FrmOperaciones extends JDialog {
 
             }
 
-
             double IT;
             IT = Double.parseDouble(ITTC.getValue().toString());
 
             String CUITSocioTC;
             CUITSocioTC = TFCUIT2.getText();
 
-            if (verif.essocioparticipe(CUITSocioTC) == false) {
-                showMessageDialog(null, "El socio ingresado no es un Socio Participe Pleno");
-                DatosCorrectosFlagTC = false;
+
+            ArrayList<String> EmpresaComparteSocio = new ArrayList<>();
+            EmpresaComparteSocio = verif.ListaCUITAC(CUITSocioTC);
+            boolean fdrflag = false;
+            if (DatosCorrectosFlagTC == true) {
+                if (verif.essocioparticipe(CUITSocioTC) != true) {
+                    showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio no es un socio participe pleno");
+                    checks = false;
+                } else if (verif.lineacreditovigente(CUITSocioTC) == false) {
+                    showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que la linea de credito se encuentra vencida");
+                    checks = false;
+                } else if (verif.debefacturas(CUITSocioTC) == true) {
+                    showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio adeuda facturas");
+                    checks = false;
+                } else if (verif.check_deuda(CUITSocioTC) == true) {
+                    showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el socio registra deudas");
+                    checks = false;
+                } else if (!EmpresaComparteSocio.isEmpty()) {
+                    if (verif.Computar5FDRAc(EmpresaComparteSocio, CUITSocioTC, IT) == true) {
+                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que supera la suma de los riesgos vivos de los socios que comparten accionistas");
+                        checks = false;
+                        fdrflag = true;
+                    }
+                } else if (verif.lineatope(CUITSocioTC, (float) IT) == false) {
+                    showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que el importe total excede el tope de la linea de credito asignada");
+                    checks = false;
+                } else if (verif.contragarantiassuficientes(CUITSocioTC, (float) IT) == false) {
+                    showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor al total de las contragarantias presentadas");
+                    checks = false;
+                } else if (fdrflag != true) {
+                    try {
+                        if (verif.operacionvsfdr(IT) == false) {
+                            showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor al 5% del fondo de riesgo");
+                            checks = false;
+                        }
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                }
             }
 
-            if (DatosCorrectosFlagTC == true) {
-                boolean checks = true;
-                if (verif.lineacreditovigente(CUITSocioTC) == false) {
-                    showMessageDialog(null, "La linea de credito se encuentra vencida");
-                    checks = false;
-                }
-                if (verif.lineasuficiente(CUITSocioTC, (float) IT) == false) {
-                    showMessageDialog(null, "La linea de credito no tiene disponibilidad para realizar esta operacion");
-                    checks = false;
-                }
-                if (verif.debefacturas(CUITSocioTC) == true) {
-                    showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que se adeudan facturas");
-                    checks = false;
-                }
-                try {
-                    if (verif.operacionvsfdr(IT) == false) {
-                        showMessageDialog(null, "La operacion solicitada no puede ser cursada ya que es mayor que el 5% del fondo de riesgo");
-                        checks = false;
-                    }
-                } catch (Exception exception) {
-                    exception.printStackTrace();
-                }
-                if (verif.check_deuda(CUITSocioTC) == true) {
-                    showMessageDialog(null, "No puede operar porque el socio tiene deudas");
-                    checks = false;
-                }
-                if (checks == true) {
+            if (checks == true) {
                     int mensaje_numcertificado = 0;
                     try {
                         System.out.println("mando la tarjeta");
@@ -1057,7 +1102,6 @@ public class FrmOperaciones extends JDialog {
                         exception.printStackTrace();
                     }
                 }
-            }
         }
     });
 }
