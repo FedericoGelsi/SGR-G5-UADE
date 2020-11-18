@@ -551,12 +551,5 @@ public class FrmConsultasGenerales extends JDialog {
         pnlSOperacionesMTable.setVisible(true);
     }
 
-    private void copiarArchivo(String from, String to) throws IOException {
-        Path origen = Paths.get(from);
-        Path destino = Paths.get(to);
-        String ext = FilenameUtils.getExtension(origen.toString());
-        if (ext.equals("pdf") || ext.equals("jpg") || ext.equals("png") || ext.equals("jpeg")) {
-            Files.copy(origen, destino, StandardCopyOption.REPLACE_EXISTING);
-        }
-    }
+
 }

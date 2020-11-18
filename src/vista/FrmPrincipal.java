@@ -58,7 +58,6 @@ public class FrmPrincipal extends JFrame {
         // Inicia la pantalla centrada
         this.setLocationRelativeTo(null);
         this.loggedAs.setText(CUIT);
-
         this.asociarEventos();
         this.self = this;
 

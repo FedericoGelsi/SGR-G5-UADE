@@ -85,8 +85,8 @@
             </properties>
             <border type="none"/>
             <children>
-              <grid id="473d7" layout-manager="GridLayoutManager" row-count="12" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
+              <grid id="473d7" layout-manager="GridLayoutManager" row-count="11" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="10" left="10" bottom="10" right="10"/>
                 <constraints border-constraint="Center"/>
                 <properties>
                   <autoscrolls value="true"/>
@@ -99,6 +99,8 @@
                       <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font name="Roboto" size="14"/>
+                      <foreground color="-1"/>
                       <labelFor value="9e050"/>
                       <text value="Razon Social"/>
                     </properties>
@@ -108,6 +110,8 @@
                       <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font name="Roboto" size="14"/>
+                      <foreground color="-1"/>
                       <labelFor value="3ceb5"/>
                       <text value="Fecha Inic. Act."/>
                     </properties>
@@ -117,6 +121,8 @@
                       <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font name="Roboto" size="14"/>
+                      <foreground color="-1"/>
                       <text value="Tipo Empresa"/>
                     </properties>
                   </component>
@@ -125,20 +131,10 @@
                       <grid row="6" column="0" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font name="Roboto" size="14"/>
+                      <foreground color="-1"/>
                       <labelFor value="f5f85"/>
                       <text value="Act. Principal"/>
-                    </properties>
-                  </component>
-                  <component id="4ef90" class="javax.swing.JComboBox" binding="CBTIPOEMP">
-                    <constraints>
-                      <grid row="5" column="1" row-span="2" col-span="4" vsize-policy="0" hsize-policy="2" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <model>
-                        <item value="Pequeña"/>
-                        <item value="Mediana"/>
-                        <item value="Grande"/>
-                      </model>
                     </properties>
                   </component>
                   <component id="b5342" class="javax.swing.JLabel">
@@ -146,24 +142,19 @@
                       <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font name="Roboto" size="14"/>
+                      <foreground color="-1"/>
                       <labelFor value="9da49"/>
                       <text value="Direccion"/>
                     </properties>
                   </component>
-                  <component id="b95bc" class="javax.swing.JLabel">
+                  <component id="48de7" class="javax.swing.JLabel">
                     <constraints>
                       <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <labelFor value="ca80"/>
-                      <text value="Telefono"/>
-                    </properties>
-                  </component>
-                  <component id="48de7" class="javax.swing.JLabel">
-                    <constraints>
-                      <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
+                      <font name="Roboto" size="14"/>
+                      <foreground color="-1"/>
                       <labelFor value="f628f"/>
                       <text value="Email"/>
                     </properties>
@@ -174,7 +165,12 @@
                         <preferred-size width="150" height="-1"/>
                       </grid>
                     </constraints>
-                    <properties/>
+                    <properties>
+                      <background color="-11700571"/>
+                      <font name="Roboto" size="12"/>
+                      <foreground color="-1"/>
+                      <opaque value="false"/>
+                    </properties>
                   </component>
                   <component id="3ceb5" class="javax.swing.JTextField" binding="fechaInicActTextField" default-binding="true">
                     <constraints>
@@ -182,7 +178,12 @@
                         <preferred-size width="150" height="-1"/>
                       </grid>
                     </constraints>
-                    <properties/>
+                    <properties>
+                      <background color="-11700571"/>
+                      <font name="Roboto" size="12"/>
+                      <foreground color="-1"/>
+                      <opaque value="false"/>
+                    </properties>
                   </component>
                   <component id="f5f85" class="javax.swing.JTextField" binding="actPrincipalTextField" default-binding="true">
                     <constraints>
@@ -190,7 +191,12 @@
                         <preferred-size width="150" height="-1"/>
                       </grid>
                     </constraints>
-                    <properties/>
+                    <properties>
+                      <background color="-11700571"/>
+                      <font name="Roboto" size="12"/>
+                      <foreground color="-1"/>
+                      <opaque value="false"/>
+                    </properties>
                   </component>
                   <component id="9da49" class="javax.swing.JTextField" binding="direccionTextField" default-binding="true">
                     <constraints>
@@ -198,27 +204,29 @@
                         <preferred-size width="150" height="-1"/>
                       </grid>
                     </constraints>
-                    <properties/>
+                    <properties>
+                      <background color="-11700571"/>
+                      <font name="Roboto" size="12"/>
+                      <foreground color="-1"/>
+                      <opaque value="false"/>
+                    </properties>
                   </component>
-                  <component id="ca80" class="javax.swing.JTextField" binding="telefonoTextField" default-binding="true">
+                  <component id="f628f" class="javax.swing.JTextField" binding="emailTextField" default-binding="true">
                     <constraints>
                       <grid row="9" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="-1"/>
                       </grid>
                     </constraints>
-                    <properties/>
-                  </component>
-                  <component id="f628f" class="javax.swing.JTextField" binding="emailTextField" default-binding="true">
-                    <constraints>
-                      <grid row="10" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                        <preferred-size width="150" height="-1"/>
-                      </grid>
-                    </constraints>
-                    <properties/>
+                    <properties>
+                      <background color="-11700571"/>
+                      <font name="Roboto" size="12"/>
+                      <foreground color="-1"/>
+                      <opaque value="false"/>
+                    </properties>
                   </component>
                   <vspacer id="2db79">
                     <constraints>
-                      <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                      <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
                     </constraints>
                   </vspacer>
                   <component id="9dc1" class="javax.swing.JComboBox" binding="CBESTADO">
@@ -228,10 +236,13 @@
                       </grid>
                     </constraints>
                     <properties>
+                      <font name="Roboto" size="12"/>
+                      <foreground color="-16777216"/>
                       <model>
                         <item value="Postulante"/>
                         <item value="Pleno"/>
                       </model>
+                      <opaque value="false"/>
                     </properties>
                   </component>
                   <component id="882c8" class="javax.swing.JLabel">
@@ -239,6 +250,8 @@
                       <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font name="Roboto" size="14"/>
+                      <foreground color="-1"/>
                       <text value="Estado"/>
                     </properties>
                   </component>
@@ -248,13 +261,20 @@
                         <preferred-size width="150" height="-1"/>
                       </grid>
                     </constraints>
-                    <properties/>
+                    <properties>
+                      <background color="-11700571"/>
+                      <font name="Roboto" size="12"/>
+                      <foreground color="-1"/>
+                      <opaque value="false"/>
+                    </properties>
                   </component>
                   <component id="a36be" class="javax.swing.JLabel">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font name="Roboto" size="14"/>
+                      <foreground color="-1"/>
                       <labelFor value="128c7"/>
                       <text value="CUIT"/>
                     </properties>
@@ -264,6 +284,8 @@
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font name="Roboto" size="14"/>
+                      <foreground color="-1"/>
                       <text value="Tipo Socio"/>
                     </properties>
                   </component>
@@ -272,10 +294,13 @@
                       <grid row="1" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font name="Roboto" size="12"/>
+                      <foreground color="-16777216"/>
                       <model>
                         <item value="Socio Participe"/>
                         <item value="Socio Protector"/>
                       </model>
+                      <opaque value="true"/>
                     </properties>
                   </component>
                   <component id="81998" class="javax.swing.JButton" binding="validarSocioButton" default-binding="true">
@@ -283,6 +308,7 @@
                       <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font name="Roboto" size="14"/>
                       <text value="Validar Socio"/>
                     </properties>
                   </component>
@@ -291,46 +317,67 @@
                       <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font name="Roboto" size="14"/>
                       <text value="Borrar Campos"/>
                     </properties>
                   </component>
                   <component id="a9134" class="javax.swing.JButton" binding="modificarDatosButton" default-binding="true">
                     <constraints>
-                      <grid row="11" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="10" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font name="Roboto" size="14"/>
                       <text value="Modificar Datos"/>
                     </properties>
                   </component>
                   <component id="3df6f" class="javax.swing.JButton" binding="confirmarDatosButton">
                     <constraints>
-                      <grid row="11" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="10" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font name="Roboto" size="14"/>
                       <text value="Confirmar Datos"/>
                     </properties>
                   </component>
                   <component id="2e915" class="javax.swing.JButton" binding="borrarSocioButton" default-binding="true">
                     <constraints>
-                      <grid row="11" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="10" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font name="Roboto" size="14"/>
                       <text value="Borrar Socio"/>
                     </properties>
                   </component>
                   <component id="60ce8" class="javax.swing.JButton" binding="cancelarButton" default-binding="true">
                     <constraints>
-                      <grid row="11" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="10" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font name="Roboto" size="14"/>
                       <text value="Cancelar"/>
+                    </properties>
+                  </component>
+                  <component id="4ef90" class="javax.swing.JComboBox" binding="CBTIPOEMP">
+                    <constraints>
+                      <grid row="5" column="1" row-span="2" col-span="4" vsize-policy="0" hsize-policy="2" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <editable value="false"/>
+                      <font name="Roboto" size="12"/>
+                      <foreground color="-16777216"/>
+                      <model>
+                        <item value="Pequeña"/>
+                        <item value="Mediana"/>
+                        <item value="Grande"/>
+                      </model>
+                      <opaque value="true"/>
                     </properties>
                   </component>
                 </children>
               </grid>
             </children>
           </grid>
-          <grid id="f6aa" binding="pnlDocumentacion" layout-manager="GridLayoutManager" row-count="8" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="f6aa" binding="pnlDocumentacion" layout-manager="GridLayoutManager" row-count="8" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="10" left="10" bottom="10" right="10"/>
             <constraints>
               <tabbedpane title="Documentación"/>
@@ -361,7 +408,7 @@
               </component>
               <component id="16ef1" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <font name="Montserrat SemiBold" size="14"/>
@@ -387,6 +434,9 @@
                 <properties>
                   <background color="-11700571"/>
                   <editable value="false"/>
+                  <font name="Roboto" size="12"/>
+                  <foreground color="-1"/>
+                  <opaque value="false"/>
                   <text value=""/>
                 </properties>
               </component>
@@ -395,6 +445,8 @@
                   <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <font name="Roboto" size="14"/>
+                  <foreground color="-1"/>
                   <text value="Tipo"/>
                 </properties>
               </component>
@@ -403,6 +455,8 @@
                   <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <font name="Roboto" size="14"/>
+                  <foreground color="-1"/>
                   <text value="Estado"/>
                 </properties>
               </component>
@@ -411,6 +465,8 @@
                   <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <font name="Roboto" size="14"/>
+                  <foreground color="-1"/>
                   <text value="Usuario Carga"/>
                 </properties>
               </component>
@@ -426,28 +482,14 @@
                   </model>
                 </properties>
               </component>
-              <component id="317d" class="javax.swing.JTextField" binding="usuarioCargaTextField">
-                <constraints>
-                  <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="-1"/>
-                  </grid>
-                </constraints>
-                <properties/>
-              </component>
               <component id="855b9" class="javax.swing.JLabel">
                 <constraints>
                   <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <font name="Roboto" size="14"/>
+                  <foreground color="-1"/>
                   <text value="Archivos"/>
-                </properties>
-              </component>
-              <component id="1bb7a" class="javax.swing.JButton" binding="adjDocButton">
-                <constraints>
-                  <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Adjuntar Documentacion"/>
                 </properties>
               </component>
               <component id="bd55" class="javax.swing.JButton" binding="confirmarButton" default-binding="true">
@@ -458,17 +500,82 @@
                   <text value="Confirmar"/>
                 </properties>
               </component>
-              <grid id="4d4f3" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="214a5" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
-                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <opaque value="false"/>
                 </properties>
                 <border type="none"/>
                 <children>
-                  <component id="b21a9" class="javax.swing.JTextField" binding="CUITField">
+                  <component id="ece19" class="javax.swing.JButton" binding="adjDocButton">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Adjuntar Documentacion"/>
+                    </properties>
+                  </component>
+                  <component id="d2d38" class="javax.swing.JButton" binding="verDocButton">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Ver Documentacion"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="b1fda" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <opaque value="false"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="f940d" class="javax.swing.JCheckBox" binding="obligatorioCheckBox" default-binding="true">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <font name="Roboto" size="12"/>
+                      <foreground color="-1"/>
+                      <opaque value="false"/>
+                      <text value="Obligatorio"/>
+                    </properties>
+                  </component>
+                  <component id="7305e" class="javax.swing.JComboBox" binding="CBTIPODOC">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <font name="Roboto" size="12"/>
+                      <model>
+                        <item value="Estatuto"/>
+                        <item value="Contrato Social"/>
+                        <item value="Balances"/>
+                        <item value="Manifestacion Bienes Socios"/>
+                      </model>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="32f99" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <opaque value="false"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="be11c" class="javax.swing.JTextField" binding="CUITField">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="2" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="-1"/>
@@ -481,13 +588,13 @@
                       <font name="Roboto" size="12"/>
                       <foreground color="-1"/>
                       <horizontalAlignment value="2"/>
-                      <opaque value="true"/>
+                      <opaque value="false"/>
                       <requestFocusEnabled value="false"/>
                       <text value=""/>
                       <toolTipText value="Ingrese el CUIT con guiones"/>
                     </properties>
                   </component>
-                  <component id="1238e" class="javax.swing.JButton" binding="buscarButton" default-binding="true">
+                  <component id="a17d0" class="javax.swing.JButton" binding="buscarButton" default-binding="true">
                     <constraints>
                       <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -497,40 +604,19 @@
                   </component>
                 </children>
               </grid>
-              <grid id="e3eb8" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
+              <component id="411a3" class="javax.swing.JTextField" binding="usuarioCargaTextField">
                 <constraints>
-                  <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
                 </constraints>
                 <properties>
+                  <background color="-11700571"/>
+                  <font name="Roboto" size="12"/>
+                  <foreground color="-1"/>
                   <opaque value="false"/>
                 </properties>
-                <border type="none"/>
-                <children>
-                  <component id="3943d" class="javax.swing.JCheckBox" binding="obligatorioCheckBox" default-binding="true">
-                    <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <opaque value="false"/>
-                      <text value="Obligatorio"/>
-                    </properties>
-                  </component>
-                  <component id="44d9" class="javax.swing.JComboBox" binding="CBTIPODOC">
-                    <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <model>
-                        <item value="Estatuto"/>
-                        <item value="Contrato Social"/>
-                        <item value="Balances"/>
-                        <item value="Manifestacion Bienes Socios"/>
-                      </model>
-                    </properties>
-                  </component>
-                </children>
-              </grid>
+              </component>
             </children>
           </grid>
           <grid id="205cd" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">

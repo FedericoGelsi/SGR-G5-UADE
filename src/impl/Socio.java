@@ -26,24 +26,26 @@ public abstract class Socio implements api.Socio {
 
     public Socio(String CUITSocio, String razonSocial, LocalDate finicAct, String tipoEmpresa, String actPrincipal, String direccion, String email) {
         this.CUITSocio = CUITSocio;
-        RazonSocial = razonSocial;
-        FinicAct = finicAct;
+        this.RazonSocial = razonSocial;
+        this.FinicAct = finicAct;
         this.tipoEmpresa = tipoEmpresa;
         this.actPrincipal = actPrincipal;
         this.direccion = direccion;
         this.email = email;
+        this.estado = "Postulante";
     }
 
     public Socio(JSONObject jsonSocio) {
 
-        this.CUITSocio = (String) jsonSocio.get("cuit");
-        this.RazonSocial = (String) jsonSocio.get("razon-social");
-        this.FinicAct = (LocalDate) (jsonSocio.get("finic-act"));
-        this.tipoEmpresa = (String) jsonSocio.get("tipo-empresa");
-        this.actPrincipal = (String) jsonSocio.get("actividad-principal");
-        this.direccion = (String) jsonSocio.get("direccion");
-        this.email = (String) jsonSocio.get("email");
-        this.FechaPleno = (LocalDate) jsonSocio.get("fecha-pleno");
+        this.CUITSocio = jsonSocio.get("cuit").toString();
+        this.RazonSocial = jsonSocio.get("razon-social").toString();
+        this.FinicAct = LocalDate.parse(jsonSocio.get("finic-act").toString());
+        this.tipoEmpresa = jsonSocio.get("tipo-empresa").toString();
+        this.actPrincipal = jsonSocio.get("actividad-principal").toString();
+        this.direccion = jsonSocio.get("direccion").toString();
+        this.email = jsonSocio.get("email").toString();
+        this.estado = jsonSocio.get("estado").toString();
+        this.FechaPleno = LocalDate.parse(jsonSocio.get("fecha-pleno").toString());
 
     }
 
@@ -135,11 +137,17 @@ public abstract class Socio implements api.Socio {
         JSONObject socio = new JSONObject();
         socio.put("cuit", this.CUITSocio);
         socio.put("razon-social", this.RazonSocial);
-        socio.put("finic-act", this.FinicAct);
+        socio.put("finic-act", this.FinicAct.toString());
         socio.put("tipo-empresa", this.tipoEmpresa);
         socio.put("actividad-principal", this.actPrincipal);
         socio.put("monto-mora", this.direccion);
         socio.put("email", this.email);
+        socio.put("estado", this.estado);
+        if (this.FechaPleno == null){
+            socio.put("fecha-pleno","");
+        }else{
+            socio.put("fecha-pleno",this.FechaPleno.toString());
+        }
         return socio;
     }
 }

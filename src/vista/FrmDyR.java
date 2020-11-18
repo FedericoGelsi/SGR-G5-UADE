@@ -214,7 +214,7 @@ public class FrmDyR extends JDialog {
     }
 
     private void cancelarDeudas() throws Exception {
-        ArrayList<String> idDeudas = new ArrayList<>();
+        ArrayList<Integer> idDeudas = new ArrayList<>();
         String filename = "./src/resources/socios.json";
         API_JSONHandler file = new JSONHandler();
         JSONObject jsonObject = (JSONObject) file.readJson(filename);

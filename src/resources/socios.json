@@ -1,1 +1,328 @@
-{"socios-participes":[{"razon-social":"Los Pollos Hermanos S.A.","actividad-principal":"Drogas","estado":"Pleno","recuperos":[{"tipo":"Parcial","monto":10.0,"id-socio-pleno":"id","id-deudas":["id1","id2"]},{"tipo":"Parcial","monto":10.0,"id-socio-pleno":"id","id-deudas":["id1","id2"]},{"tipo":"Total","monto":1924.0,"id-socio-pleno":"20-12345678-2","id-deudas":["id","id","id","id","id","id","id","id"]},{"tipo":"Total","monto":1924.0,"id-socio-pleno":"20-12345678-2","id-deudas":["id","id","id","id","id","id","id","id"]},{"tipo":"Total","monto":120.0,"id-socio-pleno":"20-12345678-2","id-deudas":["id"]},{"tipo":"Total","monto":15682.0,"id-socio-pleno":"20-12345678-2","id-deudas":["456953","456954","456955","456956"]},{"tipo":"Parcial","monto":808.0,"id-socio-pleno":"20-12345678-2","id-deudas":["1","1","1","1"]},{"tipo":"Parcial","monto":125.0,"id-socio-pleno":"20-12345678-2","id-deudas":["1"]},{"tipo":"Parcial","monto":150.0,"id-socio-pleno":"20-12345678-2","id-deudas":["2"]},{"tipo":"Parcial","monto":100.0,"id-socio-pleno":"20-12345678-2","id-deudas":["1"]},{"tipo":"Parcial","monto":904.0,"id-socio-pleno":"20-12345678-2","id-deudas":["1"]},{"tipo":"Parcial","monto":904.0,"id-socio-pleno":"20-12345678-2","id-deudas":["1"]},{"tipo":"Parcial","monto":854.0,"id-socio-pleno":"20-12345678-2","id-deudas":["3"]}],"finic-act":"2020-11-13T09:52:32.914993900","direccion":"Rivadavia 2630, CABA","deudas":[{"fecha-deuda":"2020-02-23","monto":100.0,"id-deuda":"1","aplica-mora":true,"monto-mora":3.0,"cuit-deudor":"20-12345678-2"},{"fecha-deuda":"2020-02-23","monto":100.0,"id-deuda":"2","aplica-mora":true,"monto-mora":3.0,"cuit-deudor":"20-12345678-2"},{"fecha-deuda":"2019-02-23","monto":100.0,"id-deuda":"4","aplica-mora":true,"monto-mora":3.0,"cuit-deudor":"20-12345678-2"}],"contragarantias":[{"fecha-creacion":"2020-08-23","tipo":"Fianza Personal","monto":10.0,"cuit-socio":"20-12345678-2","fecha-vigencia":"2020-11-13"},{"fecha-creacion":"2020-08-23","tipo":"Hipoteca","monto":10.0,"cuit-socio":"20-12345678-2","fecha-vigencia":"2020-11-13"},{"fecha-creacion":"2020-11-18","tipo":"Hipoteca","monto":15000.0,"cuit-socio":"20-12345678-2","fecha-vigencia":"2021-12-12"},{"fecha-creacion":"2020-11-18","tipo":"Hipoteca","monto":150000.0,"cuit-socio":"20-12345678-2","fecha-vigencia":"2021-10-05"},{"fecha-creacion":"2020-11-18","tipo":"Hipoteca","monto":10000.0,"cuit-socio":"20-12345678-2","fecha-vigencia":"2022-05-09"},{"fecha-creacion":"2020-11-18","tipo":"Fianza personal","monto":45000.0,"cuit-socio":"20-12345678-2","fecha-vigencia":"2025-07-09"}],"accionistas":[{"cuit-accionista":"20-123456789-2","razon-social-ac":"Pepito S.R.L.","porcentaje-participacion":15.0},{"cuit-accionista":"20-32568456-5","razon-social-ac":"GDev S.A.","porcentaje-participacion":55.0},{"cuit-accionista":"20-12346587-9","razon-social-ac":"Fede S.H.","porcentaje-participacion":10.0}],"cuit":"20-12345678-2","linea-de-credito":{"tope":10.0,"id":1,"fecha-vigencia":"2020-11-13","monto-utilizado":10.0},"tipo-empresa":"Mediana","fecha-pleno":"2020-11-13","email":"ventas@polloshrnos.com"}],"last-modified":"2020-11-13","socios-protectores":[{"razon-social":"Los Pollos Hermanos S.A.","actividad-principal":"Drogas","accionistas":[{"cuit-accionista":"20-12345678-2","razon-social-ac":"Pepito S.R.L.","porcentaje-participacion":15.0},{"cuit-accionista":"20-12345679-2","razon-social-ac":"Pepito S.R.L.","porcentaje-participacion":15.0}],"estado":"Pleno","cuit":"20-12345675-2","tipo-empresa":"Mediana","fecha-pleno":"2020-11-13","finic-act":"2020-11-13","direccion":"Rivadavia 2630, CABA","aportes":[{"fecha-creacion":"2020-10-12","id-aporte":1,"monto":100.0,"socio-aportante":"20-12345673-1","doc-path":".\/src\/resources\/aportes\/aporte1.pdf"},{"fecha-creacion":"2020-11-12","id-aporte":2,"monto":10000.0,"socio-aportante":"20-12345673-1","doc-path":".\/src\/resources\/aportes\/aporte1.pdf"},{"fecha-creacion":"2019-10-12","id-aporte":3,"monto":1200.0,"socio-aportante":"20-12345673-1","doc-path":".\/src\/resources\/aportes\/aporte1.pdf"}],"email":"ventas@polloshrnos.com"},{"razon-social":"Los Pollas Hermanas S.A.","actividad-principal":"Drogas","accionistas":[{"cuit-accionista":"20-12345789-2","razon-social-ac":"Pepito S.R.L.","porcentaje-participacion":15.0},{"cuit-accionista":"20-12345689-2","razon-social-ac":"Pepito S.R.L.","porcentaje-participacion":15.0}],"estado":"Postulante","cuit":"20-12345679-2","tipo-empresa":"Mediana","fecha-pleno":"2020-11-13","finic-act":"2020-11-13","direccion":"Rivadavia 2630, CABA","aportes":[],"email":"ventas@polloshrnos.com"}],"author":"admin","desembolsos":[{"razon-social":"Los Pollos Hermanos S.A.","fecha-op":"2020-10-15","cuit-socio":"20-12345678-2","monto":123.45,"id":1}],"created-at":"2020-11-13","modified-by":"admin"}
+{
+    "socios-participes": [
+        {
+            "razon-social":       "Los Pollos Hermanos S.A.",
+            "actividad-principal":"Drogas",
+            "estado":             "Pleno",
+            "recuperos":          [
+                {
+                    "tipo":          "Parcial",
+                    "monto":         10.0,
+                    "id-socio-pleno":"id",
+                    "id-deudas":     [
+                        "id1",
+                        "id2"
+                    ]
+                },
+                {
+                    "tipo":          "Parcial",
+                    "monto":         10.0,
+                    "id-socio-pleno":"id",
+                    "id-deudas":     [
+                        "id1",
+                        "id2"
+                    ]
+                },
+                {
+                    "tipo":          "Total",
+                    "monto":         1924.0,
+                    "id-socio-pleno":"20-12345678-2",
+                    "id-deudas":     [
+                        "id",
+                        "id",
+                        "id",
+                        "id",
+                        "id",
+                        "id",
+                        "id",
+                        "id"
+                    ]
+                },
+                {
+                    "tipo":          "Total",
+                    "monto":         1924.0,
+                    "id-socio-pleno":"20-12345678-2",
+                    "id-deudas":     [
+                        "id",
+                        "id",
+                        "id",
+                        "id",
+                        "id",
+                        "id",
+                        "id",
+                        "id"
+                    ]
+                },
+                {
+                    "tipo":          "Total",
+                    "monto":         120.0,
+                    "id-socio-pleno":"20-12345678-2",
+                    "id-deudas":     [
+                        "id"
+                    ]
+                },
+                {
+                    "tipo":          "Total",
+                    "monto":         15682.0,
+                    "id-socio-pleno":"20-12345678-2",
+                    "id-deudas":     [
+                        "456953",
+                        "456954",
+                        "456955",
+                        "456956"
+                    ]
+                },
+                {
+                    "tipo":          "Parcial",
+                    "monto":         808.0,
+                    "id-socio-pleno":"20-12345678-2",
+                    "id-deudas":     [
+                        "1",
+                        "1",
+                        "1",
+                        "1"
+                    ]
+                },
+                {
+                    "tipo":          "Parcial",
+                    "monto":         125.0,
+                    "id-socio-pleno":"20-12345678-2",
+                    "id-deudas":     [
+                        "1"
+                    ]
+                },
+                {
+                    "tipo":          "Parcial",
+                    "monto":         150.0,
+                    "id-socio-pleno":"20-12345678-2",
+                    "id-deudas":     [
+                        "2"
+                    ]
+                },
+                {
+                    "tipo":          "Parcial",
+                    "monto":         100.0,
+                    "id-socio-pleno":"20-12345678-2",
+                    "id-deudas":     [
+                        "1"
+                    ]
+                },
+                {
+                    "tipo":          "Parcial",
+                    "monto":         904.0,
+                    "id-socio-pleno":"20-12345678-2",
+                    "id-deudas":     [
+                        "1"
+                    ]
+                },
+                {
+                    "tipo":          "Parcial",
+                    "monto":         904.0,
+                    "id-socio-pleno":"20-12345678-2",
+                    "id-deudas":     [
+                        "1"
+                    ]
+                },
+                {
+                    "tipo":          "Parcial",
+                    "monto":         854.0,
+                    "id-socio-pleno":"20-12345678-2",
+                    "id-deudas":     [
+                        "3"
+                    ]
+                }
+            ],
+            "finic-act":          "2020-11-13",
+            "direccion":          "Rivadavia 2630, CABA",
+            "deudas":             [
+                {
+                    "fecha-deuda":"2020-02-23",
+                    "monto":      100.0,
+                    "id-deuda":   "1",
+                    "aplica-mora":true,
+                    "monto-mora": 3.0,
+                    "cuit-deudor":"20-12345678-2"
+                },
+                {
+                    "fecha-deuda":"2020-02-23",
+                    "monto":      100.0,
+                    "id-deuda":   "2",
+                    "aplica-mora":true,
+                    "monto-mora": 3.0,
+                    "cuit-deudor":"20-12345678-2"
+                },
+                {
+                    "fecha-deuda":"2019-02-23",
+                    "monto":      100.0,
+                    "id-deuda":   "4",
+                    "aplica-mora":true,
+                    "monto-mora": 3.0,
+                    "cuit-deudor":"20-12345678-2"
+                }
+            ],
+            "contragarantias":    [
+                {
+                    "fecha-creacion":"2020-08-23",
+                    "tipo":          "Fianza Personal",
+                    "monto":         10.0,
+                    "cuit-socio":    "20-12345678-2",
+                    "fecha-vigencia":"2020-11-13"
+                },
+                {
+                    "fecha-creacion":"2020-08-23",
+                    "tipo":          "Hipoteca",
+                    "monto":         10.0,
+                    "cuit-socio":    "20-12345678-2",
+                    "fecha-vigencia":"2020-11-13"
+                },
+                {
+                    "fecha-creacion":"2020-11-18",
+                    "tipo":          "Hipoteca",
+                    "monto":         15000.0,
+                    "cuit-socio":    "20-12345678-2",
+                    "fecha-vigencia":"2021-12-12"
+                },
+                {
+                    "fecha-creacion":"2020-11-18",
+                    "tipo":          "Hipoteca",
+                    "monto":         150000.0,
+                    "cuit-socio":    "20-12345678-2",
+                    "fecha-vigencia":"2021-10-05"
+                },
+                {
+                    "fecha-creacion":"2020-11-18",
+                    "tipo":          "Hipoteca",
+                    "monto":         10000.0,
+                    "cuit-socio":    "20-12345678-2",
+                    "fecha-vigencia":"2022-05-09"
+                },
+                {
+                    "fecha-creacion":"2020-11-18",
+                    "tipo":          "Fianza personal",
+                    "monto":         45000.0,
+                    "cuit-socio":    "20-12345678-2",
+                    "fecha-vigencia":"2025-07-09"
+                },
+                {
+                    "fecha-creacion":"2020-11-18",
+                    "tipo":          "Hipoteca",
+                    "monto":         1500.0,
+                    "cuit-socio":    "20-12345678-2",
+                    "fecha-vigencia":"2025-11-25"
+                }
+            ],
+            "accionistas":        [
+                {
+                    "cuit-accionista":         "20-123456789-2",
+                    "razon-social-ac":         "Pepito S.R.L.",
+                    "porcentaje-participacion":15.0
+                },
+                {
+                    "cuit-accionista":         "20-32568456-5",
+                    "razon-social-ac":         "GDev S.A.",
+                    "porcentaje-participacion":55.0
+                },
+                {
+                    "cuit-accionista":         "20-12346587-9",
+                    "razon-social-ac":         "Fede S.H.",
+                    "porcentaje-participacion":10.0
+                }
+            ],
+            "cuit":               "20-12345678-2",
+            "linea-de-credito":   {
+                "tope":           10.0,
+                "id":             1,
+                "fecha-vigencia": "2020-11-13",
+                "monto-utilizado":10.0
+            },
+            "tipo-empresa":       "Mediana",
+            "fecha-pleno":        "2020-11-13",
+            "email":              "ventas@polloshrnos.com"
+        }
+    ],
+    "last-modified":     "2020-11-13",
+    "socios-protectores":[
+        {
+            "razon-social":       "Los Pollos Hermanos S.A.",
+            "actividad-principal":"Drogas",
+            "accionistas":        [
+                {
+                    "cuit-accionista":         "20-12345678-2",
+                    "razon-social-ac":         "Pepito S.R.L.",
+                    "porcentaje-participacion":15.0
+                },
+                {
+                    "cuit-accionista":         "20-12345679-2",
+                    "razon-social-ac":         "Pepito S.R.L.",
+                    "porcentaje-participacion":15.0
+                }
+            ],
+            "estado":             "Pleno",
+            "cuit":               "20-12345675-2",
+            "tipo-empresa":       "Mediana",
+            "fecha-pleno":        "2020-11-13",
+            "finic-act":          "2020-11-13",
+            "direccion":          "Rivadavia 2630, CABA",
+            "aportes":            [
+                {
+                    "fecha-creacion": "2020-10-12",
+                    "id-aporte":      1,
+                    "monto":          100.0,
+                    "socio-aportante":"20-12345673-1",
+                    "doc-path":       ".\/src\/resources\/aportes\/aporte1.pdf"
+                },
+                {
+                    "fecha-creacion": "2020-11-12",
+                    "id-aporte":      2,
+                    "monto":          10000.0,
+                    "socio-aportante":"20-12345673-1",
+                    "doc-path":       ".\/src\/resources\/aportes\/aporte1.pdf"
+                },
+                {
+                    "fecha-creacion": "2019-10-12",
+                    "id-aporte":      3,
+                    "monto":          1200.0,
+                    "socio-aportante":"20-12345673-1",
+                    "doc-path":       ".\/src\/resources\/aportes\/aporte1.pdf"
+                }
+            ],
+            "email":              "ventas@polloshrnos.com"
+        },
+        {
+            "razon-social":       "Los Pollas Hermanas S.A.",
+            "actividad-principal":"Drogas",
+            "accionistas":        [
+                {
+                    "cuit-accionista":         "20-12345789-2",
+                    "razon-social-ac":         "Pepito S.R.L.",
+                    "porcentaje-participacion":15.0
+                },
+                {
+                    "cuit-accionista":         "20-12345689-2",
+                    "razon-social-ac":         "Pepito S.R.L.",
+                    "porcentaje-participacion":15.0
+                }
+            ],
+            "estado":             "Postulante",
+            "cuit":               "20-12345679-2",
+            "tipo-empresa":       "Mediana",
+            "fecha-pleno":        "2020-11-13",
+            "finic-act":          "2020-11-13",
+            "direccion":          "Rivadavia 2630, CABA",
+            "aportes":            [],
+            "email":              "ventas@polloshrnos.com"
+        }
+    ],
+    "author":            "admin",
+    "desembolsos":       [
+        {
+            "razon-social":"Los Pollos Hermanos S.A.",
+            "fecha-op":    "2020-10-15",
+            "cuit-socio":  "20-12345678-2",
+            "monto":       123.45,
+            "id":          1
+        }
+    ],
+    "created-at":        "2020-11-13",
+    "modified-by":       "admin"
+}

@@ -11,7 +11,7 @@ public interface Deuda {
 
     String getCUITDeudor();
 
-    String getIdDeuda();
+    int getIdDeuda();
 
     double getMontoMora();
 

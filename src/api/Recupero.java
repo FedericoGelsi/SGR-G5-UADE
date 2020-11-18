@@ -11,7 +11,7 @@ public interface Recupero {
 
     String getIdSocioPleno();
 
-    ArrayList<String> getIdDeuda();
+    ArrayList<Integer> getIdDeuda();
 
     JSONObject toJSON();
 }

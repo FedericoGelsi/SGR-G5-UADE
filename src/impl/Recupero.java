@@ -10,11 +10,11 @@ public class Recupero implements api.Recupero {
     private String tipo;
     private double monto;
     private String idSocioPleno;
-    private ArrayList<String> idDeudas;
+    private ArrayList<Integer> idDeudas;
 
     /*======CONSTRUCTOR=======*/
 
-    public Recupero(String tipo, double monto, String idSocioPleno, ArrayList<String> idDeudas) {
+    public Recupero(String tipo, double monto, String idSocioPleno, ArrayList<Integer> idDeudas) {
         this.tipo = tipo;
         this.monto = monto;
         this.idSocioPleno = idSocioPleno;
@@ -25,7 +25,7 @@ public class Recupero implements api.Recupero {
         this.monto = (double) jsonRecupero.get("monto");
         this.tipo = (String) jsonRecupero.get("tipo");
         this.idSocioPleno = (String) jsonRecupero.get("id-socio-pleno");
-        this.idDeudas = (ArrayList<String>) jsonRecupero.get("id-deudas");
+        this.idDeudas = (ArrayList<Integer>) jsonRecupero.get("id-deudas");
     }
 
     /*======GETTERS=======*/
@@ -46,7 +46,7 @@ public class Recupero implements api.Recupero {
     }
 
     @Override
-    public ArrayList<String> getIdDeuda() {
+    public ArrayList<Integer> getIdDeuda() {
         return idDeudas;
     }
 

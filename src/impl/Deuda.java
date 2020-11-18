@@ -9,14 +9,14 @@ import java.time.temporal.ChronoUnit;
 public class Deuda implements api.Deuda {
     private double monto;
     private String CUITDeudor;
-    private String idDeuda;
+    private int idDeuda;
     private double montoMora;
     private LocalDate fechaDeuda;
     private boolean aplicaMora;
 
     /*======CONSTRUCTOR=======*/
 
-    public Deuda(double monto, String CUITDeudor, String idDeuda, double montoMora) {
+    public Deuda(double monto, String CUITDeudor, int idDeuda, double montoMora) {
         this.monto = monto;
         this.CUITDeudor = CUITDeudor;
         this.idDeuda = idDeuda;
@@ -27,7 +27,7 @@ public class Deuda implements api.Deuda {
     public Deuda(JSONObject jsonDeuda){
         this.monto = Double.parseDouble(jsonDeuda.get("monto").toString());
         this.CUITDeudor = (String) jsonDeuda.get("cuit-deudor");
-        this.idDeuda = jsonDeuda.get("id-deuda").toString();
+        this.idDeuda = Integer.parseInt(jsonDeuda.get("id-deuda").toString());
         this.montoMora = Double.parseDouble(jsonDeuda.get("monto-mora").toString());
         this.aplicaMora = (boolean) jsonDeuda.get("aplica-mora");
         this.fechaDeuda = LocalDate.parse(jsonDeuda.get("fecha-deuda").toString());
@@ -51,7 +51,7 @@ public class Deuda implements api.Deuda {
     }
 
     @Override
-    public String getIdDeuda() {
+    public int getIdDeuda() {
         return idDeuda;
     }
 
